@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <meta name="description" content="">
+
+    <meta name="keywords" content="">
+
+    <meta name="author" content="Jan Wira Gotama Putra, wira gotama">
+
+    <title> Annotation Tool - Tokyo Tech CL </title>
+
+    <!-- Styling -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/portfolio-item.css" rel="stylesheet">
+    <link rel="shortcut icon" type="image/png" href="img/favicon.ico">
+    <link href="css/font-awesome-min.css" rel="stylesheet">
+
+    <!-- Scripts -->
+    <script src="js/jquery-1.12.4.js"></script>
+  	<script src="js/jquery-ui.js"></script>
+    <!-- <script src="js/jquery.js"></script> -->
+    <!-- <script src="js/bootstrap.min.js"></script> -->
+    <script src="js/jquery.html-svg-connect.js"></script>
+    <script src="js/annotation.js"></script>
+    <script src="js/jsplumb.min.js"></script>
+</head>
+
+<!-- IDEA: either use arrow or highlight the target sentence when we focus on a particular sentence -->
+
+
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <!-- <a class="navbar-brand" href="#">Wira Gotama</a> -->
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li>
+                        <a href=""> Check </a>
+                    </li>
+                    <li>
+                        <a onclick="jsPlumb.repaintEverything()"> Refresh </a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+
+    <!-- Page Content -->
+    <div class="container">
+        <!-- Portfolio Item Heading -->
+        <div class="row">
+            <br>
+            <br>
+        </div>
+        <!-- /.row -->
+
+        <!-- Portfolio Item Row -->
+        <div id="main" class="row" style="font-size:12px">
+            <div class="col-lg-1">
+            </div>
+            <div class="col-lg-10 draggable-area">
+                <div class="flex-container">
+                	<div class="flex-item-prompt" id="sentence0"> <b> [PROMPT] </b> 0. It is important for college students to have a part time job </div>
+                	<br> <br>
+                </div>
+                <div class="flex-container">
+                	<div class="flex-item" id="sentence1"> 
+                		<form onsubmit="updateSentenceAnnotation(document.getElementById('target1'), document.getElementById('relation1'), document.getElementById('dropping1'), 1, 13); return false">
+                			<span class="col-lg-10">
+                				<textarea id="textarea1" class="showText"> 1. Today, more and more college students are taking part-time jobs. </textarea>
+                			</span>
+
+                			<span class="col-lg-2 form-option">
+                				<p>
+                					<label> Target</label> <input type="number" class="input-number" id="target1">
+                				</p>
+
+                				<p>
+	                				<label> Relation </label>
+		                			<select name="relationLabel" id="relation1">
+		                				<option value=""></option>
+		                				<option value="="> = </option>
+		                				<option value="sup"> sup </option>
+		                				<option value="det"> det </option>
+		                				<option value="att"> att </option>
+		                			</select>
+	                			</p>
+
+	                			<p>
+		                			<label> Drop? </label>
+		                			<select name="dropping" id="dropping1">
+		                				<option value="keep"> keep </option>
+		                				<option value="drop"> drop </option>
+		                			</select>
+	                			</p>
+
+	                			<p>
+	                				<input type="submit">
+	                			</p>
+                			</span>
+                		</form>
+                	</div>
+
+                	<div class="flex-item" id="sentence2"> 
+                		<form onsubmit="updateSentenceAnnotation(document.getElementById('target2'), document.getElementById('relation2'), document.getElementById('dropping2'), 2, 13); return false">
+                			<span class="col-lg-10">
+                				<textarea id="textarea2" class="showText"> 2. Different people hold different viewpoints. </textarea>
+                			</span>
+
+                			<span class="col-lg-2 form-option">
+                				<p>
+                					<label> Target</label> <input type="number" class="input-number" id="target2">
+                				</p>
+
+                				<p>
+	                				<label> Relation </label>
+		                			<select name="relationLabel" id="relation2">
+		                				<option value=""></option>
+		                				<option value="="> = </option>
+		                				<option value="sup"> sup </option>
+		                				<option value="det"> det </option>
+		                				<option value="att"> att </option>
+		                			</select>
+	                			</p>
+
+	                			<p>
+		                			<label> Drop? </label>
+		                			<select name="dropping" id="dropping2">
+		                				<option value="keep"> keep </option>
+		                				<option value="drop"> drop </option>
+		                			</select>
+	                			</p>
+
+	                			<p>
+	                				<input type="submit">
+	                			</p>
+                			</span>
+                		</form>
+                	</div>
+
+
+                    <div class="flex-item" id="sentence3"> 
+                        <form onsubmit="updateSentenceAnnotation(document.getElementById('target3'), document.getElementById('relation3'), document.getElementById('dropping3'), 3, 13); return false">
+                            <span class="col-lg-10">
+                                <textarea id="textarea3" class="showText"> 3. Some people agree with the idea that a part-time job is very good for college students. </textarea>
+                            </span>
+
+                            <span class="col-lg-2 form-option">
+                                <p>
+                                    <label> Target</label> <input type="number" class="input-number" id="target3">
+                                </p>
+
+                                <p>
+                                    <label> Relation </label>
+                                    <select name="relationLabel" id="relation3">
+                                        <option value=""></option>
+                                        <option value="="> = </option>
+                                        <option value="sup"> sup </option>
+                                        <option value="det"> det </option>
+                                        <option value="att"> att </option>
+                                    </select>
+                                </p>
+
+                                <p>
+                                    <label> Drop? </label>
+                                    <select name="dropping" id="dropping3">
+                                        <option value="keep"> keep </option>
+                                        <option value="drop"> drop </option>
+                                    </select>
+                                </p>
+
+                                <p>
+                                    <input type="submit">
+                                </p>
+                            </span>
+                        </form>
+                    </div>
+
+                	<!-- <div class="flex-item" id="sentence2"> 2. Different people hold different viewpoints.  </div>
+                	<div class="flex-item"> 3. Some people agree with the idea that a part-time job is very good for college students.   </div>
+                	<div class="flex-item"> 4. In my opinion, it is not so important for college students to have part-time jobs.   </div>
+                	<div class="flex-item"> 5. I have some reasons to prove my point.   </div>
+                	<div class="flex-item"> 6. Some people think that there are some advantages if students take part-time jobs because they can gain experience and build up their good character.   </div>
+                	<div class="flex-item"> 7. Further, students can earn money from doing part-time jobs, so if they are from a very poor family, they can reduce their family’s financial burden.    </div>
+                	<div class="flex-item"> 8. However, after-school work also brings a lot of problems.    </div>
+                	<div class="flex-item"> 9. For example, some students think about their part-time jobs all the time and cannot decide that study is more important right now.    </div>
+                	<div class="flex-item"> 10. As such, some students now have some problems with studying and some don't even go to class on time.    </div>
+                	<div class="flex-item"> 11. As for me, I think the main task of students is to study hard and gain important knowledge.     </div>
+                	<div class="flex-item"> 12. They can earn money later.      </div>
+                	<div class="flex-item"> 13. Thus, college students need to know that studying is more important than working right now.     </div> -->
+                </div>
+            </div>
+             <div class="col-lg-1">
+            </div>
+        </div> 
+
+        <!-- Footer -->
+    </div>
+    <script>
+        jsPlumb.ready(function() { // Initialization of the js plumb
+            jsPlumb.setContainer(document.getElementById("draggable-area"));
+
+            // Drag the endpoint when the sentence (DIV) is dragged
+            var is_dragging = false;
+            $(".flex-container").sortable({
+                start: function(event, ui) {
+                    is_dragging = true;
+                },
+                stop: function(event, ui) {
+                    is_dragging = false;
+                    jsPlumb.recalculateOffsets($(ui.item).parents(".draggable-area"));
+                    jsPlumb.repaintEverything();
+                }
+            })
+            .on("mousemove", function(e) {
+                if (is_dragging) {
+                    jsPlumb.repaintEverything();
+                }
+            });
+        });
+    </script>
+    <!-- /.container -->
+</body>
+
+</html>

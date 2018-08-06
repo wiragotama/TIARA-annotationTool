@@ -1,0 +1,60 @@
+/* 
+ * by Jan Wira Gotama Putra 
+ */
+
+body {
+    padding-top: 70px; /* Required padding for .navbar-fixed-top. Remove if using .navbar-static-top. Change if height of navigation changes. */
+}
+
+footer {
+    margin: 50px 0;
+}
+
+.container {
+	text-align: justify;
+}
+
+.essay-code {
+	text-align: center;
+	font-weight: bold;
+}
+
+.draggable-area {
+	font-size: 12px;
+	position: relative;
+}
+
+.flex-container {
+	display: flex;
+	flex-direction: column;
+}
+
+.hide {
+	display: none;
+}
+
+.flex-item-prompt {
+	border: 2px solid;
+	padding: 10px;
+	margin-bottom: 15px;
+	border-color: black;
+}
+
+.flex-item {
+	border: 2px solid;
+	padding: 10px;
+	margin-bottom: 40px;
+}
+
+.flex-item:focus, .flex-item:active {
+	background: orange;
+}
+
+.flex-item textarea {
+	border:none;
+	width:100%;
+}
+
+.relation-label {
+	color: black;
+}
