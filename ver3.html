@@ -39,13 +39,10 @@
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
                     <li>
-                        <a href=""> Save </a>
+                        <a href="" id="save_menu"> Save </a>
                     </li>
                      <li>
-                        <a href=""> Load </a>
-                    </li>
-                    <li>
-                        <a onclick="jsPlumb.repaintEverything()"> Refresh </a>
+                        <a href="" id="load_menu"> Load </a>
                     </li>
                 </ul>
             </div>
@@ -73,7 +70,7 @@
             </div>
 
             <!-- Save and load this whole area -->
-            <div class="col-lg-10 draggable-area"> 
+            <div class="col-lg-10 draggable-area" id="draggable-area"> 
                 <!-- Essay Code -->
                 <div class="row essay-code">
                 	<div class="col-md-10">
@@ -124,7 +121,7 @@
                             <input type="text" class="input-number hide" id="target1">
                             <input type="text" class="input-relation hide" id="relation1">
                             <Label> Drop? </Label> 
-                            <input type="checkbox" id="dropping1" name="drop" value="drop"/>
+                            <input type="checkbox" id="dropping1" name="drop" value="non-drop"/>
                         </span>
                 	</div>
 
@@ -139,7 +136,7 @@
                             <input type="text" class="input-number hide" id="target2">
                             <input type="text" class="input-relation hide" id="relation2">
                             <Label> Drop? </Label> 
-                            <input type="checkbox" id="dropping2" name="drop" value="drop"/>
+                            <input type="checkbox" id="dropping2" name="drop" value="non-drop"/>
                         </span>
                     </div>
 
@@ -155,7 +152,7 @@
                             <input type="text" class="input-number hide" id="target3">
                             <input type="text" class="input-relation hide" id="relation3">
                             <Label> Drop? </Label> 
-                            <input type="checkbox" id="dropping3" name="drop" value="drop"/>
+                            <input type="checkbox" id="dropping3" name="drop" value="non-drop"/>
                         </span>
                     </div>
 
@@ -170,7 +167,7 @@
                             <input type="text" class="input-number hide" id="target4">
                             <input type="text" class="input-relation hide" id="relation4">
                             <Label> Drop? </Label> 
-                            <input type="checkbox" id="dropping4" name="drop" value="drop"/>
+                            <input type="checkbox" id="dropping4" name="drop" value="non-drop"/>
                         </span>
                     </div>
 
@@ -185,7 +182,7 @@
                             <input type="text" class="input-number hide" id="target5">
                             <input type="text" class="input-relation hide" id="relation5">
                             <Label> Drop? </Label> 
-                            <input type="checkbox" id="dropping5" name="drop" value="drop"/>
+                            <input type="checkbox" id="dropping5" name="drop" value="non-drop"/>
                         </span>
                     </div>
 
@@ -199,123 +196,6 @@
 
     <!-- Main Script -->
     <script src="js/annotation_v3.js"></script>
-
-    <!-- <script>
-        jsPlumb.ready(function() { // Initialization of the js plumb
-            jsPlumb.setContainer(document.getElementById("draggable-area"));
-
-            // Drag the endpoint when the sentence (DIV) is dragged
-            var is_dragging = false;
-            $(".flex-container").sortable({
-                start: function(event, ui) {
-                    is_dragging = true;
-                },
-                stop: function(event, ui) {
-                    is_dragging = false;
-                    jsPlumb.recalculateOffsets($(ui.item).parents(".draggable-area"));
-                    jsPlumb.repaintEverything();
-                }
-            })
-            .on("mousemove", function(e) {
-                if (is_dragging) {
-                    jsPlumb.repaintEverything();
-                }
-            });
-
-            // Defaults for connection
-            // TO DO: differentiating inbound and outbound connections (for max connections)
-            var connectionType = {
-                connector: ["Bezier", { curviness: 60 } ],
-                anchor: ["Left", "Continuous"],
-                connectorOverlays: [
-                    ["Arrow", {width:20, length:12, location:0.9}],
-                    ["Label", {label:"label", location:0.15, cssClass:"relation-label"} ]
-                ],
-                isSource:true,
-                isTarget:true,
-                ConnectionsDetachable:true,
-                ReattachConnections:true,
-                maxConnections: -1, //the number of connection is not limited
-                paintStyle: { fill: "lightgray", stroke: "lightgray", strokeWidth:3 },
-                hoverPaintStyle: { fill: "orange", stroke: "orange", strokeWidth:3 },
-                endpointStyle: { fill: "lightgray", outlineStroke:"lightgray" },
-                endpointHoverStyle: { fill: "orange", outlineStroke:"orange" },
-                connectorStyle:{ stroke:"lightgray", strokeWidth:3 },
-                connectorHoverStyle:{ stroke:"orange", strokeWidth:3 }
-            };
-
-            // The number of endpoint is the same as number of sentences
-            var endpoint0 = jsPlumb.addEndpoint("sentence0", connectionType);
-            var endpoint1 = jsPlumb.addEndpoint("sentence1", connectionType);
-            var endpoint2 = jsPlumb.addEndpoint("sentence2", connectionType);
-            var endpoint3 = jsPlumb.addEndpoint("sentence3", connectionType);
-
-            // Event 
-            jsPlumb.bind("connection", function(info) {
-                // console
-                var conn = info.connection;
-                alert("Source = "+conn.sourceId+"; Target = "+conn.targetId);
-
-                // choosing the relational label
-                $( "#relation-dialog" ).dialog({
-                    // autoOpen:false,
-                    dialogClass: "no-close",
-                    position: {my: "center top", at: "center top+80", of: window},
-                    buttons: [
-                        {
-                            text: "=",
-                            click: function() {
-                                $( this ).dialog( "close" );
-                                getCon = jsPlumb.getConnections({source: conn.sourceId, target: conn.targetId})[0];
-                                getCon.removeAllOverlays();
-                                getCon.addOverlay(
-                                    ["Label", {label:"=", location:0.15, cssClass:"relation-label"} ]
-                                );
-                                // TO DO: change color depending on the label
-                                // label.setLabel("=");
-                            }
-                        },
-                        {
-                            text: "sup",
-                            click: function() {
-                                $( this ).dialog( "close" );
-                                relation_code = 0; //do something
-                            }
-                        },
-                        {
-                            text: "det",
-                            click: function() {
-                                $( this ).dialog( "close" );
-                                relation_code = 0; //do something
-                            }
-                        },
-                        {
-                            text: "att",
-                            click: function() {
-                                $( this ).dialog( "close" );
-                                relation_code = 0; //do something
-                            }
-                        },
-                        {
-                            text: "delete",
-                            click: function() {
-                                $( this ).dialog( "close" );
-                                relation_code = 0; //do something
-                            }
-                        }
-                    ]
-                });
-                $("#relation-dialog").dialog("open");
-
-
-                // Binding left-click event on connection
-                info.connection.bind("click", function(conn) {
-                    alert("connection between "+conn.sourceId+" and "+conn.targetId+" is clicked");
-                });
-            });
-        });
-    </script> -->
-
 </body>
 
 </html>

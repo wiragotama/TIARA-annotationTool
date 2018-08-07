@@ -15,6 +15,7 @@ var defaultStrokeHoverWidth = 7
 var defaultTarget = "";
 var defaultRelation = "";
 var mode = "production"; // {"debug", "production"}
+var Nsentences = -1; //global variable, number of sentences in the window, prompt included
 
 
 /** 
@@ -66,7 +67,7 @@ var inBound = {
     anchor: ["BottomLeft", "Continuous"],
     isSource: false,
     isTarget: true,
-    ConnectionsDetachable: false,
+    ConnectionsDetachable: true,
     ReattachConnections: true,
     maxConnections: -1, //the number of inbound connection is not limited
     endpoint: ["Dot", {radius: dotRadius}],
@@ -87,16 +88,16 @@ var outBound = {
     ],
     isSource: true,
     isTarget: false,
-    ConnectionsDetachable: false,
+    ConnectionsDetachable: true,
     ReattachConnections: true,
     maxConnections: 1, //the number of outbound connection
     endpoint: ["Rectangle", {width: 15, height: 15}],
-    paintStyle: {fill: defaultConnectionColor, stroke: defaultConnectionColor, strokeWidth: defaultStrokeWidth},
-    hoverPaintStyle: {fill: defaultHoverColor, stroke: defaultHoverColor, strokeWidth: defaultStrokeHoverWidth},
+    paintStyle: {fill: defaultConnectionColor, stroke: defaultConnectionColor, strokeStyel: defaultConnectionColor, strokeWidth: defaultStrokeWidth},
+    hoverPaintStyle: {fill: defaultHoverColor, stroke: defaultHoverColor, strokeStyle: defaultHoverColor, strokeWidth: defaultStrokeHoverWidth},
     endpointStyle: {fill: defaultConnectionColor, outlineStroke: defaultConnectionColor},
     endpointHoverStyle: {fill: defaultHoverColor, outlineStroke: defaultHoverColor},
-    connectorStyle: {stroke: defaultConnectionColor, strokeWidth: defaultStrokeWidth},
-    connectorHoverStyle: {stroke: defaultHoverColor, strokeWidth: defaultStrokeHoverWidth}
+    connectorStyle: {stroke: defaultConnectionColor, strokeStyel: defaultConnectionColor, strokeWidth: defaultStrokeWidth},
+    connectorHoverStyle: {stroke: defaultHoverColor, strokeStyle: defaultHoverColor, strokeWidth: defaultStrokeHoverWidth}
 };
 
 
@@ -125,7 +126,8 @@ jsPlumb.ready(function() {
     });
 
     // Creating Endpoints for each sentence
-    createEndpoints(6);
+    Nsentences = 6; // ideally, set this after loading
+    createEndpoints(Nsentences);
 
     // Events binding
     eventsBinding();
@@ -144,6 +146,7 @@ jsPlumb.ready(function() {
  		$("#sentence"+sentenceNumber).addClass('hide-text').removeClass('show-text');
  		$("#textarea"+sentenceNumber).addClass('hide-text').removeClass('show-text');
  		$("#annotation"+sentenceNumber).addClass('hide-text-dropping').removeClass('show-text-dropping');
+ 		// drop relations when dropping sentence
  		inboundConn = jsPlumb.getConnections({target: "sentence"+sentenceNumber});
  		outboundConn = jsPlumb.getConnections({source: "sentence"+sentenceNumber});
  		if (mode=="debug") {alert("Number of inbound connections "+inboundConn.length);}
@@ -156,28 +159,44 @@ jsPlumb.ready(function() {
  			dropRelationLabelDOM(outboundConn[i].sourceId, outboundConn[i].targetId);
  			jsPlumb.deleteConnection(outboundConn[i]);
  		}
+ 		$("#dropping"+sentenceNumber).val("drop");
  	}
  	else {
  		if (mode=="debug") {alert(checkboxId+" is unchecked");}
  		$("#sentence"+sentenceNumber).addClass('show-text').removeClass('hide-text');
  		$("#textarea"+sentenceNumber).addClass('show-text').removeClass('hide-text');
  		$("#annotation"+sentenceNumber).addClass('show-text-dropping').removeClass('hide-text-dropping');
+ 		$("#dropping"+sentenceNumber).val("non-drop");
  	}
  });
+
+
+/**
+ * TO DO: LOAD AND SAVE
+ */
+
+ $("#load_menu").on('click', function(event) {
+ 	event.preventDefault(); //do not refresh the page
+ 	alert("load menu");
+ });
+
+  $("#save_menu").on('click', function(event) {
+ 	event.preventDefault(); //do not refresh the page
+ 	alert("save menu");
+ });
+
 /** END GLOBAL PARAMETERS AND INITIALIZATION **/
-
-
 
 
 
 
 /**
  * Creating Endpoints for each sentence
- * @param{number} 	numberOfSentences
+ * @param{integer} 	numberOfSentences, prompt included
  */
 function createEndpoints(numberOfSentences) {
 	// The number of endpoint is the same as number of sentences
-	for (var i=0; i<numberOfSentences; i++) {
+	for (var i=0; i < numberOfSentences; i++) {
 		sentence_id = "sentence"+i;
 		jsPlumb.addEndpoint(sentence_id, inBound);
 		if (i > 0) 
@@ -194,13 +213,35 @@ function eventsBinding() {
 		// New connection is established
 		var conn = info.connection;
 		if (mode=="debug") {alert("Source = "+conn.sourceId+"; Target = "+conn.targetId);}
-		relationDialog(conn);
-
-		// Binding clicking event on connection on newly established connection
-		info.connection.bind("click", function(conn) {
-		    if (mode=="debug") {alert("connection between "+conn.sourceId+" and "+conn.targetId+" is clicked");}
-		    relationDialog(conn);
-		});
+		setRelationLabelDOM(conn.sourceId, conn.targetId, "temporary"); // for cycle detection
+		
+		// Establish connection if cycle is not detected
+		var cycle = cycleDetection(Nsentences, conn.sourceId);
+		if (cycle) { 
+			// cycle detected
+			alert("You cannot establish this new link because it causes circular connection");
+			dropRelationLabelDOM(conn.sourceId, conn.targetId);
+			connObj = jsPlumb.getConnections({source: conn.sourceId, target: conn.targetId})[0];
+			jsPlumb.deleteConnection(connObj);
+		}
+		else { 
+			// no cycle, safe
+			// check whether connect to dropped sentence
+			if ($('#dropping'+getSentenceIdNumber(conn.sourceId)+':checked').length > 0 || $('#dropping'+getSentenceIdNumber(conn.targetId)+':checked').length > 0) {
+				alert("You cannot establish link from or to a dropped sentence");
+				dropRelationLabelDOM(conn.sourceId, conn.targetId);
+				connObj = jsPlumb.getConnections({source: conn.sourceId, target: conn.targetId})[0];
+				jsPlumb.deleteConnection(connObj);
+			}
+			else { // select type of relation
+				relationDialog(conn);
+				// Binding clicking event on connection on newly established connection
+				info.connection.bind("click", function(conn) {
+				    if (mode=="debug") {alert("connection between "+conn.sourceId+" and "+conn.targetId+" is clicked");}
+				    relationDialog(conn);
+				});
+			}
+		}
 	});
 
 	// Binding detaching event 
@@ -209,6 +250,85 @@ function eventsBinding() {
 		if (mode=="debug") {alert("connection between "+conn.sourceId+" and "+conn.targetId+" is detached");}
 		dropRelationLabelDOM(conn.sourceId, conn.targetId);
 	});
+}
+
+
+/**
+ * Get the adjacency matrix representation of the relations
+ * @param{integer} numberOfSentences, prompt included
+ * @return{array} adjacency matrix
+ */
+function adjMatrix(numberOfSentences) {
+	// get an empty matrix ready
+	var matrix = [];
+	for (var i=0; i < numberOfSentences; i++) {
+		matrix[i] = [];
+		for (var j=0; j< numberOfSentences; j++) {
+			matrix[i][j] = 0; //no connection from sentence i to sentence j
+		}
+	}
+	// build adjacency matrix
+	for (var i=1; i < numberOfSentences; i++) {
+		var targetIdx = parseInt(getSentenceIdNumber($("#target"+i).text()));
+		matrix[i][targetIdx] = 1;
+	}
+
+	if (mode=="debug") {
+		console.log("ADJACENCY MATRIX");
+		for (var i=1; i < numberOfSentences; i++) {
+			for (var j=1; j < numberOfSentences; j++) {
+				console.log("["+i+","+j+"] "+matrix[i][j]);
+			}
+		}
+		console.log("------\n");
+	}
+	return matrix;
+}
+
+
+/**
+ * Checking whether cycle exist
+ * @param{integer} numberOfSentences, prompt included
+ * @param{string} sourceId, source sentence where we want to check the cycle
+ * @return{boolean}
+ */
+function cycleDetection(numberOfSentences, sourceId) {
+	var matrix = adjMatrix(numberOfSentences);
+	var visited = [numberOfSentences];
+	for (var i=0; i < numberOfSentences; i++) {
+		visited[i] = 0;
+	}
+	return cycleDetectionRec(numberOfSentences, matrix, visited, parseInt(getSentenceIdNumber(sourceId)));
+}
+
+
+/**
+ * Traversing graph recursively to check whether cycle exist
+ * @param{integer} numberOfSentences, prompt included
+ * @param{array} adjacency matrix
+ * @param{array} visited flag, saving the information of which nodes have been visited
+ * @param{integer} currentSentencesIdx, current sentence in the traversal
+ * @return{boolean}
+ */
+function cycleDetectionRec(numberOfSentences, matrix, visited, currentSentenceIdx) {
+	if (mode=="debug") {alert("traversing node "+currentSentenceIdx);}
+	if (visited[currentSentenceIdx]==0) {
+		visited[currentSentenceIdx] = 1;
+		var flag = false; // no cycle
+		for (var i=0; i < numberOfSentences; i++) {
+			if (matrix[currentSentenceIdx][i]==1) {
+				flag = cycleDetectionRec(numberOfSentences, matrix, visited, i);
+				if (flag) { // cycle detected
+					break;
+				}
+			}
+		}
+		return flag;
+	}
+	else {
+		if (mode=="debug") {alert("Cycle detected! "+currentSentenceIdx);}
+		return true; // cycle detected
+	}
 }
 
 
@@ -222,6 +342,7 @@ function relationDialog(conn) {
 	    dialogClass: "no-close",
 	    position: {my: "center top", at: "center top+80", of: window},
 	    height: 100,
+	    title: "Relation option "+getSentenceIdNumber(conn.sourceId)+" -> "+getSentenceIdNumber(conn.targetId),
 	    buttons: [
 	        {
 	            text: "=",
@@ -303,7 +424,7 @@ function setRelationLabelColor(sourceId, targetId, relationLabel) {
 /** 
  * Extracting the sentence number from the sentenceId (DOM)
  * @param{string} sentenceId, corresponds to DOM id
- * @return{number} sentence number
+ * @return{integer} sentence number
  */
 function getSentenceIdNumber(sentenceId) {
 	var Id = sentenceId;
