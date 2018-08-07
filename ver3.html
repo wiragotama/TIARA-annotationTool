@@ -76,16 +76,34 @@
             <div class="col-lg-10 draggable-area"> 
                 <!-- Essay Code -->
                 <div class="row essay-code">
+                	<div class="col-md-10">
                         <h4> ESSAY CODE </h4>
+                    </div>
+                    <div class="col-md-2 legend">
+                    	<p> Legend </p>
+                    	<span class="relation-color-mark rel-att-mark">
+                    		att
+                    	</span>
+                    	<span class="relation-color-mark rel-det-mark">
+                    		det
+                    	</span>
+                    	<span class="relation-color-mark rel-sup-mark">
+                    		sup
+                    	</span>
+                    	<span class="relation-color-mark rel-equal-mark">
+                    		=
+                    	</span>
+                    </div>
                 </div> <br>
 
                 <!-- Prompt -->
                 <div class="flex-container">
                 	<div class="flex-item-prompt" id="sentence0"> 
-                        <span class="col-md-1">
+                        <span class="col-md-1 sentence-id-number-prompt">
+                        	[PROMPT]
                         </span>
                         <span class="col-md-10">
-                            <p> <b> [PROMPT] </b> </p> 
+                            ahahahaha
                         </span>
                         <span class="col-md-1">
                         </span>
@@ -96,42 +114,78 @@
                 <div class="flex-container">
 
                 	<div class="flex-item" id="sentence1"> 
-                        <span class="col-md-1">
+                        <span class="col-md-1 sentence-id-number">
+                        	1
                         </span>
                         <span class="col-md-10">
                             <textarea id="textarea1">Sentence1</textarea>
                         </span>
-                		<span class="col-md-1" id="dropping1">
-                            <input type="number" class="input-number hide" id="target1">
+                		<span class="col-md-1" id="annotation1">
+                            <input type="text" class="input-number hide" id="target1">
+                            <input type="text" class="input-relation hide" id="relation1">
                             <Label> Drop? </Label> 
-                            <input type="checkbox" id="checkbox1" name="drop" value="drop"/>
+                            <input type="checkbox" id="dropping1" name="drop" value="drop"/>
                         </span>
                 	</div>
 
                 	<div class="flex-item" id="sentence2"> 
-                        <span class="col-md-1">
+                         <span class="col-md-1 sentence-id-number">
+                        	2
                         </span>
                         <span class="col-md-10">
                             <textarea id="textarea2">Sentence2</textarea>
                         </span>
-                        <span class="col-md-1" id="dropping2">
-                            <input type="number" class="input-number hide" id="target2">
+                        <span class="col-md-1" id="annotation2">
+                            <input type="text" class="input-number hide" id="target2">
+                            <input type="text" class="input-relation hide" id="relation2">
                             <Label> Drop? </Label> 
-                            <input type="checkbox" id="checkbox2" name="drop" value="drop"/>
+                            <input type="checkbox" id="dropping2" name="drop" value="drop"/>
                         </span>
                     </div>
 
 
                     <div class="flex-item" id="sentence3"> 
-                        <span class="col-md-1">
+                         <span class="col-md-1 sentence-id-number">
+                        	3
                         </span>
                         <span class="col-md-10">
                             <textarea id="textarea3">Sentence3</textarea>
                         </span>
-                        <span class="col-md-1" id="dropping3">
-                            <input type="number" class="input-number hide" id="target3">
+                        <span class="col-md-1" id="annotation3">
+                            <input type="text" class="input-number hide" id="target3">
+                            <input type="text" class="input-relation hide" id="relation3">
                             <Label> Drop? </Label> 
-                            <input type="checkbox" id="checkbox3" name="drop" value="drop"/>
+                            <input type="checkbox" id="dropping3" name="drop" value="drop"/>
+                        </span>
+                    </div>
+
+                    <div class="flex-item" id="sentence4"> 
+                         <span class="col-md-1 sentence-id-number">
+                        	4
+                        </span>
+                        <span class="col-md-10">
+                            <textarea id="textarea4">Sentence4</textarea>
+                        </span>
+                        <span class="col-md-1" id="annotation4">
+                            <input type="text" class="input-number hide" id="target4">
+                            <input type="text" class="input-relation hide" id="relation4">
+                            <Label> Drop? </Label> 
+                            <input type="checkbox" id="dropping4" name="drop" value="drop"/>
+                        </span>
+                    </div>
+
+                    <div class="flex-item" id="sentence5"> 
+                         <span class="col-md-1 sentence-id-number">
+                        	5
+                        </span>
+                        <span class="col-md-10">
+                            <textarea id="textarea5">Sentence5</textarea>
+                        </span>
+                        <span class="col-md-1" id="annotation5">
+                            <input type="text" class="input-number hide" id="target5">
+                            <input type="text" class="input-relation hide" id="relation5">
+                            <Label> Drop? </Label> 
+                            <input type="checkbox" id="dropping5" name="drop" value="drop"/>
                         </span>
                     </div>
 

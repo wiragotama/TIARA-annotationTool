@@ -4,6 +4,13 @@
 
 body {
     padding-top: 70px; /* Required padding for .navbar-fixed-top. Remove if using .navbar-static-top. Change if height of navigation changes. */
+    /* To prevent text selection when dragging */
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
 
 footer {
@@ -14,8 +21,18 @@ footer {
 	text-align: justify;
 }
 
+.sentence-id-number {
+	text-align: right; 
+	margin-top: 3px;
+}
+
+.sentence-id-number-prompt {
+	text-align: right; 
+	font-weight: bold;
+}
+
 .essay-code {
-	text-align: center;
+	text-align: left;
 	font-weight: bold;
 }
 
@@ -33,6 +50,48 @@ footer {
 	display: none;
 }
 
+.hide-text {
+	background-color: black;
+}
+
+.hide-text-dropping label {
+	color : white;
+}
+
+.legend {
+	text-align: right;
+	float: right;
+}
+
+.relation-color-mark {
+	float: right;
+	min-width: 25px;
+	text-align: center;
+	padding: 2px;
+	margin-left: 2px;
+	background-color: black;
+}
+
+.rel-equal-mark {
+	font-weight: normal;
+	background-color: lightgray;
+}
+
+.rel-sup-mark {
+	font-weight: normal;
+	background-color: lightgreen;
+}
+
+.rel-det-mark {
+	font-weight: normal;
+	background-color: lightblue;
+}
+
+.rel-att-mark {
+	font-weight: normal;
+	background-color: lightpink;
+}
+
 .flex-item-prompt {
 	border: 2px solid;
 	padding: 10px;
@@ -42,8 +101,8 @@ footer {
 
 .flex-item {
 	border: 2px solid;
-	padding: 10px;
-	margin-bottom: 40px;
+	padding: 5px;
+	margin-bottom: 25px;
 }
 
 .flex-item:focus, .flex-item:active {

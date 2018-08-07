@@ -9,17 +9,24 @@
 
 .ui-widget-content {
     background: white;
-  /*Change the dialog border color here*/
-    border: 1px solid red;
-    color: #222222;
+    font-family: Verdana,Arial,sans-serif;
+    padding: 2px;
+    margin-left: 2px;
 }
 
 .ui-dialog {
     left: 0;
-    outline: 0 none;
-    padding: 0 !important;
-    position: relative;
+    box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
     top: 0;
+    background: #fff;
+    border-radius: 2px;
+    display: inline-block;
+    height: 100px;
+    margin: 1rem;
+    position: relative;
+    width: 300px;
+    border: 2px solid blue;
+    border-radius: 5px;
 }
 
 #success {
@@ -32,12 +39,13 @@
     border: 0 none;
     overflow: auto;
     position: relative;
+    height: 20px
     padding: 0 !important;
 }
 
 .ui-widget-header {
   /*Change the Header color here*/
-    background: red;
+    background: blue;
     border: 0;
     color: #fff;
     font-weight: normal;
