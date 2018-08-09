@@ -1,0 +1,268 @@
+<!-- Essay Code -->
+<div class="row essay-code">
+    <div class="col-md-10">
+        <h4 id="essay_code_ICNALE"> W_PAK_SMK0_030_B1_2_EDIT_66.7 </h4>
+    </div>
+    <div class="col-md-2 legend">
+        <p> Legend </p>
+        <span class="relation-color-mark rel-att-mark">
+            att
+        </span>
+        <span class="relation-color-mark rel-det-mark">
+            det
+        </span>
+        <span class="relation-color-mark rel-sup-mark">
+            sup
+        </span>
+        <span class="relation-color-mark rel-equal-mark">
+            =
+        </span>
+    </div>
+</div> <br><!-- Prompt -->
+<div class="flex-container">
+    <div class="flex-item-prompt" id="sentence0"> 
+        <span class="col-md-1 sentence-id-number-prompt">
+            [PROMPT]
+        </span>
+        <span class="col-md-10">
+            Smoking should be banned at all the restaurants in the country.
+        </span>
+        <span class="col-md-1">
+        </span>
+    </div>
+</div> <br> <br><!-- Sentences -->
+ <div class="flex-container"><div class="flex-item" id="sentence1"> 
+    <span class="col-md-1 sentence-id-number">
+        1
+    </span>
+    <span class="col-md-10">
+        <textarea id="textarea1">Smoking is a current issue in our country; it is a bad habit, which spreads very quickly.</textarea>
+    </span>
+    <span class="col-md-1" id="annotation1">
+        <span class="input-number hide" id="target1"></span>
+        <span class="input-relation hide" id="relation1"></span>
+        <Label> Drop?</Label> 
+        <input type="checkbox" id="dropping1" name="drop" value="non-drop"/>
+    </span>
+</div><div class="flex-item" id="sentence2"> 
+    <span class="col-md-1 sentence-id-number">
+        2
+    </span>
+    <span class="col-md-10">
+        <textarea id="textarea2">We found many people in our daily lives who smoke.</textarea>
+    </span>
+    <span class="col-md-1" id="annotation2">
+        <span class="input-number hide" id="target2"></span>
+        <span class="input-relation hide" id="relation2"></span>
+        <Label> Drop?</Label> 
+        <input type="checkbox" id="dropping2" name="drop" value="non-drop"/>
+    </span>
+</div><div class="flex-item" id="sentence3"> 
+    <span class="col-md-1 sentence-id-number">
+        3
+    </span>
+    <span class="col-md-10">
+        <textarea id="textarea3">They are badly addicted to it and smoke continuously.</textarea>
+    </span>
+    <span class="col-md-1" id="annotation3">
+        <span class="input-number hide" id="target3"></span>
+        <span class="input-relation hide" id="relation3"></span>
+        <Label> Drop?</Label> 
+        <input type="checkbox" id="dropping3" name="drop" value="non-drop"/>
+    </span>
+</div><div class="flex-item" id="sentence4"> 
+    <span class="col-md-1 sentence-id-number">
+        4
+    </span>
+    <span class="col-md-10">
+        <textarea id="textarea4">Not only elders, but also the majority of youngsters smokes cigarettes.</textarea>
+    </span>
+    <span class="col-md-1" id="annotation4">
+        <span class="input-number hide" id="target4"></span>
+        <span class="input-relation hide" id="relation4"></span>
+        <Label> Drop?</Label> 
+        <input type="checkbox" id="dropping4" name="drop" value="non-drop"/>
+    </span>
+</div><div class="flex-item" id="sentence5"> 
+    <span class="col-md-1 sentence-id-number">
+        5
+    </span>
+    <span class="col-md-10">
+        <textarea id="textarea5">Some smoke only to be fashionable, and others smoking by following their elders; when they see their elders are smoking, they have a desire to taste it.</textarea>
+    </span>
+    <span class="col-md-1" id="annotation5">
+        <span class="input-number hide" id="target5"></span>
+        <span class="input-relation hide" id="relation5"></span>
+        <Label> Drop?</Label> 
+        <input type="checkbox" id="dropping5" name="drop" value="non-drop"/>
+    </span>
+</div><div class="flex-item" id="sentence6"> 
+    <span class="col-md-1 sentence-id-number">
+        6
+    </span>
+    <span class="col-md-10">
+        <textarea id="textarea6">If they smoke by following their desire, they become badly addicted with the passing of time and then it becomes very difficult for them to stop.</textarea>
+    </span>
+    <span class="col-md-1" id="annotation6">
+        <span class="input-number hide" id="target6"></span>
+        <span class="input-relation hide" id="relation6"></span>
+        <Label> Drop?</Label> 
+        <input type="checkbox" id="dropping6" name="drop" value="non-drop"/>
+    </span>
+</div><div class="flex-item" id="sentence7"> 
+    <span class="col-md-1 sentence-id-number">
+        7
+    </span>
+    <span class="col-md-10">
+        <textarea id="textarea7">Smoking has negative effects on health.</textarea>
+    </span>
+    <span class="col-md-1" id="annotation7">
+        <span class="input-number hide" id="target7"></span>
+        <span class="input-relation hide" id="relation7"></span>
+        <Label> Drop?</Label> 
+        <input type="checkbox" id="dropping7" name="drop" value="non-drop"/>
+    </span>
+</div><div class="flex-item" id="sentence8"> 
+    <span class="col-md-1 sentence-id-number">
+        8
+    </span>
+    <span class="col-md-10">
+        <textarea id="textarea8">It not only affects the health of smokers, but it also has negative effects on non-smokers because the fumes of the cigarettes cause many diseases such as lung cancer, asthma, and even eye problems.</textarea>
+    </span>
+    <span class="col-md-1" id="annotation8">
+        <span class="input-number hide" id="target8"></span>
+        <span class="input-relation hide" id="relation8"></span>
+        <Label> Drop?</Label> 
+        <input type="checkbox" id="dropping8" name="drop" value="non-drop"/>
+    </span>
+</div><div class="flex-item" id="sentence9"> 
+    <span class="col-md-1 sentence-id-number">
+        9
+    </span>
+    <span class="col-md-10">
+        <textarea id="textarea9">Smoking badly pollutes the environment.</textarea>
+    </span>
+    <span class="col-md-1" id="annotation9">
+        <span class="input-number hide" id="target9"></span>
+        <span class="input-relation hide" id="relation9"></span>
+        <Label> Drop?</Label> 
+        <input type="checkbox" id="dropping9" name="drop" value="non-drop"/>
+    </span>
+</div><div class="flex-item" id="sentence10"> 
+    <span class="col-md-1 sentence-id-number">
+        10
+    </span>
+    <span class="col-md-10">
+        <textarea id="textarea10">The smoke of cigarettes is very dangerous for all people whether they smoke or not.</textarea>
+    </span>
+    <span class="col-md-1" id="annotation10">
+        <span class="input-number hide" id="target10"></span>
+        <span class="input-relation hide" id="relation10"></span>
+        <Label> Drop?</Label> 
+        <input type="checkbox" id="dropping10" name="drop" value="non-drop"/>
+    </span>
+</div><div class="flex-item" id="sentence11"> 
+    <span class="col-md-1 sentence-id-number">
+        11
+    </span>
+    <span class="col-md-10">
+        <textarea id="textarea11">It is medically proven that a smoker dies sooner than does a non-smoker.</textarea>
+    </span>
+    <span class="col-md-1" id="annotation11">
+        <span class="input-number hide" id="target11"></span>
+        <span class="input-relation hide" id="relation11"></span>
+        <Label> Drop?</Label> 
+        <input type="checkbox" id="dropping11" name="drop" value="non-drop"/>
+    </span>
+</div><div class="flex-item" id="sentence12"> 
+    <span class="col-md-1 sentence-id-number">
+        12
+    </span>
+    <span class="col-md-10">
+        <textarea id="textarea12">Because they inhale the smoke, non-smokers also suffer from various diseases, and they can succumb to lung cancer by breathing in a smoky environment.</textarea>
+    </span>
+    <span class="col-md-1" id="annotation12">
+        <span class="input-number hide" id="target12"></span>
+        <span class="input-relation hide" id="relation12"></span>
+        <Label> Drop?</Label> 
+        <input type="checkbox" id="dropping12" name="drop" value="non-drop"/>
+    </span>
+</div><div class="flex-item" id="sentence13"> 
+    <span class="col-md-1 sentence-id-number">
+        13
+    </span>
+    <span class="col-md-10">
+        <textarea id="textarea13">The smoke also affects our senses.</textarea>
+    </span>
+    <span class="col-md-1" id="annotation13">
+        <span class="input-number hide" id="target13"></span>
+        <span class="input-relation hide" id="relation13"></span>
+        <Label> Drop?</Label> 
+        <input type="checkbox" id="dropping13" name="drop" value="non-drop"/>
+    </span>
+</div><div class="flex-item" id="sentence14"> 
+    <span class="col-md-1 sentence-id-number">
+        14
+    </span>
+    <span class="col-md-10">
+        <textarea id="textarea14">It causes us to lose the sense of taste, so we cannot enjoy the real taste of food in a smoky environment.</textarea>
+    </span>
+    <span class="col-md-1" id="annotation14">
+        <span class="input-number hide" id="target14"></span>
+        <span class="input-relation hide" id="relation14"></span>
+        <Label> Drop?</Label> 
+        <input type="checkbox" id="dropping14" name="drop" value="non-drop"/>
+    </span>
+</div><div class="flex-item" id="sentence15"> 
+    <span class="col-md-1 sentence-id-number">
+        15
+    </span>
+    <span class="col-md-10">
+        <textarea id="textarea15">Because of all these effects, smoking should be banned in restaurants because people go there to have great meal in a good environment.</textarea>
+    </span>
+    <span class="col-md-1" id="annotation15">
+        <span class="input-number hide" id="target15"></span>
+        <span class="input-relation hide" id="relation15"></span>
+        <Label> Drop?</Label> 
+        <input type="checkbox" id="dropping15" name="drop" value="non-drop"/>
+    </span>
+</div><div class="flex-item" id="sentence16"> 
+    <span class="col-md-1 sentence-id-number">
+        16
+    </span>
+    <span class="col-md-10">
+        <textarea id="textarea16">Therefore, to provide a good environment to the customers, restaurants should be cleaned, and they should have a smoke free environment.</textarea>
+    </span>
+    <span class="col-md-1" id="annotation16">
+        <span class="input-number hide" id="target16"></span>
+        <span class="input-relation hide" id="relation16"></span>
+        <Label> Drop?</Label> 
+        <input type="checkbox" id="dropping16" name="drop" value="non-drop"/>
+    </span>
+</div><div class="flex-item" id="sentence17"> 
+    <span class="col-md-1 sentence-id-number">
+        17
+    </span>
+    <span class="col-md-10">
+        <textarea id="textarea17">By doing so, people will enjoy their meal and enjoy themselves with their friends and family members in a smoke free, fresh, and healthy environment.</textarea>
+    </span>
+    <span class="col-md-1" id="annotation17">
+        <span class="input-number hide" id="target17"></span>
+        <span class="input-relation hide" id="relation17"></span>
+        <Label> Drop?</Label> 
+        <input type="checkbox" id="dropping17" name="drop" value="non-drop"/>
+    </span>
+</div><div class="flex-item" id="sentence18"> 
+    <span class="col-md-1 sentence-id-number">
+        18
+    </span>
+    <span class="col-md-10">
+        <textarea id="textarea18">In conclusion, smoking should be strictly banned in restaurants.</textarea>
+    </span>
+    <span class="col-md-1" id="annotation18">
+        <span class="input-number hide" id="target18"></span>
+        <span class="input-relation hide" id="relation18"></span>
+        <Label> Drop?</Label> 
+        <input type="checkbox" id="dropping18" name="drop" value="non-drop"/>
+    </span>
+</div></div>

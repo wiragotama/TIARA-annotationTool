@@ -1,0 +1,216 @@
+<!-- Essay Code -->
+<div class="row essay-code">
+    <div class="col-md-10">
+        <h4 id="essay_code_ICNALE"> W_IDN_PTJ0_034_B1_2_EDIT_71.3 </h4>
+    </div>
+    <div class="col-md-2 legend">
+        <p> Legend </p>
+        <span class="relation-color-mark rel-att-mark">
+            att
+        </span>
+        <span class="relation-color-mark rel-det-mark">
+            det
+        </span>
+        <span class="relation-color-mark rel-sup-mark">
+            sup
+        </span>
+        <span class="relation-color-mark rel-equal-mark">
+            =
+        </span>
+    </div>
+</div> <br><!-- Prompt -->
+<div class="flex-container">
+    <div class="flex-item-prompt" id="sentence0"> 
+        <span class="col-md-1 sentence-id-number-prompt">
+            [PROMPT]
+        </span>
+        <span class="col-md-10">
+            It is important for college students to have a part time job.
+        </span>
+        <span class="col-md-1">
+        </span>
+    </div>
+</div> <br> <br><!-- Sentences -->
+ <div class="flex-container"><div class="flex-item" id="sentence1"> 
+    <span class="col-md-1 sentence-id-number">
+        1
+    </span>
+    <span class="col-md-10">
+        <textarea id="textarea1">Since we were born until we graduated from high school, our parents have supported our financial needs.</textarea>
+    </span>
+    <span class="col-md-1" id="annotation1">
+        <span class="input-number hide" id="target1"></span>
+        <span class="input-relation hide" id="relation1"></span>
+        <Label> Drop?</Label> 
+        <input type="checkbox" id="dropping1" name="drop" value="non-drop"/>
+    </span>
+</div><div class="flex-item" id="sentence2"> 
+    <span class="col-md-1 sentence-id-number">
+        2
+    </span>
+    <span class="col-md-10">
+        <textarea id="textarea2">Even while attending college, we still use our parents' money.</textarea>
+    </span>
+    <span class="col-md-1" id="annotation2">
+        <span class="input-number hide" id="target2"></span>
+        <span class="input-relation hide" id="relation2"></span>
+        <Label> Drop?</Label> 
+        <input type="checkbox" id="dropping2" name="drop" value="non-drop"/>
+    </span>
+</div><div class="flex-item" id="sentence3"> 
+    <span class="col-md-1 sentence-id-number">
+        3
+    </span>
+    <span class="col-md-10">
+        <textarea id="textarea3">But not all students rely on their parents.</textarea>
+    </span>
+    <span class="col-md-1" id="annotation3">
+        <span class="input-number hide" id="target3"></span>
+        <span class="input-relation hide" id="relation3"></span>
+        <Label> Drop?</Label> 
+        <input type="checkbox" id="dropping3" name="drop" value="non-drop"/>
+    </span>
+</div><div class="flex-item" id="sentence4"> 
+    <span class="col-md-1 sentence-id-number">
+        4
+    </span>
+    <span class="col-md-10">
+        <textarea id="textarea4">Some work part-time teaching elementary, junior high, or senior high school students.</textarea>
+    </span>
+    <span class="col-md-1" id="annotation4">
+        <span class="input-number hide" id="target4"></span>
+        <span class="input-relation hide" id="relation4"></span>
+        <Label> Drop?</Label> 
+        <input type="checkbox" id="dropping4" name="drop" value="non-drop"/>
+    </span>
+</div><div class="flex-item" id="sentence5"> 
+    <span class="col-md-1 sentence-id-number">
+        5
+    </span>
+    <span class="col-md-10">
+        <textarea id="textarea5">Working part-time does not mean you have to be a teacher; there are many other jobs.</textarea>
+    </span>
+    <span class="col-md-1" id="annotation5">
+        <span class="input-number hide" id="target5"></span>
+        <span class="input-relation hide" id="relation5"></span>
+        <Label> Drop?</Label> 
+        <input type="checkbox" id="dropping5" name="drop" value="non-drop"/>
+    </span>
+</div><div class="flex-item" id="sentence6"> 
+    <span class="col-md-1 sentence-id-number">
+        6
+    </span>
+    <span class="col-md-10">
+        <textarea id="textarea6">We can look for them on the Internet or ask for help at the CAC (Career Assistance Center at our university).</textarea>
+    </span>
+    <span class="col-md-1" id="annotation6">
+        <span class="input-number hide" id="target6"></span>
+        <span class="input-relation hide" id="relation6"></span>
+        <Label> Drop?</Label> 
+        <input type="checkbox" id="dropping6" name="drop" value="non-drop"/>
+    </span>
+</div><div class="flex-item" id="sentence7"> 
+    <span class="col-md-1 sentence-id-number">
+        7
+    </span>
+    <span class="col-md-10">
+        <textarea id="textarea7">Or, we can ask for recommendations from friend who already have a part-time job.</textarea>
+    </span>
+    <span class="col-md-1" id="annotation7">
+        <span class="input-number hide" id="target7"></span>
+        <span class="input-relation hide" id="relation7"></span>
+        <Label> Drop?</Label> 
+        <input type="checkbox" id="dropping7" name="drop" value="non-drop"/>
+    </span>
+</div><div class="flex-item" id="sentence8"> 
+    <span class="col-md-1 sentence-id-number">
+        8
+    </span>
+    <span class="col-md-10">
+        <textarea id="textarea8">Working part time doesn't mean we have to work while we are studying.</textarea>
+    </span>
+    <span class="col-md-1" id="annotation8">
+        <span class="input-number hide" id="target8"></span>
+        <span class="input-relation hide" id="relation8"></span>
+        <Label> Drop?</Label> 
+        <input type="checkbox" id="dropping8" name="drop" value="non-drop"/>
+    </span>
+</div><div class="flex-item" id="sentence9"> 
+    <span class="col-md-1 sentence-id-number">
+        9
+    </span>
+    <span class="col-md-10">
+        <textarea id="textarea9">We can work part time during the holidays, so we don't waste our time lazing around not knowing what to do.</textarea>
+    </span>
+    <span class="col-md-1" id="annotation9">
+        <span class="input-number hide" id="target9"></span>
+        <span class="input-relation hide" id="relation9"></span>
+        <Label> Drop?</Label> 
+        <input type="checkbox" id="dropping9" name="drop" value="non-drop"/>
+    </span>
+</div><div class="flex-item" id="sentence10"> 
+    <span class="col-md-1 sentence-id-number">
+        10
+    </span>
+    <span class="col-md-10">
+        <textarea id="textarea10">By working part time, we can get some activity to do, and we can get money to lessen the burden on our parents.</textarea>
+    </span>
+    <span class="col-md-1" id="annotation10">
+        <span class="input-number hide" id="target10"></span>
+        <span class="input-relation hide" id="relation10"></span>
+        <Label> Drop?</Label> 
+        <input type="checkbox" id="dropping10" name="drop" value="non-drop"/>
+    </span>
+</div><div class="flex-item" id="sentence11"> 
+    <span class="col-md-1 sentence-id-number">
+        11
+    </span>
+    <span class="col-md-10">
+        <textarea id="textarea11">Working part time also gives us experience.</textarea>
+    </span>
+    <span class="col-md-1" id="annotation11">
+        <span class="input-number hide" id="target11"></span>
+        <span class="input-relation hide" id="relation11"></span>
+        <Label> Drop?</Label> 
+        <input type="checkbox" id="dropping11" name="drop" value="non-drop"/>
+    </span>
+</div><div class="flex-item" id="sentence12"> 
+    <span class="col-md-1 sentence-id-number">
+        12
+    </span>
+    <span class="col-md-10">
+        <textarea id="textarea12">However, later, when we are looking for a job to fulfill our needs, we can write our part-time job on our CV.</textarea>
+    </span>
+    <span class="col-md-1" id="annotation12">
+        <span class="input-number hide" id="target12"></span>
+        <span class="input-relation hide" id="relation12"></span>
+        <Label> Drop?</Label> 
+        <input type="checkbox" id="dropping12" name="drop" value="non-drop"/>
+    </span>
+</div><div class="flex-item" id="sentence13"> 
+    <span class="col-md-1 sentence-id-number">
+        13
+    </span>
+    <span class="col-md-10">
+        <textarea id="textarea13">So, it's important for us as college students to have a part-time job.</textarea>
+    </span>
+    <span class="col-md-1" id="annotation13">
+        <span class="input-number hide" id="target13"></span>
+        <span class="input-relation hide" id="relation13"></span>
+        <Label> Drop?</Label> 
+        <input type="checkbox" id="dropping13" name="drop" value="non-drop"/>
+    </span>
+</div><div class="flex-item" id="sentence14"> 
+    <span class="col-md-1 sentence-id-number">
+        14
+    </span>
+    <span class="col-md-10">
+        <textarea id="textarea14">Although, we can't fulfill all of our needs, we can learn to be independent.</textarea>
+    </span>
+    <span class="col-md-1" id="annotation14">
+        <span class="input-number hide" id="target14"></span>
+        <span class="input-relation hide" id="relation14"></span>
+        <Label> Drop?</Label> 
+        <input type="checkbox" id="dropping14" name="drop" value="non-drop"/>
+    </span>
+</div></div>

@@ -1,0 +1,164 @@
+<!-- Essay Code -->
+<div class="row essay-code">
+    <div class="col-md-10">
+        <h4 id="essay_code_ICNALE"> W_PAK_SMK0_005_B1_2_EDIT_49.2 </h4>
+    </div>
+    <div class="col-md-2 legend">
+        <p> Legend </p>
+        <span class="relation-color-mark rel-att-mark">
+            att
+        </span>
+        <span class="relation-color-mark rel-det-mark">
+            det
+        </span>
+        <span class="relation-color-mark rel-sup-mark">
+            sup
+        </span>
+        <span class="relation-color-mark rel-equal-mark">
+            =
+        </span>
+    </div>
+</div> <br><!-- Prompt -->
+<div class="flex-container">
+    <div class="flex-item-prompt" id="sentence0"> 
+        <span class="col-md-1 sentence-id-number-prompt">
+            [PROMPT]
+        </span>
+        <span class="col-md-10">
+            Smoking should be banned at all the restaurants in the country.
+        </span>
+        <span class="col-md-1">
+        </span>
+    </div>
+</div> <br> <br><!-- Sentences -->
+ <div class="flex-container"><div class="flex-item" id="sentence1"> 
+    <span class="col-md-1 sentence-id-number">
+        1
+    </span>
+    <span class="col-md-10">
+        <textarea id="textarea1">Everything has a root cause.</textarea>
+    </span>
+    <span class="col-md-1" id="annotation1">
+        <span class="input-number hide" id="target1"></span>
+        <span class="input-relation hide" id="relation1"></span>
+        <Label> Drop?</Label> 
+        <input type="checkbox" id="dropping1" name="drop" value="non-drop"/>
+    </span>
+</div><div class="flex-item" id="sentence2"> 
+    <span class="col-md-1 sentence-id-number">
+        2
+    </span>
+    <span class="col-md-10">
+        <textarea id="textarea2">The root cause of smoking is often stress release, health problems, or the company of people that we have.</textarea>
+    </span>
+    <span class="col-md-1" id="annotation2">
+        <span class="input-number hide" id="target2"></span>
+        <span class="input-relation hide" id="relation2"></span>
+        <Label> Drop?</Label> 
+        <input type="checkbox" id="dropping2" name="drop" value="non-drop"/>
+    </span>
+</div><div class="flex-item" id="sentence3"> 
+    <span class="col-md-1 sentence-id-number">
+        3
+    </span>
+    <span class="col-md-10">
+        <textarea id="textarea3">However, with the passage of time, the use of smoking took different shapes.</textarea>
+    </span>
+    <span class="col-md-1" id="annotation3">
+        <span class="input-number hide" id="target3"></span>
+        <span class="input-relation hide" id="relation3"></span>
+        <Label> Drop?</Label> 
+        <input type="checkbox" id="dropping3" name="drop" value="non-drop"/>
+    </span>
+</div><div class="flex-item" id="sentence4"> 
+    <span class="col-md-1 sentence-id-number">
+        4
+    </span>
+    <span class="col-md-10">
+        <textarea id="textarea4">The main sources of smoking are cigarettes, cigars, hookahs and, nowadays, sheesha.</textarea>
+    </span>
+    <span class="col-md-1" id="annotation4">
+        <span class="input-number hide" id="target4"></span>
+        <span class="input-relation hide" id="relation4"></span>
+        <Label> Drop?</Label> 
+        <input type="checkbox" id="dropping4" name="drop" value="non-drop"/>
+    </span>
+</div><div class="flex-item" id="sentence5"> 
+    <span class="col-md-1 sentence-id-number">
+        5
+    </span>
+    <span class="col-md-10">
+        <textarea id="textarea5">People smoke for various reasons, some do it for fun, some for their health needs, and some smoke as a status symbol, but most do not know why they smoke.</textarea>
+    </span>
+    <span class="col-md-1" id="annotation5">
+        <span class="input-number hide" id="target5"></span>
+        <span class="input-relation hide" id="relation5"></span>
+        <Label> Drop?</Label> 
+        <input type="checkbox" id="dropping5" name="drop" value="non-drop"/>
+    </span>
+</div><div class="flex-item" id="sentence6"> 
+    <span class="col-md-1 sentence-id-number">
+        6
+    </span>
+    <span class="col-md-10">
+        <textarea id="textarea6">Releasing stress is one of the main things that a smoker will tell when you ask him about smoking.</textarea>
+    </span>
+    <span class="col-md-1" id="annotation6">
+        <span class="input-number hide" id="target6"></span>
+        <span class="input-relation hide" id="relation6"></span>
+        <Label> Drop?</Label> 
+        <input type="checkbox" id="dropping6" name="drop" value="non-drop"/>
+    </span>
+</div><div class="flex-item" id="sentence7"> 
+    <span class="col-md-1 sentence-id-number">
+        7
+    </span>
+    <span class="col-md-10">
+        <textarea id="textarea7">To put a thing or habit on a good or bad list depends upon its usage.</textarea>
+    </span>
+    <span class="col-md-1" id="annotation7">
+        <span class="input-number hide" id="target7"></span>
+        <span class="input-relation hide" id="relation7"></span>
+        <Label> Drop?</Label> 
+        <input type="checkbox" id="dropping7" name="drop" value="non-drop"/>
+    </span>
+</div><div class="flex-item" id="sentence8"> 
+    <span class="col-md-1 sentence-id-number">
+        8
+    </span>
+    <span class="col-md-10">
+        <textarea id="textarea8">If you smoke because your doctor has advised you that burning one or two cigarettes does not matter, and you are doing it for fun, to look cool, and to release stress, these are just ways to satisfy ourselves.</textarea>
+    </span>
+    <span class="col-md-1" id="annotation8">
+        <span class="input-number hide" id="target8"></span>
+        <span class="input-relation hide" id="relation8"></span>
+        <Label> Drop?</Label> 
+        <input type="checkbox" id="dropping8" name="drop" value="non-drop"/>
+    </span>
+</div><div class="flex-item" id="sentence9"> 
+    <span class="col-md-1 sentence-id-number">
+        9
+    </span>
+    <span class="col-md-10">
+        <textarea id="textarea9">In fact, smoking is a silent killer; passive smoking is more dangerous than active smoking.</textarea>
+    </span>
+    <span class="col-md-1" id="annotation9">
+        <span class="input-number hide" id="target9"></span>
+        <span class="input-relation hide" id="relation9"></span>
+        <Label> Drop?</Label> 
+        <input type="checkbox" id="dropping9" name="drop" value="non-drop"/>
+    </span>
+</div><div class="flex-item" id="sentence10"> 
+    <span class="col-md-1 sentence-id-number">
+        10
+    </span>
+    <span class="col-md-10">
+        <textarea id="textarea10">Smoking destroys your natural beauty and natural assets, and that day is not far when the clouds of fumes and the smell of nicotine become natural if you continue to smoke at the same pace.</textarea>
+    </span>
+    <span class="col-md-1" id="annotation10">
+        <span class="input-number hide" id="target10"></span>
+        <span class="input-relation hide" id="relation10"></span>
+        <Label> Drop?</Label> 
+        <input type="checkbox" id="dropping10" name="drop" value="non-drop"/>
+    </span>
+</div></div>

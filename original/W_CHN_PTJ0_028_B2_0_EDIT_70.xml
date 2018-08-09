@@ -1,0 +1,203 @@
+<!-- Essay Code -->
+<div class="row essay-code">
+    <div class="col-md-10">
+        <h4 id="essay_code_ICNALE"> W_CHN_PTJ0_028_B2_0_EDIT_70 </h4>
+    </div>
+    <div class="col-md-2 legend">
+        <p> Legend </p>
+        <span class="relation-color-mark rel-att-mark">
+            att
+        </span>
+        <span class="relation-color-mark rel-det-mark">
+            det
+        </span>
+        <span class="relation-color-mark rel-sup-mark">
+            sup
+        </span>
+        <span class="relation-color-mark rel-equal-mark">
+            =
+        </span>
+    </div>
+</div> <br><!-- Prompt -->
+<div class="flex-container">
+    <div class="flex-item-prompt" id="sentence0"> 
+        <span class="col-md-1 sentence-id-number-prompt">
+            [PROMPT]
+        </span>
+        <span class="col-md-10">
+            It is important for college students to have a part time job.
+        </span>
+        <span class="col-md-1">
+        </span>
+    </div>
+</div> <br> <br><!-- Sentences -->
+ <div class="flex-container"><div class="flex-item" id="sentence1"> 
+    <span class="col-md-1 sentence-id-number">
+        1
+    </span>
+    <span class="col-md-10">
+        <textarea id="textarea1">Nowadays, many college students take part in part-time jobs.</textarea>
+    </span>
+    <span class="col-md-1" id="annotation1">
+        <span class="input-number hide" id="target1"></span>
+        <span class="input-relation hide" id="relation1"></span>
+        <Label> Drop?</Label> 
+        <input type="checkbox" id="dropping1" name="drop" value="non-drop"/>
+    </span>
+</div><div class="flex-item" id="sentence2"> 
+    <span class="col-md-1 sentence-id-number">
+        2
+    </span>
+    <span class="col-md-10">
+        <textarea id="textarea2">Some people think that it is very important for college students to have a part-time job.</textarea>
+    </span>
+    <span class="col-md-1" id="annotation2">
+        <span class="input-number hide" id="target2"></span>
+        <span class="input-relation hide" id="relation2"></span>
+        <Label> Drop?</Label> 
+        <input type="checkbox" id="dropping2" name="drop" value="non-drop"/>
+    </span>
+</div><div class="flex-item" id="sentence3"> 
+    <span class="col-md-1 sentence-id-number">
+        3
+    </span>
+    <span class="col-md-10">
+        <textarea id="textarea3">As for me, I don’t think that it is a good idea.</textarea>
+    </span>
+    <span class="col-md-1" id="annotation3">
+        <span class="input-number hide" id="target3"></span>
+        <span class="input-relation hide" id="relation3"></span>
+        <Label> Drop?</Label> 
+        <input type="checkbox" id="dropping3" name="drop" value="non-drop"/>
+    </span>
+</div><div class="flex-item" id="sentence4"> 
+    <span class="col-md-1 sentence-id-number">
+        4
+    </span>
+    <span class="col-md-10">
+        <textarea id="textarea4">To have a part-time job is not as important as making a great achievement in your studies.</textarea>
+    </span>
+    <span class="col-md-1" id="annotation4">
+        <span class="input-number hide" id="target4"></span>
+        <span class="input-relation hide" id="relation4"></span>
+        <Label> Drop?</Label> 
+        <input type="checkbox" id="dropping4" name="drop" value="non-drop"/>
+    </span>
+</div><div class="flex-item" id="sentence5"> 
+    <span class="col-md-1 sentence-id-number">
+        5
+    </span>
+    <span class="col-md-10">
+        <textarea id="textarea5">Having a part-time job means that you won't have enough time to study.</textarea>
+    </span>
+    <span class="col-md-1" id="annotation5">
+        <span class="input-number hide" id="target5"></span>
+        <span class="input-relation hide" id="relation5"></span>
+        <Label> Drop?</Label> 
+        <input type="checkbox" id="dropping5" name="drop" value="non-drop"/>
+    </span>
+</div><div class="flex-item" id="sentence6"> 
+    <span class="col-md-1 sentence-id-number">
+        6
+    </span>
+    <span class="col-md-10">
+        <textarea id="textarea6">As a result of this, the quality of education will decline, and many students will not be able to absorb enough professional knowledge that would be suitable for future work.</textarea>
+    </span>
+    <span class="col-md-1" id="annotation6">
+        <span class="input-number hide" id="target6"></span>
+        <span class="input-relation hide" id="relation6"></span>
+        <Label> Drop?</Label> 
+        <input type="checkbox" id="dropping6" name="drop" value="non-drop"/>
+    </span>
+</div><div class="flex-item" id="sentence7"> 
+    <span class="col-md-1 sentence-id-number">
+        7
+    </span>
+    <span class="col-md-10">
+        <textarea id="textarea7">Meanwhile, as many students will earn extra money from their part-time jobs, they will get into the habit of spending their money unwisely.</textarea>
+    </span>
+    <span class="col-md-1" id="annotation7">
+        <span class="input-number hide" id="target7"></span>
+        <span class="input-relation hide" id="relation7"></span>
+        <Label> Drop?</Label> 
+        <input type="checkbox" id="dropping7" name="drop" value="non-drop"/>
+    </span>
+</div><div class="flex-item" id="sentence8"> 
+    <span class="col-md-1 sentence-id-number">
+        8
+    </span>
+    <span class="col-md-10">
+        <textarea id="textarea8">Since they have worked hard to earn money, they will think that they deserve a luxurious life instead of studying after working for a whole day.</textarea>
+    </span>
+    <span class="col-md-1" id="annotation8">
+        <span class="input-number hide" id="target8"></span>
+        <span class="input-relation hide" id="relation8"></span>
+        <Label> Drop?</Label> 
+        <input type="checkbox" id="dropping8" name="drop" value="non-drop"/>
+    </span>
+</div><div class="flex-item" id="sentence9"> 
+    <span class="col-md-1 sentence-id-number">
+        9
+    </span>
+    <span class="col-md-10">
+        <textarea id="textarea9">How can a tired student study hard in his or her lessons?</textarea>
+    </span>
+    <span class="col-md-1" id="annotation9">
+        <span class="input-number hide" id="target9"></span>
+        <span class="input-relation hide" id="relation9"></span>
+        <Label> Drop?</Label> 
+        <input type="checkbox" id="dropping9" name="drop" value="non-drop"/>
+    </span>
+</div><div class="flex-item" id="sentence10"> 
+    <span class="col-md-1 sentence-id-number">
+        10
+    </span>
+    <span class="col-md-10">
+        <textarea id="textarea10">In other words, the disadvantages of having a part-time job for a college student outweigh the advantages.</textarea>
+    </span>
+    <span class="col-md-1" id="annotation10">
+        <span class="input-number hide" id="target10"></span>
+        <span class="input-relation hide" id="relation10"></span>
+        <Label> Drop?</Label> 
+        <input type="checkbox" id="dropping10" name="drop" value="non-drop"/>
+    </span>
+</div><div class="flex-item" id="sentence11"> 
+    <span class="col-md-1 sentence-id-number">
+        11
+    </span>
+    <span class="col-md-10">
+        <textarea id="textarea11">We can't only focus on the working experience of students.</textarea>
+    </span>
+    <span class="col-md-1" id="annotation11">
+        <span class="input-number hide" id="target11"></span>
+        <span class="input-relation hide" id="relation11"></span>
+        <Label> Drop?</Label> 
+        <input type="checkbox" id="dropping11" name="drop" value="non-drop"/>
+    </span>
+</div><div class="flex-item" id="sentence12"> 
+    <span class="col-md-1 sentence-id-number">
+        12
+    </span>
+    <span class="col-md-10">
+        <textarea id="textarea12">Instead, gaining knowledge of the professional field is more important when we are still students.</textarea>
+    </span>
+    <span class="col-md-1" id="annotation12">
+        <span class="input-number hide" id="target12"></span>
+        <span class="input-relation hide" id="relation12"></span>
+        <Label> Drop?</Label> 
+        <input type="checkbox" id="dropping12" name="drop" value="non-drop"/>
+    </span>
+</div><div class="flex-item" id="sentence13"> 
+    <span class="col-md-1 sentence-id-number">
+        13
+    </span>
+    <span class="col-md-10">
+        <textarea id="textarea13">Thus, we should try to pay more attention to our studies now rather than working at some part-time jobs.</textarea>
+    </span>
+    <span class="col-md-1" id="annotation13">
+        <span class="input-number hide" id="target13"></span>
+        <span class="input-relation hide" id="relation13"></span>
+        <Label> Drop?</Label> 
+        <input type="checkbox" id="dropping13" name="drop" value="non-drop"/>
+    </span>
+</div></div>

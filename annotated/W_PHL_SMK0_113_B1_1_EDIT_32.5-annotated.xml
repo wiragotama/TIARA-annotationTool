@@ -1,0 +1,151 @@
+<!-- Essay Code -->
+<div class="row essay-code">
+    <div class="col-md-10">
+        <h4 id="essay_code_ICNALE"> W_PHL_SMK0_113_B1_1_EDIT_32.5 </h4>
+    </div>
+    <div class="col-md-2 legend">
+        <p> Legend </p>
+        <span class="relation-color-mark rel-att-mark">
+            att
+        </span>
+        <span class="relation-color-mark rel-det-mark">
+            det
+        </span>
+        <span class="relation-color-mark rel-sup-mark">
+            sup
+        </span>
+        <span class="relation-color-mark rel-equal-mark">
+            =
+        </span>
+    </div>
+</div> <br><!-- Prompt -->
+<div class="flex-container ui-sortable">
+    <div class="flex-item-prompt ui-sortable-handle jtk-endpoint-anchor jtk-connected" id="sentence0"> 
+        <span class="col-md-1 sentence-id-number-prompt">
+            [PROMPT]
+        </span>
+        <span class="col-md-10">
+            Smoking should be banned at all the restaurants in the country.
+        </span>
+        <span class="col-md-1">
+        </span>
+    </div>
+</div> <br> <br><!-- Sentences -->
+ <div class="flex-container ui-sortable"><div class="flex-item ui-sortable-handle jtk-endpoint-anchor jtk-connected" id="sentence1"> 
+    <span class="col-md-1 sentence-id-number">
+        1
+    </span>
+    <span class="col-md-10">
+        <textarea id="textarea1">Yes, smoking should be completely banned in all restaurants in the country.</textarea>
+    </span>
+    <span class="col-md-1" id="annotation1">
+        <span class="input-number hide" id="target1">sentence0</span>
+        <span class="input-relation hide" id="relation1">sup</span>
+        <label> Drop?</label> 
+        <input type="checkbox" id="dropping1" name="drop" value="non-drop">
+    </span>
+</div><div class="flex-item ui-sortable-handle jtk-endpoint-anchor jtk-connected" id="sentence2"> 
+    <span class="col-md-1 sentence-id-number">
+        2
+    </span>
+    <span class="col-md-10">
+        <textarea id="textarea2">Because smoking is dangerous to our health, the government should empower people all over the country to quit to help our environment as well as our bodies.</textarea>
+    </span>
+    <span class="col-md-1" id="annotation2">
+        <span class="input-number hide" id="target2">sentence1</span>
+        <span class="input-relation hide" id="relation2">sup</span>
+        <label> Drop?</label> 
+        <input type="checkbox" id="dropping2" name="drop" value="non-drop">
+    </span>
+</div><div class="flex-item ui-sortable-handle jtk-endpoint-anchor jtk-connected" id="sentence5" style=""> 
+    <span class="col-md-1 sentence-id-number">
+        5
+    </span>
+    <span class="col-md-10">
+        <textarea id="textarea5">To improve our health, the government should provide information that our body will become healthy, and not smoking will improve our country and environment.</textarea>
+    </span>
+    <span class="col-md-1" id="annotation5">
+        <span class="input-number hide" id="target5">sentence2</span>
+        <span class="input-relation hide" id="relation5">sup</span>
+        <label> Drop?</label> 
+        <input type="checkbox" id="dropping5" name="drop" value="non-drop">
+    </span>
+</div><div class="flex-item ui-sortable-handle jtk-endpoint-anchor jtk-connected" id="sentence6" style=""> 
+    <span class="col-md-1 sentence-id-number">
+        6
+    </span>
+    <span class="col-md-10">
+        <textarea id="textarea6">The government should provide good healthcare for the whole country so they can develop their own beliefs about this project.</textarea>
+    </span>
+    <span class="col-md-1" id="annotation6">
+        <span class="input-number hide" id="target6">sentence2</span>
+        <span class="input-relation hide" id="relation6">sup</span>
+        <label> Drop?</label> 
+        <input type="checkbox" id="dropping6" name="drop" value="non-drop">
+    </span>
+</div><div class="flex-item ui-sortable-handle jtk-endpoint-anchor jtk-connected" id="sentence7" style=""> 
+    <span class="col-md-1 sentence-id-number">
+        7
+    </span>
+    <span class="col-md-10">
+        <textarea id="textarea7">The government should confiscate cigarettes to reduce pollution.</textarea>
+    </span>
+    <span class="col-md-1" id="annotation7">
+        <span class="input-number hide" id="target7">sentence2</span>
+        <span class="input-relation hide" id="relation7">sup</span>
+        <label> Drop?</label> 
+        <input type="checkbox" id="dropping7" name="drop" value="non-drop">
+    </span>
+</div><div class="flex-item ui-sortable-handle jtk-endpoint-anchor jtk-connected" id="sentence4"> 
+    <span class="col-md-1 sentence-id-number">
+        4
+    </span>
+    <span class="col-md-10">
+        <textarea id="textarea4">Vendors should not have any cigarettes in their stores to avoid smoking everywhere, because we all know that smoking is an addiction, and that cigarettes are very harmful to our body because they affect our lungs, teeth, and gums.</textarea>
+    </span>
+    <span class="col-md-1" id="annotation4">
+        <span class="input-number hide" id="target4">sentence7</span>
+        <span class="input-relation hide" id="relation4">det</span>
+        <label> Drop?</label> 
+        <input type="checkbox" id="dropping4" name="drop" value="non-drop">
+    </span>
+</div><div class="flex-item ui-sortable-handle jtk-endpoint-anchor jtk-connected" id="sentence3" style=""> 
+    <span class="col-md-1 sentence-id-number">
+        3
+    </span>
+    <span class="col-md-10">
+        <textarea id="textarea3">If people do not follow the law, the government should give them sanctions or punishments so they do not to do it again.</textarea>
+    </span>
+    <span class="col-md-1" id="annotation3">
+        <span class="input-number hide" id="target3">sentence7</span>
+        <span class="input-relation hide" id="relation3">det</span>
+        <label> Drop?</label> 
+        <input type="checkbox" id="dropping3" name="drop" value="non-drop">
+    </span>
+</div><div class="flex-item ui-sortable-handle jtk-endpoint-anchor jtk-connected" id="sentence8"> 
+    <span class="col-md-1 sentence-id-number">
+        8
+    </span>
+    <span class="col-md-10">
+        <textarea id="textarea8">All of the funds that they will get can be used to help build a foundation for street children so they can have a proper education.</textarea>
+    </span>
+    <span class="col-md-1" id="annotation8">
+        <span class="input-number hide" id="target8">sentence3</span>
+        <span class="input-relation hide" id="relation8">det</span>
+        <label> Drop?</label> 
+        <input type="checkbox" id="dropping8" name="drop" value="non-drop">
+    </span>
+</div><div class="flex-item ui-sortable-handle jtk-endpoint-anchor jtk-connected" id="sentence9"> 
+    <span class="col-md-1 sentence-id-number">
+        9
+    </span>
+    <span class="col-md-10">
+        <textarea id="textarea9">I therefore conclude that the government should impose the NO SMOKING CAMPAIGN across the country.</textarea>
+    </span>
+    <span class="col-md-1" id="annotation9">
+        <span class="input-number hide" id="target9">sentence0</span>
+        <span class="input-relation hide" id="relation9">sup</span>
+        <label> Drop?</label> 
+        <input type="checkbox" id="dropping9" name="drop" value="non-drop">
+    </span>
+</div></div>

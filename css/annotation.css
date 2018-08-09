@@ -13,6 +13,12 @@ body {
     user-select: none;
 }
 
+.btn-file {
+	font-size: 12px;
+	width: 150px;
+	text-align: center;
+}
+
 footer {
     margin: 50px 0;
 }
@@ -47,7 +53,7 @@ footer {
 }
 
 .hide {
-	display: none;
+	visibility: hidden;
 }
 
 .hide-text {
@@ -103,6 +109,7 @@ footer {
 	border: 2px solid;
 	padding: 5px;
 	margin-bottom: 25px;
+	/*z-index: 1000;*/
 }
 
 .flex-item:focus, .flex-item:active {

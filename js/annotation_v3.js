@@ -15,16 +15,8 @@ var defaultStrokeHoverWidth = 7
 var defaultTarget = "";
 var defaultRelation = "";
 var mode = "production"; // {"debug", "production"}
-var Nsentences = -1; //global variable, number of sentences in the window, prompt included
-
-
-/** 
- * Initiating sortable
- */ 
-$(function() {
-	$(".flex-container").sortable();
-	$(".flex-item").disableSelection();
-});
+var Nsentences = -1; // global variable, number of sentences in the window, prompt included
+var allowIntermediarySave = false; // set false if we only allows annotator to save only when the annotation is done; true if annotators can save midway
 
 
 /** 
@@ -38,26 +30,26 @@ $(document).ready(function() {
 
 
 /**
- * Scroll page automatically when dragging
+ * Scroll page automatically when dragging --> seems buggy, disabled
  */
-var clicked = false, clickY;
-$(document).on({
-    'mousemove': function(e) {
-        clicked && updateScrollPos(e);
-    },
-    'mousedown': function(e) {
-        clicked = true;
-        clickY = e.pageY;
-    },
-    'mouseup': function() {
-        clicked = false;
-        $('html').css('cursor', 'auto');
-    }
-});
-var updateScrollPos = function(e) {
-    $('html').css('cursor', 'row-resize');
-    $(window).scrollTop($(window).scrollTop() + (e.pageY - clickY));
-}
+// var clicked = false, clickY;
+// $(document).on({
+//     'mousemove': function(e) {
+//         clicked && updateScrollPos(e);
+//     },
+//     'mousedown': function(e) {
+//         clicked = true;
+//         clickY = e.pageY;
+//     },
+//     'mouseup': function() {
+//         clicked = false;
+//         $('html').css('cursor', 'auto');
+//     }
+// });
+// var updateScrollPos = function(e) {
+//     $('html').css('cursor', 'row-resize');
+//     $(window).scrollTop($(window).scrollTop() + (e.pageY - clickY));
+// }
 
 
 /**
@@ -92,102 +84,207 @@ var outBound = {
     ReattachConnections: true,
     maxConnections: 1, //the number of outbound connection
     endpoint: ["Rectangle", {width: 15, height: 15}],
-    paintStyle: {fill: defaultConnectionColor, stroke: defaultConnectionColor, strokeStyel: defaultConnectionColor, strokeWidth: defaultStrokeWidth},
+    paintStyle: {fill: defaultConnectionColor, stroke: defaultConnectionColor, strokeStyle: defaultConnectionColor, strokeWidth: defaultStrokeWidth},
     hoverPaintStyle: {fill: defaultHoverColor, stroke: defaultHoverColor, strokeStyle: defaultHoverColor, strokeWidth: defaultStrokeHoverWidth},
     endpointStyle: {fill: defaultConnectionColor, outlineStroke: defaultConnectionColor},
     endpointHoverStyle: {fill: defaultHoverColor, outlineStroke: defaultHoverColor},
-    connectorStyle: {stroke: defaultConnectionColor, strokeStyel: defaultConnectionColor, strokeWidth: defaultStrokeWidth},
+    connectorStyle: {stroke: defaultConnectionColor, strokeStyle: defaultConnectionColor, strokeWidth: defaultStrokeWidth},
     connectorHoverStyle: {stroke: defaultHoverColor, strokeStyle: defaultHoverColor, strokeWidth: defaultStrokeHoverWidth}
 };
-
-
-/**
- * Initialization of the jsPlumb
- */
-jsPlumb.ready(function() {
-    jsPlumb.setContainer(document.getElementById("draggable-area"));
-
-    // Drag the endpoint when the sentence (DIV) is dragged
-    var is_dragging = false;
-    $(".flex-container").sortable({
-        start: function(event, ui) {
-            is_dragging = true;
-        },
-        stop: function(event, ui) {
-            is_dragging = false;
-            jsPlumb.recalculateOffsets($(ui.item).parents(".draggable-area"));
-            jsPlumb.repaintEverything();
-        }
-    })
-    .on("mousemove", function(e) {
-        if (is_dragging) {
-            jsPlumb.repaintEverything();
-        }
-    });
-
-    // Creating Endpoints for each sentence
-    Nsentences = 6; // ideally, set this after loading
-    createEndpoints(Nsentences);
-
-    // Events binding
-    eventsBinding();
-});
 
 
 /** 
  * Dropping listener
  */
- $("input[type=checkbox]").on('change', function() {
- 	var checkbox = $(this);
- 	var checkboxId = checkbox.attr("id");
- 	var sentenceNumber = getSentenceIdNumber(checkbox.attr("id"));
- 	if (checkbox.is(":checked")) {
- 		if (mode=="debug") {alert(checkboxId+" is checked");}
- 		$("#sentence"+sentenceNumber).addClass('hide-text').removeClass('show-text');
- 		$("#textarea"+sentenceNumber).addClass('hide-text').removeClass('show-text');
- 		$("#annotation"+sentenceNumber).addClass('hide-text-dropping').removeClass('show-text-dropping');
- 		// drop relations when dropping sentence
- 		inboundConn = jsPlumb.getConnections({target: "sentence"+sentenceNumber});
- 		outboundConn = jsPlumb.getConnections({source: "sentence"+sentenceNumber});
- 		if (mode=="debug") {alert("Number of inbound connections "+inboundConn.length);}
- 		for (var i=0; i<inboundConn.length; i++) {
- 			dropRelationLabelDOM(inboundConn[i].sourceId, inboundConn[i].targetId);
- 			jsPlumb.deleteConnection(inboundConn[i]);
- 		}
- 		if (mode=="debug") {alert("Number of outbound connections "+outboundConn.length);}
- 		for (var i=0; i<outboundConn.length; i++) {
- 			dropRelationLabelDOM(outboundConn[i].sourceId, outboundConn[i].targetId);
- 			jsPlumb.deleteConnection(outboundConn[i]);
- 		}
- 		$("#dropping"+sentenceNumber).val("drop");
- 	}
- 	else {
- 		if (mode=="debug") {alert(checkboxId+" is unchecked");}
- 		$("#sentence"+sentenceNumber).addClass('show-text').removeClass('hide-text');
- 		$("#textarea"+sentenceNumber).addClass('show-text').removeClass('hide-text');
- 		$("#annotation"+sentenceNumber).addClass('show-text-dropping').removeClass('hide-text-dropping');
- 		$("#dropping"+sentenceNumber).val("non-drop");
- 	}
- });
+ function droppingListener() {
+	$("input[type=checkbox]").on('change', function() {
+		var checkbox = $(this);
+		var checkboxId = checkbox.attr("id");
+		var sentenceNumber = getSentenceIdNumber(checkbox.attr("id"));
+		if (checkbox.is(":checked")) {
+			if (mode=="debug") {alert(checkboxId+" is checked");}
+			$("#sentence"+sentenceNumber).addClass('hide-text').removeClass('show-text');
+			$("#textarea"+sentenceNumber).addClass('hide-text').removeClass('show-text');
+			$("#annotation"+sentenceNumber).addClass('hide-text-dropping').removeClass('show-text-dropping');
+			// drop relations when dropping sentence
+			inboundConn = jsPlumb.getConnections({target: "sentence"+sentenceNumber});
+			outboundConn = jsPlumb.getConnections({source: "sentence"+sentenceNumber});
+			if (mode=="debug") {alert("Number of inbound connections "+inboundConn.length);}
+			for (var i=0; i<inboundConn.length; i++) {
+				dropRelationLabelDOM(inboundConn[i].sourceId, inboundConn[i].targetId);
+				jsPlumb.deleteConnection(inboundConn[i]);
+			}
+			if (mode=="debug") {alert("Number of outbound connections "+outboundConn.length);}
+			for (var i=0; i<outboundConn.length; i++) {
+				dropRelationLabelDOM(outboundConn[i].sourceId, outboundConn[i].targetId);
+				jsPlumb.deleteConnection(outboundConn[i]);
+			}
+			$("#dropping"+sentenceNumber).val("drop");
+		}
+		else {
+			if (mode=="debug") {alert(checkboxId+" is unchecked");}
+			$("#sentence"+sentenceNumber).addClass('show-text').removeClass('hide-text');
+			$("#textarea"+sentenceNumber).addClass('show-text').removeClass('hide-text');
+			$("#annotation"+sentenceNumber).addClass('show-text-dropping').removeClass('hide-text-dropping');
+			$("#dropping"+sentenceNumber).val("non-drop");
+		}
+	});
+}
 
 
 /**
- * TO DO: LOAD AND SAVE
+ * Load pre-formatted essay (xml) into the window, then establish connections based on the information present
  */
+$("#load-file").on('change', function(event) {
+	jsPlumb.reset(); // removes every endpoint, detaches every connection, and clears the event listeners list. Returns jsPlumb instance to its initial state.
+	event.preventDefault(); // do not refresh the page
 
- $("#load_menu").on('click', function(event) {
- 	event.preventDefault(); //do not refresh the page
- 	alert("load menu");
- });
+	if (mode=="debug") {alert("Load menu is clicked")};
 
-  $("#save_menu").on('click', function(event) {
- 	event.preventDefault(); //do not refresh the page
- 	alert("save menu");
- });
+	var file = event.target.files[0]; // get only the first one
+	if (file) {
+		var reader = new FileReader();
+		reader.onload = function(e) { 
+			var content = e.target.result;
+			if (mode=="debug") {
+				alert( "Got the file.n" 
+					+"name: " + file.name + "n"
+					+"type: " + file.type + "n"
+					+"size: " + file.size + " bytesn"
+					+ "starts with: " + content.substr(1, content.indexOf("n"))
+				);  
+			}
+			document.getElementsByClassName('draggable-area')[0].innerHTML = content;
+			Nsentences = document.getElementsByClassName("flex-item").length + 1; //plus the prompt
+			
+			initializeJsPlumb(Nsentences);
+		}
+		reader.readAsText(file);
+	} 
+	else { 
+		alert("Failed to load file");
+	}
+});
 
+
+/**
+ * Initialization of the jsPlumb
+ * @param{integer} Nsentences, number of snetences in the text including prompt
+ */
+ function initializeJsPlumb(Nsentences) {
+ 	jsPlumb.ready(function() {
+	    jsPlumb.setContainer(document.getElementById("draggable-area"));
+
+	    // initializing sortable
+	    $(".flex-container").sortable();
+		$(".flex-item").disableSelection();
+
+	    // repaint connection when dragging sentence
+	    var is_dragging = false;
+	    $(".flex-container").sortable({
+	        start: function(event, ui) {
+	            is_dragging = true;
+	        },
+	        stop: function(event, ui) {
+	            is_dragging = false;
+	            jsPlumb.recalculateOffsets($(ui.item).parents(".draggable-area"));
+	            jsPlumb.repaintEverything();
+	        }
+	    })
+	    .on("mousemove", function(e) {
+	        if (is_dragging) {
+	            jsPlumb.repaintEverything();
+	        }
+	    });
+
+	    // Creating Endpoints for each sentence
+	    createEndpoints(Nsentences);
+
+	    // Creating existing relation information
+		for (var i=1; i < Nsentences; i++) { // prompt has not outgoing connection
+			paintExistingConnection(i);
+		}
+
+	    // General event binding
+	    eventsBinding();
+	    droppingListener();
+	});
+}
+
+
+/**
+ * Save essay (xml) into local file
+ */
+$("#save_menu").on('click', function(event) {
+	if (allowIntermediarySave || (!allowIntermediarySave && isFullAnnotation(Nsentences))) {
+		event.preventDefault(); //do not refresh the page
+		if (mode=="debug") {alert("Save menu is clicked")};
+
+		// Handling textarea
+		for (var i=1; i < Nsentences; i++) {
+			document.getElementById("textarea"+i).innerHTML = $("#textarea"+i).val();
+		}
+
+		var cut = document.getElementsByClassName('draggable-area')[0].innerHTML.indexOf("div class=\"jtk-endpoint");
+		var text = document.getElementsByClassName('draggable-area')[0].innerHTML.substring(0, cut-1);
+		// console.log(text);
+		var filename = $(".essay-code .col-md-10 #essay_code_ICNALE").text().trim() + "-annotated.xml";
+		download(filename, text);
+
+		// IDEA: TO DO refresh automatically ....
+	}
+	else alert("You cannot save because your annotation is incomplete");
+});
 /** END GLOBAL PARAMETERS AND INITIALIZATION **/
 
 
+
+/**
+ * Check (shallowly) whether the annotators has finished the annotation
+ * Definition: prompt is referenced, each sentence has outgoing connections or dropped otherwise
+ * @param{integer} numberOfSentences including prompt
+ */
+function isFullAnnotation(numberOfSentences) {
+	var flag = true; 
+	var isPromptReferenced = false;
+	for (var i=1; i < Nsentences; i++) {
+		var target = $("#target"+i).text();
+		var relation = $("#relation"+i).text();
+		var dropping = $("#dropping"+i).val();
+		if (dropping == "non-drop") {
+			if (target == defaultTarget && relation == defaultRelation) {
+				flag = false;
+				break;
+			}
+			if (target == "sentence0")
+				isPromptReferenced = true;
+			// else still true
+		}
+		// should have been already handled by the visualization 
+	}
+	return flag && isPromptReferenced;
+}
+
+
+/**
+ * Download a text file
+ * @param{string} filename, save filename
+ * @param{string} text
+ */
+function download(filename, text) {
+	var pom = document.createElement('a');
+	pom.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
+	pom.setAttribute('download', filename);
+
+	if (document.createEvent) {
+	    var event = document.createEvent('MouseEvents');
+	    event.initEvent('click', true, true);
+	    pom.dispatchEvent(event);
+	}
+	else {
+	    pom.click();
+	}
+}
 
 
 /**
@@ -198,9 +295,9 @@ function createEndpoints(numberOfSentences) {
 	// The number of endpoint is the same as number of sentences
 	for (var i=0; i < numberOfSentences; i++) {
 		sentence_id = "sentence"+i;
-		jsPlumb.addEndpoint(sentence_id, inBound);
+		jsPlumb.addEndpoint(sentence_id, inBound, {uuid:"ib"+i}); 
 		if (i > 0) 
-			jsPlumb.addEndpoint(sentence_id, outBound);
+			jsPlumb.addEndpoint(sentence_id, outBound, {uuid:"ob"+i});
 	}
 }
 
@@ -209,8 +306,8 @@ function createEndpoints(numberOfSentences) {
  * Binding events that may occur in the sentences connection
  */
 function eventsBinding() {
-	jsPlumb.bind("connection", function(info) {
-		// New connection is established
+	// New connection is established
+	jsPlumb.bind("connection", function(info) {	
 		var conn = info.connection;
 		if (mode=="debug") {alert("Source = "+conn.sourceId+"; Target = "+conn.targetId);}
 		setRelationLabelDOM(conn.sourceId, conn.targetId, "temporary"); // for cycle detection
@@ -235,19 +332,20 @@ function eventsBinding() {
 			}
 			else { // select type of relation
 				relationDialog(conn);
-				// Binding clicking event on connection on newly established connection
-				info.connection.bind("click", function(conn) {
-				    if (mode=="debug") {alert("connection between "+conn.sourceId+" and "+conn.targetId+" is clicked");}
-				    relationDialog(conn);
-				});
 			}
 		}
+	});
+
+	// Binding clicking event on connection
+	jsPlumb.bind("click", function(conn) {
+	    if (mode=="debug") {alert("connection between "+conn.sourceId+" and "+conn.targetId+" is clicked");}
+	    relationDialog(conn);
 	});
 
 	// Binding detaching event 
 	jsPlumb.bind('connectionDetached', function(info) {
 		var conn = info.connection;
-		if (mode=="debug") {alert("connection between "+conn.sourceId+" and "+conn.targetId+" is detached");}
+		if (mode=="debug") {alert("connection between "+conn.sourceId+" -> "+conn.targetId+" is detached");}
 		dropRelationLabelDOM(conn.sourceId, conn.targetId);
 	});
 }
@@ -270,13 +368,13 @@ function adjMatrix(numberOfSentences) {
 	// build adjacency matrix
 	for (var i=1; i < numberOfSentences; i++) {
 		var targetIdx = parseInt(getSentenceIdNumber($("#target"+i).text()));
-		matrix[i][targetIdx] = 1;
+		matrix[i][targetIdx] = 1; // connection from sentence i to targetIdx
 	}
 
 	if (mode=="debug") {
 		console.log("ADJACENCY MATRIX");
 		for (var i=1; i < numberOfSentences; i++) {
-			for (var j=1; j < numberOfSentences; j++) {
+			for (var j=0; j < numberOfSentences; j++) {
 				console.log("["+i+","+j+"] "+matrix[i][j]);
 			}
 		}
@@ -431,7 +529,7 @@ function getSentenceIdNumber(sentenceId) {
 	while (isNaN(Id.charAt(0))) {
 		Id = Id.substr(1);
 	}
-	return Id
+	return Id;
 }
 
 
@@ -455,6 +553,44 @@ function setRelationLabelDOM(sourceId, targetId, relationLabel) {
 function dropRelationLabelDOM(sourceId, targetId) {
 	document.getElementById("target"+getSentenceIdNumber(sourceId)).innerHTML = defaultTarget;
 	document.getElementById("relation"+getSentenceIdNumber(sourceId)).innerHTML = defaultRelation;
+}
+
+
+/**
+ * Get the relation information (from the DOM) from a particular source sentence
+ * @param{integer} sourceIdx, corresponds to original index (order) of sentence
+ * @return{array} target, relation, dropping status
+ */
+function getRelationInfoByDOM(sourceIdx) {
+	var retval = [3];
+	retval[0] = document.getElementById("target"+sourceIdx).innerHTML;
+	retval[1] = document.getElementById("relation"+sourceIdx).innerHTML;
+	retval[2] = $("#dropping"+sourceIdx).val();
+	return retval
+}
+
+
+/**
+ * Paint existing connections from the source sentnece when loading text
+ * @param{integer} sourceIdx, corresponds to original index (order) of sentence
+ */
+function paintExistingConnection(sourceIdx) {
+	var retval = getRelationInfoByDOM(sourceIdx);
+	if (retval[2] == "non-drop") {
+		if (retval[0] != defaultTarget && retval[1] != defaultRelation) {
+			if (mode=="debug") {alert("paint "+sourceIdx+" -> "+getSentenceIdNumber(retval[0])+" on "+retval[1])};
+			jsPlumb.connect({
+				uuids: ["ob"+sourceIdx, "ib"+getSentenceIdNumber(retval[0])],
+			    ConnectionsDetachable: true,
+			    ReattachConnections: true,
+			});
+			setRelationLabelColor("sentence"+sourceIdx, retval[0], retval[1]);
+		}
+		document.getElementById("dropping"+sourceIdx).checked = false;
+	}
+	else {
+		document.getElementById("dropping"+sourceIdx).checked = true;
+	}
 }
 
 
