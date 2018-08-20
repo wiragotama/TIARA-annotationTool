@@ -27,11 +27,6 @@ footer {
 	text-align: justify;
 }
 
-.sentence-id-number {
-	text-align: right; 
-	margin-top: 3px;
-}
-
 .sentence-id-number-prompt {
 	text-align: right; 
 	font-weight: bold;
@@ -50,6 +45,16 @@ footer {
 .flex-container {
 	display: flex;
 	flex-direction: column;
+}
+
+.sentence-id-number {
+	text-align: right; 
+	/*margin-top: 3px;*/
+	font-size: 20px;
+	border: 1px solid gray;
+	vertical-align: center;
+	padding-bottom: 10px;
+	padding-top: -2px;
 }
 
 .hide {
@@ -117,7 +122,7 @@ footer {
 }
 
 .flex-item textarea {
-	border:none;
+	border:1px solid #cccccc;
 	width:100%;
 }
 

@@ -18,7 +18,9 @@
             =
         </span>
     </div>
-</div> <br><!-- Prompt -->
+</div> <br>
+
+<!-- Prompt -->
 <div class="flex-container">
     <div class="flex-item-prompt" id="sentence0"> 
         <span class="col-md-1 sentence-id-number-prompt">
@@ -30,8 +32,11 @@
         <span class="col-md-1">
         </span>
     </div>
-</div> <br> <br><!-- Sentences -->
- <div class="flex-container"><div class="flex-item" id="sentence1"> 
+</div> <br> <br>
+
+<!-- Sentences -->
+<div class="flex-container">
+<div class="flex-item" id="sentence1"> 
     <span class="col-md-1 sentence-id-number">
         1
     </span>
@@ -44,7 +49,8 @@
         <Label> Drop?</Label> 
         <input type="checkbox" id="dropping1" name="drop" value="non-drop"/>
     </span>
-</div><div class="flex-item" id="sentence2"> 
+</div>
+<div class="flex-item" id="sentence2"> 
     <span class="col-md-1 sentence-id-number">
         2
     </span>
@@ -57,7 +63,8 @@
         <Label> Drop?</Label> 
         <input type="checkbox" id="dropping2" name="drop" value="non-drop"/>
     </span>
-</div><div class="flex-item" id="sentence3"> 
+</div>
+<div class="flex-item" id="sentence3"> 
     <span class="col-md-1 sentence-id-number">
         3
     </span>
@@ -70,7 +77,8 @@
         <Label> Drop?</Label> 
         <input type="checkbox" id="dropping3" name="drop" value="non-drop"/>
     </span>
-</div><div class="flex-item" id="sentence4"> 
+</div>
+<div class="flex-item" id="sentence4"> 
     <span class="col-md-1 sentence-id-number">
         4
     </span>
@@ -83,7 +91,8 @@
         <Label> Drop?</Label> 
         <input type="checkbox" id="dropping4" name="drop" value="non-drop"/>
     </span>
-</div><div class="flex-item" id="sentence5"> 
+</div>
+<div class="flex-item" id="sentence5"> 
     <span class="col-md-1 sentence-id-number">
         5
     </span>
@@ -96,7 +105,8 @@
         <Label> Drop?</Label> 
         <input type="checkbox" id="dropping5" name="drop" value="non-drop"/>
     </span>
-</div><div class="flex-item" id="sentence6"> 
+</div>
+<div class="flex-item" id="sentence6"> 
     <span class="col-md-1 sentence-id-number">
         6
     </span>
@@ -109,7 +119,8 @@
         <Label> Drop?</Label> 
         <input type="checkbox" id="dropping6" name="drop" value="non-drop"/>
     </span>
-</div><div class="flex-item" id="sentence7"> 
+</div>
+<div class="flex-item" id="sentence7"> 
     <span class="col-md-1 sentence-id-number">
         7
     </span>
@@ -122,7 +133,8 @@
         <Label> Drop?</Label> 
         <input type="checkbox" id="dropping7" name="drop" value="non-drop"/>
     </span>
-</div><div class="flex-item" id="sentence8"> 
+</div>
+<div class="flex-item" id="sentence8"> 
     <span class="col-md-1 sentence-id-number">
         8
     </span>
@@ -135,7 +147,8 @@
         <Label> Drop?</Label> 
         <input type="checkbox" id="dropping8" name="drop" value="non-drop"/>
     </span>
-</div><div class="flex-item" id="sentence9"> 
+</div>
+<div class="flex-item" id="sentence9"> 
     <span class="col-md-1 sentence-id-number">
         9
     </span>
@@ -148,7 +161,8 @@
         <Label> Drop?</Label> 
         <input type="checkbox" id="dropping9" name="drop" value="non-drop"/>
     </span>
-</div><div class="flex-item" id="sentence10"> 
+</div>
+<div class="flex-item" id="sentence10"> 
     <span class="col-md-1 sentence-id-number">
         10
     </span>
@@ -161,4 +175,5 @@
         <Label> Drop?</Label> 
         <input type="checkbox" id="dropping10" name="drop" value="non-drop"/>
     </span>
-</div></div>
+</div>
+</div>
