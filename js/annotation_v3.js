@@ -216,10 +216,12 @@ $("#load-file").on('change', function(event) {
  * Save essay (xml) into local file
  */
 $("#save_menu").on('click', function(event) {
+	if (mode=="debug") {
+		alert("Save menu is clicked");
+	}
+
 	if (allowIntermediarySave || (!allowIntermediarySave && isFullAnnotation(Nsentences))) {
 		event.preventDefault(); //do not refresh the page
-		if (mode=="debug") {alert("Save menu is clicked")};
-
 		// Handling textarea
 		for (var i=1; i < Nsentences; i++) {
 			document.getElementById("textarea"+i).innerHTML = $("#textarea"+i).val();
@@ -241,12 +243,13 @@ $("#save_menu").on('click', function(event) {
 
 /**
  * Check (shallowly) whether the annotators has finished the annotation
- * Definition: prompt is referenced, each sentence has outgoing connections or dropped otherwise
+ * Definition: prompt is referenced, each sentence has outgoing connections or dropped otherwise; OR all sentences are dropped
  * @param{integer} numberOfSentences including prompt
  */
 function isFullAnnotation(numberOfSentences) {
 	var flag = true; 
 	var isPromptReferenced = false;
+	var droppedSentencesCount = 0;
 	for (var i=1; i < Nsentences; i++) {
 		var target = $("#target"+i).text();
 		var relation = $("#relation"+i).text();
@@ -260,9 +263,21 @@ function isFullAnnotation(numberOfSentences) {
 				isPromptReferenced = true;
 			// else still true
 		}
-		// should have been already handled by the visualization 
+		else {
+			droppedSentencesCount += 1;
+		}
 	}
-	return flag && isPromptReferenced;
+
+	// all sentences are dropped
+	if (!isPromptReferenced && (droppedSentencesCount == Nsentences-1)) {
+		if (mode=="debug") {
+			alert("all sentences are dropped, this is a very special case");
+		}
+		return true;
+	}
+	else { // not all sentences are dropped
+		return flag && isPromptReferenced;
+	}
 }
 
 

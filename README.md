@@ -18,6 +18,9 @@ HOW TO USE:
 			4. Do the annotation ...
 			Ideally, destructor will delete and flush out everything from the page; however it seems that the destructor doesn't work properly. That's why we need to refresh the page when we work on a new file
 
+ADVICE:
+	For easy reordering, grab (click) the box of the sentence id for grabbing the whole div
+
 DEVELOPER NOTE:
 	- We have two modes: "debug" and "production". If you want the script to output some messages every time it detects an event in the page, please change the line 17 of the "js/annotation_v3.js" file as "var mode = "debug""
 	- I have tried annotating three files without problems (Chrome 67 and Safari 11.1.2). Hopefully there is no bug but if you found one, please kindly tell me how to reproduce the bug
