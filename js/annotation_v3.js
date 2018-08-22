@@ -9,6 +9,7 @@ var dotRadius = 8;
 var rectangleWidth = 15;
 var rectangleHeight = 15;
 var defaultConnectionColor = "lightgray";
+var defaultConnectedColor = "yellow";
 var defaultHoverColor = "orange";
 var defaultStrokeWidth = 3
 var defaultStrokeHoverWidth = 7
@@ -113,12 +114,14 @@ var outBound = {
 			for (var i=0; i<inboundConn.length; i++) {
 				dropRelationLabelDOM(inboundConn[i].sourceId, inboundConn[i].targetId);
 				jsPlumb.deleteConnection(inboundConn[i]);
+				setSourceEndpointColor(inboundConn[i].sourceId, defaultConnectionColor);
 			}
 			if (mode=="debug") {alert("Number of outbound connections "+outboundConn.length);}
 			for (var i=0; i<outboundConn.length; i++) {
 				dropRelationLabelDOM(outboundConn[i].sourceId, outboundConn[i].targetId);
 				jsPlumb.deleteConnection(outboundConn[i]);
 			}
+			setSourceEndpointColor("sentence"+sentenceNumber, defaultConnectionColor);
 			$("#dropping"+sentenceNumber).val("drop");
 		}
 		else {
@@ -232,10 +235,7 @@ $("#save_menu").on('click', function(event) {
 		// console.log(text);
 		var filename = $(".essay-code .col-md-10 #essay_code_ICNALE").text().trim() + "-annotated.xml";
 		download(filename, text);
-
-		// IDEA: TO DO refresh automatically ....
 	}
-	else alert("You cannot save because your annotation is incomplete");
 });
 /** END GLOBAL PARAMETERS AND INITIALIZATION **/
 
@@ -250,6 +250,7 @@ function isFullAnnotation(numberOfSentences) {
 	var flag = true; 
 	var isPromptReferenced = false;
 	var droppedSentencesCount = 0;
+	var incompleteSentences = [];
 	for (var i=1; i < Nsentences; i++) {
 		var target = $("#target"+i).text();
 		var relation = $("#relation"+i).text();
@@ -257,11 +258,10 @@ function isFullAnnotation(numberOfSentences) {
 		if (dropping == "non-drop") {
 			if (target == defaultTarget && relation == defaultRelation) {
 				flag = false;
-				break;
+				incompleteSentences.push(i);
 			}
 			if (target == "sentence0")
 				isPromptReferenced = true;
-			// else still true
 		}
 		else {
 			droppedSentencesCount += 1;
@@ -276,6 +276,16 @@ function isFullAnnotation(numberOfSentences) {
 		return true;
 	}
 	else { // not all sentences are dropped
+		if ((flag && isPromptReferenced) == false) {
+			verdict = "You have not connected the following sentences: ";
+			for (var i=0; i < incompleteSentences.length; i++) {
+				if (i > 0) {
+					verdict = verdict + ", "
+				}
+				verdict = verdict + incompleteSentences[i];
+			}
+			alert("You cannot save because your annotation is incomplete!\n"+verdict);
+		}
 		return flag && isPromptReferenced;
 	}
 }
@@ -362,6 +372,7 @@ function eventsBinding() {
 		var conn = info.connection;
 		if (mode=="debug") {alert("connection between "+conn.sourceId+" -> "+conn.targetId+" is detached");}
 		dropRelationLabelDOM(conn.sourceId, conn.targetId);
+		setSourceEndpointColor(conn.sourceId, defaultConnectionColor);
 	});
 }
 
@@ -465,6 +476,7 @@ function relationDialog(conn) {
 	                $( this ).dialog( "close" );
 	                setRelationLabelColor(conn.sourceId, conn.targetId, "=");
 	                setRelationLabelDOM(conn.sourceId, conn.targetId, "=");
+	                setSourceEndpointColor(conn.sourceId, defaultConnectedColor);
 	            }
 	        },
 	        {
@@ -475,6 +487,7 @@ function relationDialog(conn) {
 	                $( this ).dialog( "close" );
 	                setRelationLabelColor(conn.sourceId, conn.targetId, "sup");
 	                setRelationLabelDOM(conn.sourceId, conn.targetId, "sup");
+	                setSourceEndpointColor(conn.sourceId, defaultConnectedColor);
 	            }
 	        },
 	        {
@@ -485,6 +498,7 @@ function relationDialog(conn) {
 	                $( this ).dialog( "close" );
 	                setRelationLabelColor(conn.sourceId, conn.targetId, "det");
 	                setRelationLabelDOM(conn.sourceId, conn.targetId, "det");
+	                setSourceEndpointColor(conn.sourceId, defaultConnectedColor);
 	            }
 	        },
 	        {
@@ -495,6 +509,7 @@ function relationDialog(conn) {
 	                $( this ).dialog( "close" );
 	                setRelationLabelColor(conn.sourceId, conn.targetId, "att");
 	                setRelationLabelDOM(conn.sourceId, conn.targetId, "att");
+	                setSourceEndpointColor(conn.sourceId, defaultConnectedColor);
 	            }
 	        },
 	        {
@@ -506,6 +521,7 @@ function relationDialog(conn) {
 	                dropRelationLabelDOM(conn.sourceId, conn.targetId);
 	                connObj = jsPlumb.getConnections({source: conn.sourceId, target: conn.targetId})[0];
 	                jsPlumb.deleteConnection(connObj);
+	                setSourceEndpointColor(conn.sourceId, defaultConnectionColor);
 	            }
 	        }
 	    ]
@@ -586,6 +602,15 @@ function getRelationInfoByDOM(sourceIdx) {
 
 
 /**
+ * Change the source (outgoing) endpoint color
+ * @param{string} sourceId, corresponds to DOM id (div) where the endpoint is attached 
+ */
+function setSourceEndpointColor(sourceId, color) {
+	jsPlumb.selectEndpoints({source: "sentence"+getSentenceIdNumber(sourceId)}).setPaintStyle({fill: color});
+}
+
+
+/**
  * Paint existing connections from the source sentnece when loading text
  * @param{integer} sourceIdx, corresponds to original index (order) of sentence
  */
@@ -600,6 +625,7 @@ function paintExistingConnection(sourceIdx) {
 			    ReattachConnections: true,
 			});
 			setRelationLabelColor("sentence"+sourceIdx, retval[0], retval[1]);
+			setSourceEndpointColor("sentence"+sourceIdx, defaultConnectedColor);
 		}
 		document.getElementById("dropping"+sourceIdx).checked = false;
 	}
