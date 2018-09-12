@@ -1,116 +1,117 @@
 <!-- Essay Code -->
-                <div class="row essay-code">
-                    <div class="col-md-10">
-                        <h4 id="essay_code_ICNALE"> W_ESSAY_TRIAL_00 </h4>
-                    </div>
-                    <div class="col-md-2 legend">
-                        <p> Legend </p>
-                        <span class="relation-color-mark rel-att-mark">
-                            att
-                        </span>
-                        <span class="relation-color-mark rel-det-mark">
-                            det
-                        </span>
-                        <span class="relation-color-mark rel-sup-mark">
-                            sup
-                        </span>
-                        <span class="relation-color-mark rel-equal-mark">
-                            =
-                        </span>
-                    </div>
-                </div> <br>
+<div class="row essay-code">
+    <div class="col-md-10">
+        <h4 id="essay_code_ICNALE"> ESSAY_TRIAL_00 </h4>
+        <p class="prompt"> [PROMPT] Smoking should be banned at all restaurants in the country. </p>
+    </div>
+    <div class="col-md-2 legend">
+        <p> Legend </p>
+        <span class="relation-color-mark rel-att-mark">
+            att
+        </span>
+        <span class="relation-color-mark rel-det-mark">
+            det
+        </span>
+        <span class="relation-color-mark rel-sup-mark">
+            sup
+        </span>
+        <span class="relation-color-mark rel-equal-mark">
+            =
+        </span>
+    </div>
+</div> <br>
 
-                <!-- Prompt -->
-                <div class="flex-container ui-sortable">
-                    <div class="flex-item-prompt ui-sortable-handle jtk-endpoint-anchor jtk-connected" id="sentence0"> 
-                        <span class="col-md-1 sentence-id-number-prompt">
-                            [PROMPT]
-                        </span>
-                        <span class="col-md-10">
-                            ahahahaha
-                        </span>
-                        <span class="col-md-1">
-                        </span>
-                    </div>
-                </div> <br> <br>
+<!-- Prompt -->
+<!-- <div class="flex-container">
+    <div class="flex-item-prompt" id="sentence0"> 
+        <span class="col-md-1 sentence-id-number-prompt">
+            [PROMPT]
+        </span>
+        <span class="col-md-10">
+            Smoking should be banned at all restaurants in the country.
+        </span>
+        <span class="col-md-1">
+        </span>
+    </div>
+</div> <br> <br> -->
 
-                <!-- Sentences -->
-                <div class="flex-container ui-sortable">
+<!-- Sentences -->
+<div class="flex-container ui-sortable">
 
-                    <div class="flex-item ui-sortable-handle jtk-endpoint-anchor" id="sentence1"> 
-                        <span class="col-md-1 sentence-id-number">
-                            1
-                        </span>
-                        <span class="col-md-10">
-                            <textarea id="textarea1">Sentence1</textarea>
-                        </span>
-                        <span class="col-md-1" id="annotation1">
-                            <span class="input-number hide" id="target1"></span>
-                            <span class="input-relation hide" id="relation1"></span>
-                            <label> Drop? </label> 
-                            <input type="checkbox" id="dropping1" name="drop" value="non-drop">
-                        </span>
-                    </div>
+    
 
-                    <div class="flex-item ui-sortable-handle jtk-endpoint-anchor" id="sentence2"> 
-                         <span class="col-md-1 sentence-id-number">
-                            2
-                        </span>
-                        <span class="col-md-10">
-                            <textarea id="textarea2">Sentence2</textarea>
-                        </span>
-                        <span class="col-md-1" id="annotation2">
-                            <span class="input-number hide" id="target2"></span>
-                            <span class="input-relation hide" id="relation2"></span>
-                            <label> Drop? </label> 
-                            <input type="checkbox" id="dropping2" name="drop" value="non-drop">
-                        </span>
-                    </div>
+    <div class="flex-item jtk-endpoint-anchor ui-sortable-handle hide-text" id="sentence2"> 
+         <span class="col-md-1 sentence-id-number">
+            2
+        </span>
+        <span class="col-md-10">
+            <textarea id="textarea2" class="hide-text">Smoking is dangerous to our health and the government should empower people all over the country to quit.</textarea>
+        </span>
+        <span class="col-md-1 hide-text-dropping" id="annotation2">
+            <span class="input-number hide" id="target2"></span>
+            <span class="input-relation hide" id="relation2"></span>
+            <label> Drop? </label> 
+            <input type="checkbox" id="dropping2" name="drop" value="drop">
+        </span>
+    </div>
 
 
-                    <div class="flex-item ui-sortable-handle jtk-endpoint-anchor jtk-connected" id="sentence3"> 
-                         <span class="col-md-1 sentence-id-number">
-                            3
-                        </span>
-                        <span class="col-md-10">
-                            <textarea id="textarea3">Sentence3</textarea>
-                        </span>
-                        <span class="col-md-1" id="annotation3">
-                            <span class="input-number hide" id="target3">sentence0</span>
-                            <span class="input-relation hide" id="relation3">att</span>
-                            <label> Drop? </label> 
-                            <input type="checkbox" id="dropping3" name="drop" value="non-drop">
-                        </span>
-                    </div>
+    
 
-                    <div class="flex-item ui-sortable-handle jtk-endpoint-anchor" id="sentence4"> 
-                         <span class="col-md-1 sentence-id-number">
-                            4
-                        </span>
-                        <span class="col-md-10">
-                            <textarea id="textarea4">Sentence4</textarea>
-                        </span>
-                        <span class="col-md-1" id="annotation4">
-                            <span class="input-number hide" id="target4"></span>
-                            <span class="input-relation hide" id="relation4"></span>
-                            <label> Drop? </label> 
-                            <input type="checkbox" id="dropping4" name="drop" value="non-drop">
-                        </span>
-                    </div>
+    <div class="flex-item jtk-endpoint-anchor ui-sortable-handle show-text" id="sentence4"> 
+         <span class="col-md-1 sentence-id-number">
+            4
+        </span>
+        <span class="col-md-10">
+            <textarea id="textarea4" class="show-text">Vendors should not have any cigarettes in their stores to avoid smoking.</textarea>
+        </span>
+        <span class="col-md-1 show-text-dropping" id="annotation4">
+            <span class="input-number hide" id="target4"></span>
+            <span class="input-relation hide" id="relation4"></span>
+            <label> Drop? </label> 
+            <input type="checkbox" id="dropping4" name="drop" value="non-drop">
+        </span>
+    </div>
 
-                    <div class="flex-item ui-sortable-handle jtk-endpoint-anchor" id="sentence5"> 
-                         <span class="col-md-1 sentence-id-number">
-                            5
-                        </span>
-                        <span class="col-md-10">
-                            <textarea id="textarea5">Sentence5</textarea>
-                        </span>
-                        <span class="col-md-1" id="annotation5">
-                            <span class="input-number hide" id="target5"></span>
-                            <span class="input-relation hide" id="relation5"></span>
-                            <label> Drop? </label> 
-                            <input type="checkbox" id="dropping5" name="drop" value="non-drop">
-                        </span>
-                    </div>
+    <div class="flex-item jtk-endpoint-anchor jtk-connected ui-sortable-handle" id="sentence1" style=""> 
+        <span class="col-md-1 sentence-id-number">
+            1
+        </span>
+        <span class="col-md-10">
+            <textarea id="textarea1">I agree that smoking should be completely banned in all restaurants in the country.</textarea>
+        </span>
+        <span class="col-md-1" id="annotation1">
+            <span class="input-number hide" id="target1"></span>
+            <span class="input-relation hide" id="relation1"></span>
+            <label> Drop? </label> 
+            <input type="checkbox" id="dropping1" name="drop" value="non-drop">
+        </span>
+    </div><div class="flex-item jtk-endpoint-anchor ui-sortable-handle show-text" id="sentence5"> 
+         <span class="col-md-1 sentence-id-number">
+            5
+        </span>
+        <span class="col-md-10">
+            <textarea id="textarea5" class="show-text">Therefore, we should impose no smoking campaign.</textarea>
+        </span>
+        <span class="col-md-1 show-text-dropping" id="annotation5">
+            <span class="input-number hide" id="target5"></span>
+            <span class="input-relation hide" id="relation5"></span>
+            <label> Drop? </label> 
+            <input type="checkbox" id="dropping5" name="drop" value="non-drop">
+        </span>
+    </div><div class="flex-item jtk-endpoint-anchor jtk-connected ui-sortable-handle" id="sentence3" style=""> 
+         <span class="col-md-1 sentence-id-number">
+            3
+        </span>
+        <span class="col-md-10">
+            <textarea id="textarea3">People do not follow the law, the government should give them sanctions.</textarea>
+        </span>
+        <span class="col-md-1" id="annotation3">
+            <span class="input-number hide" id="target3">sentence1</span>
+            <span class="input-relation hide" id="relation3">=</span>
+            <label> Drop? </label> 
+            <input type="checkbox" id="dropping3" name="drop" value="non-drop">
+        </span>
+    </div>
 
-                </div>
+</div>

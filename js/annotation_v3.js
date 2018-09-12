@@ -111,13 +111,13 @@ var outBound = {
 			inboundConn = jsPlumb.getConnections({target: "sentence"+sentenceNumber});
 			outboundConn = jsPlumb.getConnections({source: "sentence"+sentenceNumber});
 			if (mode=="debug") {alert("Number of inbound connections "+inboundConn.length);}
-			for (var i=0; i<inboundConn.length; i++) {
+			for (var i=0; i < inboundConn.length; i++) {
 				dropRelationLabelDOM(inboundConn[i].sourceId, inboundConn[i].targetId);
 				jsPlumb.deleteConnection(inboundConn[i]);
 				setSourceEndpointColor(inboundConn[i].sourceId, defaultConnectionColor);
 			}
 			if (mode=="debug") {alert("Number of outbound connections "+outboundConn.length);}
-			for (var i=0; i<outboundConn.length; i++) {
+			for (var i=0; i < outboundConn.length; i++) {
 				dropRelationLabelDOM(outboundConn[i].sourceId, outboundConn[i].targetId);
 				jsPlumb.deleteConnection(outboundConn[i]);
 			}
@@ -158,7 +158,7 @@ $("#load-file").on('change', function(event) {
 				);  
 			}
 			document.getElementsByClassName('draggable-area')[0].innerHTML = content;
-			Nsentences = document.getElementsByClassName("flex-item").length + 1; //plus the prompt
+			Nsentences = document.getElementsByClassName("flex-item").length + 1; //prompt is included in the calculation
 			
 			initializeJsPlumb(Nsentences);
 		}
@@ -172,7 +172,7 @@ $("#load-file").on('change', function(event) {
 
 /**
  * Initialization of the jsPlumb
- * @param{integer} Nsentences, number of snetences in the text including prompt
+ * @param{integer} Nsentences, number of sentences in the text including prompt
  */
  function initializeJsPlumb(Nsentences) {
  	jsPlumb.ready(function() {
@@ -200,11 +200,11 @@ $("#load-file").on('change', function(event) {
 	        }
 	    });
 
-	    // Creating Endpoints for each sentence
+	    // Creating Endpoints for each sentence, except the prompt
 	    createEndpoints(Nsentences);
 
 	    // Creating existing relation information
-		for (var i=1; i < Nsentences; i++) { // prompt has not outgoing connection
+		for (var i=1; i < Nsentences; i++) {
 			paintExistingConnection(i);
 		}
 
@@ -235,6 +235,8 @@ $("#save_menu").on('click', function(event) {
 		// console.log(text);
 		var filename = $(".essay-code .col-md-10 #essay_code_ICNALE").text().trim() + "-annotated.xml";
 		download(filename, text);
+
+		alert("Refresh the page after the download is complete!")
 	}
 });
 /** END GLOBAL PARAMETERS AND INITIALIZATION **/
@@ -243,50 +245,89 @@ $("#save_menu").on('click', function(event) {
 
 /**
  * Check (shallowly) whether the annotators has finished the annotation
- * Definition: prompt is referenced, each sentence has outgoing connections or dropped otherwise; OR all sentences are dropped
+ * Definition: each sentence has outgoing connections (incoming otherwise) or dropped if no connection; OR all sentences are dropped. Only one node (non-dropped) has no outgoing connection at maximum
  * @param{integer} numberOfSentences including prompt
  */
 function isFullAnnotation(numberOfSentences) {
-	var flag = true; 
-	var isPromptReferenced = false;
-	var droppedSentencesCount = 0;
-	var incompleteSentences = [];
+	var verdict = []; 
+	var droppingFlag = [];
+	var incomingFlag = [];
+	var outgoingFlag = [];
+	var allNodesHaveConnection = true;
+	var outgoingCount = 0;
+
+	// initialization
+	for (var i=0; i < Nsentences; i++) {
+		droppingFlag.push(false);
+		incomingFlag.push(false);
+		outgoingFlag.push(false);
+		verdict.push(false);
+	}
+
+	// fill the nodes information
 	for (var i=1; i < Nsentences; i++) {
 		var target = $("#target"+i).text();
 		var relation = $("#relation"+i).text();
 		var dropping = $("#dropping"+i).val();
+		// console.log(getSentenceIdNumber(target)+","+relation+","+dropping);
 		if (dropping == "non-drop") {
-			if (target == defaultTarget && relation == defaultRelation) {
-				flag = false;
-				incompleteSentences.push(i);
+			if (target != defaultTarget && relation !=defaultRelation) {
+				outgoingFlag[i] = true;
+				incomingFlag[parseInt(getSentenceIdNumber(target))] = true;
+				outgoingCount += 1;
 			}
-			if (target == "sentence0")
-				isPromptReferenced = true;
 		}
 		else {
-			droppedSentencesCount += 1;
+			droppingFlag[i] = true;
+			outgoingCount += 1;
 		}
 	}
 
-	// all sentences are dropped
-	if (!isPromptReferenced && (droppedSentencesCount == Nsentences-1)) {
-		if (mode=="debug") {
-			alert("all sentences are dropped, this is a very special case");
-		}
-		return true;
-	}
-	else { // not all sentences are dropped
-		if ((flag && isPromptReferenced) == false) {
-			verdict = "You have not connected the following sentences: ";
-			for (var i=0; i < incompleteSentences.length; i++) {
-				if (i > 0) {
-					verdict = verdict + ", "
-				}
-				verdict = verdict + incompleteSentences[i];
+	// annotation checking
+	message = "You have not connected the following sentences: ";
+	var first = true;
+	for (var i=1; i < Nsentences; i++) {
+		verdict[i] = droppingFlag[i] || (!droppingFlag[i] && (incomingFlag[i] || outgoingFlag[i]));
+		allNodesHaveConnection = allNodesHaveConnection && verdict[i];
+
+		if (!verdict[i]) {
+			if (first) {
+				message = message + i;
 			}
-			alert("You cannot save because your annotation is incomplete!\n"+verdict);
+			else {
+				message = message + ", " + i;
+			}
+			first = false;
 		}
-		return flag && isPromptReferenced;
+	}
+
+	if (!allNodesHaveConnection) { // Unconnected nodes
+		message = "You cannot save because your annotation is incomplete!\n"+message;
+		alert(message);
+	}
+	else {
+		// How many nodes have outgoing connection
+		if (outgoingCount == Nsentences-2) { // prompt is not counted so -2
+			return allNodesHaveConnection;
+		}
+		else {
+			message = "Only one non-dropped sentences is allowed not to have outgoing connection!\n"
+			message = message + "The following sentences have no outgoing connection: "
+			var first = true;
+			for (var i=1; i < Nsentences; i++) {
+				if (!droppingFlag[i] && !outgoingFlag[i]) {
+					if (first) {
+						first = false;
+						message = message + i; 
+					}
+					else {
+						message = message + ", " + i;
+					}
+				}
+			}
+			alert(message);
+			return false;
+		}
 	}
 }
 
@@ -317,12 +358,11 @@ function download(filename, text) {
  * @param{integer} 	numberOfSentences, prompt included
  */
 function createEndpoints(numberOfSentences) {
-	// The number of endpoint is the same as number of sentences
-	for (var i=0; i < numberOfSentences; i++) {
+	// The number of endpoint is the same as number of sentences; except we do not create endpoint for prompt
+	for (var i=1; i < numberOfSentences; i++) {
 		sentence_id = "sentence"+i;
 		jsPlumb.addEndpoint(sentence_id, inBound, {uuid:"ib"+i}); 
-		if (i > 0) 
-			jsPlumb.addEndpoint(sentence_id, outBound, {uuid:"ob"+i});
+		jsPlumb.addEndpoint(sentence_id, outBound, {uuid:"ob"+i});
 	}
 }
 
@@ -473,7 +513,7 @@ function relationDialog(conn) {
 	            class: "rel-equal-mark",
 	            style: "width:37px; text-align:center",
 	            click: function() {
-	                $( this ).dialog( "close" );
+	                $(this).dialog("close");
 	                setRelationLabelColor(conn.sourceId, conn.targetId, "=");
 	                setRelationLabelDOM(conn.sourceId, conn.targetId, "=");
 	                setSourceEndpointColor(conn.sourceId, defaultConnectedColor);
@@ -484,7 +524,7 @@ function relationDialog(conn) {
 	            class: "rel-sup-mark",
 	            style: "margin-left:10px; width:37px; text-align:left",
 	            click: function() {
-	                $( this ).dialog( "close" );
+	                $(this).dialog("close");
 	                setRelationLabelColor(conn.sourceId, conn.targetId, "sup");
 	                setRelationLabelDOM(conn.sourceId, conn.targetId, "sup");
 	                setSourceEndpointColor(conn.sourceId, defaultConnectedColor);
@@ -495,7 +535,7 @@ function relationDialog(conn) {
 	            class: "rel-det-mark",
 	            style: "margin-left:10px; width:37px; text-align:left",
 	            click: function() {
-	                $( this ).dialog( "close" );
+	                $(this).dialog("close");
 	                setRelationLabelColor(conn.sourceId, conn.targetId, "det");
 	                setRelationLabelDOM(conn.sourceId, conn.targetId, "det");
 	                setSourceEndpointColor(conn.sourceId, defaultConnectedColor);
@@ -506,7 +546,7 @@ function relationDialog(conn) {
 	            class: "rel-att-mark",
 	            style: "margin-left:10px; width:37px; text-align:left",
 	            click: function() {
-	                $( this ).dialog( "close" );
+	                $(this).dialog("close");
 	                setRelationLabelColor(conn.sourceId, conn.targetId, "att");
 	                setRelationLabelDOM(conn.sourceId, conn.targetId, "att");
 	                setSourceEndpointColor(conn.sourceId, defaultConnectedColor);
@@ -517,7 +557,7 @@ function relationDialog(conn) {
 	            class: "btn-default",
 	            style: "margin-left:10px;",
 	            click: function() {
-	                $( this ).dialog( "close" );
+	                $(this).dialog("close");
 	                dropRelationLabelDOM(conn.sourceId, conn.targetId);
 	                connObj = jsPlumb.getConnections({source: conn.sourceId, target: conn.targetId})[0];
 	                jsPlumb.deleteConnection(connObj);
@@ -541,11 +581,13 @@ function setRelationLabelColor(sourceId, targetId, relationLabel) {
 	connObj = jsPlumb.getConnections({source: sourceId, target: targetId})[0];
     connObj.removeAllOverlays();
     connObj.addOverlay(
-        ["Label", {label: relationLabel, location: labelLocation, cssClass:"relation-label"} ]
+        ["Label", {label: relationLabel, location: labelLocation, cssClass:"relation-label", id:"label"+getSentenceIdNumber(sourceId)} ]
     );
-    connObj.addOverlay(
-        ["Arrow", {width: arrowWidth, length: arrowLength, location: arrowLocation}]
-    );
+    if (relationLabel != "=") {
+	    connObj.addOverlay(
+	        ["Arrow", {width: arrowWidth, length: arrowLength, location: arrowLocation, id:"arrow"+getSentenceIdNumber(sourceId)}]
+	    );
+	}
     connObj.setPaintStyle({stroke: chooseColor(relationLabel), strokeWidth: defaultStrokeWidth});
 }
 

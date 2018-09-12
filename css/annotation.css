@@ -27,10 +27,10 @@ footer {
 	text-align: justify;
 }
 
-.sentence-id-number-prompt {
+/*.sentence-id-number-prompt {
 	text-align: right; 
 	font-weight: bold;
-}
+}*/
 
 .essay-code {
 	text-align: left;
@@ -103,11 +103,9 @@ footer {
 	background-color: lightpink;
 }
 
-.flex-item-prompt {
-	border: 2px solid;
-	padding: 10px;
-	margin-bottom: 15px;
-	border-color: black;
+.prompt {
+	font-size: 12px;
+	font-family: monospace;
 }
 
 .flex-item {
