@@ -27,11 +27,6 @@ footer {
 	text-align: justify;
 }
 
-/*.sentence-id-number-prompt {
-	text-align: right; 
-	font-weight: bold;
-}*/
-
 .essay-code {
 	text-align: left;
 	font-weight: bold;
@@ -112,7 +107,7 @@ footer {
 	border: 2px solid;
 	padding: 5px;
 	margin-bottom: 25px;
-	/*z-index: 1000;*/
+	position: relative;
 }
 
 .flex-item:focus, .flex-item:active {
@@ -126,4 +121,25 @@ footer {
 
 .relation-label {
 	color: black;
+}
+
+.drop-label {
+	float: left;
+	padding-right: 10px;
+}
+
+.movebutton {
+	float: left;
+	min-width: 25px;
+	text-align: center;
+	padding: 0px;
+	margin-right: 7px;
+	background-color: black;
+	color: white;
+}
+
+.sentence-side-menu {
+	float:left; 
+	padding:0; 
+	display:block;
 }

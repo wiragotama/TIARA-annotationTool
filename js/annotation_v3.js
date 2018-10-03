@@ -696,3 +696,35 @@ function chooseColor(relationLabel) {
 		return "lightpink";
 	}
 }
+
+
+/**
+ * Moving box (flex-item), sentence container to the left for indentation
+ * @param{int} 	sentenceId, corresponds to the sentence Id of the text
+ */
+function moveBoxLeft(sentenceId) {
+	var box = document.getElementById("sentence"+sentenceId);
+	var left_pos;
+	if (box.style.left == "") {
+		left_pos = 0;
+	}
+	else left_pos = parseInt(box.style.left);
+	box.style.left = (left_pos - 20) + 'px';
+	jsPlumb.repaintEverything();
+}
+
+
+/**
+ * Moving box (flex-item), sentence container to the right for indentation
+ * @param{int} 	sentenceId, corresponds to the sentence Id of the text
+ */
+function moveBoxRight(sentenceId) {
+	var box = document.getElementById("sentence"+sentenceId);
+	var left_pos;
+	if (box.style.left == "") {
+		left_pos = 0;
+	}
+	else left_pos = parseInt(box.style.left);
+	box.style.left = (left_pos + 20) + 'px';
+	jsPlumb.repaintEverything();
+}
