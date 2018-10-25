@@ -19,7 +19,6 @@ var mode = "production"; // {"debug", "production"}
 var Nsentences = -1; // global variable, number of sentences in the window, prompt included
 var allowIntermediarySave = false; // set false if we only allows annotator to save only when the annotation is done; true if annotators can save midway
 
-
 /** 
  * Initiating Dialog Box
  */
@@ -104,9 +103,12 @@ var outBound = {
 		var sentenceNumber = getSentenceIdNumber(checkbox.attr("id"));
 		if (checkbox.is(":checked")) {
 			if (mode=="debug") {alert(checkboxId+" is checked");}
+			addLogRecord("Drop", sentenceNumber);
+
 			$("#sentence"+sentenceNumber).addClass('hide-text').removeClass('show-text');
 			$("#textarea"+sentenceNumber).addClass('hide-text').removeClass('show-text');
 			$("#annotation"+sentenceNumber).addClass('hide-text-dropping').removeClass('show-text-dropping');
+			
 			// drop relations when dropping sentence
 			inboundConn = jsPlumb.getConnections({target: "sentence"+sentenceNumber});
 			outboundConn = jsPlumb.getConnections({source: "sentence"+sentenceNumber});
@@ -126,6 +128,7 @@ var outBound = {
 		}
 		else {
 			if (mode=="debug") {alert(checkboxId+" is unchecked");}
+			addLogRecord("Un-drop", sentenceNumber);
 			$("#sentence"+sentenceNumber).addClass('show-text').removeClass('hide-text');
 			$("#textarea"+sentenceNumber).addClass('show-text').removeClass('hide-text');
 			$("#annotation"+sentenceNumber).addClass('show-text-dropping').removeClass('hide-text-dropping');
@@ -161,6 +164,7 @@ $("#load-file").on('change', function(event) {
 			Nsentences = document.getElementsByClassName("flex-item").length + 1; //prompt is included in the calculation
 			
 			initializeJsPlumb(Nsentences);
+			addLogRecord("Load", file.name);
 		}
 		reader.readAsText(file);
 	} 
@@ -187,11 +191,13 @@ $("#load-file").on('change', function(event) {
 	    $(".flex-container").sortable({
 	        start: function(event, ui) {
 	            is_dragging = true;
+	            addLogRecord("Reordering-start", getCurrentOrdering());
 	        },
 	        stop: function(event, ui) {
 	            is_dragging = false;
 	            jsPlumb.recalculateOffsets($(ui.item).parents(".draggable-area"));
 	            jsPlumb.repaintEverything();
+	            addLogRecord("Reordering-end", getCurrentOrdering());
 	        }
 	    })
 	    .on("mousemove", function(e) {
@@ -225,6 +231,8 @@ $("#save_menu").on('click', function(event) {
 
 	if (allowIntermediarySave || (!allowIntermediarySave && isFullAnnotation(Nsentences))) {
 		event.preventDefault(); //do not refresh the page
+		addLogRecord("Save");
+
 		// Handling textarea
 		for (var i=1; i < Nsentences; i++) {
 			document.getElementById("textarea"+i).innerHTML = $("#textarea"+i).val();
@@ -232,7 +240,6 @@ $("#save_menu").on('click', function(event) {
 
 		var cut = document.getElementsByClassName('draggable-area')[0].innerHTML.indexOf("div class=\"jtk-endpoint");
 		var text = document.getElementsByClassName('draggable-area')[0].innerHTML.substring(0, cut-1);
-		// console.log(text);
 		var filename = $(".essay-code .col-md-10 #essay_code_ICNALE").text().trim() + "-annotated.xml";
 		download(filename, text);
 
@@ -413,6 +420,7 @@ function eventsBinding() {
 		if (mode=="debug") {alert("connection between "+conn.sourceId+" -> "+conn.targetId+" is detached");}
 		dropRelationLabelDOM(conn.sourceId, conn.targetId);
 		setSourceEndpointColor(conn.sourceId, defaultConnectionColor);
+		addLogRecord("Relation-delete", "connection between "+getSentenceIdNumber(conn.sourceId)+" to "+getSentenceIdNumber(conn.targetId)+" is detached");
 	});
 }
 
@@ -517,6 +525,7 @@ function relationDialog(conn) {
 	                setRelationLabelColor(conn.sourceId, conn.targetId, "=");
 	                setRelationLabelDOM(conn.sourceId, conn.targetId, "=");
 	                setSourceEndpointColor(conn.sourceId, defaultConnectedColor);
+	                addLogRecord("Relation-add", "connection between "+getSentenceIdNumber(conn.sourceId)+" to "+getSentenceIdNumber(conn.targetId)+" is labeled =");
 	            }
 	        },
 	        {
@@ -528,6 +537,7 @@ function relationDialog(conn) {
 	                setRelationLabelColor(conn.sourceId, conn.targetId, "sup");
 	                setRelationLabelDOM(conn.sourceId, conn.targetId, "sup");
 	                setSourceEndpointColor(conn.sourceId, defaultConnectedColor);
+                 	addLogRecord("Relation-add", "connection between "+getSentenceIdNumber(conn.sourceId)+" to "+getSentenceIdNumber(conn.targetId)+" is labeled sup");
 	            }
 	        },
 	        {
@@ -539,6 +549,7 @@ function relationDialog(conn) {
 	                setRelationLabelColor(conn.sourceId, conn.targetId, "det");
 	                setRelationLabelDOM(conn.sourceId, conn.targetId, "det");
 	                setSourceEndpointColor(conn.sourceId, defaultConnectedColor);
+	                addLogRecord("Relation-add", "connection between "+getSentenceIdNumber(conn.sourceId)+" to "+getSentenceIdNumber(conn.targetId)+" is labeled det");
 	            }
 	        },
 	        {
@@ -550,6 +561,7 @@ function relationDialog(conn) {
 	                setRelationLabelColor(conn.sourceId, conn.targetId, "att");
 	                setRelationLabelDOM(conn.sourceId, conn.targetId, "att");
 	                setSourceEndpointColor(conn.sourceId, defaultConnectedColor);
+	                addLogRecord("Relation-add", "connection between "+getSentenceIdNumber(conn.sourceId)+" to "+getSentenceIdNumber(conn.targetId)+" is labeled att");
 	            }
 	        },
 	        {
@@ -562,6 +574,7 @@ function relationDialog(conn) {
 	                connObj = jsPlumb.getConnections({source: conn.sourceId, target: conn.targetId})[0];
 	                jsPlumb.deleteConnection(connObj);
 	                setSourceEndpointColor(conn.sourceId, defaultConnectionColor);
+	                addLogRecord("Relation-delete", "connection between "+getSentenceIdNumber(conn.sourceId)+" to "+getSentenceIdNumber(conn.targetId)+" is detached");
 	            }
 	        }
 	    ]
@@ -710,6 +723,7 @@ function moveBoxLeft(sentenceId) {
 	}
 	else left_pos = parseInt(box.style.left);
 	box.style.left = (left_pos - 20) + 'px';
+	addLogRecord("Indent-left", sentenceId);
 	jsPlumb.repaintEverything();
 }
 
@@ -726,5 +740,54 @@ function moveBoxRight(sentenceId) {
 	}
 	else left_pos = parseInt(box.style.left);
 	box.style.left = (left_pos + 20) + 'px';
+	addLogRecord("Indent-right", sentenceId);
 	jsPlumb.repaintEverything();
+}
+
+
+/**
+ * @return currentDateTime
+ */
+function getCurrentDateTime() {
+	var today = new Date();
+	var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+	var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+	return date+' '+time;
+}
+
+
+/** 
+ * Add log record to the annotation file for tracing the actions performed by the annotator
+ * @param{string} actionType {Load, Save, Drop, Un-drop, Relation-add, Relation-delete}
+ * @param{string} message
+ */
+function addLogRecord(actionType, detail) {
+	if (document.getElementsByClassName('logging').length == 0) {
+		$(".draggable-area").prepend("<ul class='logging hide'>\n</ul>\n\n");
+	}
+	var logRecord = {};
+	logRecord.timestamp = getCurrentDateTime();
+	logRecord.actionType = actionType;
+	logRecord.detail = detail;
+	$(".logging").append("<li>"+JSON.stringify(logRecord)+"</li>\n");
+}
+
+
+/** 
+ * Get the current sentence ordering
+ * @return{string} current sentence ordering
+ */
+function getCurrentOrdering() {
+	var items = $(".flex-item");
+	var ordering = "";
+	for (var i=0; i < items.length; i++) {
+		if (i==0) {
+			ordering += ("[" + getSentenceIdNumber(items[i].id));
+		}
+		else {
+			ordering += ("," + getSentenceIdNumber(items[i].id));
+		}
+	}
+	ordering += "]";
+	return ordering;
 }
