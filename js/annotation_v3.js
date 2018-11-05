@@ -403,6 +403,7 @@ function eventsBinding() {
 				jsPlumb.deleteConnection(connObj);
 			}
 			else { // select type of relation
+				addLogRecord("Relation-add", "connection between "+getSentenceIdNumber(conn.sourceId)+" to "+getSentenceIdNumber(conn.targetId)+" is established");
 				relationDialog(conn);
 			}
 		}
@@ -574,7 +575,7 @@ function relationDialog(conn) {
 	                connObj = jsPlumb.getConnections({source: conn.sourceId, target: conn.targetId})[0];
 	                jsPlumb.deleteConnection(connObj);
 	                setSourceEndpointColor(conn.sourceId, defaultConnectionColor);
-	                addLogRecord("Relation-delete", "connection between "+getSentenceIdNumber(conn.sourceId)+" to "+getSentenceIdNumber(conn.targetId)+" is detached");
+	                // logging at detaching event
 	            }
 	        }
 	    ]
@@ -759,16 +760,16 @@ function getCurrentDateTime() {
 /** 
  * Add log record to the annotation file for tracing the actions performed by the annotator
  * @param{string} actionType {Load, Save, Drop, Un-drop, Relation-add, Relation-delete}
- * @param{string} message
+ * @param{string} description
  */
-function addLogRecord(actionType, detail) {
+function addLogRecord(actionType, description) {
 	if (document.getElementsByClassName('logging').length == 0) {
 		$(".draggable-area").prepend("<ul class='logging hide'>\n</ul>\n\n");
 	}
 	var logRecord = {};
 	logRecord.timestamp = getCurrentDateTime();
 	logRecord.actionType = actionType;
-	logRecord.detail = detail;
+	logRecord.description = description;
 	$(".logging").append("<li>"+JSON.stringify(logRecord)+"</li>\n");
 }
 
