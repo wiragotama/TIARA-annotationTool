@@ -1,0 +1,4 @@
+01/17
+	Error: when we establish relation, there is a dialogue to choose the relation label. When the annotators press "esc", the dialogue will be closed and there is no relation assigned! --> marked as "temporary" by jsplumb
+
+	Solution: resolved by preventing close on escape; "js/annotation_v3.js", function relationDialog(conn)

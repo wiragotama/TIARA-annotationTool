@@ -512,6 +512,7 @@ function cycleDetectionRec(numberOfSentences, matrix, visited, currentSentenceId
 function relationDialog(conn) {
 	$( "#relation-dialog" ).dialog({
 	    // autoOpen:false,
+	    closeOnEscape: false,
 	    dialogClass: "no-close",
 	    position: {my: "center top", at: "center top+80", of: window},
 	    height: 100,
