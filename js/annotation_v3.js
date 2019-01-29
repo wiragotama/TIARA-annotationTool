@@ -229,7 +229,7 @@ $("#save_menu").on('click', function(event) {
 		alert("Save menu is clicked");
 	}
 
-	if (allowIntermediarySave || (!allowIntermediarySave && isFullAnnotation(Nsentences))) {
+	if (allowIntermediarySave || (!allowIntermediarySave && isFullAnnotation() && checkRepairFormat())) {
 		event.preventDefault(); //do not refresh the page
 		addLogRecord("Save");
 
@@ -253,9 +253,8 @@ $("#save_menu").on('click', function(event) {
 /**
  * Check (shallowly) whether the annotators has finished the annotation
  * Definition: each sentence has outgoing connections (incoming otherwise) or dropped if no connection; OR all sentences are dropped. Only one node (non-dropped) has no outgoing connection at maximum
- * @param{integer} numberOfSentences including prompt
  */
-function isFullAnnotation(numberOfSentences) {
+function isFullAnnotation() {
 	var verdict = []; 
 	var droppingFlag = [];
 	var incomingFlag = [];
@@ -336,6 +335,52 @@ function isFullAnnotation(numberOfSentences) {
 			return false;
 		}
 	}
+}
+
+
+/**
+ * Check (shallowly) whether the annotator follows the repair formatting 
+ * This works by checking the parenthesis
+ */
+function checkRepairFormat() {
+	var flag = false;
+
+	for (var i=1; i < Nsentences; i++) {
+		sentence = document.getElementById("textarea"+i).innerHTML = $("#textarea"+i).val();
+
+		var stack = [];
+		var mode = "";
+		for (var j=0; j < sentence.length; j++) {
+			if (sentence.charAt(j) == '[') {
+				mode = "push";
+				stack.push(j);
+			}
+			else if (sentence.charAt(j) == '|') {
+				mode = "pop";
+			}
+			else if (sentence.charAt(j) == ']') {
+				if (mode == "pop") {
+					if (stack.length != 0) {
+						stack.pop();
+					}
+					else {
+						flag = true;
+					}
+				}
+			}
+		}
+
+		if (stack.length > 0) {
+			flag = true;
+		}
+
+		if (flag) {
+			alert("The text repair in sentence "+i+" does not follow the formatting standard!");
+			break;
+		}
+	}
+
+	return !flag;
 }
 
 
