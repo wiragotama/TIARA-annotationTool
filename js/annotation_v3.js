@@ -261,6 +261,7 @@ function isFullAnnotation() {
 	var outgoingFlag = [];
 	var allNodesHaveConnection = true;
 	var outgoingCount = 0;
+	var dropCount = false;
 
 	// initialization
 	for (var i=0; i < Nsentences; i++) {
@@ -285,54 +286,60 @@ function isFullAnnotation() {
 		}
 		else {
 			droppingFlag[i] = true;
+			dropCount += 1;
 			outgoingCount += 1;
 		}
 	}
 
-	// annotation checking
-	message = "You have not connected the following sentences: ";
-	var first = true;
-	for (var i=1; i < Nsentences; i++) {
-		verdict[i] = droppingFlag[i] || (!droppingFlag[i] && (incomingFlag[i] || outgoingFlag[i]));
-		allNodesHaveConnection = allNodesHaveConnection && verdict[i];
-
-		if (!verdict[i]) {
-			if (first) {
-				message = message + i;
-			}
-			else {
-				message = message + ", " + i;
-			}
-			first = false;
-		}
-	}
-
-	if (!allNodesHaveConnection) { // Unconnected nodes
-		message = "You cannot save because your annotation is incomplete!\n"+message;
-		alert(message);
+	if (dropCount == Nsentences-1) { // all dropped
+		return true;
 	}
 	else {
-		// How many nodes have outgoing connection
-		if (outgoingCount == Nsentences-2) { // prompt is not counted so -2
-			return allNodesHaveConnection;
+		// annotation checking
+		message = "You have not connected the following sentences: ";
+		var first = true;
+		for (var i=1; i < Nsentences; i++) {
+			verdict[i] = droppingFlag[i] || (!droppingFlag[i] && (incomingFlag[i] || outgoingFlag[i]));
+			allNodesHaveConnection = allNodesHaveConnection && verdict[i];
+
+			if (!verdict[i]) {
+				if (first) {
+					message = message + i;
+				}
+				else {
+					message = message + ", " + i;
+				}
+				first = false;
+			}
+		}
+
+		if (!allNodesHaveConnection) { // Unconnected nodes
+			message = "You cannot save because your annotation is incomplete!\n"+message;
+			alert(message);
 		}
 		else {
-			message = "Only one non-dropped sentences is allowed not to have outgoing connection!\n"
-			message = message + "The following sentences have no outgoing connection: "
-			var first = true;
-			for (var i=1; i < Nsentences; i++) {
-				if (!droppingFlag[i] && !outgoingFlag[i]) {
-					if (first) {
-						first = false;
-						message = message + i; 
-					}
-					else {
-						message = message + ", " + i;
+			// How many nodes have outgoing connection
+			if (outgoingCount == Nsentences-2) { // prompt is not counted so -2
+				return allNodesHaveConnection;
+			}
+			else {
+				message = "Only one non-dropped sentences is allowed not to have outgoing connection!\n"
+				message = message + "The following sentences have no outgoing connection: "
+				var first = true;
+				for (var i=1; i < Nsentences; i++) {
+					if (!droppingFlag[i] && !outgoingFlag[i]) {
+						if (first) {
+							first = false;
+							message = message + i; 
+						}
+						else {
+							message = message + ", " + i;
+						}
 					}
 				}
+				alert(message);
+				return false;
 			}
-			alert(message);
-			return false;
 		}
 	}
 }
@@ -359,13 +366,11 @@ function checkRepairFormat() {
 				mode = "pop";
 			}
 			else if (sentence.charAt(j) == ']') {
-				if (mode == "pop") {
-					if (stack.length != 0) {
-						stack.pop();
-					}
-					else {
-						flag = true;
-					}
+				if (stack.length != 0 && mode == "pop") {
+					stack.pop();
+				}
+				else {
+					flag = true;
 				}
 			}
 		}
