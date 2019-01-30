@@ -360,18 +360,18 @@ function checkRepairFormat() {
 		for (var j=0; j < sentence.length; j++) {
 			if (sentence.charAt(j) == '[') {
 				mode = "push";
-				stack.push(j);
+				if (stack.length == 0) stack.push(j);
+				else flag = true; // error in annotation
 			}
 			else if (sentence.charAt(j) == '|') {
-				mode = "pop";
+				if (mode == "pop") flag = true; // no double separator
+				else mode = "pop";
 			}
 			else if (sentence.charAt(j) == ']') {
-				if (stack.length != 0 && mode == "pop") {
+				if (stack.length == 1 && mode == "pop") {
 					stack.pop();
 				}
-				else {
-					flag = true;
-				}
+				else flag = true;
 			}
 		}
 
