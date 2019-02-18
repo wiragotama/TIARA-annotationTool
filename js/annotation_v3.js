@@ -229,7 +229,7 @@ $("#save_menu").on('click', function(event) {
 		alert("Save menu is clicked");
 	}
 
-	if (allowIntermediarySave || (!allowIntermediarySave && isFullAnnotation() && checkRepairFormat())) {
+	if (allowIntermediarySave || (!allowIntermediarySave && isFullAnnotation() && checkRepairFormat() && !checkTemporaryPresence())) {
 		event.preventDefault(); //do not refresh the page
 		addLogRecord("Save");
 
@@ -387,6 +387,29 @@ function checkRepairFormat() {
 
 	return !flag;
 }
+
+
+/**
+ * Check whether there is relation labelled "temporary"
+ */
+ function checkTemporaryPresence() {
+ 	var flag = false; // no "temporary" relation
+ 	var message = "The following relations are labelled \"temporary\", please label them correctly:";
+
+	for (var i=1; i < Nsentences; i++) {
+		relation = document.getElementById("relation"+i).innerHTML;
+
+		if (relation == "temporary") {
+			flag = true;
+			message += "\n" + i.toString() + " -> " + document.getElementById("target"+i).innerHTML.replace( /^\D+/g, ''); 
+		}
+	}
+
+	if (flag) {
+		alert(message);
+	}
+	return flag;
+ }
 
 
 /**
