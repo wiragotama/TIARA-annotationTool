@@ -1,0 +1,34 @@
+<div class="flex-item" id="sentence[PUT_SENTENCE_NUMBER_HERE]"> 
+        <span class="col-md-1 sentence-id-number">
+            [PUT_SENTENCE_NUMBER_HERE]
+        </span>
+        <span class="col-md-10">
+            <textarea id="textarea[PUT_SENTENCE_NUMBER_HERE]">[PUT_SENTENCE_TEXT_HERE]</textarea>
+        </span>
+
+        <span class="col-md-1 sentence-side-menu" id="annotation[PUT_SENTENCE_NUMBER_HERE]">
+            <table>
+                <tr>
+                    <td>
+                        <span class="input-number hide" id="target[PUT_SENTENCE_NUMBER_HERE]"></span>
+                        <span class="input-relation hide" id="relation[PUT_SENTENCE_NUMBER_HERE]"></span>
+                        <span>
+                            <Label class="drop-label"> Drop? </Label>
+                            <input type="checkbox" id="dropping[PUT_SENTENCE_NUMBER_HERE]" name="drop" value="non-drop"/>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <button class="movebutton" onclick="moveBoxLeft([PUT_SENTENCE_NUMBER_HERE])">
+                            &laquo;
+                        </button>
+
+                        <button class="movebutton" onclick="moveBoxRight([PUT_SENTENCE_NUMBER_HERE])">
+                            &raquo;
+                        </button>
+                    </td>
+                </tr>
+            </table>
+        </span>
+    </div>

@@ -71,31 +71,18 @@ footer {
 
 .relation-color-mark {
 	float: right;
-	min-width: 25px;
+	width: 100px;
 	text-align: center;
+	overflow: hidden;
 	padding: 2px;
 	margin-left: 2px;
 	background-color: black;
+	font-weight: normal
+	margin-bottom: 20px;
 }
 
-.rel-equal-mark {
-	font-weight: normal;
-	background-color: lightgray;
-}
-
-.rel-sup-mark {
-	font-weight: normal;
-	background-color: lightgreen;
-}
-
-.rel-det-mark {
-	font-weight: normal;
-	background-color: lightblue;
-}
-
-.rel-att-mark {
-	font-weight: normal;
-	background-color: lightpink;
+.color-legend {
+	float:right;
 }
 
 .prompt {

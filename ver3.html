@@ -21,6 +21,7 @@
     <script src="js/bootstrap.min.js"></script>
     <script src="js/jquery.html-svg-connect.js"></script>
     <script src="js/jsplumb.min.js"></script>
+    <script src="js/annotation-globalsetting.js"></script>
 </head>
 
 <body>
@@ -33,7 +34,7 @@
                     <li>
                         <a> 
                             <label href="" id="save_menu" class="btn btn-default btn-file"> 
-                                Save 
+                                Save
                             </label>
                         </a>
                     </li>
@@ -41,6 +42,18 @@
                         <a> <label class="btn btn-default btn-file">
                             Load <input type="file" class="hide" id="load-file">
                         </label> 
+                        </a>   
+                    </li>
+                    <li>
+                        <a> <label href="" id="rel_to_excel" class="btn btn-default btn-file"> 
+                                Format relation to excel
+                            </label>
+                        </a>   
+                    </li>
+                    <li>
+                        <a> <label href="" id="annotation_to_excel" class="btn btn-default btn-file"> 
+                                Format file to excel
+                            </label>
                         </a>   
                     </li>
                 </ul>
@@ -64,12 +77,38 @@
             <!-- Dialog -->
             <div class="col-lg-1">
                 <div class="relation-dialog" id="relation-dialog" title="Relation option">
-                    Choose one out of the four relation labels or delete the connection
+                    Choose one of available relations below or delete the connection
                 </div>
             </div>
 
             <!-- Save and load this whole area -->
             <div class="col-lg-10 draggable-area" id="draggable-area"> 
+                <!-- Essay Code -->
+                <div class="row essay-code">
+                    <div class="col-lg-10">
+                        <h4 id="essay_code_ICNALE"> [PUT_ESSAY_CODE_HERE] </h4>
+                          <p class="prompt"> [PROMPT] [PUT_PROMPT_TEXT_HERE] </p>
+                    </div>
+                    <div class="col-lg-2 legend">
+                        <p> [Legend] </p>
+                    </div>
+                </div> <br>
+
+                <div class="row color-legend col-lg-12">
+                    <span class="relation-color-mark rel-att-mark">
+                        att
+                    </span>
+                    <span class="relation-color-mark rel-det-mark">
+                        det
+                    </span>
+                    <span class="relation-color-mark rel-sup-mark">
+                        sup
+                    </span>
+                    <span class="relation-color-mark rel-equal-mark">
+                        =
+                    </span>
+                </div>
+
             </div>
             <div class="col-lg-1">
             </div>
@@ -78,7 +117,7 @@
     <!-- /.container -->
 
     <!-- Main Script -->
-    <script src="js/annotation_v3.js"></script>
+    <script src="js/annotation.js"></script>
 </body>
 
 </html>

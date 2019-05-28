@@ -1,11 +1,61 @@
 <!-- Essay Code -->
 <div class="row essay-code">
-    <div class="col-md-10">
-        <h4 id="essay_code_ICNALE"> ESSAY_TRIAL_00 </h4>
-        <p class="prompt"> [PROMPT] Smoking should be banned at all restaurants in the country. </p>
+    <div class="row">
+        <div class="col-md-10">
+            <h4 id="essay_code_ICNALE"> ESSAY_TRIAL_00 </h4>
+            <p class="prompt"> [PROMPT] Smoking should be banned at all restaurants in the country. </p>
+        </div>
+        <div class="col-md-2 legend">
+            <p> [Legend] </p>
+        </div>
     </div>
-    <div class="col-md-2 legend">
-        <p> Legend </p>
+
+    <div class="row color-legend col-lg-12">
+        <span class="relation-color-mark rel-att-mark">
+            att
+        </span>
+        <span class="relation-color-mark rel-att-mark">
+            att
+        </span>
+        <span class="relation-color-mark rel-att-mark">
+            att
+        </span>
+        <span class="relation-color-mark rel-att-mark">
+            att
+        </span>
+        <span class="relation-color-mark rel-att-mark">
+            att
+        </span>
+        <span class="relation-color-mark rel-att-mark">
+            att
+        </span>
+        <span class="relation-color-mark rel-att-mark">
+            att
+        </span>
+        <span class="relation-color-mark rel-att-mark">
+            att
+        </span>
+        <span class="relation-color-mark rel-att-mark">
+            att
+        </span>
+        <span class="relation-color-mark rel-att-mark">
+            att
+        </span>
+        <span class="relation-color-mark rel-att-mark">
+            att
+        </span>
+        <span class="relation-color-mark rel-att-mark">
+            att
+        </span>
+        <span class="relation-color-mark rel-att-mark">
+            att
+        </span>
+        <span class="relation-color-mark rel-att-mark">
+            att
+        </span>
+        <span class="relation-color-mark rel-att-mark">
+            att
+        </span>
         <span class="relation-color-mark rel-att-mark">
             att
         </span>
@@ -18,7 +68,8 @@
         <span class="relation-color-mark rel-equal-mark">
             =
         </span>
-    </div>
+    </div> 
+
 </div> <br>
 
 <!-- Sentences -->
