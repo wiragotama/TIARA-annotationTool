@@ -77,12 +77,14 @@ footer {
 	padding: 2px;
 	margin-left: 2px;
 	background-color: black;
-	font-weight: normal
-	margin-bottom: 20px;
+	font-weight: normal;
+	border: 2px solid rgba(255,255,255, 1);
+	display: inline-block;
+	direction: ltr;
 }
 
 .color-legend {
-	float:right;
+	float: right;
 }
 
 .prompt {

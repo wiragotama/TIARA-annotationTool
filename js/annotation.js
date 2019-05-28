@@ -183,15 +183,14 @@ $("#load-file").on('change', function(event) {
 
 				// if the file is txt, we need to convert the content to xml content
 				if (file.type == "text/plain") {
-					console.log(content)
-					// NOT DONE!
-					// document.getElementsByClassName('draggable-area')[0].innerHTML = essay_code_template; --> WORKS
+					plainTextFormatting(file.name, content);
+				}
+				else {
+					document.getElementsByClassName('draggable-area')[0].innerHTML = content;
+					updateColorLegend();
 				}
 
-				// if xml, straight goes to this one
-				document.getElementsByClassName('draggable-area')[0].innerHTML = content;
 				Nsentences = document.getElementsByClassName("flex-item").length + 1; //prompt is included in the calculation
-
 				if (disableDropping) { // hide dropping buttons from end-user
 					droppingDisabler()
 				}
@@ -209,6 +208,73 @@ $("#load-file").on('change', function(event) {
 		alert("Failed to load file");
 	}
 });
+
+
+/**
+ * update the color legend (the main target is for the saved annotated file) to match the current available relations
+ */
+function updateColorLegend() {
+	// remove the current version
+	document.getElementById("color-legend").innerHTML = ""; 
+	
+	// update
+	for (var i=availableRels.length-1; i >= 0; i--) {
+		var newColorLegend = document.createElement("span");
+		newColorLegend.className = "relation-color-mark";
+		newColorLegend.innerHTML = availableRels[i];
+		newColorLegend.style = "background-color: " + relColors[i];
+		document.getElementById("color-legend").appendChild(newColorLegend);
+	}
+}
+
+/**
+ * Replace all occurence of query in inputString using replacement
+ * @param{string} inputString
+ * @param{string} query
+ * @param{string} replacement
+ */
+function replaceAll(inputString, query, replacement) {
+	var re = new RegExp(query, 'g');
+	return inputString.replace(re, replacement);
+}
+
+/**
+ * Format plaintext input to XML, then project the result to screen directly
+ * @param{string} filename
+ * @param{string} content
+ */
+function plainTextFormatting(filename, content) {
+	// skeleton
+	xmlText = "";
+	header = replaceAll(essayCodeHTMLTemplate, "\\[ESSAY_CODE_HERE\\]", filename.split(".")[0]);
+	xmlText = xmlText + header + "\n";
+	xmlText = xmlText + '\<div class="flex-container" id="flex-container"\>';
+	xmlText = xmlText + '\<\/div\>';
+	document.getElementsByClassName('draggable-area')[0].innerHTML = xmlText;
+
+	// add relation legend
+	for (var i=availableRels.length-1; i >= 0; i--) {
+		var newColorLegend = document.createElement("span");
+		newColorLegend.className = "relation-color-mark";
+		newColorLegend.innerHTML = availableRels[i];
+		newColorLegend.style = "background-color: " + relColors[i];
+		document.getElementById("color-legend").appendChild(newColorLegend);
+	}
+
+	// add sentences
+	sentences = content.split("\n")
+	for (var i=0; i < sentences.length; i++) {
+		if (sentences[i]!="") {
+			var newNodeSentence = document.createElement("div");
+			newNodeSentence.className = "flex-item";
+			newNodeSentence.id = "sentence"+(i+1);
+			sentenceFormat = replaceAll(sentenceContainerHTMLTemplate, "\\[PUT_SENTENCE_NUMBER_HERE\\]", String(i+1));
+			sentenceFormat = replaceAll(sentenceFormat, "\\[PUT_SENTENCE_TEXT_HERE\\]", sentences[i]);
+			newNodeSentence.innerHTML = sentenceFormat
+		}
+		document.getElementById("flex-container").appendChild(newNodeSentence);
+	}
+}
 
 
 /**
@@ -289,7 +355,7 @@ $("#save_menu").on('click', function(event) {
 
 		var cut = document.getElementsByClassName('draggable-area')[0].innerHTML.indexOf("div class=\"jtk-endpoint");
 		var text = document.getElementsByClassName('draggable-area')[0].innerHTML.substring(0, cut-1);
-		var filename = $(".essay-code .col-md-10 #essay_code_ICNALE").text().trim() + "-annotated.xml";
+		var filename = $(".essay-code .col-md-10 #essay_code").text().trim() + "-annotated.xml";
 		download(filename, text);
 
 		alert("Refresh the page after the download is complete!")
@@ -310,7 +376,7 @@ $("#rel_to_excel").on('click', function(event) {
 		addLogRecord("RelationStructure-to-excel");
 
 		// convert to csv format
-		var filename = $(".essay-code .col-md-10 #essay_code_ICNALE").text().trim();
+		var filename = $(".essay-code .col-md-10 #essay_code").text().trim();
 		text = relationToCSV(Nsentences, filename)
 		download(filename+".csv", text);
 
@@ -331,7 +397,7 @@ $("#annotation_to_excel").on('click', function(event) {
 		addLogRecord("Annotation-to-excel");
 
 		// convert to TSV format
-		var filename = $(".essay-code .col-md-10 #essay_code_ICNALE").text().trim();
+		var filename = $(".essay-code .col-md-10 #essay_code").text().trim();
 		text = annotationToTSV(filename)
 		download(filename+".tsv", text);
 
@@ -1010,5 +1076,6 @@ function getCurrentOrdering() {
 /**
  * Tempalate variables for text formatting (better not modify this unless you are the developer)
  */
- essayCodeTemplate = '<!-- Essay Code --> \n <div class="row essay-code"> \n \t <div class="col-md-10"> \n \t \t <h4 id="essay_code_ICNALE"> [PUT_ESSAY_CODE_HERE] </h4> \n \t \t <p class="prompt"> [PROMPT] [PUT_PROMPT_TEXT_HERE] </p> \n \t </div> \n \t <div class="col-md-2 legend"> \n \t \t <p> Legend </p> \n \t \t <span class="relation-color-mark rel-att-mark"> \n \t \t \t att \n \t \t </span> \n \t \t <span class="relation-color-mark rel-det-mark"> \n \t \t \t det \n \t \t </span> \n \t \t <span class="relation-color-mark rel-sup-mark"> \n \t \t \t sup \n \t \t </span> \n \t \t <span class="relation-color-mark rel-equal-mark"> \n \t \t \t = \n \t \t </span> \n \t </div> \n </div> <br>'
+essayCodeHTMLTemplate = '\<!-- Essay Code --\> \n \<div class="row essay-code"\> \n \t \<div class="row"\> \n \t \t \<div class="col-md-10"\> \n \t \t \t \<h4 id="essay_code"\> [ESSAY_CODE_HERE] \</h4\> \n \t \t \</div\> \n \t \t \<div class="col-md-2 legend"\> \n \t \t \t \<p\> [Legend] \</p\> \n \t \t \</div\> \n \t \</div\> \n \t \<div class="row color-legend col-lg-12" id="color-legend"\> \n \t \</div\> \n \</div\> \<br\> \n'
+sentenceContainerHTMLTemplate = '\<span class="col-md-1 sentence-id-number"\> \n \t [PUT_SENTENCE_NUMBER_HERE] \n \</span\> \n \<span class="col-md-10"\> \n \t \<textarea id="textarea[PUT_SENTENCE_NUMBER_HERE]"\>[PUT_SENTENCE_TEXT_HERE]\</textarea\> \n \</span\> \n \n \<span class="col-md-1 sentence-side-menu" id="annotation[PUT_SENTENCE_NUMBER_HERE]"\> \n \t \<table\> \n \t \t \<tr\> \n \t \t \t \<td\> \n \t \t \t \t \<span class="input-number hide" id="target[PUT_SENTENCE_NUMBER_HERE]"\>\</span\> \n \t \t \t \t \<span class="input-relation hide" id="relation[PUT_SENTENCE_NUMBER_HERE]"\>\</span\> \n \t \t \t \t \<span\> \n \t \t \t \t \t \<Label class="drop-label"\> Drop? \</Label\> \n \t \t \t \t \t \<input type="checkbox" id="dropping[PUT_SENTENCE_NUMBER_HERE]" name="drop" value="non-drop"/\> \n \t \t \t \t \</span\> \n \t \t \t \</td\> \n \t \t \</tr\> \n \t \t \<tr\> \n \t \t \t \<td\> \n \t \t \t \t \<button class="movebutton" onclick="moveBoxLeft([PUT_SENTENCE_NUMBER_HERE])"\> \n \t \t \t \t \t \&laquo; \n \t \t \t \t \</button\> \n \n \t \t \t \t \<button class="movebutton" onclick="moveBoxRight([PUT_SENTENCE_NUMBER_HERE])"\> \n \t \t \t \t \t \&raquo; \n \t \t \t \t \</button\> \n \t \t \t \</td\> \n \t \t \</tr\> \n \t \</table\> \n \</span\> \n'
 
