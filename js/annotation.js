@@ -189,6 +189,9 @@ $("#load-file").on('change', function(event) {
  * update the color legend (the main target is for the saved annotated file) to match the current available relations
  */
 function updateColorLegend() {
+	if (mode=="debug") {
+		alert("Updating color-legend");
+	}
 	// remove the current version
 	document.getElementById("color-legend").innerHTML = ""; 
 	
@@ -388,6 +391,9 @@ $("#annotation_to_excel").on('click', function(event) {
  * Change to normal view (hide the hierarchical visualization)
  */
 $("#normal_view").on('click', function(event) {
+	if (mode=="debug") {
+		alert("Change to normal view")
+	}
 	$('#draggable-area').show();
 	$('#collapsable-visualization').hide();
 });
@@ -397,6 +403,9 @@ $("#normal_view").on('click', function(event) {
  * Change to hierarchical view (hide the normal view)
  */
 $("#hierarchical_view").on('click', function(event) {
+	if (mode=="debug") {
+		alert("Change to hierarchical view");
+	}
 	if (isFullAnnotation()) {
 		$('#draggable-area').hide();
 		$('#collapsable-visualization').show();
@@ -415,8 +424,12 @@ $("#hierarchical_view").on('click', function(event) {
 				connectorsSpeed: 700
 			},
 			connectors: {
-				style: { "stroke-width": 2 }
+				style: { 
+					"stroke-width": 2, 
+					'stroke': 'black'
+				}
 			},
+			nodeAlign: "top",
 			scrollbar: "fancy",
 			rootOrientation:  'NORTH', // NORTH || EAST || WEST || SOUTH
 		};
@@ -425,13 +438,15 @@ $("#hierarchical_view").on('click', function(event) {
 		var nodes = []
 		for (var i=1; i < Nsentences; i++) {
 			var node = new Object()
-			node.text = { name: i +". " + document.getElementById("textarea"+i).textContent.trim() };
-			if ($("#target"+i).text()!="") { // this sentences points somewhere
-				relName = document.getElementById("relation"+i).textContent;
-	    		node.connectors = { style: {'stroke': 'black'} };
-	    	}
+			relName = document.getElementById("relation"+i).textContent;
+			node.text = { 
+				desc: (relName!="") ? "["+relName+"]" : "",
+				name: i +". " + document.getElementById("textarea"+i).textContent.trim(),
+			};
+			node.HTMLclass = "hierSent"+i;
 	    	nodes.push(node);
 		}
+		// establish connection to parent
 		for (var i=1; i < Nsentences; i++) {
 			if ($("#target"+i).text()!="") {
 				nodes[i-1].parent = nodes[getSentenceIdNumber(document.getElementById("target"+i).textContent)-1]; 
@@ -444,10 +459,15 @@ $("#hierarchical_view").on('click', function(event) {
 			visualization.push(nodes[i])
 		}
 		tree = new Treant( visualization ); // hopefully the garbage collector works well
+		
+		// change the description color according to the relation it is involved in
+		for (var i=1; i <Nsentences; i++) {
+			relName = document.getElementById("relation"+i).textContent;
+			$(".hierSent"+i).css("border-color", chooseColor(relName));
+			$(".hierSent"+i+" > .node-desc").css("color", chooseColor(relName));
+		}
 	}
-	else {
-		// alert given by isFullAnnotation()
-	}
+	// else alert given by isFullAnnotation()
 });
 
 /********* END GLOBAL PARAMETERS AND INITIALIZATION *********/
