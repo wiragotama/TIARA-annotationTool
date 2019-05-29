@@ -7,7 +7,7 @@
     <meta name="author" content="Jan Wira Gotama Putra">
 
     <title> TADA - Titech Discourse-relation Annotation tool </title>
-    <title> TILDA - Titech Language Discourse-relation Annotation tool </title>
+    <!-- <title> TILDA - Titech Language Discourse-relation Annotation tool </title> -->
     <!-- TADA means FREE in Japanese, this tool is free -->
 
     <!-- Styling -->
@@ -16,6 +16,8 @@
     <link href="img/favicon.ico" rel="shortcut icon" type="image/png" bootstrap.min.js>
     <link href="css/font-awesome-min.css" rel="stylesheet">
     <link href="css/dialog.css" rel="stylesheet">
+    <link href="css/Treant.css" rel="stylesheet">
+    <link href="css/perfect-scrollbar.css" rel="stylesheet">
 
     <!-- Scripts -->
     <script src="js/jquery-1.12.4.js"></script>
@@ -24,6 +26,12 @@
     <script src="js/jquery.html-svg-connect.js"></script>
     <script src="js/jsplumb.min.js"></script>
     <script src="js/annotation-globalsetting.js"></script>
+
+    <script src="js/raphael.js"></script>
+    <script src="js/Treant.js"></script>
+    <script src="js/jquery.mousewheel.js"></script>
+    <script src="js/perfect-scrollbar.js"></script>
+    <script src="js/jquery.easing.js"></script>    
 </head>
 
 <body>
@@ -58,6 +66,18 @@
                             </label>
                         </a>   
                     </li>
+                    <li>
+                        <a> <label href="" id="normal_view" class="btn btn-default btn-file"> 
+                                Normal View
+                            </label>
+                        </a>   
+                    </li>
+                    <li>
+                        <a> <label href="" id="hierarchical_view" class="btn btn-default btn-file"> 
+                                Hierarchical View
+                            </label>
+                        </a>   
+                    </li>
                 </ul>
             </div>
             <!-- /.navbar-collapse -->
@@ -89,6 +109,9 @@
             <div class="col-lg-1">
             </div>
         </div> 
+
+         <!-- Visualization -->
+        <div class="row chart" id="collapsable-visualization"></div>
     </div>
     <!-- /.container -->
 

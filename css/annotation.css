@@ -83,6 +83,10 @@ footer {
 	direction: ltr;
 }
 
+.relation-menu-button {
+	margin-left:10px; margin-bottom:10px; width:100px; height:25px; overflow:hidden; text-align:center; 
+}
+
 .color-legend {
 	float: right;
 }
@@ -131,4 +135,19 @@ footer {
 	float:left; 
 	padding:0; 
 	display:block;
+}
+
+.visualization-text {
+	border: 1px solid black;
+	width: 300px;
+}
+
+.visualization-text p {
+	padding: 5px;
+	padding-top: 10px;
+}
+
+.visualization-text a {
+	padding: 3px;
+	background-color: black;
 }

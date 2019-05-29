@@ -77,7 +77,7 @@ var outBound = {
  */
 $(document).ready(function() {
 	// initialization (whenever applicable)
-	if (availableRels.length != relColors.length) {
+	if (availableRels.length!=relColors.length || availableRels.length!=relDirections.length || relColors.length!=relDirections.length) {
 		alert("There is an error in the application setting! Cannot initiate the application!")
 		var elem = document.querySelector('#draggable-area'); // to prevent end-user from using the application, since the initialization is wrong
 		elem.style.display = 'none';
@@ -87,29 +87,6 @@ $(document).ready(function() {
         autoOpen:false
     });
 });
-
-
-/**
- * Read local text file
- * @param{string} filename
- */ 
-function readTextFile(filename)
-{
-    var rawFile = new XMLHttpRequest();
-    rawFile.open("GET", filename, false);
-    rawFile.onreadystatechange = function ()
-    {
-        if(rawFile.readyState === 4)
-        {
-            if(rawFile.status === 200 || rawFile.status == 0)
-            {
-                var allText = rawFile.responseText;
-                alert(allText);
-            }
-        }
-    }
-    rawFile.send(null);
-}
 
 
 /** 
@@ -180,7 +157,6 @@ $("#load-file").on('change', function(event) {
 				);  
 			}
 			if (file.type == "text/xml" || file.type=="text/plain") {
-
 				// if the file is txt, we need to convert the content to xml content
 				if (file.type == "text/plain") {
 					plainTextFormatting(file.name, content);
@@ -194,7 +170,6 @@ $("#load-file").on('change', function(event) {
 				if (disableDropping) { // hide dropping buttons from end-user
 					droppingDisabler()
 				}
-				
 				initializeJsPlumb(Nsentences);
 				addLogRecord("Load", file.name);
 			}
@@ -227,6 +202,7 @@ function updateColorLegend() {
 	}
 }
 
+
 /**
  * Replace all occurence of query in inputString using replacement
  * @param{string} inputString
@@ -237,6 +213,7 @@ function replaceAll(inputString, query, replacement) {
 	var re = new RegExp(query, 'g');
 	return inputString.replace(re, replacement);
 }
+
 
 /**
  * Format plaintext input to XML, then project the result to screen directly
@@ -384,6 +361,7 @@ $("#rel_to_excel").on('click', function(event) {
 	}
 });
 
+
 /**
  * Save relations existing in essay into a local excel (csv) file, this is using inter-annotator agreement format
  */
@@ -402,6 +380,73 @@ $("#annotation_to_excel").on('click', function(event) {
 		download(filename+".tsv", text);
 
 		alert("Refresh the page after the download is complete!")
+	}
+});
+
+
+/**
+ * Change to normal view (hide the hierarchical visualization)
+ */
+$("#normal_view").on('click', function(event) {
+	$('#draggable-area').show();
+	$('#collapsable-visualization').hide();
+});
+
+
+/**
+ * Change to hierarchical view (hide the normal view)
+ */
+$("#hierarchical_view").on('click', function(event) {
+	if (isFullAnnotation()) {
+		$('#draggable-area').hide();
+		$('#collapsable-visualization').show();
+		//configuration of hierarchical visualization
+		var config = {
+			container: "#collapsable-visualization",
+			animateOnInit: true,
+			node: {
+				collapsable: true,
+				HTMLclass: 'visualization-text'
+			},
+			animation: {
+				nodeAnimation: "easeOutBounce",
+				nodeSpeed: 700,
+				connectorsAnimation: "bounce",
+				connectorsSpeed: 700
+			},
+			connectors: {
+				style: { "stroke-width": 2 }
+			},
+			scrollbar: "fancy",
+			rootOrientation:  'NORTH', // NORTH || EAST || WEST || SOUTH
+		};
+
+		// convert each sentence information to visual nodes
+		var nodes = []
+		for (var i=1; i < Nsentences; i++) {
+			var node = new Object()
+			node.text = { name: i +". " + document.getElementById("textarea"+i).textContent.trim() };
+			if ($("#target"+i).text()!="") { // this sentences points somewhere
+				relName = document.getElementById("relation"+i).textContent;
+	    		node.connectors = { style: {'stroke': 'black'} };
+	    	}
+	    	nodes.push(node);
+		}
+		for (var i=1; i < Nsentences; i++) {
+			if ($("#target"+i).text()!="") {
+				nodes[i-1].parent = nodes[getSentenceIdNumber(document.getElementById("target"+i).textContent)-1]; 
+			}
+		}
+
+		// combine everything
+		var visualization = [config];
+		for (var i=0; i < nodes.length; i++) {
+			visualization.push(nodes[i])
+		}
+		tree = new Treant( visualization ); // hopefully the garbage collector works well
+	}
+	else {
+		// alert given by isFullAnnotation()
 	}
 });
 
@@ -472,7 +517,7 @@ function isFullAnnotation() {
 		}
 
 		if (!allNodesHaveConnection) { // Unconnected nodes
-			message = "You cannot save because your annotation is incomplete!\n"+message;
+			message = "You cannot save/visualize the hierarchical structure because your annotation is incomplete!\n"+message;
 			alert(message);
 		}
 		else {
@@ -656,25 +701,39 @@ function eventsBinding() {
 	});
 }
 
+/**
+ * Generate empty matrix of size N * N
+ * @param(integer} N
+ * @param{anything} element
+ * @return{array} matrix of zero
+ */
+function emptyMatrix(N, element) {
+	var matrix = [];
+	for (var i=0; i < N; i++) {
+		matrix[i] = [];
+		for (var j=0; j< N; j++) {
+			matrix[i][j] = element;
+		}
+	}
+	return matrix
+}
+
 
 /**
- * Get the adjacency matrix representation of the relations
+ * Get the adjacency matrix representation of the relations (binary)
  * @param{integer} numberOfSentences, prompt included
  * @return{array} adjacency matrix
  */
 function adjMatrix(numberOfSentences) {
 	// get an empty matrix ready
-	var matrix = [];
-	for (var i=0; i < numberOfSentences; i++) {
-		matrix[i] = [];
-		for (var j=0; j< numberOfSentences; j++) {
-			matrix[i][j] = 0; //no connection from sentence i to sentence j
-		}
-	}
+	var matrix = emptyMatrix(numberOfSentences, 0)
+
 	// build adjacency matrix
 	for (var i=1; i < numberOfSentences; i++) {
-		var targetIdx = parseInt(getSentenceIdNumber($("#target"+i).text()));
-		matrix[i][targetIdx] = 1; // connection from sentence i to targetIdx
+		if ($("#target"+i).text()!="") {
+			var targetIdx = parseInt(getSentenceIdNumber($("#target"+i).text()));
+			matrix[i][targetIdx] = 1; // connection from sentence i to targetIdx
+		}
 	}
 
 	if (mode=="debug") {
@@ -691,29 +750,33 @@ function adjMatrix(numberOfSentences) {
 
 
 /**
+ * Get the adjacency matrix representation of the relations (with relation label)
+ * @param{integer} numberOfSentences, prompt included
+ * @return{array} adjacency matrix
+ */
+function adjMatrixRelLabel(numberOfSentences) {
+	// get an empty matrix ready
+	var matrix = emptyMatrix(numberOfSentences, 'n')
+
+	// get the relation name
+	for (var i=1; i < numberOfSentences; i++) {
+		if ($("#target"+i).text()!="") { // the current sentence points somewhere in some label
+			var targetIdx = parseInt(getSentenceIdNumber($("#target"+i).text()));
+			matrix[i][targetIdx] = $("#relation"+i).text(); // connection from sentence i to targetIdx
+		}
+	}
+
+	return matrix
+}
+
+
+/**
  * Format annotated relations into excel (csv) output
  * @param{int} numberOfSentences
  * @param{string} essayCode
  */
 function relationToCSV(numberOfSentences, essayCode) {
-	// get an empty matrix ready
-	var adjMatrix = [];
-	for (var i=0; i <= numberOfSentences; i++) {
-		adjMatrix[i] = [];
-		for (var j=0; j<= numberOfSentences; j++) {
-			adjMatrix[i][j] = noRelationSymbol; //no connection from sentence i to sentence j
-		}
-	}
-
-	// get the relation name
-	for (var i=1; i <= numberOfSentences; i++) {
-		if ($("#target"+i).text()!="") { // the current sentence points somewhere in some label
-			var targetIdx = parseInt(getSentenceIdNumber($("#target"+i).text()));
-			adjMatrix[i][targetIdx] = $("#relation"+i).text(); // connection from sentence i to targetIdx
-		}
-	}
-
-	// format output text
+	adjMatrix = adjMatrixRelLabel(numberOfSentences);
 	var outputText = "essay code, source, target, relation\n";
 	for (var i=1; i < numberOfSentences; i++) {
 		for (var j=1; j < numberOfSentences; j++) {
@@ -816,11 +879,10 @@ function relationDialog(conn) {
 	// prepare buttons for selecting available relations
 	var dialogButtons = []; 
 	for (var i=0; i < availableRels.length; i++) {
-		// console.log(availableRels[i])
 		newElement = {
 			text: availableRels[i],
-			class: "rel-equal-mark",
-			style: "margin-left:10px; margin-bottom:10px; width:100px; height:25px; overflow:hidden; text-align:center; background-color:"+chooseColor(availableRels[i]),
+			class: "relation-menu-button",
+			style: "background-color:"+chooseColor(availableRels[i]),
 			click: function(event) {
 				relationLabel = $(event.target).text();
 				setRelationLabelColor(conn.sourceId, conn.targetId, relationLabel);
@@ -836,8 +898,8 @@ function relationDialog(conn) {
 	// delete button
 	dialogButtons.push({
 		text: "delete",
-        class: "btn-default",
-        style: "margin-left:10px; margin-bottom:10px; width:100px; height:25px; overflow:hidden; text-align:center",
+        class: "relation-menu-button btn-default",
+        style: "",
         click: function() {
             $(this).dialog("close");
             dropRelationLabelDOM(conn.sourceId, conn.targetId);
@@ -847,7 +909,6 @@ function relationDialog(conn) {
             // logging already handled by detaching event
         }
 	})
-	console.log(dialogButtons);
 
     // put a dialog box
 	$( "#relation-dialog" ).dialog({
@@ -865,7 +926,7 @@ function relationDialog(conn) {
 
 
 /**
- * Set the color and relation label on the vizualization
+ * Set the color and relation label on the visualization
  * @param{string} 	sourceId, corresponds to DOM id
  * @param{string}	targetId, corresponds to DOM id
  * @param{string}	relationLabel, defined as elements of availableRels (variable)
