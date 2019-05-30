@@ -10,7 +10,7 @@ var allowIntermediarySave = false; // set false (suggested) if we only allows an
  * Relations and their color
  * The relations that can be used in the tool, you can add or delete the relation in this list
  */
-var availableRels = ["collection", "comparison", "description", "causation", "response", "directed"] 
+var availableRels = ["collection", "comparison", "description", "causation", "response"] 
 // var availableRels = ["att", "det", "sup", "="] 
 
 /** 
@@ -18,11 +18,11 @@ var availableRels = ["collection", "comparison", "description", "causation", "re
  * You can use available colors in HTML color picker https://www.w3schools.com/colors/colors_picker.asp
  * For example, change "lightgreen" to "#ff0000"
  */
-var relColors = ["lightgray", "lightpink", "lightblue", "lightgreen", "goldenrod", "black"] 
+var relColors = ["lightgray", "lightpink", "lightblue", "lightgreen", "goldenrod"] 
 // var relColors = ["lightpink", "lightblue", "lightgreen", "lightgray"] 
 
 /**
  * Corresponding relation type, true if directed (asymmetrical) and false if undirected (symmetrical)
  */
-var relDirections = [false, false, true, true, true, true]
+var relDirections = [false, false, true, true, true]
 // var relDirections = [true, true, true, false]

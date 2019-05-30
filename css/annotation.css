@@ -137,10 +137,19 @@ footer {
 	display:block;
 }
 
+#collapsable-visualization {
+	background-color: white;
+}
+
 .visualization-text {
 	border: 1px solid black;
 	width: 200px;
 	font-size: 12px;
+	background-color: white;
+}
+
+#visualization-download-link {
+	float: right;
 }
 
 .visualization-text p {
