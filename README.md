@@ -1,23 +1,52 @@
-NOTE:
-	- The automatic scroll is disabled because it causes some problems while dragging (if the text is long) --> I don't know what kind of bug is this. Therefore, please hold your mouse left click + using the roller of the mouse when dragging (or use three fingers when using mac)...
+# Lightweight Annotation Tool for Hierarchical-structured Discourse-relation (LiA-HDR)
+-
+Annotation tool described in our paper at NLP2019. Please kindly cite the following paper when you use this tool.
 
-HOW TO USE:
-	- Open ver3.html
-	- Click "load" menu, and then select the essay you want to annotate in the "original/" folder. The essays have been pre-formatted into html
-	- After you have done the annotation click "Save", the javascript will automatically download a file
-		- You cannot save midway. For example, when you have 5 sentences but you only annotate 3 sentences, the script will give you an error message
-		- Question to discuss: should we allow saving midway? I am afraid the annotator will forget which essay they have finished and which one is still unfinished. Allowing saving midway will cause some extra work for us
-		- When you annotate the text, DO NOT REFRESH the page (or the annotation will be gone otherwise)
-		- When you finished annotating a text, please move the downloaded ".xml" file into the "annotation/" folder. You can load them too!
-	- After you have done the annotation and saved the annotation, please refresh the page before begin working on another file
-		- I.e., load -> annotate -> save -> refresh
-		- Wira: actually, it is okay without refreshing the page. However, sometimes the visualization does not work when I do not refresh the page (and I cannot recreate the problem). I believe this is the bug from the library. Here how my program works:
-			1. Reset the JsPlumb object (if present) when loading a new file --> kind of destructor
-			2. Load all the DOM necessary
-			3. Initialize the JsPlumb object (library: JsPlumb) -> constructor
-			4. Do the annotation ...
-			Ideally, destructor will delete and flush out everything from the page; however it seems that the destructor doesn't work properly. That's why we need to refresh the page when we work on a new file
+```
+@inproceedings{Putra_etal-NLP2019,
+	author	= {Jan Wira Gotama Putra and Simone Teufel and Takenobu Tokunaga},
+	title	= {An Argument Annotation Scheme for the Repair of Student Essays by Sentence Reordering},
+	month	= March,
+	year	= {2019},
+	booktitle = {Proceedings of Annual Meeting of the Association for Natural Language Processing Japan},
+	pages	= {546-549},
+	url		= {http://www.anlp.jp/proceedings/annual_meeting/2019/pdf_dir/P3-9.pdf},
+}
+```
 
-DEVELOPER NOTE:
-	- We have two modes: "debug" and "production". If you want the script to output some messages every time it detects an event in the page, please change the line 17 of the "js/annotation_v3.js" file as "var mode = "debug""
-	- I have tried annotating three files without problems (Chrome 67 and Safari 11.1.2). Hopefully there is no bug but if you found one, please kindly tell me how to reproduce the bug
+>Jan Wira Gotama Putra, Simone Teufel, and Takenobu Tokunaga. An Argument Annotation Scheme for the Repair of Student Essays by Sentence Reordering. In Proceedings of Annual Meeting of the Association for Natural Language Processing Japan (言語処理学会第25回年次表論文集), pp. 546--549, Nagoya, Japan, March 2019.
+
+## How to Use
+- Fork, clone or download (+unpack) this repository
+- Read the manual located at ```manual/``` folder
+- Open ```index.html``` located at the root folder
+- We have tested the tool using Google Chrome (ver 7.4++) and Safari (ver 12++). You can use other web browsers at your own risks
+- You can see the demo at <https://wiragotama.github.io>
+
+## Concept
+There are many great annotation tools available out there. However, some (if not many) require complicated steps (and dependencies) to install. People with programming background may not find it difficult to install but people from other backgrounds may. This annotation tool considers the ease of use in mind (of course, with compromises), even for people without a programming background. This tool is customizable by changing the conguration at ```js/annotation-globalsetting.js``` to suit your annotation scheme (explained in the manual). 
+
+## Formatting Text for Annotation
+Format the text you want to annotate in ```.txt```, in which each discourse unit (sentence/clause) is separated by a newline. See at the following example (```sample_original/ESSAY_TRIAL_00.txt```).
+
+```
+I agree with the previous statement.
+If somebody smokes in the restaurant, other people may not be able to enjoy the experience.
+At restaurants, customers enjoy eating and talking.
+However, if we ban smoking in restaurants, then those restaurants might lose some customers.
+Some restaurants are indeed popular, especially among old men, because they allow people to smoke.
+But, I firmly support banning smoking in restaurants because we need to prioritise health.
+In conclusion, I encourage banning smoking in all restaurants.
+
+``` 
+
+## Important
+- Refresh the web browser after saving an annotated file (see the manual)
+- However, do not refresh the web browser midway (the annotation will be gone otherwise)
+
+## License 
+[MIT](https://opensource.org/licenses/MIT)
+
+## Snippet
+![](img/SS1.png)
+![](img/SS2.png)
