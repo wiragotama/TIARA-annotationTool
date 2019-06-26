@@ -27,7 +27,7 @@ var defaultStrokeHoverWidth = 7
 var defaultTarget = "";
 var defaultRelation = "";
 var noRelationSymbol = "n"; // no relation between a pair of sentences
-var Nsentences = -1; // global variable, number of sentences in the window, prompt (if any) is counted (the text body starts from sentence 1)
+var Nsentences = -1; // global variable, number of sentences in the window, the text body starts from unit 1
 /** 
  * Default config, can be changed based on your preference
  */
@@ -98,7 +98,7 @@ var hierConfig = {
 	},
 	connectors: {
 		style: { 
-			"stroke-width": 2, 
+			"stroke-width": 1.5, 
 			'stroke': 'black',
 			'arrow-start': 'classic-wide-long',
 			'arrow-end': 'none',
@@ -205,7 +205,7 @@ $("#load-file").on('change', function(event) {
 					updateColorLegend();
 				}
 
-				Nsentences = document.getElementsByClassName("flex-item").length + 1; //prompt is included in the calculation
+				Nsentences = document.getElementsByClassName("flex-item").length + 1; // unit index starts from 1
 				if (disableDropping) { // hide dropping buttons from end-user
 					droppingDisabler()
 				}
@@ -303,7 +303,7 @@ function droppingDisabler() {
 
 /**
  * Initialization of the jsPlumb
- * @param{integer} Nsentences, number of sentences in the text including prompt
+ * @param{integer} Nsentences, number of sentences in the text (index starts from 1)
  */
 function initializeJsPlumb(Nsentences) {
  	jsPlumb.ready(function() {
@@ -335,15 +335,15 @@ function initializeJsPlumb(Nsentences) {
 		    });
 		}
 
-	    // Creating Endpoints for each sentence, except the prompt
+	    // create Endpoints for each sentence
 	    createEndpoints(Nsentences);
 
-	    // Creating existing relation information
+	    // create existing relation information
 		for (var i=1; i < Nsentences; i++) {
 			paintExistingConnection(i);
 		}
 
-	    // General event binding
+	    // general event binding
 	    eventsBinding();
 	    droppingListener();
 	});
@@ -361,7 +361,7 @@ $("#save_menu").on('click', function(event) {
 		event.preventDefault(); //do not refresh the page
 		addLogRecord("Save");
 
-		// Handling textarea
+		// handling textarea
 		for (var i=1; i < Nsentences; i++) {
 			document.getElementById("textarea"+i).innerHTML = $("#textarea"+i).val();
 		}
@@ -384,7 +384,7 @@ $("#rel_to_excel").on('click', function(event) {
 	}
 
 	if (allowIntermediarySave || (!allowIntermediarySave && isFullAnnotation() && checkRepairFormat() && !checkTemporaryPresence())) {
-		event.preventDefault(); //do not refresh the page
+		event.preventDefault(); // do not refresh the page
 		addLogRecord("RelationStructure-to-excel");
 
 		// convert to csv format
@@ -438,7 +438,7 @@ $("#hierarchical_view").on('click', function(event) {
 	$('#draggable-area').hide();
 	$('#collapsable-visualization').show();
 
-	//meta node as a root (for ongoing-process visualization)
+	// meta node as a root (for ongoing-process visualization)
 	var meta = {text: {name: 'meta'}};
 
 	// convert each sentence information to visual nodes
@@ -556,8 +556,8 @@ function isFullAnnotation() {
 			alert(message);
 		}
 		else {
-			// How many nodes have outgoing connection
-			if (outgoingCount == Nsentences-2) { // prompt is not counted so -2
+			// how many nodes have outgoing connection
+			if (outgoingCount == Nsentences-2) { // index starts from 1 and one unit acts as a root, so -2
 				return allNodesHaveConnection;
 			}
 			else {
@@ -669,10 +669,10 @@ function download(filename, text) {
 
 /**
  * Creating Endpoints for each sentence
- * @param{integer} 	numberOfSentences, prompt included (if any)
+ * @param{integer} 	numberOfSentences, index starts from 1
  */
 function createEndpoints(numberOfSentences) {
-	// The number of endpoint is the same as number of sentences; except we do not create endpoint for prompt
+	// the number of endpoint is the same as number of sentences
 	for (var i=1; i < numberOfSentences; i++) {
 		sentenceID = "sentence"+i;
 		jsPlumb.addEndpoint(sentenceID, inBound, {uuid:"ib"+i}); 
@@ -684,13 +684,13 @@ function createEndpoints(numberOfSentences) {
  * Binding events that may occur in the sentences connection
  */
 function eventsBinding() {
-	// New connection is established
+	// new connection is established
 	jsPlumb.bind("connection", function(info) {	
 		var conn = info.connection;
 		if (mode=="debug") {alert("Source = "+conn.sourceId+"; Target = "+conn.targetId);}
 		setRelationLabelDOM(conn.sourceId, conn.targetId, "temporary"); // for cycle detection
 		
-		// Establish connection if cycle is not detected
+		// establish connection if cycle is not detected
 		var cycle = cycleDetection(Nsentences, conn.sourceId);
 		if (cycle) { 
 			// cycle detected
@@ -715,13 +715,13 @@ function eventsBinding() {
 		}
 	});
 
-	// Binding clicking event on connection
+	// binds clicking event on connection
 	jsPlumb.bind("click", function(conn) {
 	    if (mode=="debug") {alert("connection between "+conn.sourceId+" and "+conn.targetId+" is clicked");}
 	    relationDialog(conn);
 	});
 
-	// Binding detaching event 
+	// binds detaching event 
 	jsPlumb.bind('connectionDetached', function(info) {
 		var conn = info.connection;
 		if (mode=="debug") {alert("connection between "+conn.sourceId+" -> "+conn.targetId+" is detached");}
@@ -750,7 +750,7 @@ function emptyMatrix(N, element) {
 
 /**
  * Get the adjacency matrix representation of the relations (binary)
- * @param{integer} numberOfSentences, prompt included
+ * @param{integer} numberOfSentences, index starts from 1
  * @return{array} adjacency matrix
  */
 function adjMatrix(numberOfSentences) {
@@ -775,7 +775,7 @@ function adjMatrix(numberOfSentences) {
 
 /**
  * Get the adjacency matrix representation of the relations (with relation label)
- * @param{integer} numberOfSentences, prompt included
+ * @param{integer} numberOfSentences, index starts from 1
  * @return{array} adjacency matrix
  */
 function adjMatrixRelLabel(numberOfSentences) {
@@ -823,9 +823,9 @@ function relationToCSV(numberOfSentences, essayCode) {
 function annotationToTSV(essayCode) {
 	var outputText = ""
 	if (disableDropping)
-		outputText = "essay code\t sentence ID\t text\t target\t relation\n"; // header;
+		outputText = "essay code\t unit ID\t text\t target\t relation\n"; // header;
 	else
-		outputText = "essay code\t sentence ID\t text\t target\t relation\t drop flag\n"; // header;
+		outputText = "essay code\t unit ID\t text\t target\t relation\t drop flag\n"; // header;
 	
 	var items = document.getElementsByClassName("flex-item");
 	for (i = 0; i < items.length; i++) {
@@ -851,7 +851,7 @@ function annotationToTSV(essayCode) {
 
 /**
  * Checking whether cycle exist
- * @param{integer} numberOfSentences, prompt included
+ * @param{integer} numberOfSentences, index starts from 1
  * @param{string} sourceId, source sentence where we want to check the cycle
  * @return{boolean}
  */
@@ -866,7 +866,7 @@ function cycleDetection(numberOfSentences, sourceId) {
 
 /**
  * Traversing graph recursively to check whether cycle exist
- * @param{integer} numberOfSentences, prompt included
+ * @param{integer} numberOfSentences, index starts from 1
  * @param{array} adjacency matrix
  * @param{array} visited flag, saving the information of which nodes have been visited
  * @param{integer} currentSentencesIdx, current sentence in the traversal

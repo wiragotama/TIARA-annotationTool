@@ -1,0 +1,531 @@
+<ul class="logging hide">
+<li>{"timestamp":"2019-5-29 17:23:16","actionType":"Load","description":"ESSAY_TRIAL_01.txt"}</li>
+<li>{"timestamp":"2019-5-29 17:23:47","actionType":"Drop","description":"2"}</li>
+<li>{"timestamp":"2019-5-29 17:23:47","actionType":"Drop","description":"3"}</li>
+<li>{"timestamp":"2019-5-29 17:23:48","actionType":"Drop","description":"4"}</li>
+<li>{"timestamp":"2019-5-29 17:23:50","actionType":"Drop","description":"8"}</li>
+<li>{"timestamp":"2019-5-29 17:24:1","actionType":"Relation-add","description":"connection between 5 to 6 is established"}</li>
+<li>{"timestamp":"2019-5-29 17:24:2","actionType":"Relation-add","description":"connection between 5 to 6 is labeled description"}</li>
+<li>{"timestamp":"2019-5-29 17:24:8","actionType":"Relation-add","description":"connection between 6 to 7 is established"}</li>
+<li>{"timestamp":"2019-5-29 17:24:9","actionType":"Relation-add","description":"connection between 6 to 7 is labeled comparison"}</li>
+<li>{"timestamp":"2019-5-29 17:24:16","actionType":"Relation-add","description":"connection between 7 to 1 is established"}</li>
+<li>{"timestamp":"2019-5-29 17:24:17","actionType":"Relation-add","description":"connection between 7 to 1 is labeled causation"}</li>
+<li>{"timestamp":"2019-5-29 17:24:23","actionType":"Relation-add","description":"connection between 9 to 1 is established"}</li>
+<li>{"timestamp":"2019-5-29 17:24:24","actionType":"Relation-add","description":"connection between 9 to 1 is labeled comparison"}</li>
+<li>{"timestamp":"2019-5-29 17:24:30","actionType":"Relation-add","description":"connection between 10 to 9 is established"}</li>
+<li>{"timestamp":"2019-5-29 17:24:31","actionType":"Relation-add","description":"connection between 10 to 9 is labeled description"}</li>
+<li>{"timestamp":"2019-5-29 17:24:35","actionType":"Relation-add","description":"connection between 10 to 9 is labeled causation"}</li>
+<li>{"timestamp":"2019-5-29 17:24:36","actionType":"Indent-right","description":10}</li>
+<li>{"timestamp":"2019-5-29 17:24:36","actionType":"Indent-right","description":11}</li>
+<li>{"timestamp":"2019-5-29 17:24:40","actionType":"Relation-add","description":"connection between 11 to 10 is established"}</li>
+<li>{"timestamp":"2019-5-29 17:24:41","actionType":"Relation-add","description":"connection between 11 to 10 is labeled description"}</li>
+<li>{"timestamp":"2019-5-29 17:24:52","actionType":"Relation-add","description":"connection between 12 to 1 is established"}</li>
+<li>{"timestamp":"2019-5-29 17:24:53","actionType":"Relation-add","description":"connection between 12 to 1 is labeled causation"}</li>
+<li>{"timestamp":"2019-5-29 17:24:58","actionType":"Relation-add","description":"connection between 13 to 12 is established"}</li>
+<li>{"timestamp":"2019-5-29 17:24:59","actionType":"Relation-add","description":"connection between 13 to 12 is labeled comparison"}</li>
+<li>{"timestamp":"2019-5-29 17:25:0","actionType":"Relation-add","description":"connection between 14 to 13 is established"}</li>
+<li>{"timestamp":"2019-5-29 17:25:1","actionType":"Relation-add","description":"connection between 14 to 13 is labeled comparison"}</li>
+<li>{"timestamp":"2019-5-29 17:25:6","actionType":"Relation-add","description":"connection between 15 to 12 is established"}</li>
+<li>{"timestamp":"2019-5-29 17:25:7","actionType":"Relation-add","description":"connection between 15 to 12 is labeled collection"}</li>
+<li>{"timestamp":"2019-5-29 17:25:8","actionType":"Indent-right","description":13}</li>
+<li>{"timestamp":"2019-5-29 17:25:8","actionType":"Indent-right","description":14}</li>
+<li>{"timestamp":"2019-5-29 17:25:10","actionType":"Indent-left","description":1}</li>
+<li>{"timestamp":"2019-5-29 17:25:11","actionType":"Indent-left","description":1}</li>
+<li>{"timestamp":"2019-5-29 17:25:12","actionType":"Save"}</li>
+</ul>
+
+<!-- Essay Code --> 
+ <div class="row essay-code"> 
+ 	 <div class="row"> 
+ 	 	 <div class="col-md-10"> 
+ 	 	 	 <h4 id="essay_code"> ESSAY_TRIAL_01 </h4> 
+ 	 	 </div> 
+ 	 	 <div class="col-md-2 legend"> 
+ 	 	 	 <p> [Legend] </p> 
+ 	 	 </div> 
+ 	 </div> 
+ 	 <div class="row color-legend col-lg-12" id="color-legend"> 
+ 	 <span class="relation-color-mark" style="background-color: goldenrod;">response</span><span class="relation-color-mark" style="background-color: lightgreen;">causation</span><span class="relation-color-mark" style="background-color: lightblue;">description</span><span class="relation-color-mark" style="background-color: lightpink;">comparison</span><span class="relation-color-mark" style="background-color: lightgray;">collection</span></div> 
+ </div> <br> 
+
+<div class="flex-container ui-sortable" id="flex-container"><div class="flex-item ui-sortable-handle jtk-endpoint-anchor jtk-connected" id="sentence1" style="left: -40px;"><span class="col-md-1 sentence-id-number"> 
+ 	 1 
+ </span> 
+ <span class="col-md-10"> 
+ 	 <textarea id="textarea1">I don't agree with the idea that it is important for college students to have a part-time job. </textarea> 
+ </span> 
+ 
+ <span class="col-md-1 sentence-side-menu" id="annotation1"> 
+ 	 <table> 
+ 	 	 <tbody><tr> 
+ 	 	 	 <td> 
+ 	 	 	 	 <span class="input-number hide" id="target1"></span> 
+ 	 	 	 	 <span class="input-relation hide" id="relation1"></span> 
+ 	 	 	 	 <span> 
+ 	 	 	 	 	 <label class="drop-label"> Drop? </label> 
+ 	 	 	 	 	 <input type="checkbox" id="dropping1" name="drop" value="non-drop"> 
+ 	 	 	 	 </span> 
+ 	 	 	 </td> 
+ 	 	 </tr> 
+ 	 	 <tr> 
+ 	 	 	 <td> 
+ 	 	 	 	 <button class="movebutton" onclick="moveBoxLeft(1)"> 
+ 	 	 	 	 	 « 
+ 	 	 	 	 </button> 
+ 
+ 	 	 	 	 <button class="movebutton" onclick="moveBoxRight(1)"> 
+ 	 	 	 	 	 » 
+ 	 	 	 	 </button> 
+ 	 	 	 </td> 
+ 	 	 </tr> 
+ 	 </tbody></table> 
+ </span> 
+</div><div class="flex-item ui-sortable-handle jtk-endpoint-anchor hide-text" id="sentence2"><span class="col-md-1 sentence-id-number"> 
+ 	 2 
+ </span> 
+ <span class="col-md-10"> 
+ 	 <textarea id="textarea2" class="hide-text">Of course there are both good aspects and bad aspects to having a part-time job. </textarea> 
+ </span> 
+ 
+ <span class="col-md-1 sentence-side-menu hide-text-dropping" id="annotation2"> 
+ 	 <table> 
+ 	 	 <tbody><tr> 
+ 	 	 	 <td> 
+ 	 	 	 	 <span class="input-number hide" id="target2"></span> 
+ 	 	 	 	 <span class="input-relation hide" id="relation2"></span> 
+ 	 	 	 	 <span> 
+ 	 	 	 	 	 <label class="drop-label"> Drop? </label> 
+ 	 	 	 	 	 <input type="checkbox" id="dropping2" name="drop" value="drop"> 
+ 	 	 	 	 </span> 
+ 	 	 	 </td> 
+ 	 	 </tr> 
+ 	 	 <tr> 
+ 	 	 	 <td> 
+ 	 	 	 	 <button class="movebutton" onclick="moveBoxLeft(2)"> 
+ 	 	 	 	 	 « 
+ 	 	 	 	 </button> 
+ 
+ 	 	 	 	 <button class="movebutton" onclick="moveBoxRight(2)"> 
+ 	 	 	 	 	 » 
+ 	 	 	 	 </button> 
+ 	 	 	 </td> 
+ 	 	 </tr> 
+ 	 </tbody></table> 
+ </span> 
+</div><div class="flex-item ui-sortable-handle jtk-endpoint-anchor hide-text" id="sentence3"><span class="col-md-1 sentence-id-number"> 
+ 	 3 
+ </span> 
+ <span class="col-md-10"> 
+ 	 <textarea id="textarea3" class="hide-text">I'm going to write why I don't agree with the idea by showing both good aspects and bad aspects of having a part-time job. </textarea> 
+ </span> 
+ 
+ <span class="col-md-1 sentence-side-menu hide-text-dropping" id="annotation3"> 
+ 	 <table> 
+ 	 	 <tbody><tr> 
+ 	 	 	 <td> 
+ 	 	 	 	 <span class="input-number hide" id="target3"></span> 
+ 	 	 	 	 <span class="input-relation hide" id="relation3"></span> 
+ 	 	 	 	 <span> 
+ 	 	 	 	 	 <label class="drop-label"> Drop? </label> 
+ 	 	 	 	 	 <input type="checkbox" id="dropping3" name="drop" value="drop"> 
+ 	 	 	 	 </span> 
+ 	 	 	 </td> 
+ 	 	 </tr> 
+ 	 	 <tr> 
+ 	 	 	 <td> 
+ 	 	 	 	 <button class="movebutton" onclick="moveBoxLeft(3)"> 
+ 	 	 	 	 	 « 
+ 	 	 	 	 </button> 
+ 
+ 	 	 	 	 <button class="movebutton" onclick="moveBoxRight(3)"> 
+ 	 	 	 	 	 » 
+ 	 	 	 	 </button> 
+ 	 	 	 </td> 
+ 	 	 </tr> 
+ 	 </tbody></table> 
+ </span> 
+</div><div class="flex-item ui-sortable-handle jtk-endpoint-anchor hide-text" id="sentence4"><span class="col-md-1 sentence-id-number"> 
+ 	 4 
+ </span> 
+ <span class="col-md-10"> 
+ 	 <textarea id="textarea4" class="hide-text">Let me explain. </textarea> 
+ </span> 
+ 
+ <span class="col-md-1 sentence-side-menu hide-text-dropping" id="annotation4"> 
+ 	 <table> 
+ 	 	 <tbody><tr> 
+ 	 	 	 <td> 
+ 	 	 	 	 <span class="input-number hide" id="target4"></span> 
+ 	 	 	 	 <span class="input-relation hide" id="relation4"></span> 
+ 	 	 	 	 <span> 
+ 	 	 	 	 	 <label class="drop-label"> Drop? </label> 
+ 	 	 	 	 	 <input type="checkbox" id="dropping4" name="drop" value="drop"> 
+ 	 	 	 	 </span> 
+ 	 	 	 </td> 
+ 	 	 </tr> 
+ 	 	 <tr> 
+ 	 	 	 <td> 
+ 	 	 	 	 <button class="movebutton" onclick="moveBoxLeft(4)"> 
+ 	 	 	 	 	 « 
+ 	 	 	 	 </button> 
+ 
+ 	 	 	 	 <button class="movebutton" onclick="moveBoxRight(4)"> 
+ 	 	 	 	 	 » 
+ 	 	 	 	 </button> 
+ 	 	 	 </td> 
+ 	 	 </tr> 
+ 	 </tbody></table> 
+ </span> 
+</div><div class="flex-item ui-sortable-handle jtk-endpoint-anchor jtk-connected" id="sentence5"><span class="col-md-1 sentence-id-number"> 
+ 	 5 
+ </span> 
+ <span class="col-md-10"> 
+ 	 <textarea id="textarea5">They say young people can acquire far more things than older people in the same time. </textarea> 
+ </span> 
+ 
+ <span class="col-md-1 sentence-side-menu" id="annotation5"> 
+ 	 <table> 
+ 	 	 <tbody><tr> 
+ 	 	 	 <td> 
+ 	 	 	 	 <span class="input-number hide" id="target5">sentence6</span> 
+ 	 	 	 	 <span class="input-relation hide" id="relation5">description</span> 
+ 	 	 	 	 <span> 
+ 	 	 	 	 	 <label class="drop-label"> Drop? </label> 
+ 	 	 	 	 	 <input type="checkbox" id="dropping5" name="drop" value="non-drop"> 
+ 	 	 	 	 </span> 
+ 	 	 	 </td> 
+ 	 	 </tr> 
+ 	 	 <tr> 
+ 	 	 	 <td> 
+ 	 	 	 	 <button class="movebutton" onclick="moveBoxLeft(5)"> 
+ 	 	 	 	 	 « 
+ 	 	 	 	 </button> 
+ 
+ 	 	 	 	 <button class="movebutton" onclick="moveBoxRight(5)"> 
+ 	 	 	 	 	 » 
+ 	 	 	 	 </button> 
+ 	 	 	 </td> 
+ 	 	 </tr> 
+ 	 </tbody></table> 
+ </span> 
+</div><div class="flex-item ui-sortable-handle jtk-endpoint-anchor jtk-connected" id="sentence6"><span class="col-md-1 sentence-id-number"> 
+ 	 6 
+ </span> 
+ <span class="col-md-10"> 
+ 	 <textarea id="textarea6">If we have a part-time job, we can get some money, and getting money from one's work is surely a good thing. </textarea> 
+ </span> 
+ 
+ <span class="col-md-1 sentence-side-menu" id="annotation6"> 
+ 	 <table> 
+ 	 	 <tbody><tr> 
+ 	 	 	 <td> 
+ 	 	 	 	 <span class="input-number hide" id="target6">sentence7</span> 
+ 	 	 	 	 <span class="input-relation hide" id="relation6">comparison</span> 
+ 	 	 	 	 <span> 
+ 	 	 	 	 	 <label class="drop-label"> Drop? </label> 
+ 	 	 	 	 	 <input type="checkbox" id="dropping6" name="drop" value="non-drop"> 
+ 	 	 	 	 </span> 
+ 	 	 	 </td> 
+ 	 	 </tr> 
+ 	 	 <tr> 
+ 	 	 	 <td> 
+ 	 	 	 	 <button class="movebutton" onclick="moveBoxLeft(6)"> 
+ 	 	 	 	 	 « 
+ 	 	 	 	 </button> 
+ 
+ 	 	 	 	 <button class="movebutton" onclick="moveBoxRight(6)"> 
+ 	 	 	 	 	 » 
+ 	 	 	 	 </button> 
+ 	 	 	 </td> 
+ 	 	 </tr> 
+ 	 </tbody></table> 
+ </span> 
+</div><div class="flex-item ui-sortable-handle jtk-endpoint-anchor jtk-connected" id="sentence7"><span class="col-md-1 sentence-id-number"> 
+ 	 7 
+ </span> 
+ <span class="col-md-10"> 
+ 	 <textarea id="textarea7">However, we can't actually have what we could have acquired if we had done something other than working. </textarea> 
+ </span> 
+ 
+ <span class="col-md-1 sentence-side-menu" id="annotation7"> 
+ 	 <table> 
+ 	 	 <tbody><tr> 
+ 	 	 	 <td> 
+ 	 	 	 	 <span class="input-number hide" id="target7">sentence1</span> 
+ 	 	 	 	 <span class="input-relation hide" id="relation7">causation</span> 
+ 	 	 	 	 <span> 
+ 	 	 	 	 	 <label class="drop-label"> Drop? </label> 
+ 	 	 	 	 	 <input type="checkbox" id="dropping7" name="drop" value="non-drop"> 
+ 	 	 	 	 </span> 
+ 	 	 	 </td> 
+ 	 	 </tr> 
+ 	 	 <tr> 
+ 	 	 	 <td> 
+ 	 	 	 	 <button class="movebutton" onclick="moveBoxLeft(7)"> 
+ 	 	 	 	 	 « 
+ 	 	 	 	 </button> 
+ 
+ 	 	 	 	 <button class="movebutton" onclick="moveBoxRight(7)"> 
+ 	 	 	 	 	 » 
+ 	 	 	 	 </button> 
+ 	 	 	 </td> 
+ 	 	 </tr> 
+ 	 </tbody></table> 
+ </span> 
+</div><div class="flex-item ui-sortable-handle jtk-endpoint-anchor hide-text" id="sentence8"><span class="col-md-1 sentence-id-number"> 
+ 	 8 
+ </span> 
+ <span class="col-md-10"> 
+ 	 <textarea id="textarea8" class="hide-text">This is a bad aspect of having a part-time job. </textarea> 
+ </span> 
+ 
+ <span class="col-md-1 sentence-side-menu hide-text-dropping" id="annotation8"> 
+ 	 <table> 
+ 	 	 <tbody><tr> 
+ 	 	 	 <td> 
+ 	 	 	 	 <span class="input-number hide" id="target8"></span> 
+ 	 	 	 	 <span class="input-relation hide" id="relation8"></span> 
+ 	 	 	 	 <span> 
+ 	 	 	 	 	 <label class="drop-label"> Drop? </label> 
+ 	 	 	 	 	 <input type="checkbox" id="dropping8" name="drop" value="drop"> 
+ 	 	 	 	 </span> 
+ 	 	 	 </td> 
+ 	 	 </tr> 
+ 	 	 <tr> 
+ 	 	 	 <td> 
+ 	 	 	 	 <button class="movebutton" onclick="moveBoxLeft(8)"> 
+ 	 	 	 	 	 « 
+ 	 	 	 	 </button> 
+ 
+ 	 	 	 	 <button class="movebutton" onclick="moveBoxRight(8)"> 
+ 	 	 	 	 	 » 
+ 	 	 	 	 </button> 
+ 	 	 	 </td> 
+ 	 	 </tr> 
+ 	 </tbody></table> 
+ </span> 
+</div><div class="flex-item ui-sortable-handle jtk-endpoint-anchor jtk-connected" id="sentence9"><span class="col-md-1 sentence-id-number"> 
+ 	 9 
+ </span> 
+ <span class="col-md-10"> 
+ 	 <textarea id="textarea9">On the other hand, having a part-time job itself can teach something important to us. </textarea> 
+ </span> 
+ 
+ <span class="col-md-1 sentence-side-menu" id="annotation9"> 
+ 	 <table> 
+ 	 	 <tbody><tr> 
+ 	 	 	 <td> 
+ 	 	 	 	 <span class="input-number hide" id="target9">sentence1</span> 
+ 	 	 	 	 <span class="input-relation hide" id="relation9">comparison</span> 
+ 	 	 	 	 <span> 
+ 	 	 	 	 	 <label class="drop-label"> Drop? </label> 
+ 	 	 	 	 	 <input type="checkbox" id="dropping9" name="drop" value="non-drop"> 
+ 	 	 	 	 </span> 
+ 	 	 	 </td> 
+ 	 	 </tr> 
+ 	 	 <tr> 
+ 	 	 	 <td> 
+ 	 	 	 	 <button class="movebutton" onclick="moveBoxLeft(9)"> 
+ 	 	 	 	 	 « 
+ 	 	 	 	 </button> 
+ 
+ 	 	 	 	 <button class="movebutton" onclick="moveBoxRight(9)"> 
+ 	 	 	 	 	 » 
+ 	 	 	 	 </button> 
+ 	 	 	 </td> 
+ 	 	 </tr> 
+ 	 </tbody></table> 
+ </span> 
+</div><div class="flex-item ui-sortable-handle jtk-endpoint-anchor jtk-connected" id="sentence10" style="left: 20px;"><span class="col-md-1 sentence-id-number"> 
+ 	 10 
+ </span> 
+ <span class="col-md-10"> 
+ 	 <textarea id="textarea10">For example, through a part-time job, we can realize the value of money, or realize our parents' effort to raise us, know how we can give better service to customers, or encounter many people and enhance our knowledge. </textarea> 
+ </span> 
+ 
+ <span class="col-md-1 sentence-side-menu" id="annotation10"> 
+ 	 <table> 
+ 	 	 <tbody><tr> 
+ 	 	 	 <td> 
+ 	 	 	 	 <span class="input-number hide" id="target10">sentence9</span> 
+ 	 	 	 	 <span class="input-relation hide" id="relation10">causation</span> 
+ 	 	 	 	 <span> 
+ 	 	 	 	 	 <label class="drop-label"> Drop? </label> 
+ 	 	 	 	 	 <input type="checkbox" id="dropping10" name="drop" value="non-drop"> 
+ 	 	 	 	 </span> 
+ 	 	 	 </td> 
+ 	 	 </tr> 
+ 	 	 <tr> 
+ 	 	 	 <td> 
+ 	 	 	 	 <button class="movebutton" onclick="moveBoxLeft(10)"> 
+ 	 	 	 	 	 « 
+ 	 	 	 	 </button> 
+ 
+ 	 	 	 	 <button class="movebutton" onclick="moveBoxRight(10)"> 
+ 	 	 	 	 	 » 
+ 	 	 	 	 </button> 
+ 	 	 	 </td> 
+ 	 	 </tr> 
+ 	 </tbody></table> 
+ </span> 
+</div><div class="flex-item ui-sortable-handle jtk-endpoint-anchor jtk-connected" id="sentence11" style="left: 20px;"><span class="col-md-1 sentence-id-number"> 
+ 	 11 
+ </span> 
+ <span class="col-md-10"> 
+ 	 <textarea id="textarea11">Those are the good aspects of having a part-time job, and we cannot do those things by just reading our textbooks or something like that. </textarea> 
+ </span> 
+ 
+ <span class="col-md-1 sentence-side-menu" id="annotation11"> 
+ 	 <table> 
+ 	 	 <tbody><tr> 
+ 	 	 	 <td> 
+ 	 	 	 	 <span class="input-number hide" id="target11">sentence10</span> 
+ 	 	 	 	 <span class="input-relation hide" id="relation11">description</span> 
+ 	 	 	 	 <span> 
+ 	 	 	 	 	 <label class="drop-label"> Drop? </label> 
+ 	 	 	 	 	 <input type="checkbox" id="dropping11" name="drop" value="non-drop"> 
+ 	 	 	 	 </span> 
+ 	 	 	 </td> 
+ 	 	 </tr> 
+ 	 	 <tr> 
+ 	 	 	 <td> 
+ 	 	 	 	 <button class="movebutton" onclick="moveBoxLeft(11)"> 
+ 	 	 	 	 	 « 
+ 	 	 	 	 </button> 
+ 
+ 	 	 	 	 <button class="movebutton" onclick="moveBoxRight(11)"> 
+ 	 	 	 	 	 » 
+ 	 	 	 	 </button> 
+ 	 	 	 </td> 
+ 	 	 </tr> 
+ 	 </tbody></table> 
+ </span> 
+</div><div class="flex-item ui-sortable-handle jtk-endpoint-anchor jtk-connected" id="sentence12"><span class="col-md-1 sentence-id-number"> 
+ 	 12 
+ </span> 
+ <span class="col-md-10"> 
+ 	 <textarea id="textarea12">In my opinion, college students should regard their study as more important than anything else. </textarea> 
+ </span> 
+ 
+ <span class="col-md-1 sentence-side-menu" id="annotation12"> 
+ 	 <table> 
+ 	 	 <tbody><tr> 
+ 	 	 	 <td> 
+ 	 	 	 	 <span class="input-number hide" id="target12">sentence1</span> 
+ 	 	 	 	 <span class="input-relation hide" id="relation12">causation</span> 
+ 	 	 	 	 <span> 
+ 	 	 	 	 	 <label class="drop-label"> Drop? </label> 
+ 	 	 	 	 	 <input type="checkbox" id="dropping12" name="drop" value="non-drop"> 
+ 	 	 	 	 </span> 
+ 	 	 	 </td> 
+ 	 	 </tr> 
+ 	 	 <tr> 
+ 	 	 	 <td> 
+ 	 	 	 	 <button class="movebutton" onclick="moveBoxLeft(12)"> 
+ 	 	 	 	 	 « 
+ 	 	 	 	 </button> 
+ 
+ 	 	 	 	 <button class="movebutton" onclick="moveBoxRight(12)"> 
+ 	 	 	 	 	 » 
+ 	 	 	 	 </button> 
+ 	 	 	 </td> 
+ 	 	 </tr> 
+ 	 </tbody></table> 
+ </span> 
+</div><div class="flex-item ui-sortable-handle jtk-endpoint-anchor jtk-connected" id="sentence13" style="left: 20px;"><span class="col-md-1 sentence-id-number"> 
+ 	 13 
+ </span> 
+ <span class="col-md-10"> 
+ 	 <textarea id="textarea13">If we want to experience the good aspects of having a part-time job, I think it is a good idea to have a short term part-time job. </textarea> 
+ </span> 
+ 
+ <span class="col-md-1 sentence-side-menu" id="annotation13"> 
+ 	 <table> 
+ 	 	 <tbody><tr> 
+ 	 	 	 <td> 
+ 	 	 	 	 <span class="input-number hide" id="target13">sentence12</span> 
+ 	 	 	 	 <span class="input-relation hide" id="relation13">comparison</span> 
+ 	 	 	 	 <span> 
+ 	 	 	 	 	 <label class="drop-label"> Drop? </label> 
+ 	 	 	 	 	 <input type="checkbox" id="dropping13" name="drop" value="non-drop"> 
+ 	 	 	 	 </span> 
+ 	 	 	 </td> 
+ 	 	 </tr> 
+ 	 	 <tr> 
+ 	 	 	 <td> 
+ 	 	 	 	 <button class="movebutton" onclick="moveBoxLeft(13)"> 
+ 	 	 	 	 	 « 
+ 	 	 	 	 </button> 
+ 
+ 	 	 	 	 <button class="movebutton" onclick="moveBoxRight(13)"> 
+ 	 	 	 	 	 » 
+ 	 	 	 	 </button> 
+ 	 	 	 </td> 
+ 	 	 </tr> 
+ 	 </tbody></table> 
+ </span> 
+</div><div class="flex-item ui-sortable-handle jtk-endpoint-anchor jtk-connected" id="sentence14" style="left: 20px;"><span class="col-md-1 sentence-id-number"> 
+ 	 14 
+ </span> 
+ <span class="col-md-10"> 
+ 	 <textarea id="textarea14">However, I think having a part-time job regularly can sometimes affect the quality of college students' learning. </textarea> 
+ </span> 
+ 
+ <span class="col-md-1 sentence-side-menu" id="annotation14"> 
+ 	 <table> 
+ 	 	 <tbody><tr> 
+ 	 	 	 <td> 
+ 	 	 	 	 <span class="input-number hide" id="target14">sentence13</span> 
+ 	 	 	 	 <span class="input-relation hide" id="relation14">comparison</span> 
+ 	 	 	 	 <span> 
+ 	 	 	 	 	 <label class="drop-label"> Drop? </label> 
+ 	 	 	 	 	 <input type="checkbox" id="dropping14" name="drop" value="non-drop"> 
+ 	 	 	 	 </span> 
+ 	 	 	 </td> 
+ 	 	 </tr> 
+ 	 	 <tr> 
+ 	 	 	 <td> 
+ 	 	 	 	 <button class="movebutton" onclick="moveBoxLeft(14)"> 
+ 	 	 	 	 	 « 
+ 	 	 	 	 </button> 
+ 
+ 	 	 	 	 <button class="movebutton" onclick="moveBoxRight(14)"> 
+ 	 	 	 	 	 » 
+ 	 	 	 	 </button> 
+ 	 	 	 </td> 
+ 	 	 </tr> 
+ 	 </tbody></table> 
+ </span> 
+</div><div class="flex-item ui-sortable-handle jtk-endpoint-anchor jtk-connected" id="sentence15"><span class="col-md-1 sentence-id-number"> 
+ 	 15 
+ </span> 
+ <span class="col-md-10"> 
+ 	 <textarea id="textarea15">Therefore, I think it is better for them to study as much as possible rather than to spend their precious young years, unless they are in a financially difficult state.</textarea> 
+ </span> 
+ 
+ <span class="col-md-1 sentence-side-menu" id="annotation15"> 
+ 	 <table> 
+ 	 	 <tbody><tr> 
+ 	 	 	 <td> 
+ 	 	 	 	 <span class="input-number hide" id="target15">sentence12</span> 
+ 	 	 	 	 <span class="input-relation hide" id="relation15">collection</span> 
+ 	 	 	 	 <span> 
+ 	 	 	 	 	 <label class="drop-label"> Drop? </label> 
+ 	 	 	 	 	 <input type="checkbox" id="dropping15" name="drop" value="non-drop"> 
+ 	 	 	 	 </span> 
+ 	 	 	 </td> 
+ 	 	 </tr> 
+ 	 	 <tr> 
+ 	 	 	 <td> 
+ 	 	 	 	 <button class="movebutton" onclick="moveBoxLeft(15)"> 
+ 	 	 	 	 	 « 
+ 	 	 	 	 </button> 
+ 
+ 	 	 	 	 <button class="movebutton" onclick="moveBoxRight(15)"> 
+ 	 	 	 	 	 » 
+ 	 	 	 	 </button> 
+ 	 	 	 </td> 
+ 	 	 </tr> 
+ 	 </tbody></table> 
+ </span> 
+</div></div>

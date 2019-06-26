@@ -1,0 +1,869 @@
+<ul class="logging hide">
+<li>{"timestamp":"2019-1-16 17:29:0","actionType":"Load","description":"W_JPN_PTJ0_026_B1_1_EDIT.xml"}</li>
+<li>{"timestamp":"2019-1-16 17:29:24","actionType":"Indent-left","description":1}</li>
+<li>{"timestamp":"2019-1-16 17:29:27","actionType":"Indent-right","description":4}</li>
+<li>{"timestamp":"2019-1-16 17:29:37","actionType":"Indent-right","description":5}</li>
+<li>{"timestamp":"2019-1-16 17:41:34","actionType":"Indent-right","description":6}</li>
+<li>{"timestamp":"2019-1-16 17:42:4","actionType":"Indent-right","description":8}</li>
+<li>{"timestamp":"2019-1-16 17:42:6","actionType":"Indent-right","description":9}</li>
+<li>{"timestamp":"2019-1-16 17:42:7","actionType":"Indent-right","description":10}</li>
+<li>{"timestamp":"2019-1-16 17:42:9","actionType":"Indent-right","description":11}</li>
+<li>{"timestamp":"2019-1-16 17:42:11","actionType":"Indent-right","description":12}</li>
+<li>{"timestamp":"2019-1-16 17:42:12","actionType":"Indent-right","description":13}</li>
+<li>{"timestamp":"2019-1-16 17:42:13","actionType":"Indent-right","description":14}</li>
+<li>{"timestamp":"2019-1-16 17:42:16","actionType":"Indent-right","description":15}</li>
+<li>{"timestamp":"2019-1-16 17:42:41","actionType":"Indent-right","description":16}</li>
+<li>{"timestamp":"2019-1-16 17:42:41","actionType":"Indent-right","description":17}</li>
+<li>{"timestamp":"2019-1-16 17:42:42","actionType":"Indent-right","description":18}</li>
+<li>{"timestamp":"2019-1-16 17:42:43","actionType":"Indent-right","description":19}</li>
+<li>{"timestamp":"2019-1-16 17:42:52","actionType":"Reordering-start","description":"[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,,17,18,19,20,21,22]"}</li>
+<li>{"timestamp":"2019-1-16 17:42:54","actionType":"Reordering-end","description":"[1,2,3,4,5,6,16,7,8,9,10,11,12,13,14,15,17,18,19,20,21,22]"}</li>
+<li>{"timestamp":"2019-1-16 17:42:56","actionType":"Reordering-start","description":"[1,2,3,4,5,6,16,7,8,9,10,11,12,13,14,15,17,,18,19,20,21,22]"}</li>
+<li>{"timestamp":"2019-1-16 17:42:57","actionType":"Reordering-end","description":"[1,2,3,4,5,6,16,17,7,8,9,10,11,12,13,14,15,18,19,20,21,22]"}</li>
+<li>{"timestamp":"2019-1-16 17:42:59","actionType":"Reordering-start","description":"[1,2,3,4,5,6,16,17,7,8,9,10,11,12,13,14,15,18,,19,20,21,22]"}</li>
+<li>{"timestamp":"2019-1-16 17:43:1","actionType":"Reordering-end","description":"[1,2,3,4,5,6,16,17,18,7,8,9,10,11,12,13,14,15,19,20,21,22]"}</li>
+<li>{"timestamp":"2019-1-16 17:43:3","actionType":"Reordering-start","description":"[1,2,3,4,5,6,16,17,18,7,8,9,10,11,12,13,14,15,19,,20,21,22]"}</li>
+<li>{"timestamp":"2019-1-16 17:43:5","actionType":"Reordering-end","description":"[1,2,3,4,5,6,16,17,18,19,7,8,9,10,11,12,13,14,15,20,21,22]"}</li>
+<li>{"timestamp":"2019-1-16 17:43:9","actionType":"Drop","description":"2"}</li>
+<li>{"timestamp":"2019-1-16 17:43:11","actionType":"Relation-add","description":"connection between 3 to 1 is established"}</li>
+<li>{"timestamp":"2019-1-16 17:43:12","actionType":"Relation-add","description":"connection between 3 to 1 is labeled sup"}</li>
+<li>{"timestamp":"2019-1-16 17:43:16","actionType":"Relation-add","description":"connection between 7 to 1 is established"}</li>
+<li>{"timestamp":"2019-1-16 17:43:17","actionType":"Relation-add","description":"connection between 7 to 1 is labeled sup"}</li>
+<li>{"timestamp":"2019-1-16 17:43:58","actionType":"Relation-add","description":"connection between 4 to 5 is established"}</li>
+<li>{"timestamp":"2019-1-16 17:44:1","actionType":"Relation-add","description":"connection between 4 to 5 is labeled det"}</li>
+<li>{"timestamp":"2019-1-16 17:44:3","actionType":"Relation-add","description":"connection between 5 to 6 is established"}</li>
+<li>{"timestamp":"2019-1-16 17:44:4","actionType":"Relation-add","description":"connection between 5 to 6 is labeled det"}</li>
+<li>{"timestamp":"2019-1-16 17:44:6","actionType":"Relation-add","description":"connection between 6 to 3 is established"}</li>
+<li>{"timestamp":"2019-1-16 17:44:7","actionType":"Relation-add","description":"connection between 6 to 3 is labeled ="}</li>
+<li>{"timestamp":"2019-1-16 17:44:16","actionType":"Relation-add","description":"connection between 16 to 3 is established"}</li>
+<li>{"timestamp":"2019-1-16 17:44:19","actionType":"Relation-add","description":"connection between 16 to 3 is labeled sup"}</li>
+<li>{"timestamp":"2019-1-16 17:44:22","actionType":"Relation-delete","description":"connection between 4 to 5 is detached"}</li>
+<li>{"timestamp":"2019-1-16 17:44:25","actionType":"Relation-add","description":"connection between 4 to 3 is established"}</li>
+<li>{"timestamp":"2019-1-16 17:44:26","actionType":"Relation-delete","description":"connection between 4 to 3 is detached"}</li>
+<li>{"timestamp":"2019-1-16 17:44:31","actionType":"Relation-add","description":"connection between 4 to 6 is established"}</li>
+<li>{"timestamp":"2019-1-16 17:44:32","actionType":"Relation-add","description":"connection between 4 to 6 is labeled sup"}</li>
+<li>{"timestamp":"2019-1-16 17:44:34","actionType":"Reordering-start","description":"[1,2,3,4,,5,6,16,17,18,19,7,8,9,10,11,12,13,14,15,20,21,22]"}</li>
+<li>{"timestamp":"2019-1-16 17:44:35","actionType":"Reordering-end","description":"[1,2,3,5,6,4,16,17,18,19,7,8,9,10,11,12,13,14,15,20,21,22]"}</li>
+<li>{"timestamp":"2019-1-16 17:44:36","actionType":"Reordering-start","description":"[1,2,3,5,,6,4,16,17,18,19,7,8,9,10,11,12,13,14,15,20,21,22]"}</li>
+<li>{"timestamp":"2019-1-16 17:44:41","actionType":"Reordering-end","description":"[1,2,3,5,6,4,16,17,18,19,7,8,9,10,11,12,13,14,15,20,21,22]"}</li>
+<li>{"timestamp":"2019-1-16 17:44:42","actionType":"Reordering-start","description":"[1,2,3,5,6,4,,16,17,18,19,7,8,9,10,11,12,13,14,15,20,21,22]"}</li>
+<li>{"timestamp":"2019-1-16 17:44:42","actionType":"Reordering-end","description":"[1,2,3,4,5,6,16,17,18,19,7,8,9,10,11,12,13,14,15,20,21,22]"}</li>
+<li>{"timestamp":"2019-1-16 17:44:57","actionType":"Relation-delete","description":"connection between 5 to 6 is detached"}</li>
+<li>{"timestamp":"2019-1-16 17:45:2","actionType":"Relation-add","description":"connection between 5 to 4 is established"}</li>
+<li>{"timestamp":"2019-1-16 17:45:3","actionType":"Relation-add","description":"connection between 5 to 4 is labeled det"}</li>
+<li>{"timestamp":"2019-1-16 17:45:18","actionType":"Relation-add","description":"connection between 17 to 16 is established"}</li>
+<li>{"timestamp":"2019-1-16 17:45:19","actionType":"Relation-add","description":"connection between 17 to 16 is labeled det"}</li>
+<li>{"timestamp":"2019-1-16 17:45:21","actionType":"Relation-add","description":"connection between 18 to 17 is established"}</li>
+<li>{"timestamp":"2019-1-16 17:45:22","actionType":"Relation-add","description":"connection between 18 to 17 is labeled det"}</li>
+<li>{"timestamp":"2019-1-16 17:45:24","actionType":"Indent-right","description":17}</li>
+<li>{"timestamp":"2019-1-16 17:45:25","actionType":"Indent-right","description":18}</li>
+<li>{"timestamp":"2019-1-16 17:45:42","actionType":"Relation-add","description":"connection between 19 to 16 is established"}</li>
+<li>{"timestamp":"2019-1-16 17:45:43","actionType":"Relation-add","description":"connection between 19 to 16 is labeled sup"}</li>
+<li>{"timestamp":"2019-1-16 17:45:47","actionType":"Indent-right","description":19}</li>
+<li>{"timestamp":"2019-1-16 17:45:49","actionType":"Indent-left","description":19}</li>
+<li>{"timestamp":"2019-1-16 17:46:22","actionType":"Relation-add","description":"connection between 8 to 7 is established"}</li>
+<li>{"timestamp":"2019-1-16 17:46:23","actionType":"Relation-add","description":"connection between 8 to 7 is labeled sup"}</li>
+<li>{"timestamp":"2019-1-16 17:46:32","actionType":"Relation-add","description":"connection between 10 to 9 is established"}</li>
+<li>{"timestamp":"2019-1-16 17:46:33","actionType":"Relation-add","description":"connection between 10 to 9 is labeled det"}</li>
+<li>{"timestamp":"2019-1-16 17:46:36","actionType":"Relation-add","description":"connection between 9 to 11 is established"}</li>
+<li>{"timestamp":"2019-1-16 17:46:38","actionType":"Relation-add","description":"connection between 9 to 11 is labeled det"}</li>
+<li>{"timestamp":"2019-1-16 17:46:42","actionType":"Relation-add","description":"connection between 11 to 7 is established"}</li>
+<li>{"timestamp":"2019-1-16 17:46:43","actionType":"Relation-add","description":"connection between 11 to 7 is labeled sup"}</li>
+<li>{"timestamp":"2019-1-16 17:47:31","actionType":"Relation-add","description":"connection between 12 to 8 is established"}</li>
+<li>{"timestamp":"2019-1-16 17:47:32","actionType":"Relation-add","description":"connection between 12 to 8 is labeled sup"}</li>
+<li>{"timestamp":"2019-1-16 17:47:35","actionType":"Indent-right","description":12}</li>
+<li>{"timestamp":"2019-1-16 17:47:36","actionType":"Reordering-start","description":"[1,2,3,4,5,6,16,17,18,19,7,8,9,10,11,12,,13,14,15,20,21,22]"}</li>
+<li>{"timestamp":"2019-1-16 17:47:37","actionType":"Reordering-end","description":"[1,2,3,4,5,6,16,17,18,19,7,8,12,9,10,11,13,14,15,20,21,22]"}</li>
+<li>{"timestamp":"2019-1-16 17:48:27","actionType":"Relation-add","description":"connection between 13 to 11 is established"}</li>
+<li>{"timestamp":"2019-1-16 17:48:29","actionType":"Relation-add","description":"connection between 13 to 11 is labeled det"}</li>
+<li>{"timestamp":"2019-1-16 17:48:30","actionType":"Reordering-start","description":"[1,2,3,4,5,6,16,17,18,19,7,8,12,9,10,11,13,14,,15,20,21,22]"}</li>
+<li>{"timestamp":"2019-1-16 17:48:30","actionType":"Reordering-end","description":"[1,2,3,4,5,6,16,17,18,19,7,8,12,9,10,11,13,14,15,20,21,22]"}</li>
+<li>{"timestamp":"2019-1-16 17:48:32","actionType":"Relation-add","description":"connection between 14 to 13 is established"}</li>
+<li>{"timestamp":"2019-1-16 17:48:33","actionType":"Relation-add","description":"connection between 14 to 13 is labeled det"}</li>
+<li>{"timestamp":"2019-1-16 17:48:34","actionType":"Relation-add","description":"connection between 15 to 14 is established"}</li>
+<li>{"timestamp":"2019-1-16 17:48:36","actionType":"Relation-add","description":"connection between 15 to 14 is labeled det"}</li>
+<li>{"timestamp":"2019-1-16 17:48:45","actionType":"Reordering-start","description":"[1,2,3,4,5,6,16,17,18,19,7,8,,12,9,10,11,13,14,15,20,21,22]"}</li>
+<li>{"timestamp":"2019-1-16 17:48:47","actionType":"Reordering-end","description":"[1,2,3,4,5,6,16,17,18,19,7,12,9,10,11,13,14,15,8,20,21,22]"}</li>
+<li>{"timestamp":"2019-1-16 17:48:48","actionType":"Reordering-start","description":"[1,2,3,4,5,6,16,17,18,19,7,12,,9,10,11,13,14,15,8,20,21,22]"}</li>
+<li>{"timestamp":"2019-1-16 17:48:49","actionType":"Reordering-end","description":"[1,2,3,4,5,6,16,17,18,19,7,9,10,11,13,14,15,8,12,20,21,22]"}</li>
+<li>{"timestamp":"2019-1-16 17:49:41","actionType":"Relation-add","description":"connection between 21 to 1 is established"}</li>
+<li>{"timestamp":"2019-1-16 17:49:42","actionType":"Relation-add","description":"connection between 21 to 1 is labeled att"}</li>
+<li>{"timestamp":"2019-1-16 17:49:48","actionType":"Relation-delete","description":"connection between 21 to 1 is detached"}</li>
+<li>{"timestamp":"2019-1-16 17:49:52","actionType":"Relation-add","description":"connection between 20 to 1 is established"}</li>
+<li>{"timestamp":"2019-1-16 17:49:53","actionType":"Relation-add","description":"connection between 20 to 1 is labeled att"}</li>
+<li>{"timestamp":"2019-1-16 17:49:56","actionType":"Relation-add","description":"connection between 21 to 20 is established"}</li>
+<li>{"timestamp":"2019-1-16 17:49:57","actionType":"Relation-add","description":"connection between 21 to 20 is labeled det"}</li>
+<li>{"timestamp":"2019-1-16 17:50:4","actionType":"Relation-add","description":"connection between 22 to 21 is established"}</li>
+<li>{"timestamp":"2019-1-16 17:50:5","actionType":"Relation-add","description":"connection between 22 to 21 is labeled det"}</li>
+<li>{"timestamp":"2019-1-16 17:50:12","actionType":"Save"}</li>
+</ul>
+
+<!-- Essay Code -->
+<div class="row essay-code">
+    <div class="row">
+        <div class="col-md-10">
+            <h4 id="essay_code_ICNALE"> W_JPN_PTJ0_026_B1_1_EDIT </h4>
+            <p class="prompt"> [PROMPT] It is important for college students to have a part time job. </p>
+        </div>
+        <div class="col-md-2 legend"> 
+             <p> [Legend] </p> 
+         </div> 
+    </div>
+    <div class="row color-legend col-lg-12" id="color-legend"> 
+        <span class="relation-color-mark" style="background-color: goldenrod;">response</span><span class="relation-color-mark" style="background-color: lightgreen;">causation</span><span class="relation-color-mark" style="background-color: lightblue;">description</span><span class="relation-color-mark" style="background-color: lightpink;">comparison</span><span class="relation-color-mark" style="background-color: lightgray;">collection</span>
+    </div> 
+</div> <br>
+
+
+
+<!-- Sentences -->
+<div class="flex-container ui-sortable">
+<div class="flex-item ui-sortable-handle jtk-endpoint-anchor jtk-connected" id="sentence1" style="left: -20px;"> 
+        <span class="col-md-1 sentence-id-number">
+            1
+        </span>
+        <span class="col-md-10">
+            <textarea id="textarea1">It is important for college students to have part time jobs.</textarea>
+        </span>
+
+        <span class="col-md-1 sentence-side-menu" id="annotation1">
+            <table>
+                <tbody><tr>
+                    <td>
+                        <span class="input-number hide" id="target1"></span>
+                        <span class="input-relation hide" id="relation1"></span>
+                        <span>
+                            <label class="drop-label"> Drop?</label>
+                            <input type="checkbox" id="dropping1" name="drop" value="non-drop">
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <button class="movebutton" onclick="moveBoxLeft(1)">
+                            «
+                        </button>
+
+                        <button class="movebutton" onclick="moveBoxRight(1)">
+                            »
+                        </button>
+                    </td>
+                </tr>
+            </tbody></table>
+        </span>
+    </div>
+<div class="flex-item ui-sortable-handle jtk-endpoint-anchor hide-text" id="sentence2"> 
+        <span class="col-md-1 sentence-id-number">
+            2
+        </span>
+        <span class="col-md-10">
+            <textarea id="textarea2" class="hide-text">I have two reasons why.</textarea>
+        </span>
+
+        <span class="col-md-1 sentence-side-menu hide-text-dropping" id="annotation2">
+            <table>
+                <tbody><tr>
+                    <td>
+                        <span class="input-number hide" id="target2"></span>
+                        <span class="input-relation hide" id="relation2"></span>
+                        <span>
+                            <label class="drop-label"> Drop?</label>
+                            <input type="checkbox" id="dropping2" name="drop" value="drop">
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <button class="movebutton" onclick="moveBoxLeft(2)">
+                            «
+                        </button>
+
+                        <button class="movebutton" onclick="moveBoxRight(2)">
+                            »
+                        </button>
+                    </td>
+                </tr>
+            </tbody></table>
+        </span>
+    </div>
+<div class="flex-item ui-sortable-handle jtk-endpoint-anchor jtk-connected" id="sentence3"> 
+        <span class="col-md-1 sentence-id-number">
+            3
+        </span>
+        <span class="col-md-10">
+            <textarea id="textarea3">One reason is to make money.</textarea>
+        </span>
+
+        <span class="col-md-1 sentence-side-menu" id="annotation3">
+            <table>
+                <tbody><tr>
+                    <td>
+                        <span class="input-number hide" id="target3">sentence1</span>
+                        <span class="input-relation hide" id="relation3">sup</span>
+                        <span>
+                            <label class="drop-label"> Drop?</label>
+                            <input type="checkbox" id="dropping3" name="drop" value="non-drop">
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <button class="movebutton" onclick="moveBoxLeft(3)">
+                            «
+                        </button>
+
+                        <button class="movebutton" onclick="moveBoxRight(3)">
+                            »
+                        </button>
+                    </td>
+                </tr>
+            </tbody></table>
+        </span>
+    </div>
+
+
+<div class="flex-item ui-sortable-handle jtk-endpoint-anchor jtk-connected" id="sentence4" style="left: 20px; position: relative; top: 0px;"> 
+        <span class="col-md-1 sentence-id-number">
+            4
+        </span>
+        <span class="col-md-10">
+            <textarea id="textarea4">College students have much free time compared with other members of society.</textarea>
+        </span>
+
+        <span class="col-md-1 sentence-side-menu" id="annotation4">
+            <table>
+                <tbody><tr>
+                    <td>
+                        <span class="input-number hide" id="target4">sentence6</span>
+                        <span class="input-relation hide" id="relation4">sup</span>
+                        <span>
+                            <label class="drop-label"> Drop?</label>
+                            <input type="checkbox" id="dropping4" name="drop" value="non-drop">
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <button class="movebutton" onclick="moveBoxLeft(4)">
+                            «
+                        </button>
+
+                        <button class="movebutton" onclick="moveBoxRight(4)">
+                            »
+                        </button>
+                    </td>
+                </tr>
+            </tbody></table>
+        </span>
+    </div><div class="flex-item ui-sortable-handle jtk-endpoint-anchor jtk-connected" id="sentence5" style="left: 20px; position: relative; top: 0px;"> 
+        <span class="col-md-1 sentence-id-number">
+            5
+        </span>
+        <span class="col-md-10">
+            <textarea id="textarea5">Adults often say, “I have money but no time.” As college students, we can do what we want to do as far as time permits.</textarea>
+        </span>
+
+        <span class="col-md-1 sentence-side-menu" id="annotation5">
+            <table>
+                <tbody><tr>
+                    <td>
+                        <span class="input-number hide" id="target5">sentence4</span>
+                        <span class="input-relation hide" id="relation5">det</span>
+                        <span>
+                            <label class="drop-label"> Drop?</label>
+                            <input type="checkbox" id="dropping5" name="drop" value="non-drop">
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <button class="movebutton" onclick="moveBoxLeft(5)">
+                            «
+                        </button>
+
+                        <button class="movebutton" onclick="moveBoxRight(5)">
+                            »
+                        </button>
+                    </td>
+                </tr>
+            </tbody></table>
+        </span>
+    </div><div class="flex-item ui-sortable-handle jtk-endpoint-anchor jtk-connected" id="sentence6" style="left: 20px;"> 
+        <span class="col-md-1 sentence-id-number">
+            6
+        </span>
+        <span class="col-md-10">
+            <textarea id="textarea6">Therefore, we [ need | can make ] money.</textarea>
+        </span>
+
+        <span class="col-md-1 sentence-side-menu" id="annotation6">
+            <table>
+                <tbody><tr>
+                    <td>
+                        <span class="input-number hide" id="target6">sentence3</span>
+                        <span class="input-relation hide" id="relation6">=</span>
+                        <span>
+                            <label class="drop-label"> Drop?</label>
+                            <input type="checkbox" id="dropping6" name="drop" value="non-drop">
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <button class="movebutton" onclick="moveBoxLeft(6)">
+                            «
+                        </button>
+
+                        <button class="movebutton" onclick="moveBoxRight(6)">
+                            »
+                        </button>
+                    </td>
+                </tr>
+            </tbody></table>
+        </span>
+    </div>
+<div class="flex-item ui-sortable-handle jtk-endpoint-anchor jtk-connected" id="sentence16" style="left: 20px; position: relative; top: 0px;"> 
+        <span class="col-md-1 sentence-id-number">
+            16
+        </span>
+        <span class="col-md-10">
+            <textarea id="textarea16">In addition, I sometimes travel using the money I have earned.</textarea>
+        </span>
+
+        <span class="col-md-1 sentence-side-menu" id="annotation16">
+            <table>
+                <tbody><tr>
+                    <td>
+                        <span class="input-number hide" id="target16">sentence3</span>
+                        <span class="input-relation hide" id="relation16">sup</span>
+                        <span>
+                            <label class="drop-label"> Drop?</label>
+                            <input type="checkbox" id="dropping16" name="drop" value="non-drop">
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <button class="movebutton" onclick="moveBoxLeft(16)">
+                            «
+                        </button>
+
+                        <button class="movebutton" onclick="moveBoxRight(16)">
+                            »
+                        </button>
+                    </td>
+                </tr>
+            </tbody></table>
+        </span>
+    </div><div class="flex-item ui-sortable-handle jtk-endpoint-anchor jtk-connected" id="sentence17" style="left: 40px; position: relative; top: 0px;"> 
+        <span class="col-md-1 sentence-id-number">
+            17
+        </span>
+        <span class="col-md-10">
+            <textarea id="textarea17">I have been to India, Australia, South Africa, and so on.</textarea>
+        </span>
+
+        <span class="col-md-1 sentence-side-menu" id="annotation17">
+            <table>
+                <tbody><tr>
+                    <td>
+                        <span class="input-number hide" id="target17">sentence16</span>
+                        <span class="input-relation hide" id="relation17">det</span>
+                        <span>
+                            <label class="drop-label"> Drop?</label>
+                            <input type="checkbox" id="dropping17" name="drop" value="non-drop">
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <button class="movebutton" onclick="moveBoxLeft(17)">
+                            «
+                        </button>
+
+                        <button class="movebutton" onclick="moveBoxRight(17)">
+                            »
+                        </button>
+                    </td>
+                </tr>
+            </tbody></table>
+        </span>
+    </div><div class="flex-item ui-sortable-handle jtk-endpoint-anchor jtk-connected" id="sentence18" style="left: 40px; position: relative; top: 0px;"> 
+        <span class="col-md-1 sentence-id-number">
+            18
+        </span>
+        <span class="col-md-10">
+            <textarea id="textarea18">I had invaluable experiences in these places.</textarea>
+        </span>
+
+        <span class="col-md-1 sentence-side-menu" id="annotation18">
+            <table>
+                <tbody><tr>
+                    <td>
+                        <span class="input-number hide" id="target18">sentence17</span>
+                        <span class="input-relation hide" id="relation18">det</span>
+                        <span>
+                            <label class="drop-label"> Drop?</label>
+                            <input type="checkbox" id="dropping18" name="drop" value="non-drop">
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <button class="movebutton" onclick="moveBoxLeft(18)">
+                            «
+                        </button>
+
+                        <button class="movebutton" onclick="moveBoxRight(18)">
+                            »
+                        </button>
+                    </td>
+                </tr>
+            </tbody></table>
+        </span>
+    </div><div class="flex-item ui-sortable-handle jtk-endpoint-anchor jtk-connected" id="sentence19" style="left: 20px; position: relative; top: 0px;"> 
+        <span class="col-md-1 sentence-id-number">
+            19
+        </span>
+        <span class="col-md-10">
+            <textarea id="textarea19">I couldn't get such experiences by relying on pocket money from my parents.</textarea>
+        </span>
+
+        <span class="col-md-1 sentence-side-menu" id="annotation19">
+            <table>
+                <tbody><tr>
+                    <td>
+                        <span class="input-number hide" id="target19">sentence16</span>
+                        <span class="input-relation hide" id="relation19">sup</span>
+                        <span>
+                            <label class="drop-label"> Drop?</label>
+                            <input type="checkbox" id="dropping19" name="drop" value="non-drop">
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <button class="movebutton" onclick="moveBoxLeft(19)">
+                            «
+                        </button>
+
+                        <button class="movebutton" onclick="moveBoxRight(19)">
+                            »
+                        </button>
+                    </td>
+                </tr>
+            </tbody></table>
+        </span>
+    </div><div class="flex-item ui-sortable-handle jtk-endpoint-anchor jtk-connected" id="sentence7"> 
+        <span class="col-md-1 sentence-id-number">
+            7
+        </span>
+        <span class="col-md-10">
+            <textarea id="textarea7">The other reason is to have many opportunities through part time jobs.</textarea>
+        </span>
+
+        <span class="col-md-1 sentence-side-menu" id="annotation7">
+            <table>
+                <tbody><tr>
+                    <td>
+                        <span class="input-number hide" id="target7">sentence1</span>
+                        <span class="input-relation hide" id="relation7">sup</span>
+                        <span>
+                            <label class="drop-label"> Drop?</label>
+                            <input type="checkbox" id="dropping7" name="drop" value="non-drop">
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <button class="movebutton" onclick="moveBoxLeft(7)">
+                            «
+                        </button>
+
+                        <button class="movebutton" onclick="moveBoxRight(7)">
+                            »
+                        </button>
+                    </td>
+                </tr>
+            </tbody></table>
+        </span>
+    </div>
+
+<div class="flex-item ui-sortable-handle jtk-endpoint-anchor jtk-connected" id="sentence9" style="left: 20px;"> 
+        <span class="col-md-1 sentence-id-number">
+            9
+        </span>
+        <span class="col-md-10">
+            <textarea id="textarea9">As for me, I have had a part time job and worked at a doughnut shop for 3 years.</textarea>
+        </span>
+
+        <span class="col-md-1 sentence-side-menu" id="annotation9">
+            <table>
+                <tbody><tr>
+                    <td>
+                        <span class="input-number hide" id="target9">sentence11</span>
+                        <span class="input-relation hide" id="relation9">det</span>
+                        <span>
+                            <label class="drop-label"> Drop?</label>
+                            <input type="checkbox" id="dropping9" name="drop" value="non-drop">
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <button class="movebutton" onclick="moveBoxLeft(9)">
+                            «
+                        </button>
+
+                        <button class="movebutton" onclick="moveBoxRight(9)">
+                            »
+                        </button>
+                    </td>
+                </tr>
+            </tbody></table>
+        </span>
+    </div>
+<div class="flex-item ui-sortable-handle jtk-endpoint-anchor jtk-connected" id="sentence10" style="left: 20px;"> 
+        <span class="col-md-1 sentence-id-number">
+            10
+        </span>
+        <span class="col-md-10">
+            <textarea id="textarea10">I work from 5:00 to 9:00 and go to school twice or three times a week.</textarea>
+        </span>
+
+        <span class="col-md-1 sentence-side-menu" id="annotation10">
+            <table>
+                <tbody><tr>
+                    <td>
+                        <span class="input-number hide" id="target10">sentence9</span>
+                        <span class="input-relation hide" id="relation10">det</span>
+                        <span>
+                            <label class="drop-label"> Drop?</label>
+                            <input type="checkbox" id="dropping10" name="drop" value="non-drop">
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <button class="movebutton" onclick="moveBoxLeft(10)">
+                            «
+                        </button>
+
+                        <button class="movebutton" onclick="moveBoxRight(10)">
+                            »
+                        </button>
+                    </td>
+                </tr>
+            </tbody></table>
+        </span>
+    </div>
+<div class="flex-item ui-sortable-handle jtk-endpoint-anchor jtk-connected" id="sentence11" style="left: 20px;"> 
+        <span class="col-md-1 sentence-id-number">
+            11
+        </span>
+        <span class="col-md-10">
+            <textarea id="textarea11">Since I started my part time job, I have changed.</textarea>
+        </span>
+
+        <span class="col-md-1 sentence-side-menu" id="annotation11">
+            <table>
+                <tbody><tr>
+                    <td>
+                        <span class="input-number hide" id="target11">sentence7</span>
+                        <span class="input-relation hide" id="relation11">sup</span>
+                        <span>
+                            <label class="drop-label"> Drop?</label>
+                            <input type="checkbox" id="dropping11" name="drop" value="non-drop">
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <button class="movebutton" onclick="moveBoxLeft(11)">
+                            «
+                        </button>
+
+                        <button class="movebutton" onclick="moveBoxRight(11)">
+                            »
+                        </button>
+                    </td>
+                </tr>
+            </tbody></table>
+        </span>
+    </div>
+
+<div class="flex-item ui-sortable-handle jtk-endpoint-anchor jtk-connected" id="sentence13" style="left: 20px;"> 
+        <span class="col-md-1 sentence-id-number">
+            13
+        </span>
+        <span class="col-md-10">
+            <textarea id="textarea13">I have learned how to talk with a range of people.</textarea>
+        </span>
+
+        <span class="col-md-1 sentence-side-menu" id="annotation13">
+            <table>
+                <tbody><tr>
+                    <td>
+                        <span class="input-number hide" id="target13">sentence11</span>
+                        <span class="input-relation hide" id="relation13">det</span>
+                        <span>
+                            <label class="drop-label"> Drop?</label>
+                            <input type="checkbox" id="dropping13" name="drop" value="non-drop">
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <button class="movebutton" onclick="moveBoxLeft(13)">
+                            «
+                        </button>
+
+                        <button class="movebutton" onclick="moveBoxRight(13)">
+                            »
+                        </button>
+                    </td>
+                </tr>
+            </tbody></table>
+        </span>
+    </div>
+<div class="flex-item ui-sortable-handle jtk-endpoint-anchor jtk-connected" id="sentence14" style="left: 20px; position: relative; top: 0px;"> 
+        <span class="col-md-1 sentence-id-number">
+            14
+        </span>
+        <span class="col-md-10">
+            <textarea id="textarea14">This skill has helped me in job interviews.</textarea>
+        </span>
+
+        <span class="col-md-1 sentence-side-menu" id="annotation14">
+            <table>
+                <tbody><tr>
+                    <td>
+                        <span class="input-number hide" id="target14">sentence13</span>
+                        <span class="input-relation hide" id="relation14">det</span>
+                        <span>
+                            <label class="drop-label"> Drop?</label>
+                            <input type="checkbox" id="dropping14" name="drop" value="non-drop">
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <button class="movebutton" onclick="moveBoxLeft(14)">
+                            «
+                        </button>
+
+                        <button class="movebutton" onclick="moveBoxRight(14)">
+                            »
+                        </button>
+                    </td>
+                </tr>
+            </tbody></table>
+        </span>
+    </div>
+<div class="flex-item ui-sortable-handle jtk-endpoint-anchor jtk-connected" id="sentence15" style="left: 20px;"> 
+        <span class="col-md-1 sentence-id-number">
+            15
+        </span>
+        <span class="col-md-10">
+            <textarea id="textarea15">Consequently, I received an informal job offer.</textarea>
+        </span>
+
+        <span class="col-md-1 sentence-side-menu" id="annotation15">
+            <table>
+                <tbody><tr>
+                    <td>
+                        <span class="input-number hide" id="target15">sentence14</span>
+                        <span class="input-relation hide" id="relation15">det</span>
+                        <span>
+                            <label class="drop-label"> Drop?</label>
+                            <input type="checkbox" id="dropping15" name="drop" value="non-drop">
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <button class="movebutton" onclick="moveBoxLeft(15)">
+                            «
+                        </button>
+
+                        <button class="movebutton" onclick="moveBoxRight(15)">
+                            »
+                        </button>
+                    </td>
+                </tr>
+            </tbody></table>
+        </span>
+    </div><div class="flex-item ui-sortable-handle jtk-endpoint-anchor jtk-connected" id="sentence8" style="left: 20px; position: relative; top: 0px;"> 
+        <span class="col-md-1 sentence-id-number">
+            8
+        </span>
+        <span class="col-md-10">
+            <textarea id="textarea8">Part time jobs enable us not only to make money but also to make friends, have a sense of responsibility, learn manners, and so on.</textarea>
+        </span>
+
+        <span class="col-md-1 sentence-side-menu" id="annotation8">
+            <table>
+                <tbody><tr>
+                    <td>
+                        <span class="input-number hide" id="target8">sentence7</span>
+                        <span class="input-relation hide" id="relation8">sup</span>
+                        <span>
+                            <label class="drop-label"> Drop?</label>
+                            <input type="checkbox" id="dropping8" name="drop" value="non-drop">
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <button class="movebutton" onclick="moveBoxLeft(8)">
+                            «
+                        </button>
+
+                        <button class="movebutton" onclick="moveBoxRight(8)">
+                            »
+                        </button>
+                    </td>
+                </tr>
+            </tbody></table>
+        </span>
+    </div><div class="flex-item ui-sortable-handle jtk-endpoint-anchor jtk-connected" id="sentence12" style="left: 40px; position: relative; top: 0px;"> 
+        <span class="col-md-1 sentence-id-number">
+            12
+        </span>
+        <span class="col-md-10">
+            <textarea id="textarea12">For example, I come into contact with a wide range of people from children to old people through my part time job.</textarea>
+        </span>
+
+        <span class="col-md-1 sentence-side-menu" id="annotation12">
+            <table>
+                <tbody><tr>
+                    <td>
+                        <span class="input-number hide" id="target12">sentence8</span>
+                        <span class="input-relation hide" id="relation12">sup</span>
+                        <span>
+                            <label class="drop-label"> Drop?</label>
+                            <input type="checkbox" id="dropping12" name="drop" value="non-drop">
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <button class="movebutton" onclick="moveBoxLeft(12)">
+                            «
+                        </button>
+
+                        <button class="movebutton" onclick="moveBoxRight(12)">
+                            »
+                        </button>
+                    </td>
+                </tr>
+            </tbody></table>
+        </span>
+    </div>
+
+
+
+
+<div class="flex-item ui-sortable-handle jtk-endpoint-anchor jtk-connected" id="sentence20"> 
+        <span class="col-md-1 sentence-id-number">
+            20
+        </span>
+        <span class="col-md-10">
+            <textarea id="textarea20">But there is one thing that I must not forget.</textarea>
+        </span>
+
+        <span class="col-md-1 sentence-side-menu" id="annotation20">
+            <table>
+                <tbody><tr>
+                    <td>
+                        <span class="input-number hide" id="target20">sentence1</span>
+                        <span class="input-relation hide" id="relation20">att</span>
+                        <span>
+                            <label class="drop-label"> Drop?</label>
+                            <input type="checkbox" id="dropping20" name="drop" value="non-drop">
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <button class="movebutton" onclick="moveBoxLeft(20)">
+                            «
+                        </button>
+
+                        <button class="movebutton" onclick="moveBoxRight(20)">
+                            »
+                        </button>
+                    </td>
+                </tr>
+            </tbody></table>
+        </span>
+    </div>
+<div class="flex-item ui-sortable-handle jtk-endpoint-anchor jtk-connected" id="sentence21"> 
+        <span class="col-md-1 sentence-id-number">
+            21
+        </span>
+        <span class="col-md-10">
+            <textarea id="textarea21">The main work for students is not their part time job but study.</textarea>
+        </span>
+
+        <span class="col-md-1 sentence-side-menu" id="annotation21">
+            <table>
+                <tbody><tr>
+                    <td>
+                        <span class="input-number hide" id="target21">sentence20</span>
+                        <span class="input-relation hide" id="relation21">det</span>
+                        <span>
+                            <label class="drop-label"> Drop?</label>
+                            <input type="checkbox" id="dropping21" name="drop" value="non-drop">
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <button class="movebutton" onclick="moveBoxLeft(21)">
+                            «
+                        </button>
+
+                        <button class="movebutton" onclick="moveBoxRight(21)">
+                            »
+                        </button>
+                    </td>
+                </tr>
+            </tbody></table>
+        </span>
+    </div>
+<div class="flex-item ui-sortable-handle jtk-endpoint-anchor jtk-connected" id="sentence22"> 
+        <span class="col-md-1 sentence-id-number">
+            22
+        </span>
+        <span class="col-md-10">
+            <textarea id="textarea22">So students must hold a part time job so that the job doesn't interrupt their study.</textarea>
+        </span>
+
+        <span class="col-md-1 sentence-side-menu" id="annotation22">
+            <table>
+                <tbody><tr>
+                    <td>
+                        <span class="input-number hide" id="target22">sentence21</span>
+                        <span class="input-relation hide" id="relation22">det</span>
+                        <span>
+                            <label class="drop-label"> Drop?</label>
+                            <input type="checkbox" id="dropping22" name="drop" value="non-drop">
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <button class="movebutton" onclick="moveBoxLeft(22)">
+                            «
+                        </button>
+
+                        <button class="movebutton" onclick="moveBoxRight(22)">
+                            »
+                        </button>
+                    </td>
+                </tr>
+            </tbody></table>
+        </span>
+    </div>
+</div>

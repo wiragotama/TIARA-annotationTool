@@ -1,0 +1,270 @@
+<ul class="logging hide">
+<li>{"timestamp":"2019-5-31 12:21:39","actionType":"Load","description":"ESSAY_TRIAL_00.txt"}</li>
+<li>{"timestamp":"2019-5-31 12:21:40","actionType":"Relation-add","description":"connection between 2 to 1 is established"}</li>
+<li>{"timestamp":"2019-5-31 12:21:41","actionType":"Relation-add","description":"connection between 2 to 1 is labeled att"}</li>
+<li>{"timestamp":"2019-5-31 12:21:42","actionType":"Relation-add","description":"connection between 3 to 1 is established"}</li>
+<li>{"timestamp":"2019-5-31 12:21:43","actionType":"Relation-add","description":"connection between 3 to 1 is labeled det"}</li>
+<li>{"timestamp":"2019-5-31 12:21:45","actionType":"Relation-add","description":"connection between 4 to 3 is established"}</li>
+<li>{"timestamp":"2019-5-31 12:21:45","actionType":"Relation-add","description":"connection between 4 to 3 is labeled ="}</li>
+<li>{"timestamp":"2019-5-31 12:21:46","actionType":"Indent-right","description":4}</li>
+<li>{"timestamp":"2019-5-31 12:21:46","actionType":"Indent-right","description":4}</li>
+<li>{"timestamp":"2019-5-31 12:21:49","actionType":"Relation-add","description":"connection between 5 to 4 is established"}</li>
+<li>{"timestamp":"2019-5-31 12:21:50","actionType":"Relation-add","description":"connection between 5 to 4 is labeled sup"}</li>
+<li>{"timestamp":"2019-5-31 12:21:51","actionType":"Relation-add","description":"connection between 6 to 5 is established"}</li>
+<li>{"timestamp":"2019-5-31 12:21:52","actionType":"Relation-add","description":"connection between 6 to 5 is labeled det"}</li>
+<li>{"timestamp":"2019-5-31 12:21:54","actionType":"Indent-left","description":7}</li>
+<li>{"timestamp":"2019-5-31 12:21:54","actionType":"Indent-right","description":7}</li>
+<li>{"timestamp":"2019-5-31 12:21:54","actionType":"Indent-left","description":7}</li>
+<li>{"timestamp":"2019-5-31 12:21:55","actionType":"Reordering-start","description":"[1,2,3,4,5,6,7,]"}</li>
+<li>{"timestamp":"2019-5-31 12:21:55","actionType":"Reordering-end","description":"[1,2,3,4,5,6,7]"}</li>
+<li>{"timestamp":"2019-5-31 12:21:55","actionType":"Indent-left","description":7}</li>
+<li>{"timestamp":"2019-5-31 12:21:56","actionType":"Reordering-start","description":"[1,2,3,4,5,6,7,]"}</li>
+<li>{"timestamp":"2019-5-31 12:21:56","actionType":"Reordering-end","description":"[1,2,3,4,5,6,7]"}</li>
+<li>{"timestamp":"2019-5-31 12:21:57","actionType":"Relation-add","description":"connection between 7 to 1 is established"}</li>
+<li>{"timestamp":"2019-5-31 12:21:59","actionType":"Relation-add","description":"connection between 7 to 1 is labeled sup"}</li>
+<li>{"timestamp":"2019-5-31 12:22:0","actionType":"Reordering-start","description":"[1,2,3,4,5,6,7,]"}</li>
+<li>{"timestamp":"2019-5-31 12:22:1","actionType":"Reordering-end","description":"[1,2,3,4,5,6,7]"}</li>
+<li>{"timestamp":"2019-5-31 12:22:6","actionType":"Annotation-to-excel"}</li>
+<li>{"timestamp":"2019-5-31 12:22:8","actionType":"RelationStructure-to-excel"}</li>
+<li>{"timestamp":"2019-5-31 12:22:9","actionType":"Save"}</li>
+</ul>
+
+<!-- Essay Code --> 
+ <div class="row essay-code"> 
+ 	 <div class="row"> 
+ 	 	 <div class="col-md-10"> 
+ 	 	 	 <h4 id="essay_code"> ESSAY_TRIAL_00 </h4> 
+ 	 	 </div> 
+ 	 	 <div class="col-md-2 legend"> 
+ 	 	 	 <p> [Legend] </p> 
+ 	 	 </div> 
+ 	 </div> 
+ 	 <div class="row color-legend col-lg-12" id="color-legend"> 
+ 	 <span class="relation-color-mark" style="background-color: lightgray;">=</span><span class="relation-color-mark" style="background-color: lightgreen;">sup</span><span class="relation-color-mark" style="background-color: lightblue;">det</span><span class="relation-color-mark" style="background-color: lightpink;">att</span></div> 
+ </div> <br> 
+
+<div class="flex-container ui-sortable" id="flex-container"><div class="flex-item ui-sortable-handle jtk-endpoint-anchor jtk-connected" id="sentence1"><span class="col-md-1 sentence-id-number"> 
+ 	 1 
+ </span> 
+ <span class="col-md-10"> 
+ 	 <textarea id="textarea1">I agree with the previous statement.</textarea> 
+ </span> 
+ 
+ <span class="col-md-1 sentence-side-menu" id="annotation1"> 
+ 	 <table> 
+ 	 	 <tbody><tr> 
+ 	 	 	 <td> 
+ 	 	 	 	 <span class="input-number hide" id="target1"></span> 
+ 	 	 	 	 <span class="input-relation hide" id="relation1"></span> 
+ 	 	 	 	 <span style="display: none;"> 
+ 	 	 	 	 	 <label class="drop-label"> Drop? </label> 
+ 	 	 	 	 	 <input type="checkbox" id="dropping1" name="drop" value="non-drop"> 
+ 	 	 	 	 </span> 
+ 	 	 	 </td> 
+ 	 	 </tr> 
+ 	 	 <tr> 
+ 	 	 	 <td> 
+ 	 	 	 	 <button class="movebutton" onclick="moveBoxLeft(1)"> 
+ 	 	 	 	 	 « 
+ 	 	 	 	 </button> 
+ 
+ 	 	 	 	 <button class="movebutton" onclick="moveBoxRight(1)"> 
+ 	 	 	 	 	 » 
+ 	 	 	 	 </button> 
+ 	 	 	 </td> 
+ 	 	 </tr> 
+ 	 </tbody></table> 
+ </span> 
+</div><div class="flex-item ui-sortable-handle jtk-endpoint-anchor jtk-connected" id="sentence2"><span class="col-md-1 sentence-id-number"> 
+ 	 2 
+ </span> 
+ <span class="col-md-10"> 
+ 	 <textarea id="textarea2">If somebody smokes in the restaurant, other people may not be able to enjoy the experience.</textarea> 
+ </span> 
+ 
+ <span class="col-md-1 sentence-side-menu" id="annotation2"> 
+ 	 <table> 
+ 	 	 <tbody><tr> 
+ 	 	 	 <td> 
+ 	 	 	 	 <span class="input-number hide" id="target2">sentence1</span> 
+ 	 	 	 	 <span class="input-relation hide" id="relation2">att</span> 
+ 	 	 	 	 <span style="display: none;"> 
+ 	 	 	 	 	 <label class="drop-label"> Drop? </label> 
+ 	 	 	 	 	 <input type="checkbox" id="dropping2" name="drop" value="non-drop"> 
+ 	 	 	 	 </span> 
+ 	 	 	 </td> 
+ 	 	 </tr> 
+ 	 	 <tr> 
+ 	 	 	 <td> 
+ 	 	 	 	 <button class="movebutton" onclick="moveBoxLeft(2)"> 
+ 	 	 	 	 	 « 
+ 	 	 	 	 </button> 
+ 
+ 	 	 	 	 <button class="movebutton" onclick="moveBoxRight(2)"> 
+ 	 	 	 	 	 » 
+ 	 	 	 	 </button> 
+ 	 	 	 </td> 
+ 	 	 </tr> 
+ 	 </tbody></table> 
+ </span> 
+</div><div class="flex-item ui-sortable-handle jtk-endpoint-anchor jtk-connected" id="sentence3"><span class="col-md-1 sentence-id-number"> 
+ 	 3 
+ </span> 
+ <span class="col-md-10"> 
+ 	 <textarea id="textarea3">At restaurants, customers enjoy eating and talking.</textarea> 
+ </span> 
+ 
+ <span class="col-md-1 sentence-side-menu" id="annotation3"> 
+ 	 <table> 
+ 	 	 <tbody><tr> 
+ 	 	 	 <td> 
+ 	 	 	 	 <span class="input-number hide" id="target3">sentence1</span> 
+ 	 	 	 	 <span class="input-relation hide" id="relation3">det</span> 
+ 	 	 	 	 <span style="display: none;"> 
+ 	 	 	 	 	 <label class="drop-label"> Drop? </label> 
+ 	 	 	 	 	 <input type="checkbox" id="dropping3" name="drop" value="non-drop"> 
+ 	 	 	 	 </span> 
+ 	 	 	 </td> 
+ 	 	 </tr> 
+ 	 	 <tr> 
+ 	 	 	 <td> 
+ 	 	 	 	 <button class="movebutton" onclick="moveBoxLeft(3)"> 
+ 	 	 	 	 	 « 
+ 	 	 	 	 </button> 
+ 
+ 	 	 	 	 <button class="movebutton" onclick="moveBoxRight(3)"> 
+ 	 	 	 	 	 » 
+ 	 	 	 	 </button> 
+ 	 	 	 </td> 
+ 	 	 </tr> 
+ 	 </tbody></table> 
+ </span> 
+</div><div class="flex-item ui-sortable-handle jtk-endpoint-anchor jtk-connected" id="sentence4" style="left: 40px;"><span class="col-md-1 sentence-id-number"> 
+ 	 4 
+ </span> 
+ <span class="col-md-10"> 
+ 	 <textarea id="textarea4">However, if we ban smoking in restaurants, then those restaurants might lose some customers.</textarea> 
+ </span> 
+ 
+ <span class="col-md-1 sentence-side-menu" id="annotation4"> 
+ 	 <table> 
+ 	 	 <tbody><tr> 
+ 	 	 	 <td> 
+ 	 	 	 	 <span class="input-number hide" id="target4">sentence3</span> 
+ 	 	 	 	 <span class="input-relation hide" id="relation4">=</span> 
+ 	 	 	 	 <span style="display: none;"> 
+ 	 	 	 	 	 <label class="drop-label"> Drop? </label> 
+ 	 	 	 	 	 <input type="checkbox" id="dropping4" name="drop" value="non-drop"> 
+ 	 	 	 	 </span> 
+ 	 	 	 </td> 
+ 	 	 </tr> 
+ 	 	 <tr> 
+ 	 	 	 <td> 
+ 	 	 	 	 <button class="movebutton" onclick="moveBoxLeft(4)"> 
+ 	 	 	 	 	 « 
+ 	 	 	 	 </button> 
+ 
+ 	 	 	 	 <button class="movebutton" onclick="moveBoxRight(4)"> 
+ 	 	 	 	 	 » 
+ 	 	 	 	 </button> 
+ 	 	 	 </td> 
+ 	 	 </tr> 
+ 	 </tbody></table> 
+ </span> 
+</div><div class="flex-item ui-sortable-handle jtk-endpoint-anchor jtk-connected" id="sentence5"><span class="col-md-1 sentence-id-number"> 
+ 	 5 
+ </span> 
+ <span class="col-md-10"> 
+ 	 <textarea id="textarea5">Some restaurants are indeed popular, especially among old men, because they allow people to smoke.</textarea> 
+ </span> 
+ 
+ <span class="col-md-1 sentence-side-menu" id="annotation5"> 
+ 	 <table> 
+ 	 	 <tbody><tr> 
+ 	 	 	 <td> 
+ 	 	 	 	 <span class="input-number hide" id="target5">sentence4</span> 
+ 	 	 	 	 <span class="input-relation hide" id="relation5">sup</span> 
+ 	 	 	 	 <span style="display: none;"> 
+ 	 	 	 	 	 <label class="drop-label"> Drop? </label> 
+ 	 	 	 	 	 <input type="checkbox" id="dropping5" name="drop" value="non-drop"> 
+ 	 	 	 	 </span> 
+ 	 	 	 </td> 
+ 	 	 </tr> 
+ 	 	 <tr> 
+ 	 	 	 <td> 
+ 	 	 	 	 <button class="movebutton" onclick="moveBoxLeft(5)"> 
+ 	 	 	 	 	 « 
+ 	 	 	 	 </button> 
+ 
+ 	 	 	 	 <button class="movebutton" onclick="moveBoxRight(5)"> 
+ 	 	 	 	 	 » 
+ 	 	 	 	 </button> 
+ 	 	 	 </td> 
+ 	 	 </tr> 
+ 	 </tbody></table> 
+ </span> 
+</div><div class="flex-item ui-sortable-handle jtk-endpoint-anchor jtk-connected" id="sentence6"><span class="col-md-1 sentence-id-number"> 
+ 	 6 
+ </span> 
+ <span class="col-md-10"> 
+ 	 <textarea id="textarea6">But, I firmly support banning smoking in restaurants because we need to prioritise health.</textarea> 
+ </span> 
+ 
+ <span class="col-md-1 sentence-side-menu" id="annotation6"> 
+ 	 <table> 
+ 	 	 <tbody><tr> 
+ 	 	 	 <td> 
+ 	 	 	 	 <span class="input-number hide" id="target6">sentence5</span> 
+ 	 	 	 	 <span class="input-relation hide" id="relation6">det</span> 
+ 	 	 	 	 <span style="display: none;"> 
+ 	 	 	 	 	 <label class="drop-label"> Drop? </label> 
+ 	 	 	 	 	 <input type="checkbox" id="dropping6" name="drop" value="non-drop"> 
+ 	 	 	 	 </span> 
+ 	 	 	 </td> 
+ 	 	 </tr> 
+ 	 	 <tr> 
+ 	 	 	 <td> 
+ 	 	 	 	 <button class="movebutton" onclick="moveBoxLeft(6)"> 
+ 	 	 	 	 	 « 
+ 	 	 	 	 </button> 
+ 
+ 	 	 	 	 <button class="movebutton" onclick="moveBoxRight(6)"> 
+ 	 	 	 	 	 » 
+ 	 	 	 	 </button> 
+ 	 	 	 </td> 
+ 	 	 </tr> 
+ 	 </tbody></table> 
+ </span> 
+</div><div class="flex-item ui-sortable-handle jtk-endpoint-anchor jtk-connected" id="sentence7" style="left: -40px; position: relative; top: 0px;"><span class="col-md-1 sentence-id-number"> 
+ 	 7 
+ </span> 
+ <span class="col-md-10"> 
+ 	 <textarea id="textarea7">In conclusion, I encourage banning smoking in all restaurants.</textarea> 
+ </span> 
+ 
+ <span class="col-md-1 sentence-side-menu" id="annotation7"> 
+ 	 <table> 
+ 	 	 <tbody><tr> 
+ 	 	 	 <td> 
+ 	 	 	 	 <span class="input-number hide" id="target7">sentence1</span> 
+ 	 	 	 	 <span class="input-relation hide" id="relation7">sup</span> 
+ 	 	 	 	 <span style="display: none;"> 
+ 	 	 	 	 	 <label class="drop-label"> Drop? </label> 
+ 	 	 	 	 	 <input type="checkbox" id="dropping7" name="drop" value="non-drop"> 
+ 	 	 	 	 </span> 
+ 	 	 	 </td> 
+ 	 	 </tr> 
+ 	 	 <tr> 
+ 	 	 	 <td> 
+ 	 	 	 	 <button class="movebutton" onclick="moveBoxLeft(7)"> 
+ 	 	 	 	 	 « 
+ 	 	 	 	 </button> 
+ 
+ 	 	 	 	 <button class="movebutton" onclick="moveBoxRight(7)"> 
+ 	 	 	 	 	 » 
+ 	 	 	 	 </button> 
+ 	 	 	 </td> 
+ 	 	 </tr> 
+ 	 </tbody></table> 
+ </span> 
+</div></div>
