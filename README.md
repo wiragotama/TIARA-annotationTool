@@ -46,6 +46,10 @@ In conclusion, I encourage banning smoking in all restaurants.
 ## License 
 [MIT](https://opensource.org/licenses/MIT)
 
+## Dependencies (included)
+- [Treant-js](https://github.com/fperucic/treant-js)
+- [JsPlumb](https://github.com/jsplumb/jsplumb)
+
 ## Screenshots
 ![](img/SS1.png)
 ![](img/SS2.png)
