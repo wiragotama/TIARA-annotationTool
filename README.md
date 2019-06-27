@@ -1,5 +1,4 @@
 # TIARA - a Lightweight Annotation Tool for Hierarchical-structured Discourse-relation
--
 Annotation tool described in [our paper at NLP2019](http://www.anlp.jp/proceedings/annual_meeting/2019/pdf_dir/P3-9.pdf). Please kindly cite the following paper when you use this tool.
 
 ```
@@ -21,7 +20,7 @@ Annotation tool described in [our paper at NLP2019](http://www.anlp.jp/proceedin
 - Read the manual located at ```manual/``` folder
 - Open ```index.html``` located at the root folder
 - We have tested the tool using Google Chrome (ver 7.4++) and Safari (ver 12++). You can use other web browsers at your own risks
-- Live demo: <https://wiragotama.github.io/LiA-HDR>
+- Live demo: <https://wiragotama.github.io/TIARA-annotationTool/>
 
 ## Concept
 There are many great annotation tools available out there. However, some (if not many) require complicated steps (and dependencies) to install. People with programming background may not find it difficult to install but people from other backgrounds may. This annotation tool considers the ease of use in mind (of course, with compromises), even for people without a programming background. That is why we provide this client-side annotation tool. The tool is customizable, by changing the conguration suit your annotation scheme (explained in the manual, ```js/annotation-globalsetting.js```). 
