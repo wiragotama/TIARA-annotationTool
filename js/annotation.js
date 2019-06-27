@@ -5,8 +5,8 @@
  * https://github.com/wiragotama
  * This file (and the whole tool) may be freely distributed under the MIT license.
  *
- * TADA is an open-source discourse-relation annotation tool
- * It is developed using JsPlumb (community edition) and Treant-js as the visualization libraries
+ * TIARA is an open-source discourse-relation annotation tool
+ * It is developed on top of JsPlumb (community edition) and Treant-js (for the visualization)
  */
 
 /** 

@@ -1,6 +1,6 @@
-# Lightweight Annotation Tool for Hierarchical-structured Discourse-relation (LiA-HDR)
+# TIARA - a Lightweight Annotation Tool for Hierarchical-structured Discourse-relation
 -
-Annotation tool described in our paper at NLP2019. Please kindly cite the following paper when you use this tool.
+Annotation tool described in [our paper at NLP2019](http://www.anlp.jp/proceedings/annual_meeting/2019/pdf_dir/P3-9.pdf). Please kindly cite the following paper when you use this tool.
 
 ```
 @inproceedings{Putra_etal-NLP2019,
@@ -21,10 +21,10 @@ Annotation tool described in our paper at NLP2019. Please kindly cite the follow
 - Read the manual located at ```manual/``` folder
 - Open ```index.html``` located at the root folder
 - We have tested the tool using Google Chrome (ver 7.4++) and Safari (ver 12++). You can use other web browsers at your own risks
-- You can see the demo at <https://wiragotama.github.io>
+- Live demo: <https://wiragotama.github.io/LiA-HDR>
 
 ## Concept
-There are many great annotation tools available out there. However, some (if not many) require complicated steps (and dependencies) to install. People with programming background may not find it difficult to install but people from other backgrounds may. This annotation tool considers the ease of use in mind (of course, with compromises), even for people without a programming background. This tool is customizable by changing the conguration at ```js/annotation-globalsetting.js``` to suit your annotation scheme (explained in the manual). 
+There are many great annotation tools available out there. However, some (if not many) require complicated steps (and dependencies) to install. People with programming background may not find it difficult to install but people from other backgrounds may. This annotation tool considers the ease of use in mind (of course, with compromises), even for people without a programming background. That is why we provide this client-side annotation tool. The tool is customizable, by changing the conguration suit your annotation scheme (explained in the manual, ```js/annotation-globalsetting.js```). 
 
 ## Formatting Text for Annotation
 Format the text you want to annotate in ```.txt```, in which each discourse unit (sentence/clause) is separated by a newline. See at the following example (```sample_original/ESSAY_TRIAL_00.txt```).
@@ -47,6 +47,6 @@ In conclusion, I encourage banning smoking in all restaurants.
 ## License 
 [MIT](https://opensource.org/licenses/MIT)
 
-## Snippet
+## Screenshots
 ![](img/SS1.png)
 ![](img/SS2.png)
