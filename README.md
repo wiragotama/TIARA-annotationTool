@@ -3,13 +3,13 @@ Annotation tool described in [our paper at NLP2019](http://www.anlp.jp/proceedin
 
 ```
 @inproceedings{Putra_etal-NLP2019,
-	author	= {Jan Wira Gotama Putra and Simone Teufel and Takenobu Tokunaga},
-	title	= {An Argument Annotation Scheme for the Repair of Student Essays by Sentence Reordering},
-	month	= March,
-	year	= {2019},
-	booktitle = {Proceedings of Annual Meeting of the Association for Natural Language Processing Japan},
-	pages	= {546-549},
-	url		= {http://www.anlp.jp/proceedings/annual_meeting/2019/pdf_dir/P3-9.pdf},
+    author  = {Jan Wira Gotama Putra and Simone Teufel and Takenobu Tokunaga},
+    title   = {An Argument Annotation Scheme for the Repair of Student Essays by Sentence Reordering},
+    month   = March,
+    year    = {2019},
+    booktitle = {Proceedings of Annual Meeting of the Association for Natural Language Processing Japan},
+    pages   = {546-549},
+    url     = {http://www.anlp.jp/proceedings/annual_meeting/2019/pdf_dir/P3-9.pdf},
 }
 ```
 
