@@ -19,8 +19,8 @@ Annotation tool described in [our paper at NLP2019](http://www.anlp.jp/proceedin
 - Fork, clone or download (+unpack) this repository
 - Read the manual located at ```manual/``` folder
 - Open ```index.html``` located at the root folder
-- We have tested the tool using Google Chrome (ver 7.4++) and Safari (ver 12++). You can use other web browsers at your own risks
-- Live demo: <https://wiragotama.github.io/TIARA-annotationTool/>
+- We have tested the tool using Google Chrome (ver 7.4++) and Safari (ver 12++). You can use other web browsers at your own risk.
+- Live demo: <https://wiragotama.github.io/TIARA-annotationTool/> (since this is a client-side tool, your data (essay) will not be uploaded, i.e., stays in your computer locally)
 
 ## Concept
 There are many great annotation tools available out there. However, some (if not many) require complicated steps (and dependencies) to install. People with programming background may not find it difficult to install but people from other backgrounds may. This annotation tool considers the ease of use in mind (of course, with compromises), even for people without a programming background. That is why we provide this client-side annotation tool. The tool is customizable, by changing the conguration suit your annotation scheme (explained in the manual, ```js/annotation-globalsetting.js```). 
