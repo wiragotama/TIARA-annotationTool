@@ -148,8 +148,8 @@ footer {
 	background-color: white;
 }
 
-#visualization-download-link {
-	float: right;
+#visualization-download-btn {
+	float: left;
 }
 
 .visualization-text p {

@@ -19,7 +19,7 @@ Annotation tool described in [our paper at NLP2019](http://www.anlp.jp/proceedin
 - Fork, clone or download (+unpack) this repository
 - Read the manual located at ```manual/``` folder
 - Open ```index.html``` located at the root folder
-- We have tested the tool using Google Chrome (ver 7.4++) and Safari (ver 12++). You can use other web browsers at your own risk.
+- We have tested the tool using Google Chrome (ver 7.4++). You can use other web browsers at your own risk.
 - Live demo: <https://wiragotama.github.io/TIARA-annotationTool/> (since this is a client-side tool, your data (essay) will not be uploaded, i.e., stays in your computer locally)
 
 ## Concept
@@ -49,6 +49,7 @@ In conclusion, I encourage banning smoking in all restaurants.
 ## Dependencies (included)
 - [Treant-js](https://github.com/fperucic/treant-js)
 - [JsPlumb](https://github.com/jsplumb/jsplumb)
+- [html2canvas](https://github.com/niklasvh/html2canvas)
 
 ## Screenshots
 ![](img/SS1.png)
