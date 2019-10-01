@@ -175,7 +175,7 @@ function droppingListener() {
 }
 
 /**
- * Load pre-formatted essay (xml) into the window, then establish connections based on the information present
+ * Load pre-formatted essay (html) into the window, then establish connections based on the information present
  */
 $("#load-file").on('change', function(event) {
     jsPlumb.reset(); // removes every endpoint, detaches every connection, and clears the event listeners list. Returns jsPlumb instance to its initial state.
@@ -196,12 +196,12 @@ $("#load-file").on('change', function(event) {
                     + "starts with: " + content.substr(1, content.indexOf("n"))
                 );  
             }
-            if (file.type == "text/xml" || file.type=="text/plain") {
+            if (file.type == "text/xml" || file.type=="text/plain" || file.type=="text/html") {
                 // if the file is txt, we need to convert the content to xml content
                 if (file.type == "text/plain") {
                     plainTextFormatting(file.name, content);
                 }
-                else {
+                else { // xml (backwards compatibility) or html
                     document.getElementsByClassName('draggable-area')[0].innerHTML = content;
                     updateColorLegend();
                 }
@@ -351,7 +351,7 @@ function initializeJsPlumb(Nsentences) {
 }
 
 /**
- * Save essay (xml) into local file
+ * Save essay into local file (html extension)
  */
 $("#save_menu").on('click', function(event) {
     if (mode=="debug") {
@@ -369,7 +369,7 @@ $("#save_menu").on('click', function(event) {
 
         var cut = document.getElementsByClassName('draggable-area')[0].innerHTML.indexOf("div class=\"jtk-endpoint");
         var text = document.getElementsByClassName('draggable-area')[0].innerHTML.substring(0, cut-1);
-        var filename = $(".essay-code .col-md-10 #essay_code").text().trim() + "-annotated.xml";
+        var filename = $(".essay-code .col-md-10 #essay_code").text().trim() + "-annotated.html";
         download(filename, text);
 
         alert("Refresh the page after the download is complete!")
