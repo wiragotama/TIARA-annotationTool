@@ -419,11 +419,11 @@ $("#annotation_to_excel").on('click', function(event) {
 });
 
 /**
- * Change to normal view (hide the hierarchical visualization)
+ * Change to text view (hide the hierarchical visualization)
  */
-$("#normal_view").on('click', function(event) {
+$("#text_view").on('click', function(event) {
     if (mode=="debug") {
-        alert("Change to normal view")
+        alert("Change to text view")
     }
     $('#draggable-area').show();
     $('#collapsable-visualization').hide();
@@ -431,11 +431,11 @@ $("#normal_view").on('click', function(event) {
 });
 
 /**
- * Change to hierarchical view (hide the normal view)
+ * Change to hierarchical view (hide the text view)
  */
-$("#hierarchical_view").on('click', function(event) {
+$("#tree_view").on('click', function(event) {
     if (mode=="debug") {
-        alert("Change to hierarchical view");
+        alert("Change to tree view");
     }
     $('#draggable-area').hide();
     $('#collapsable-visualization').show();

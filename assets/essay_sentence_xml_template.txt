@@ -1,4 +1,4 @@
-<div class="flex-item" id="sentence[PUT_SENTENCE_NUMBER_HERE]"> 
+    <div class="flex-item" id="sentence[PUT_SENTENCE_NUMBER_HERE]"> 
         <span class="col-md-1 sentence-id-number">
             [PUT_SENTENCE_NUMBER_HERE]
         </span>
