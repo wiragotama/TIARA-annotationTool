@@ -1,4 +1,4 @@
-# TIARA - a Lightweight Annotation Tool for Hierarchical-structured Discourse-relation
+# TIARA - A Lightweight Tool for Annotating Discourse Relations and Sentence Reordering
 Annotation tool described in [our paper at NLP2019](http://www.anlp.jp/proceedings/annual_meeting/2019/pdf_dir/P3-9.pdf). Please kindly cite the following paper when you use this tool. It would also be appreciated if you send me a courtesy [email](https://wiragotama.github.io), so I could survey what task is the tool used for. 
 
 ```
@@ -20,10 +20,10 @@ Annotation tool described in [our paper at NLP2019](http://www.anlp.jp/proceedin
 - Read the manual located at ```manual/``` folder
 - Open ```index.html``` located at the root folder
 - We have tested the tool using Google Chrome (ver 7.4++). You can use other web browsers at your own risk.
-- Live demo: <https://wiragotama.github.io/TIARA-annotationTool/> (since this is a client-side tool, your data (essay) will not be uploaded, i.e., stays in your computer locally)
+- Live demo: <https://wiragotama.github.io/TIARA-annotationTool/> (since this is a **client-side** tool, your data (essay) will not be uploaded, i.e., stays in your computer locally)
 
 ## Concept
-There are many great annotation tools available out there. However, some (if not many) require complicated steps (and dependencies) to install. People with programming background may not find it difficult to install but people from other backgrounds may. This annotation tool considers the ease of use in mind (of course, with compromises), even for people without a programming background. That is why we provide this client-side annotation tool. The tool is customizable, by changing the conguration to suit your annotation scheme, as explained in the manual (configuration file: ```js/annotation-globalsetting.js```). 
+There are many great annotation tools available out there. However, some (if not many) require complicated steps (and dependencies) to install. People with programming background may not find it difficult to install but people from other backgrounds may. This annotation tool considers the ease of use in mind (of course, with compromises), even for people without a programming background. That is why we provide this **client-side** annotation tool. The tool is customizable, by changing the conguration to suit your annotation scheme, as explained in the manual (configuration file: ```js/annotation-globalsetting.js```). 
 
 ## Formatting Text for Annotation
 Format the text you want to annotate in ```.txt```, in which each discourse unit (sentence/clause) is separated by a newline. See at the following example (```sample_original/ESSAY_TRIAL_00.txt```).
