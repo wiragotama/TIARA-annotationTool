@@ -1,19 +1,21 @@
 # TIARA - A Lightweight Tool for Annotating Discourse Relations and Sentence Reordering
-Annotation tool described in [our paper at NLP2019](http://www.anlp.jp/proceedings/annual_meeting/2019/pdf_dir/P3-9.pdf). Please kindly cite the following paper when you use this tool. It would also be appreciated if you send me a courtesy [email](https://wiragotama.github.io), so I could survey what task is the tool used for. 
+Annotation tool described in [our paper at LREC2020](https://lrec2020.lrec-conf.org/en/). Please kindly cite the following paper when you use this tool. It would also be appreciated if you send me a courtesy [email](https://wiragotama.github.io), so I could survey what task is the tool used for. 
 
 ```
-@inproceedings{Putra_etal-NLP2019,
-    author  = {Jan Wira Gotama Putra and Simone Teufel and Takenobu Tokunaga},
-    title   = {An Argument Annotation Scheme for the Repair of Student Essays by Sentence Reordering},
-    month   = March,
-    year    = {2019},
-    booktitle = {Proceedings of Annual Meeting of the Association for Natural Language Processing Japan},
-    pages   = {546-549},
-    url     = {http://www.anlp.jp/proceedings/annual_meeting/2019/pdf_dir/P3-9.pdf},
+@inproceedings{Putra-etal-LREC2020,
+    author  = {Jan Wira Gotama Putra and Simone Teufel and Kana Matsumura and Takenobu Tokunaga},
+    title   = {TIARA: A Tool for Annotating Discourse Relations and Sentence Reordering},
+    booktitle = {Proceedings of the Twelveth International Conference on Language Resources and Evaluation ({LREC} 2020)},    
+    month   = May,
+    year    = {2020},
+    pages   = {},
+    url     = {},
+    address = {Marseille, France},
+    publisher = {European Language Resources Association ({ELRA})},
 }
 ```
 
->Jan Wira Gotama Putra, Simone Teufel, and Takenobu Tokunaga. An Argument Annotation Scheme for the Repair of Student Essays by Sentence Reordering. In Proceedings of Annual Meeting of the Association for Natural Language Processing Japan (言語処理学会第25回年次表論文集), pp. 546--549, Nagoya, Japan, March 2019.
+>Jan Wira Gotama Putra, Simone Teufel, Kana Matsumura, and Takenobu Tokunaga. TIARA: A Tool for Annotating Discourse Relations and Sentence Reordering. Proceedings of the Twelveth International Conference on Language Resources and Evaluation (LREC), pp. XX--YY, Marseille, France, May 2020.
 
 ## How to Use
 - Fork, clone or download (+unpack) this repository
@@ -40,7 +42,7 @@ In conclusion, I encourage banning smoking in all restaurants.
 ``` 
 
 ## Important
-- Refresh the web browser before working on another file (see the manual)
+- Refresh the web browser before working on another file (see the manual). <span style="color:gray"> While it should be generally safe without refreshing, we found super rare cases (when used by our annotator, and that we cannot reproduce) in which error happens when loading files into pre-existing workarea. </span>
 - However, do not refresh the web browser midway (the annotation will be gone otherwise)
 
 ## License 
