@@ -1,5 +1,5 @@
 # TIARA - A Lightweight Tool for Annotating Discourse Relations and Sentence Reordering
-Annotation tool described in [our paper at LREC2020](http://www.lrec-conf.org/proceedings/lrec2020/pdf/2020.lrec-1.854.pdf). Please kindly cite the following paper when you use this tool. It would also be appreciated if you send me a courtesy [email](https://wiragotama.github.io), so I could survey what task is the tool used for. 
+Annotation tool described in [our paper at LREC2020](http://www.lrec-conf.org/proceedings/lrec2020/pdf/2020.lrec-1.854.pdf). Please kindly cite the following paper when you use this tool. It would also be appreciated if you send me a courtesy [email](https://wiragotama.github.io), so I could survey what kind of tasks the tool is used for. 
 
 ```
 @inproceedings{Putra-etal-LREC2020,
