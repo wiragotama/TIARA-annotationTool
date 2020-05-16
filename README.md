@@ -1,5 +1,5 @@
 # TIARA - A Lightweight Tool for Annotating Discourse Relations and Sentence Reordering
-Annotation tool described in [our paper at LREC2020](https://lrec2020.lrec-conf.org/en/). Please kindly cite the following paper when you use this tool. It would also be appreciated if you send me a courtesy [email](https://wiragotama.github.io), so I could survey what task is the tool used for. 
+Annotation tool described in [our paper at LREC2020](http://www.lrec-conf.org/proceedings/lrec2020/pdf/2020.lrec-1.854.pdf). Please kindly cite the following paper when you use this tool. It would also be appreciated if you send me a courtesy [email](https://wiragotama.github.io), so I could survey what task is the tool used for. 
 
 ```
 @inproceedings{Putra-etal-LREC2020,
@@ -8,14 +8,14 @@ Annotation tool described in [our paper at LREC2020](https://lrec2020.lrec-conf.
     booktitle = {Proceedings of the Twelveth International Conference on Language Resources and Evaluation ({LREC} 2020)},    
     month   = May,
     year    = {2020},
-    pages   = {},
+    pages   = {6914--6922},
     url     = {},
     address = {Marseille, France},
     publisher = {European Language Resources Association ({ELRA})},
 }
 ```
 
->Jan Wira Gotama Putra, Simone Teufel, Kana Matsumura, and Takenobu Tokunaga. TIARA: A Tool for Annotating Discourse Relations and Sentence Reordering. Proceedings of the Twelveth International Conference on Language Resources and Evaluation (LREC), pp. XX--YY, Marseille, France, May 2020.
+>Jan Wira Gotama Putra, Simone Teufel, Kana Matsumura, and Takenobu Tokunaga. TIARA: A Tool for Annotating Discourse Relations and Sentence Reordering. Proceedings of the Twelveth International Conference on Language Resources and Evaluation (LREC), pp. 6914--6922, Marseille, France, May 2020.
 
 ## How to Use
 - Fork, clone or download (+unpack) this repository
