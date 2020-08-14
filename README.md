@@ -2,20 +2,25 @@
 Annotation tool described in [our paper at LREC2020](http://www.lrec-conf.org/proceedings/lrec2020/pdf/2020.lrec-1.854.pdf). Please kindly cite the following paper when you use this tool. It would also be appreciated if you send me a courtesy [email](https://wiragotama.github.io), so I could survey what kind of tasks the tool is used for. 
 
 ```
-@inproceedings{Putra-etal-LREC2020,
-    author  = {Jan Wira Gotama Putra and Simone Teufel and Kana Matsumura and Takenobu Tokunaga},
-    title   = {TIARA: A Tool for Annotating Discourse Relations and Sentence Reordering},
-    booktitle = {Proceedings of the Twelveth International Conference on Language Resources and Evaluation ({LREC} 2020)},    
-    month   = May,
-    year    = {2020},
-    pages   = {6914--6922},
-    url     = {},
-    address = {Marseille, France},
-    publisher = {European Language Resources Association ({ELRA})},
+@inproceedings{putra-etal-2020-tiara,
+    title = "{TIARA}: A Tool for Annotating Discourse Relations and Sentence Reordering",
+    author = "Putra, Jan Wira Gotama  and
+      Teufel, Simone  and
+      Matsumura, Kana  and
+      Tokunaga, Takenobu",
+    booktitle = "Proceedings of The 12th Language Resources and Evaluation Conference",
+    month = may,
+    year = "2020",
+    address = "Marseille, France",
+    publisher = "European Language Resources Association",
+    url = "https://www.aclweb.org/anthology/2020.lrec-1.854",
+    pages = "6912--6920",
+    language = "English",
+    ISBN = "979-10-95546-34-4",
 }
 ```
 
->Jan Wira Gotama Putra, Simone Teufel, Kana Matsumura, and Takenobu Tokunaga. TIARA: A Tool for Annotating Discourse Relations and Sentence Reordering. Proceedings of the Twelveth International Conference on Language Resources and Evaluation (LREC), pp. 6914--6922, Marseille, France, May 2020.
+>Jan Wira Gotama Putra, Simone Teufel, Kana Matsumura, and Takenobu Tokunaga. TIARA: A Tool for Annotating Discourse Relations and Sentence Reordering. Proceedings of the 12th International Conference on Language Resources and Evaluation (LREC), pp. 6914--6922, Marseille, France, May 2020.
 
 ## How to Use
 - Fork, clone or download (+unpack) this repository
