@@ -25,8 +25,8 @@ Annotation tool described in [our paper at LREC2020](http://www.lrec-conf.org/pr
 ## How to Use
 - Fork, clone or download (+unpack) this repository
 - Read the manual located at ```manual/``` folder
-- Open ```index.html``` located at the root folder
-- We have tested the tool using Google Chrome (ver 7.4++). You can use other web browsers at your own risk.
+- Open ```index.html``` located at the root folder using a web browser.
+- We have confirmed that the tool works on Google Chrome (ver 7.4++). You can use other web browsers at your own risk.
 - Live demo: <https://wiragotama.github.io/TIARA-annotationTool/> (since this is a **client-side** tool, your data (essay) will not be uploaded, i.e., stays in your computer locally)
 
 ## Concept
