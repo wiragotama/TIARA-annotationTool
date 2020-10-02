@@ -50,6 +50,9 @@ In conclusion, I encourage banning smoking in all restaurants.
 - Refresh the web browser before working on another file (see the manual). <span style="color:gray"> While it should be generally safe without refreshing, we found super rare cases (when used by our annotator, and that we cannot reproduce) in which error happens when loading files into pre-existing workarea. </span>
 - However, do not refresh the web browser midway (the annotation will be gone otherwise)
 
+## Update!!
+- ```2020/10/03```: TIARA can now open ```.tsv``` file that results from ```Format file to excel``` menu. Please note that the indentation and history do not present in the ```.tsv``` format.
+
 ## License 
 [MIT](https://opensource.org/licenses/MIT)
 

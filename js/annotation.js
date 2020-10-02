@@ -196,10 +196,13 @@ $("#load-file").on('change', function(event) {
                     + "starts with: " + content.substr(1, content.indexOf("n"))
                 );  
             }
-            if (file.type == "text/xml" || file.type=="text/plain" || file.type=="text/html") {
+            if (file.type=="text/xml" || file.type=="text/plain" || file.type=="text/html" || file.type=="text/tab-separated-values") {
                 // if the file is txt, we need to convert the content to xml content
-                if (file.type == "text/plain") {
+                if (file.type=="text/plain") {
                     plainTextFormatting(file.name, content);
+                }
+                else if (file.type=="text/tab-separated-values") {
+                    tsvFileFormatting(file.name, content);
                 }
                 else { // xml (backwards compatibility) or html
                     document.getElementsByClassName('draggable-area')[0].innerHTML = content;
@@ -212,6 +215,11 @@ $("#load-file").on('change', function(event) {
                 }
                 initializeJsPlumb(Nsentences);
                 addLogRecord("Load", file.name);
+
+                // post-processing for tsv file --> trigger the dropping events
+                if (file.type=="text/tab-separated-values") {
+                    tsvPostProcessing(content)  
+                }
             }
             else {
                 alert("Failed to load file, unsupported filetype");
@@ -255,12 +263,11 @@ function replaceAll(inputString, query, replacement) {
     return inputString.replace(re, replacement);
 }
 
+
 /**
- * Format plaintext input to XML, then project the result to screen directly
- * @param{string} filename
- * @param{string} content
+ * prepare the skeleton when loading plaintext
  */
-function plainTextFormatting(filename, content) {
+function prepXMLskeleton(filename) {
     // skeleton
     xmlText = "";
     header = replaceAll(essayCodeHTMLTemplate, "\\[ESSAY_CODE_HERE\\]", filename.split(".")[0]);
@@ -277,6 +284,16 @@ function plainTextFormatting(filename, content) {
         newColorLegend.style = "background-color: " + relColors[i];
         document.getElementById("color-legend").appendChild(newColorLegend);
     }
+}
+
+/**
+ * Format plaintext input to XML, then project the result to screen directly
+ * @param{string} filename
+ * @param{string} content
+ */
+function plainTextFormatting(filename, content) {
+    // skeleton
+    prepXMLskeleton(filename)
 
     // add sentences
     sentences = content.split("\n")
@@ -290,6 +307,74 @@ function plainTextFormatting(filename, content) {
             newNodeSentence.innerHTML = sentenceFormat
         }
         document.getElementById("flex-container").appendChild(newNodeSentence);
+    }
+}
+
+/**
+ * Format tsv input to XML, then project the result to screen directly
+ * @param{string} filename
+ * @param{string} content
+ */
+function tsvFileFormatting(filename, content) {
+    // preparation
+    infos = content.split("\n")
+    infos.shift() // remove the header
+    infos.pop() // remove trailing underline
+
+    // skeleton
+    filename = infos[0].split("\t")[0]
+    prepXMLskeleton(filename)
+
+    // project sentences into skeleton
+    for (var i=0; i < infos.length; i++) {
+        row = infos[i].split("\t")
+        sentence_id = row[1]
+        sentence_text = row[2]
+        target_id = row[3]
+        relLabel = row[4]
+        acFlag = row[5]
+
+        if (sentence_text!="") {
+            if (sentence_text[0]=="\"" && sentence_text[sentence_text.length-1]=="\"") {
+                sentence_text = sentence_text.slice(1, -1);
+            }
+            var newNodeSentence = document.createElement("div");
+            newNodeSentence.className = "flex-item";
+            newNodeSentence.id = "sentence"+(i+1);
+            sentenceFormat = replaceAll(sentenceContainerHTMLTemplate, "\\[PUT_SENTENCE_NUMBER_HERE\\]", sentence_id);
+            sentenceFormat = replaceAll(sentenceFormat, "\\[PUT_SENTENCE_TEXT_HERE\\]", sentence_text);
+
+            // relation information
+            if (target_id != "") {
+                sentenceFormat = replaceAll(sentenceFormat, "id=\"target"+sentence_id+"\"></span>", "id=\"target"+sentence_id+"\">sentence"+target_id+"</span>")
+                sentenceFormat = replaceAll(sentenceFormat, "id=\"relation"+sentence_id+"\"></span>", "id=\"relation"+sentence_id+"\">"+relLabel+"</span>")
+            }
+
+            newNodeSentence.innerHTML = sentenceFormat
+
+        }
+        document.getElementById("flex-container").appendChild(newNodeSentence);
+    }
+}
+    
+/**
+ * Function to paint existing dropping annotation information in the tsv file
+ * @param{string} content
+ */
+function tsvPostProcessing(content) {
+    for (var i=0; i < infos.length; i++) {
+        row = infos[i].split("\t")
+        sourceIdx = row[1]
+        sentence_text = row[2]
+        targetIdx = row[3]
+        relLabel = row[4]
+        acFlag = row[5].toLowerCase()
+
+        if (sentence_text!="") {
+            if (acFlag == "true") {
+                document.getElementById("dropping"+sourceIdx).click(); // to trigger dropping event
+            }
+        }
     }
 }
 
