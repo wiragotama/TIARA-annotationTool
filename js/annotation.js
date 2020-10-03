@@ -215,11 +215,6 @@ $("#load-file").on('change', function(event) {
                 }
                 initializeJsPlumb(Nsentences);
                 addLogRecord("Load", file.name);
-
-                // post-processing for tsv file --> trigger the dropping events
-                if (file.type=="text/tab-separated-values") {
-                    tsvPostProcessing(content)  
-                }
             }
             else {
                 alert("Failed to load file, unsupported filetype");
@@ -332,7 +327,7 @@ function tsvFileFormatting(filename, content) {
         sentence_text = row[2]
         target_id = row[3]
         relLabel = row[4]
-        acFlag = row[5]
+        acFlag = row[5].toLowerCase()
 
         if (sentence_text!="") {
             if (sentence_text[0]=="\"" && sentence_text[sentence_text.length-1]=="\"") {
@@ -354,26 +349,13 @@ function tsvFileFormatting(filename, content) {
 
         }
         document.getElementById("flex-container").appendChild(newNodeSentence);
-    }
-}
-    
-/**
- * Function to paint existing dropping annotation information in the tsv file
- * @param{string} content
- */
-function tsvPostProcessing(content) {
-    for (var i=0; i < infos.length; i++) {
-        row = infos[i].split("\t")
-        sourceIdx = row[1]
-        sentence_text = row[2]
-        targetIdx = row[3]
-        relLabel = row[4]
-        acFlag = row[5].toLowerCase()
 
-        if (sentence_text!="") {
-            if (acFlag == "true") {
-                document.getElementById("dropping"+sourceIdx).click(); // to trigger dropping event
-            }
+        // dropping
+        if (acFlag == "true") {
+            document.getElementById("dropping"+sentence_id).value = "drop"; // trigger dropping event
+            document.getElementById("annotation"+sentence_id).classList.add("hide-text-dropping");
+            document.getElementById("sentence"+sentence_id).classList.add("hide-text");
+            document.getElementById("textarea"+sentence_id).classList.add("hide-text");
         }
     }
 }
