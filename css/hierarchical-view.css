@@ -1,0 +1,181 @@
+/**
+ * For hierarchical view zoom-in zoom-out
+ */ 
+.visualization-text-1 {
+	border: 1px solid black;
+	width: 160px;
+	font-size: 8px;
+	background-color: white;
+}
+.visualization-text-1 p {
+	padding: 5px;
+	padding-top: 6px;
+}
+.visualization-text-1 a {
+	padding: 3px;
+	background-color: black;
+}
+
+
+
+.visualization-text-2 {
+	border: 1px solid black;
+	width: 180px;
+	font-size: 10px;
+	background-color: white;
+}
+.visualization-text-2 p {
+	padding: 5px;
+	padding-top: 8px;
+}
+.visualization-text-2 a {
+	padding: 3px;
+	background-color: black;
+}
+
+
+
+.visualization-text-3 {
+	border: 1px solid black;
+	width: 200px;
+	font-size: 12px;
+	background-color: white;
+}
+.visualization-text-3 p {
+	padding: 5px;
+	padding-top: 10px;
+}
+.visualization-text-3 a {
+	padding: 3px;
+	background-color: black;
+}
+
+
+.visualization-text-4 {
+	border: 1px solid black;
+	width: 220px;
+	font-size: 14px;
+	background-color: white;
+}
+.visualization-text-4 p {
+	padding: 5px;
+	padding-top: 10px;
+}
+.visualization-text-4 a {
+	padding: 3px;
+	background-color: black;
+}
+
+
+.visualization-text-5 {
+	border: 1px solid black;
+	width: 240px;
+	font-size: 16px;
+	background-color: white;
+}
+.visualization-text-5 p {
+	padding: 5px;
+	padding-top: 10px;
+}
+.visualization-text-5 a {
+	padding: 3px;
+	background-color: black;
+}
+
+
+.visualization-text-6 {
+	border: 1px solid black;
+	width: 260px;
+	font-size: 18px;
+	background-color: white;
+}
+.visualization-text-6 p {
+	padding: 5px;
+	padding-top: 10px;
+}
+.visualization-text-6 a {
+	padding: 3px;
+	background-color: black;
+}
+
+
+.visualization-text-7 {
+	border: 1px solid black;
+	width: 280px;
+	font-size: 20px;
+	background-color: white;
+}
+.visualization-text-7 p {
+	padding: 5px;
+	padding-top: 10px;
+}
+.visualization-text-7 a {
+	padding: 3px;
+	background-color: black;
+}
+
+
+.visualization-text-8 {
+	border: 1px solid black;
+	width: 320px;
+	font-size: 24px;
+	background-color: white;
+}
+.visualization-text-8 p {
+	padding: 5px;
+	padding-top: 10px;
+}
+.visualization-text-8 a {
+	padding: 3px;
+	background-color: black;
+}
+
+
+
+.visualization-text-9 {
+	border: 1px solid black;
+	width: 360px;
+	font-size: 28px;
+	background-color: white;
+}
+.visualization-text-9 p {
+	padding: 5px;
+	padding-top: 10px;
+}
+.visualization-text-9 a {
+	padding: 3px;
+	background-color: black;
+}
+
+
+.visualization-text-10 {
+	border: 1px solid black;
+	width: 400px;
+	font-size: 32px;
+	background-color: white;
+}
+.visualization-text-10 p {
+	padding: 5px;
+	padding-top: 10px;
+}
+.visualization-text-10 a {
+	padding: 3px;
+	background-color: black;
+}
+
+
+
+.visualization-text-11 {
+	border: 1px solid black;
+	width: 440px;
+	font-size: 40px;
+	background-color: white;
+}
+.visualization-text-11 p {
+	padding: 5px;
+	padding-top: 10px;
+}
+.visualization-text-11 a {
+	padding: 3px;
+	background-color: black;
+}
