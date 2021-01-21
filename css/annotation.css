@@ -167,3 +167,8 @@ footer {
 	margin: 0px;
 	font-weight: bold;
 }
+
+.essay_code_hierarchical {
+	text-align: center;
+	align-items: center;
+}

@@ -16,8 +16,10 @@ var availableRels = ["att", "det", "sup", "="]
 
 /** 
  * The corresponding color for the relation, i.e., the first element of relColor for the first relation in availableRels list. 
- * You can use available colors in HTML color picker https://www.w3schools.com/colors/colors_picker.asp
  * For example, change "lightgreen" to "#ff0000"
+ * Basic colors (can be used in all browsers): ["white", "silver", "gray", "black", "red", "maroon", "yellow", "olive", "lime", "green", "aqua", "teal", "blue", "navy", "fuchsia", "purple"]
+ *
+ * Refer to the following website for a comprehensive list of color names: https://en.wikipedia.org/wiki/Web_colors#Extended_colors
  */
 // var relColors = ["lightgray", "lightpink", "lightblue", "lightgreen", "goldenrod"] 
 var relColors = ["lightpink", "lightblue", "lightgreen", "lightgray"] 

@@ -126,7 +126,8 @@ $(document).ready(function() {
     $( "#relation-dialog" ).dialog({
         autoOpen:false
     });
-    $('#collapsable-visualization').hide();
+    $('#hierarchical-view').hide();
+    // $('#collapsable-visualization').hide(); // only the hierarchical tree part
     $('#visualization-download-btn').hide();
 });
 
@@ -215,6 +216,7 @@ $("#load-file").on('change', function(event) {
                 }
                 initializeJsPlumb(Nsentences);
                 addLogRecord("Load", file.name);
+                document.getElementById("essay_code_hierarchical").innerHTML = document.getElementById("essay_code").innerHTML; // putting essay code in the hierarchical view
             }
             else {
                 alert("Failed to load file, unsupported filetype");
@@ -493,7 +495,8 @@ $("#text_view").on('click', function(event) {
         alert("Change to text view")
     }
     $('#draggable-area').show();
-    $('#collapsable-visualization').hide();
+    $('#hierarchical-view').hide();
+    // $('#collapsable-visualization').hide(); // only the hierarchical tree part
     $('#visualization-download-btn').hide();
 });
 
@@ -505,7 +508,8 @@ $("#tree_view").on('click', function(event) {
         alert("Change to tree view");
     }
     $('#draggable-area').hide();
-    $('#collapsable-visualization').show();
+    $('#hierarchical-view').show();
+    // $('#collapsable-visualization').show(); // only the hierarchical tree part
     $('#visualization-download-btn').show();
 
     // meta node as a root (for ongoing-process visualization)
@@ -577,12 +581,11 @@ $('#visualization-download-btn').on("click", function() {
         return clone;
     }
 
-    var offScreen = document.querySelector('#collapsable-visualization');
+    var offScreen = document.querySelector('#hierarchical-view');
     var clone = hiddenClone(offScreen); // clone off-screen element
 
     html2canvas(clone).then(function(canvas) { // open image in new tab
         var image = canvas.toDataURL("image/png").replace("image/png", "image/octet-stream"); // convert image to 'octet-stream' (Just a download, really)
-        // window.open().document.write('<img src="' + image + '" />');
 
         $(this).attr("href", image)
         $(this).attr("download","imgName.png");
