@@ -692,6 +692,11 @@ $("#add_sentence_box").on("click", function() {
 
     // sucessful addition
     Nsentences += 1
+
+    // disable dropping
+    if (disableDropping) { // hide dropping button from end-user
+        droppingDisabler()
+    }
 });
 
 /********* END GLOBAL PARAMETERS AND INITIALIZATION *********/
