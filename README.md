@@ -1,5 +1,5 @@
 # TIARA - A Lightweight Tool for Annotating Discourse Relations and Sentence Reordering
-Annotation tool described in [our paper at LREC2020](http://www.lrec-conf.org/proceedings/lrec2020/pdf/2020.lrec-1.854.pdf). Please kindly cite the following paper when you use this tool. It would also be appreciated if you send me a courtesy [email](https://wiragotama.github.io), so I could survey what kind of tasks the tool is used for. 
+Annotation tool described in [our paper at LREC2020](http://www.lrec-conf.org/proceedings/lrec2020/pdf/2020.lrec-1.854.pdf). Please kindly cite the following paper when you use this tool. **You can use this tool freely**, but it would be appreciated if you could send me a courtesy [email](https://wiragotama.github.io) so I could survey what kind of tasks the tool is used for. 
 
 ```
 @inproceedings{putra-etal-2020-tiara,
@@ -51,6 +51,8 @@ In conclusion, I encourage banning smoking in all restaurants.
 - However, do not refresh the web browser midway (the annotation will be gone otherwise)
 
 ## Update!!
+- ```2021/01/21```: There is a new ```Add New Sentence``` button at the bottom of the ```normal view```. This button is dedicated for educational uses. For example, a teacher asks a student to add more sentences to support their argument. Another example is when the teacher asks the student to merge two or more sentences as a single opinion. In this case, the student may "drop" those two or more sentences, and then create a new merged sentence. 
+- ```2021/01/21```: You can now shrink and enlarge the hierarchical view
 - ```2020/10/03```: TIARA can now open ```.tsv``` file that results from ```Format file to excel``` menu. Please note that the indentation and history do not present in the ```.tsv``` format.
 
 ## License 

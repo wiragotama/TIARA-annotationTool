@@ -137,6 +137,10 @@ footer {
 	display:block;
 }
 
+.under-draggable-menu {
+	text-align: right;
+}
+
 #collapsable-visualization {
 	background-color: white;
 }
@@ -148,10 +152,6 @@ footer {
 	background-color: white;
 }
 
-#visualization-download-btn {
-	float: left;
-}
-
 .visualization-text p {
 	padding: 5px;
 	padding-top: 10px;
@@ -160,6 +160,10 @@ footer {
 .visualization-text a {
 	padding: 3px;
 	background-color: black;
+}
+
+#visualization-download-btn {
+	float: left;
 }
 
 .node-desc {

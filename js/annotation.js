@@ -17,8 +17,8 @@ var arrowLocation = 0.95;
 var arrowWidth = 20;
 var arrowLength = 12
 var dotRadius = 8;
-var rectangleWidth = 15;
-var rectangleHeight = 15;
+// var rectangleWidth = 15;
+// var rectangleHeight = 15;
 var defaultConnectionColor = "lightgray";
 var defaultConnectedColor = "yellow";
 var defaultHoverColor = "orange";
@@ -88,7 +88,7 @@ var hierConfig = {
     siblingSeparation: 40,
     node: {
         collapsable: true,
-        HTMLclass: 'visualization-text'
+        HTMLclass: 'visualization-text-3' // default size
     },
     animation: {
         nodeAnimation: "easeInOutSine",
@@ -126,9 +126,9 @@ $(document).ready(function() {
     $( "#relation-dialog" ).dialog({
         autoOpen:false
     });
+    $('#main-area').hide();
     $('#hierarchical-view').hide();
-    // $('#collapsable-visualization').hide(); // only the hierarchical tree part
-    $('#visualization-download-btn').hide();
+    $('#hierarchical-view-menu').hide();
 });
 
 /** 
@@ -205,16 +205,23 @@ $("#load-file").on('change', function(event) {
                 else if (file.type=="text/tab-separated-values") {
                     tsvFileFormatting(file.name, content);
                 }
-                else { // xml (backwards compatibility) or html
+                else { // xml (backwards compatibility for the preliminary version of TIARA) or html
                     document.getElementsByClassName('draggable-area')[0].innerHTML = content;
                     updateColorLegend();
                 }
 
+                // initialization
+                $('#main-area').show();
                 Nsentences = document.getElementsByClassName("flex-item").length + 1; // unit index starts from 1
                 if (disableDropping) { // hide dropping buttons from end-user
                     droppingDisabler()
                 }
                 initializeJsPlumb(Nsentences);
+                 // events binding
+                connectionEventBinding();
+                droppingListener();
+                textareaEventBinding(); // change the textarea content in the DOM, so we can reflect editing changes in tree view directly
+                // etc
                 addLogRecord("Load", file.name);
                 document.getElementById("essay_code_hierarchical").innerHTML = document.getElementById("essay_code").innerHTML; // putting essay code in the hierarchical view
             }
@@ -228,6 +235,20 @@ $("#load-file").on('change', function(event) {
         alert("Failed to load file");
     }
 });
+
+/**
+ * Event handling for textarea
+ */
+function textareaEventBinding() {
+    for (var i=1; i<=Nsentences; i++) {
+        $('#textarea'+i).bind('input propertychange', function(event) {
+            document.getElementById(event.target.id).innerHTML = $(this).val();
+            if (mode=="debug") {
+                console.log("Editing", event.target.id);
+            }
+        });
+    }
+}
 
 /**
  * update the color legend (the main target is for the saved annotated file) to match the current available relations
@@ -412,10 +433,6 @@ function initializeJsPlumb(Nsentences) {
         for (var i=1; i < Nsentences; i++) {
             paintExistingConnection(i);
         }
-
-        // general event binding
-        eventsBinding();
-        droppingListener();
     });
 }
 
@@ -494,10 +511,9 @@ $("#text_view").on('click', function(event) {
     if (mode=="debug") {
         alert("Change to text view")
     }
-    $('#draggable-area').show();
+    $('#main-area').show();
     $('#hierarchical-view').hide();
-    // $('#collapsable-visualization').hide(); // only the hierarchical tree part
-    $('#visualization-download-btn').hide();
+    $('#hierarchical-view-menu').hide();
 });
 
 /**
@@ -507,10 +523,9 @@ $("#tree_view").on('click', function(event) {
     if (mode=="debug") {
         alert("Change to tree view");
     }
-    $('#draggable-area').hide();
+    $('#main-area').hide();
     $('#hierarchical-view').show();
-    // $('#collapsable-visualization').show(); // only the hierarchical tree part
-    $('#visualization-download-btn').show();
+    $('#hierarchical-view-menu').show();
 
     // meta node as a root (for ongoing-process visualization)
     var meta = {text: {name: 'meta'}};
@@ -597,6 +612,86 @@ $('#visualization-download-btn').on("click", function() {
     });
 
     document.body.removeChild(clone); // remove clone element
+});
+
+
+/**
+ * Zoom-in hierarchical visualization (enlarge)
+ */
+$('#hierarchical-view-ensmall').on("click", function() { 
+    if (mode=="debug") {
+        alert("shrink tree view");
+    }
+    zoom_size = parseInt(hierConfig.node.HTMLclass.match(/\d+/g));
+    if (zoom_size > 1) {
+        if (zoom_size>6) {
+            hierConfig.siblingSeparation -= 80;
+        }
+        else {
+            hierConfig.siblingSeparation -= 10;
+        }
+        hierConfig.connectors.style["stroke-width"] -= 0.2;
+        hierConfig.node.HTMLclass = "visualization-text-" + (zoom_size-1);
+        $("#tree_view").click(); // refresh visualization
+    }
+});
+
+
+/**
+ * Zoom-out hierarchical visualization (shrink)
+ */
+$('#hierarchical-view-enlarge').on("click", function() {         
+    if (mode=="debug") {
+        alert("enlarge tree view");
+    }
+    zoom_size = parseInt(hierConfig.node.HTMLclass.match(/\d+/g));
+    if (zoom_size < 11) {
+        if (zoom_size<6) {
+            hierConfig.siblingSeparation += 10;
+        }
+        else {
+            hierConfig.siblingSeparation += 80;
+        }
+        hierConfig.connectors.style["stroke-width"] += 0.2;
+        hierConfig.node.HTMLclass = "visualization-text-" + (zoom_size+1);
+        $("#tree_view").click(); // refresh visualization
+    }
+});
+
+
+/**
+ * Add a new sentence box. This feature is particularly useful for educational purpose. 
+ * For example, the teacher asks the student to add more sentences to support their argument. 
+ * Another example is when the teacher asks the student to collapse two or more sentences. In this case, the student may drop those two or more sentences, and then create a new merged sentence.
+ */
+$("#add_sentence_box").on("click", function() {
+    if (mode=="debug") {
+        alert("add new sentence box");
+    }
+    newSentenceIdx = Nsentences;
+
+    // new sentence object
+    var newNodeSentence = document.createElement("div");
+    newNodeSentence.className = "flex-item";
+    newNodeSentence.id = "sentence"+newSentenceIdx;
+    sentenceFormat = replaceAll(sentenceContainerHTMLTemplate, "\\[PUT_SENTENCE_NUMBER_HERE\\]", String(newSentenceIdx));
+    sentenceFormat = replaceAll(sentenceFormat, "\\[PUT_SENTENCE_TEXT_HERE\\]", "");
+    newNodeSentence.innerHTML = sentenceFormat;
+    document.getElementById("flex-container").appendChild(newNodeSentence);
+
+    // endpoint for connections
+    jsPlumb.addEndpoint("sentence"+newSentenceIdx, inBound, {uuid:"ib"+newSentenceIdx}); 
+    jsPlumb.addEndpoint("sentence"+newSentenceIdx, outBound, {uuid:"ob"+newSentenceIdx});
+
+    // event binding
+    droppingListener();
+    textareaEventBinding();
+
+    // log
+    addLogRecord("Add-new-sentence", newSentenceIdx);
+
+    // sucessful addition
+    Nsentences += 1
 });
 
 /********* END GLOBAL PARAMETERS AND INITIALIZATION *********/
@@ -797,7 +892,7 @@ function createEndpoints(numberOfSentences) {
 /**
  * Binding events that may occur in the sentences connection
  */
-function eventsBinding() {
+function connectionEventBinding() {
     // new connection is established
     jsPlumb.bind("connection", function(info) { 
         var conn = info.connection;

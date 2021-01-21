@@ -11,6 +11,7 @@
     <!-- Styling -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/annotation.css" rel="stylesheet">
+    <link href="css/hierarchical-view.css" rel="stylesheet">
     <link href="img/favicon.ico" rel="shortcut icon" type="image/png" bootstrap.min.js>
     <link href="css/font-awesome-min.css" rel="stylesheet">
     <link href="css/dialog.css" rel="stylesheet">
@@ -94,28 +95,53 @@
         <!-- /.row -->
 
         <!-- Annotation Items -->
-        <div id="main" class="row">
+        <div id="main-area" class="row">
             <!-- Dialog -->
-            <div class="col-lg-1">
+            <div class="row">
                 <div class="relation-dialog" id="relation-dialog" title="Relation option">
                     Choose one of available relations below or delete the connection
                 </div>
             </div>
 
-            <!-- Save and load this whole area -->
-            <div class="col-lg-10 draggable-area" id="draggable-area"> 
+            <!-- Edit area -->
+            <div class="row">
+                <div class="col-lg-1">
+                </div>
+                <!-- Save and load this whole area -->
+                <div class="col-lg-10 draggable-area" id="draggable-area"> 
+                </div>
+                <div class="col-lg-1">
+                </div>
             </div>
-            <div class="col-lg-1">
+
+            <div class="row">
+                <div class="col-lg-1">
+                </div>
+                <div class="col-lg-10 under-draggable-menu">
+                    <button id="add_sentence_box" class="btn btn-info"> 
+                        <i class="glyphicon glyphicon-plus"></i> Add New Sentence
+                    </button>
+                </div>
+                <div class="col-lg-1">
+                </div>
             </div>
         </div> 
 
         <!-- Visualization -->
-        <div class="row">
+        <div class="row" id="hierarchical-view-menu">
             <div class="col-lg-1">
             </div>
-            <div class="col-lg-10">
-                <button id="visualization-download-btn" class="btn btn-warning"> 
+            <div class="col-lg-3">
+                <button id="visualization-download-btn" class="btn btn-info"> 
                     Capture Image 
+                </button>
+            </div>
+            <div class="col-lg-7" style="text-align:right">
+                <button id="hierarchical-view-ensmall" class="btn btn-info"> 
+                    <i class="glyphicon glyphicon-zoom-out"></i> Shrink
+                </button>
+                <button id="hierarchical-view-enlarge" class="btn btn-info"> 
+                    <i class="glyphicon glyphicon-zoom-in"></i> Enlarge
                 </button>
             </div>
             <div class="col-lg-1">
@@ -127,6 +153,8 @@
                 <div class="col-lg-12" style="text-align: center">
                     <h4 id="essay_code_hierarchical"> ESSAY_TRIAL_00 </h4> 
                 </div>
+            </div>
+            <div class="row">
             </div>
             <div class="row chart" id="collapsable-visualization">
                 
