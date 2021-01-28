@@ -37,6 +37,10 @@
 <li>{"timestamp":"2019-8-20 17:46:32","actionType":"Relation-add","description":"connection between 7 to 1 is established"}</li>
 <li>{"timestamp":"2019-8-20 17:46:33","actionType":"Relation-add","description":"connection between 7 to 1 is labeled ="}</li>
 <li>{"timestamp":"2019-8-20 17:46:38","actionType":"Save"}</li>
+<li>{"timestamp":"2021-1-22 15:24:39","actionType":"Load","description":"ESSAY_TRIAL_00-annotated.html"}</li>
+<li>{"timestamp":"2021-1-22 15:26:14","actionType":"Drop","description":"3"}</li>
+<li>{"timestamp":"2021-1-22 15:26:14","actionType":"Relation-delete","description":"connection between 3 to 2 is detached"}</li>
+<li>{"timestamp":"2021-1-22 15:26:31","actionType":"Save"}</li>
 </ul>
 
 <!-- Essay Code --> 
@@ -49,15 +53,14 @@
  	 	 	 <p> [Legend] </p> 
  	 	 </div> 
  	 </div> 
- 	 <div class="row color-legend col-lg-12" id="color-legend"> 
- 	 <span class="relation-color-mark" style="background-color: lightgray;">=</span><span class="relation-color-mark" style="background-color: lightgreen;">sup</span><span class="relation-color-mark" style="background-color: lightblue;">det</span><span class="relation-color-mark" style="background-color: lightpink;">att</span></div> 
+ 	 <div class="row color-legend col-lg-12" id="color-legend"><span class="relation-color-mark" style="background-color: lightgray;">=</span><span class="relation-color-mark" style="background-color: lightgreen;">sup</span><span class="relation-color-mark" style="background-color: lightblue;">det</span><span class="relation-color-mark" style="background-color: lightpink;">att</span></div> 
  </div> <br> 
 
-<div class="flex-container ui-sortable" id="flex-container"><div class="flex-item ui-sortable-handle jtk-endpoint-anchor jtk-connected" id="sentence1"><span class="col-md-1 sentence-id-number"> 
+<div class="flex-container ui-sortable" id="flex-container"><div class="flex-item jtk-endpoint-anchor jtk-connected ui-sortable-handle" id="sentence1"><span class="col-md-1 sentence-id-number"> 
  	 1 
  </span> 
  <span class="col-md-10"> 
- 	 <textarea id="textarea1">I agree with the previous statement.</textarea> 
+ 	 <textarea id="textarea1">I agree [ with the previous statement | that smoking should be banned in restaurants ].</textarea> 
  </span> 
  
  <span class="col-md-1 sentence-side-menu" id="annotation1"> 
@@ -85,22 +88,22 @@
  	 	 </tr> 
  	 </tbody></table> 
  </span> 
-</div><div class="flex-item ui-sortable-handle jtk-endpoint-anchor jtk-connected" id="sentence3" style="position: relative; left: 20px; top: 0px;"><span class="col-md-1 sentence-id-number"> 
+</div><div class="flex-item jtk-endpoint-anchor ui-sortable-handle hide-text" id="sentence3" style="position: relative; left: 20px; top: 0px;"><span class="col-md-1 sentence-id-number"> 
  	 3 
  </span> 
  <span class="col-md-10"> 
- 	 <textarea id="textarea3">At restaurants, customers enjoy eating and talking.</textarea> 
+ 	 <textarea id="textarea3" class="hide-text">At restaurants, customers enjoy eating and talking.</textarea> 
  </span> 
  
- <span class="col-md-1 sentence-side-menu" id="annotation3"> 
+ <span class="col-md-1 sentence-side-menu hide-text-dropping" id="annotation3"> 
  	 <table> 
  	 	 <tbody><tr> 
  	 	 	 <td> 
- 	 	 	 	 <span class="input-number hide" id="target3">sentence2</span> 
- 	 	 	 	 <span class="input-relation hide" id="relation3">det</span> 
+ 	 	 	 	 <span class="input-number hide" id="target3"></span> 
+ 	 	 	 	 <span class="input-relation hide" id="relation3"></span> 
  	 	 	 	 <span> 
  	 	 	 	 	 <label class="drop-label"> Drop? </label> 
- 	 	 	 	 	 <input type="checkbox" id="dropping3" name="drop" value="non-drop"> 
+ 	 	 	 	 	 <input type="checkbox" id="dropping3" name="drop" value="drop"> 
  	 	 	 	 </span> 
  	 	 	 </td> 
  	 	 </tr> 
@@ -117,7 +120,7 @@
  	 	 </tr> 
  	 </tbody></table> 
  </span> 
-</div><div class="flex-item ui-sortable-handle jtk-endpoint-anchor jtk-connected" id="sentence2" style="left: 20px;"><span class="col-md-1 sentence-id-number"> 
+</div><div class="flex-item jtk-endpoint-anchor jtk-connected ui-sortable-handle" id="sentence2" style="left: 20px;"><span class="col-md-1 sentence-id-number"> 
  	 2 
  </span> 
  <span class="col-md-10"> 
@@ -149,7 +152,7 @@
  	 	 </tr> 
  	 </tbody></table> 
  </span> 
-</div><div class="flex-item ui-sortable-handle jtk-endpoint-anchor jtk-connected" id="sentence4" style="left: 20px;"><span class="col-md-1 sentence-id-number"> 
+</div><div class="flex-item jtk-endpoint-anchor jtk-connected ui-sortable-handle" id="sentence4" style="left: 20px;"><span class="col-md-1 sentence-id-number"> 
  	 4 
  </span> 
  <span class="col-md-10"> 
@@ -181,7 +184,7 @@
  	 	 </tr> 
  	 </tbody></table> 
  </span> 
-</div><div class="flex-item ui-sortable-handle jtk-endpoint-anchor jtk-connected" id="sentence5" style="left: 40px;"><span class="col-md-1 sentence-id-number"> 
+</div><div class="flex-item jtk-endpoint-anchor jtk-connected ui-sortable-handle" id="sentence5" style="left: 40px;"><span class="col-md-1 sentence-id-number"> 
  	 5 
  </span> 
  <span class="col-md-10"> 
@@ -213,7 +216,7 @@
  	 	 </tr> 
  	 </tbody></table> 
  </span> 
-</div><div class="flex-item ui-sortable-handle jtk-endpoint-anchor jtk-connected" id="sentence6" style="left: 20px;"><span class="col-md-1 sentence-id-number"> 
+</div><div class="flex-item jtk-endpoint-anchor jtk-connected ui-sortable-handle" id="sentence6" style="left: 20px;"><span class="col-md-1 sentence-id-number"> 
  	 6 
  </span> 
  <span class="col-md-10"> 
@@ -245,7 +248,7 @@
  	 	 </tr> 
  	 </tbody></table> 
  </span> 
-</div><div class="flex-item ui-sortable-handle jtk-endpoint-anchor jtk-connected" id="sentence7"><span class="col-md-1 sentence-id-number"> 
+</div><div class="flex-item jtk-endpoint-anchor jtk-connected ui-sortable-handle" id="sentence7"><span class="col-md-1 sentence-id-number"> 
  	 7 
  </span> 
  <span class="col-md-10"> 
