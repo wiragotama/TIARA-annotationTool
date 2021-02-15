@@ -34,6 +34,7 @@ var Nsentences = -1; // global variable, number of sentences in the window, the 
 var mode = "production"; // {"debug", "production"}
 /** 
  * Some parameters are defined in annotation-globalsetting.js (users can change it as they like, so we split the script in order to prevent users changing other things here) 
+ * var disableAddNewSentence
  * var disableDropping
  * var disableReordering
  * var availableRels
@@ -216,6 +217,9 @@ $("#load-file").on('change', function(event) {
                 if (disableDropping) { // hide dropping buttons from end-user
                     droppingDisabler()
                 }
+                if (disableAddNewSentence) { // hide add new sentence button from end-user
+                    addNewSentenceDisabler()
+                }
                 initializeJsPlumb(Nsentences);
                  // events binding
                 connectionEventBinding();
@@ -390,6 +394,13 @@ function droppingDisabler() {
     for (var i=1; i < Nsentences; i++) {
         document.getElementById("dropping"+i).parentElement.style.display = 'none'
     }
+}
+
+/**
+ * Hide "Add new sentence" button from end-user
+ */ 
+function addNewSentenceDisabler() {
+    document.getElementById("add_sentence_box").style.display = 'none'
 }
 
 /**
