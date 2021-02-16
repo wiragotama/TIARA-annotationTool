@@ -15,15 +15,15 @@
 var labelLocation = 0.01;
 var arrowLocation = 0.95;
 var arrowWidth = 20;
-var arrowLength = 12
+var arrowLength = 12;
 var dotRadius = 8;
 // var rectangleWidth = 15;
 // var rectangleHeight = 15;
 var defaultConnectionColor = "lightgray";
 var defaultConnectedColor = "yellow";
 var defaultHoverColor = "orange";
-var defaultStrokeWidth = 3
-var defaultStrokeHoverWidth = 7
+var defaultStrokeWidth = 3;
+var defaultStrokeHoverWidth = 7;
 var defaultTarget = "";
 var defaultRelation = "";
 var noRelationSymbol = "n"; // no relation between a pair of sentences
@@ -34,9 +34,11 @@ var Nsentences = -1; // global variable, number of sentences in the window, the 
 var mode = "production"; // {"debug", "production"}
 /** 
  * Some parameters are defined in annotation-globalsetting.js (users can change it as they like, so we split the script in order to prevent users changing other things here) 
- * var disableAddNewSentence
+ * 
  * var disableDropping
  * var disableReordering
+ * var disableEditing
+ * var disableAddNewSentence
  * var availableRels
  * var relColors
  * var relDirections
@@ -214,12 +216,21 @@ $("#load-file").on('change', function(event) {
                 // initialization
                 $('#main-area').show();
                 Nsentences = document.getElementsByClassName("flex-item").length + 1; // unit index starts from 1
+
+                // disable or enable functions
                 if (disableDropping) { // hide dropping buttons from end-user
-                    droppingDisabler()
+                    droppingDisabler();
                 }
                 if (disableAddNewSentence) { // hide add new sentence button from end-user
-                    addNewSentenceDisabler()
+                    addNewSentenceDisabler();
                 }
+                if (disableEditing) {
+                    textAreaEditDisabler();
+                }
+                else {
+                    textAreaEditEnabler();
+                }
+
                 initializeJsPlumb(Nsentences);
                  // events binding
                 connectionEventBinding();
@@ -392,7 +403,25 @@ function tsvFileFormatting(filename, content) {
  */
 function droppingDisabler() {
     for (var i=1; i < Nsentences; i++) {
-        document.getElementById("dropping"+i).parentElement.style.display = 'none'
+        document.getElementById("dropping"+i).parentElement.style.display = 'none';
+    }
+}
+
+/**
+ * Disable editing textarea
+ */ 
+function textAreaEditDisabler() {
+    for (var i=1; i< Nsentences; i++) {
+        document.getElementById("textarea"+i).readOnly = true;
+    }
+}
+
+/**
+ * Disable editing textarea
+ */ 
+function textAreaEditEnabler() {
+    for (var i=1; i< Nsentences; i++) {
+        document.getElementById("textarea"+i).readOnly = false;
     }
 }
 
@@ -400,7 +429,7 @@ function droppingDisabler() {
  * Hide "Add new sentence" button from end-user
  */ 
 function addNewSentenceDisabler() {
-    document.getElementById("add_sentence_box").style.display = 'none'
+    document.getElementById("add_sentence_box").style.display = 'none';
 }
 
 /**
@@ -706,7 +735,11 @@ $("#add_sentence_box").on("click", function() {
 
     // disable dropping
     if (disableDropping) { // hide dropping button from end-user
-        droppingDisabler()
+        droppingDisabler();
+    }
+    // disable editing
+    if (disableEditing) {
+        textAreaEditDisabler();
     }
 });
 
