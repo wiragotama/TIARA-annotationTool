@@ -516,8 +516,8 @@ $("#rel_to_excel").on('click', function(event) {
 
         // convert to csv format
         var filename = $(".essay-code .col-md-10 #essay_code").text().trim();
-        text = relationToCSV(Nsentences, filename)
-        download(filename+".csv", text);
+        text = relationToTSV(Nsentences, filename, "\t")
+        download(filename+"_rels.tsv", text);
 
         alert("Refresh the page after the download is complete!")
     }
@@ -1052,22 +1052,22 @@ function adjMatrixRelLabel(numberOfSentences) {
 }
 
 /**
- * Format annotated relations into excel (csv) output
+ * Format annotated relations into excel (tsv) output
  * @param{int} numberOfSentences
  * @param{string} essayCode
  */
-function relationToCSV(numberOfSentences, essayCode) {
+function relationToTSV(numberOfSentences, essayCode, separator) {
     adjMatrix = adjMatrixRelLabel(numberOfSentences);
     if (mode=="debug") {
         console.log("RELATION MATRIX");
         console.log(adjMatrix);
         console.log("------\n");
     }
-    var outputText = "essay code, source, target, relation\n";
+    var outputText = "essay code" + separator + "source" + separator + "target" + separator + "relation\n";
     for (var i=1; i < numberOfSentences; i++) {
         for (var j=1; j < numberOfSentences; j++) {
             if (i!=j) { 
-                outputText += essayCode + "," + i + "," + j + "," + adjMatrix[i][j] + "\n";
+                outputText += essayCode + separator + i + separator + j + separator + adjMatrix[i][j] + "\n";
             }
         }
     }

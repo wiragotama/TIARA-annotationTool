@@ -53,7 +53,7 @@ In conclusion, I encourage banning smoking in all restaurants.
 ## Update!!
 - ```2021/01/21```: There is a new ```Add New Sentence``` button at the bottom of the ```normal view```. This button is dedicated for educational uses. For example, a teacher asks a student to add more sentences to support their argument. Another example is when the teacher asks the student to merge two or more sentences as a single opinion. In this case, the student may "drop" those two or more sentences, and then create a new merged sentence. 
 - ```2021/01/21```: You can now shrink and enlarge the hierarchical view
-- ```2020/10/03```: TIARA can now open ```.tsv``` file that results from ```Format file to excel``` menu. Please note that the indentation and history do not present in the ```.tsv``` format.
+- ```2020/10/03```: TIARA can now open ```.tsv``` file that results from ```Format file to TSV``` menu. Please note that the indentation and history do not present in the ```.tsv``` format.
 
 ## License 
 [MIT](https://opensource.org/licenses/MIT)
