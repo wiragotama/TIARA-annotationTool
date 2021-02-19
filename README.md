@@ -3,14 +3,29 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
 [![version](https://img.shields.io/badge/version-2.0-red.svg)](https://semver.org) 
 
-Annotation tool described in [our paper at LRE2021](.pdf). Please kindly cite the following paper when you use this tool. **You can use this tool freely**, but it would be appreciated if you could send me a courtesy [email](https://wiragotama.github.io) so I could survey what kind of tasks the tool is used for. 
+Annotation tool described in [our paper at LREC2020](http://www.lrec-conf.org/proceedings/lrec2020/pdf/2020.lrec-1.854.pdf). Please kindly cite the following paper when you use this tool. **You can use this tool freely**, but it would be appreciated if you could send me a courtesy [email](https://wiragotama.github.io) so I could survey what kind of tasks the tool is used for. 
+
 
 ```
-@article{putra-etal-2021-tiarav2,
+@inproceedings{putra-etal-2020-tiara,
+    title = "{TIARA}: A Tool for Annotating Discourse Relations and Sentence Reordering",
+    author = "Putra, Jan Wira Gotama  and
+      Teufel, Simone  and
+      Matsumura, Kana  and
+      Tokunaga, Takenobu",
+    booktitle = "Proceedings of The 12th Language Resources and Evaluation Conference",
+    month = may,
+    year = "2020",
+    address = "Marseille, France",
+    publisher = "European Language Resources Association",
+    url = "https://www.aclweb.org/anthology/2020.lrec-1.854",
+    pages = "6912--6920",
+    language = "English",
+    ISBN = "979-10-95546-34-4",
 }
 ```
 
->Jan Wira Gotama Putra, Simone Teufel, Kana Matsumura, and Takenobu Tokunaga....
+>Jan Wira Gotama Putra, Simone Teufel, Kana Matsumura, and Takenobu Tokunaga. TIARA: A Tool for Annotating Discourse Relations and Sentence Reordering. Proceedings of the 12th International Conference on Language Resources and Evaluation (LREC), pp. 6914--6922, Marseille, France, May 2020.
 
 ## How to Use
 - Fork, clone or download (+unpack) this repository
@@ -36,7 +51,6 @@ But, I firmly support banning smoking in restaurants because we need to prioriti
 Some restaurants are indeed popular, especially among old men, because they allow people to smoke.
 In conclusion, I encourage banning smoking in all restaurants.
 
-
 ``` 
 
 ## Important
@@ -45,7 +59,12 @@ In conclusion, I encourage banning smoking in all restaurants.
 - If you are looking for the older version of TIARA, visit <https://github.com/wiragotama/TIARAv1>
 
 ## Update!!
-NA
+Since we published the LREC paper above, we have made the following updates to the tool.
+
+- ```2020/02/19```: The tool now support the annotation of sentence categories.
+- ```2021/01/21```: There is a new ```Add New Sentence``` button at the bottom of the ```text view```. This button is dedicated for educational uses. For example, a teacher asks a student to add more sentences to support their argument. Another example is when the teacher asks the student to merge two or more sentences as a single opinion. In this case, the student may "drop" those two or more sentences, and then create a new merged sentence. 
+- ```2021/01/21```: You can now shrink and enlarge the hierarchical view
+- ```2020/10/03```: TIARA can now open ```.tsv``` file that results from ```Format file to TSV``` menu. Please note that the indentation and history do not present in the ```.tsv``` format.
 
 ## License 
 [MIT](https://opensource.org/licenses/MIT)
