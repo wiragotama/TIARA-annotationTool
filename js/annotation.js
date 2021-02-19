@@ -395,6 +395,7 @@ function tsvFileFormatting(filename, content) {
     // project sentences into skeleton
     for (var i=0; i < infos.length; i++) {
         row = infos[i].split("\t");
+        alert(row);
         sentence_id = row[1];
         sentence_text = row[2];
         if (!compatibilityModeFlag) {
@@ -410,7 +411,7 @@ function tsvFileFormatting(filename, content) {
             }
             var newNodeSentence = document.createElement("div");
             newNodeSentence.className = "flex-item";
-            newNodeSentence.id = "sentence"+(i+1);
+            newNodeSentence.id = "sentence"+(sentence_id);
             sentenceFormat = replaceAll(sentenceContainerHTMLTemplate, "\\[PUT_SENTENCE_NUMBER_HERE\\]", sentence_id);
             sentenceFormat = replaceAll(sentenceFormat, "\\[PUT_SENTENCE_TEXT_HERE\\]", sentence_text);
 
