@@ -8,7 +8,7 @@ var disableEditing = false; // {true, false}; set true to enable editing boxes' 
 var disableAddNewSentence = false; // {true, false}; set true to disable "Add New Sentence" function
 var disableLinking = false; // {true, false}; set false if you do not annotate relations between sentences
 var disableSentenceCategorization = false; // {true, false}; set true to disable sentence categorization function
-var allowIntermediarySave = true; // {true, false}; set false (suggested) if you allow the annotator to save only when the annotation is done; true if the annotator can save midway
+var allowIntermediarySave = false; // {true, false}; set false (suggested) if you allow the annotator to save only when the annotation is done; true if the annotator can save midway
 
 /** 
  * Relations and their color
