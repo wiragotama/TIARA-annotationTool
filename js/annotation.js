@@ -395,7 +395,6 @@ function tsvFileFormatting(filename, content) {
     // project sentences into skeleton
     for (var i=0; i < infos.length; i++) {
         row = infos[i].split("\t");
-        alert(row);
         sentence_id = row[1];
         sentence_text = row[2];
         if (!compatibilityModeFlag) {
