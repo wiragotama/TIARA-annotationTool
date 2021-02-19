@@ -176,3 +176,32 @@ footer {
 	text-align: center;
 	align-items: center;
 }
+
+/* TO DO: NEW FEATURE */
+.sentence-category {
+	padding-left: -20px;
+}
+
+.sentence-box-col-padding {
+	width: 5%;
+}
+
+.footer {
+	padding-top: 100px;
+	text-align: center;
+	color: gray;
+	font-style: italic;
+}
+
+.footer a {
+	color: gray;
+}
+
+#compatibility-mode {
+	padding: 5px;
+	background-color: orange;
+	text-align: center;
+	font-weight: bold;
+	margin-bottom: 20px;
+	visibility: hidden;
+}

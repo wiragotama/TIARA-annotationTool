@@ -1,7 +1,7 @@
 /*
  * Annotation-js
  *
- * (c) 2019 Jan Wira Gotama Putra
+ * (c) 2021 Jan Wira Gotama Putra
  * https://github.com/wiragotama
  * This file (and the whole tool) may be freely distributed under the MIT license.
  *
@@ -17,8 +17,6 @@ var arrowLocation = 0.95;
 var arrowWidth = 20;
 var arrowLength = 12;
 var dotRadius = 8;
-// var rectangleWidth = 15;
-// var rectangleHeight = 15;
 var defaultConnectionColor = "lightgray";
 var defaultConnectedColor = "yellow";
 var defaultHoverColor = "orange";
@@ -28,10 +26,14 @@ var defaultTarget = "";
 var defaultRelation = "";
 var noRelationSymbol = "n"; // no relation between a pair of sentences
 var Nsentences = -1; // global variable, number of sentences in the window, the text body starts from unit 1
+var compatibilityModeFlag = false; // this means the loaded file was annotated using the previous version of TIARA; What's different here? (1) The way to convert file to TSV, (2) automatically set disableSentenceCategorization=false (override user's config)
+var defaultSentenceCategory = " "; // this is when a category has not been assigned to a sentence
+
 /** 
  * Default config, can be changed based on your preference
  */
 var mode = "production"; // {"debug", "production"}
+
 /** 
  * Some parameters are defined in annotation-globalsetting.js (users can change it as they like, so we split the script in order to prevent users changing other things here) 
  * 
@@ -39,9 +41,12 @@ var mode = "production"; // {"debug", "production"}
  * var disableReordering
  * var disableEditing
  * var disableAddNewSentence
+ * var disableLinking
+ * var disableSentenceCategorization
  * var availableRels
  * var relColors
  * var relDirections
+ * var sentenceCategories
  */
 
 /**
@@ -149,31 +154,40 @@ function droppingListener() {
             $("#sentence"+sentenceNumber).addClass('hide-text').removeClass('show-text');
             $("#textarea"+sentenceNumber).addClass('hide-text').removeClass('show-text');
             $("#annotation"+sentenceNumber).addClass('hide-text-dropping').removeClass('show-text-dropping');
+            if (!disableSentenceCategorization) {
+                $("#sentenceCategory"+sentenceNumber).addClass('hide-text').removeClass('show-text');
+                sentenceCategoryToDefault(sentenceNumber); // remove sentence category when dropping happens
+            }
             
             // drop relations when dropping sentence
-            inboundConn = jsPlumb.getConnections({target: "sentence"+sentenceNumber});
-            outboundConn = jsPlumb.getConnections({source: "sentence"+sentenceNumber});
-            if (mode=="debug") {alert("Number of inbound connections "+inboundConn.length);}
-            for (var i=0; i < inboundConn.length; i++) {
-                dropRelationLabelDOM(inboundConn[i].sourceId, inboundConn[i].targetId);
-                jsPlumb.deleteConnection(inboundConn[i]);
-                setSourceEndpointColor(inboundConn[i].sourceId, defaultConnectionColor);
+            if (!disableLinking) {
+                inboundConn = jsPlumb.getConnections({target: "sentence"+sentenceNumber});
+                outboundConn = jsPlumb.getConnections({source: "sentence"+sentenceNumber});
+                if (mode=="debug") {alert("Number of inbound connections "+inboundConn.length);}
+                for (var i=0; i < inboundConn.length; i++) {
+                    dropRelationLabelDOM(inboundConn[i].sourceId, inboundConn[i].targetId);
+                    jsPlumb.deleteConnection(inboundConn[i]);
+                    setSourceEndpointColor(inboundConn[i].sourceId, defaultConnectionColor);
+                }
+                if (mode=="debug") {alert("Number of outbound connections "+outboundConn.length);}
+                for (var i=0; i < outboundConn.length; i++) {
+                    dropRelationLabelDOM(outboundConn[i].sourceId, outboundConn[i].targetId);
+                    jsPlumb.deleteConnection(outboundConn[i]);
+                }
+                setSourceEndpointColor("sentence"+sentenceNumber, defaultConnectionColor);
             }
-            if (mode=="debug") {alert("Number of outbound connections "+outboundConn.length);}
-            for (var i=0; i < outboundConn.length; i++) {
-                dropRelationLabelDOM(outboundConn[i].sourceId, outboundConn[i].targetId);
-                jsPlumb.deleteConnection(outboundConn[i]);
-            }
-            setSourceEndpointColor("sentence"+sentenceNumber, defaultConnectionColor);
             $("#dropping"+sentenceNumber).val("drop");
         }
-        else {
+        else { 
             if (mode=="debug") {alert(checkboxId+" is unchecked");}
             addLogRecord("Un-drop", sentenceNumber);
             $("#sentence"+sentenceNumber).addClass('show-text').removeClass('hide-text');
             $("#textarea"+sentenceNumber).addClass('show-text').removeClass('hide-text');
             $("#annotation"+sentenceNumber).addClass('show-text-dropping').removeClass('hide-text-dropping');
             $("#dropping"+sentenceNumber).val("non-drop");
+            if (!disableSentenceCategorization) {
+                $("#sentenceCategory"+sentenceNumber).addClass('show-text').removeClass('hide-text');
+            }
         }
     });
 }
@@ -206,16 +220,25 @@ $("#load-file").on('change', function(event) {
                     plainTextFormatting(file.name, content);
                 }
                 else if (file.type=="text/tab-separated-values") {
-                    tsvFileFormatting(file.name, content);
+                    tsvFileFormatting(file.name, content); // backward compatibility check is included here
                 }
                 else { // xml (backwards compatibility for the preliminary version of TIARA) or html
                     document.getElementsByClassName('draggable-area')[0].innerHTML = content;
                     updateColorLegend();
+                    verdict = checkHTMLfileCompatibilityMode(); // backward compatibility check
+                    if (!verdict) { //corrupt file
+                        location.reload();
+                    }
                 }
 
                 // initialization
                 $('#main-area').show();
                 Nsentences = document.getElementsByClassName("flex-item").length + 1; // unit index starts from 1
+
+                // for text only
+                if (file.type=="text/plain") {
+                    initializeSentenceCategorySelection(Nsentences);
+                }
 
                 // disable or enable functions
                 if (disableDropping) { // hide dropping buttons from end-user
@@ -224,18 +247,24 @@ $("#load-file").on('change', function(event) {
                 if (disableAddNewSentence) { // hide add new sentence button from end-user
                     addNewSentenceDisabler();
                 }
-                if (disableEditing) {
+                if (disableEditing) { // disable textarea editing
                     textAreaEditDisabler();
                 }
                 else {
-                    textAreaEditEnabler();
+                    textAreaEditEnabler(); // enable text editing
                 }
-
+                if (disableSentenceCategorization) { // disable sentence categorization
+                    sentenceCategoryDisabler();
+                }
+                // JsPlumb, disable linking and reordering is handled inside this function
                 initializeJsPlumb(Nsentences);
+
                  // events binding
                 connectionEventBinding();
                 droppingListener();
                 textareaEventBinding(); // change the textarea content in the DOM, so we can reflect editing changes in tree view directly
+                sentenceCategoryEventBinding();
+
                 // etc
                 addLogRecord("Load", file.name);
                 document.getElementById("essay_code_hierarchical").innerHTML = document.getElementById("essay_code").innerHTML; // putting essay code in the hierarchical view
@@ -251,6 +280,7 @@ $("#load-file").on('change', function(event) {
     }
 });
 
+
 /**
  * Event handling for textarea
  */
@@ -261,6 +291,7 @@ function textareaEventBinding() {
             if (mode=="debug") {
                 console.log("Editing", event.target.id);
             }
+            // would be nice if we put the textediting to log but I don't think it's important
         });
     }
 }
@@ -306,7 +337,7 @@ function prepXMLskeleton(filename) {
     header = replaceAll(essayCodeHTMLTemplate, "\\[ESSAY_CODE_HERE\\]", filename.split(".")[0]);
     xmlText = xmlText + header + "\n";
     xmlText = xmlText + '\<div class="flex-container" id="flex-container"\>';
-    xmlText = xmlText + '\<\/div\>';
+    xmlText = xmlText + '\<\/div\>\n';
     document.getElementsByClassName('draggable-area')[0].innerHTML = xmlText;
 
     // add relation legend
@@ -351,6 +382,9 @@ function plainTextFormatting(filename, content) {
 function tsvFileFormatting(filename, content) {
     // preparation
     infos = content.split("\n")
+    header = infos[0];
+    checkTSVfileCompatibilityMode(header);
+
     infos.shift() // remove the header
     infos.pop() // remove trailing underline
 
@@ -360,12 +394,15 @@ function tsvFileFormatting(filename, content) {
 
     // project sentences into skeleton
     for (var i=0; i < infos.length; i++) {
-        row = infos[i].split("\t")
-        sentence_id = row[1]
-        sentence_text = row[2]
-        target_id = row[3]
-        relLabel = row[4]
-        acFlag = row[5].toLowerCase()
+        row = infos[i].split("\t");
+        sentence_id = row[1];
+        sentence_text = row[2];
+        if (!compatibilityModeFlag) {
+            sentence_category = row[3];
+        }
+        target_id = compatibilityModeFlag ? row[3]: row[4];
+        relLabel = compatibilityModeFlag ? row[4]: row[5];
+        acFlag = compatibilityModeFlag ? row[5].toLowerCase(): row[6].toLowerCase();
 
         if (sentence_text!="") {
             if (sentence_text[0]=="\"" && sentence_text[sentence_text.length-1]=="\"") {
@@ -388,12 +425,19 @@ function tsvFileFormatting(filename, content) {
         }
         document.getElementById("flex-container").appendChild(newNodeSentence);
 
+        // category selection
+        if (!disableSentenceCategorization) {
+            addSentenceCategorySelection(sentence_id);
+            $("#sentenceCategory"+sentence_id+" option[value="+sentence_category+"]").attr('selected', 'selected');
+        }
+
         // dropping
         if (acFlag == "true") {
             document.getElementById("dropping"+sentence_id).value = "drop"; // trigger dropping event
             document.getElementById("annotation"+sentence_id).classList.add("hide-text-dropping");
             document.getElementById("sentence"+sentence_id).classList.add("hide-text");
             document.getElementById("textarea"+sentence_id).classList.add("hide-text");
+            document.getElementById("sentenceCategory"+sentence_id).classList.add('hide-text');
         }
     }
 }
@@ -417,7 +461,7 @@ function textAreaEditDisabler() {
 }
 
 /**
- * Disable editing textarea
+ * Enable editing textarea
  */ 
 function textAreaEditEnabler() {
     for (var i=1; i< Nsentences; i++) {
@@ -466,12 +510,20 @@ function initializeJsPlumb(Nsentences) {
             });
         }
 
-        // create Endpoints for each sentence
-        createEndpoints(Nsentences);
+        if (!disableLinking) { // linking function permitted
+            // create Endpoints for each sentence
+            createEndpoints(Nsentences);
 
-        // create existing relation information
-        for (var i=1; i < Nsentences; i++) {
-            paintExistingConnection(i);
+            // create existing relation information
+            for (var i=1; i < Nsentences; i++) {
+                paintExistingConnection(i);
+            }
+        }
+        else {
+            // if dropping is previously
+            for (var i=1; i < Nsentences; i++) {
+                paintExistingConnection(i);
+            }
         }
     });
 }
@@ -488,13 +540,13 @@ $("#save_menu").on('click', function(event) {
         event.preventDefault(); //do not refresh the page
         addLogRecord("Save");
 
-        // handling textarea
-        for (var i=1; i < Nsentences; i++) {
-            document.getElementById("textarea"+i).innerHTML = $("#textarea"+i).val();
+        if (!disableLinking) {
+            cut = document.getElementsByClassName('draggable-area')[0].innerHTML.indexOf("div class=\"jtk-endpoint"); // JsPlumb trailing info
+            text = document.getElementsByClassName('draggable-area')[0].innerHTML.substring(0, cut-1);
         }
-
-        var cut = document.getElementsByClassName('draggable-area')[0].innerHTML.indexOf("div class=\"jtk-endpoint");
-        var text = document.getElementsByClassName('draggable-area')[0].innerHTML.substring(0, cut-1);
+        else { // no connection endpoints, so don't cut JsPlumb trailing info
+            text = document.getElementsByClassName('draggable-area')[0].innerHTML;
+        }
         var filename = $(".essay-code .col-md-10 #essay_code").text().trim() + "-annotated.html";
         download(filename, text);
 
@@ -503,7 +555,7 @@ $("#save_menu").on('click', function(event) {
 });
 
 /**
- * Save relations existing in essay into a local excel (csv) file, this is using inter-annotator agreement format
+ * Save relations existing in essay into a local excel (tsv) file, this is using inter-annotator agreement format
  */
 $("#rel_to_excel").on('click', function(event) {
     if (mode=="debug") {
@@ -512,7 +564,7 @@ $("#rel_to_excel").on('click', function(event) {
 
     if (allowIntermediarySave || (!allowIntermediarySave && isFullAnnotation() && checkRepairFormat() && !checkTemporaryPresence())) {
         event.preventDefault(); // do not refresh the page
-        addLogRecord("RelationStructure-to-excel");
+        addLogRecord("Expert-relation-to-TSV");
 
         // convert to csv format
         var filename = $(".essay-code .col-md-10 #essay_code").text().trim();
@@ -533,12 +585,18 @@ $("#annotation_to_excel").on('click', function(event) {
 
     if (allowIntermediarySave || (!allowIntermediarySave && isFullAnnotation() && checkRepairFormat() && !checkTemporaryPresence())) {
         event.preventDefault(); //do not refresh the page
-        addLogRecord("Annotation-to-excel");
+        addLogRecord("Export-file-to-TSV");
 
         // convert to TSV format
         var filename = $(".essay-code .col-md-10 #essay_code").text().trim();
-        text = annotationToTSV(filename)
-        download(filename+".tsv", text);
+        if (compatibilityModeFlag) {
+            text = annotationToTSVBackwardCompatible(filename);
+            download(filename+"_backward_compatible.tsv", text);
+        }
+        else {
+            text = annotationToTSV(filename);
+            download(filename+".tsv", text);
+        }
 
         alert("Refresh the page after the download is complete!")
     }
@@ -575,9 +633,15 @@ $("#tree_view").on('click', function(event) {
     for (var i=1; i < Nsentences; i++) {
         var node = new Object()
         relName = document.getElementById("relation"+i).textContent;
+        if (disableSentenceCategorization) { // to prevent DOM search error
+            categoryName = "";
+        }
+        else {
+            categoryName = document.getElementById("sentenceCategory"+i).value;
+        }
         node.text = { 
-            desc: (relName!="") ? "["+relName+"]" : "",
-            name: i +". " + document.getElementById("textarea"+i).textContent.trim(),
+            desc: ((disableSentenceCategorization) ? "": "[" + categoryName + "] ")   +  ((relName!="") ? "("+ relName + ")" : ""),
+            name: i +". " + document.getElementById("textarea"+i).textContent.trim(), 
         };
         node.HTMLclass = "hierSent"+i;
         nodes.push(node);
@@ -605,7 +669,7 @@ $("#tree_view").on('click', function(event) {
         console.log("visualization definition");
         console.log(visualization);
     }
-    tree = new Treant( visualization ); // hopefully the garbage collector works well
+    tree = new Treant( visualization ); // pray the garbage collector works well
     
     // change the description color according to the relation it is involved in
     for (var i=1; i <Nsentences; i++) {
@@ -624,8 +688,7 @@ $('#visualization-download-btn').on("click", function() {
         // Create clone of element
         var clone = element.cloneNode(true);
 
-        // Position element relatively within the 
-        // body but still out of the viewport
+        // Position element relatively within the body but still out of the viewport
         var style = clone.style;
         style.position = 'relative';
         style.top = window.innerHeight + 'px';
@@ -719,19 +782,12 @@ $("#add_sentence_box").on("click", function() {
     newNodeSentence.innerHTML = sentenceFormat;
     document.getElementById("flex-container").appendChild(newNodeSentence);
 
-    // endpoint for connections
-    jsPlumb.addEndpoint("sentence"+newSentenceIdx, inBound, {uuid:"ib"+newSentenceIdx}); 
-    jsPlumb.addEndpoint("sentence"+newSentenceIdx, outBound, {uuid:"ob"+newSentenceIdx});
+    // sucessful addition
+    Nsentences += 1
 
     // event binding
     droppingListener();
     textareaEventBinding();
-
-    // log
-    addLogRecord("Add-new-sentence", newSentenceIdx);
-
-    // sucessful addition
-    Nsentences += 1
 
     // disable dropping
     if (disableDropping) { // hide dropping button from end-user
@@ -741,14 +797,30 @@ $("#add_sentence_box").on("click", function() {
     if (disableEditing) {
         textAreaEditDisabler();
     }
+    // disable or enable sentence categorization, has to be here before the endpoint is drawn
+    if (!disableSentenceCategorization) {
+        addSentenceCategorySelection(newSentenceIdx);
+        sentenceCategoryChangeListener(newSentenceIdx);
+    }
+    else {
+        sentenceCategoryDisabler();
+    }
+    // endpoint for connections
+    if (!disableLinking) {
+        jsPlumb.addEndpoint("sentence"+newSentenceIdx, inBound, {uuid:"ib"+newSentenceIdx}); 
+        jsPlumb.addEndpoint("sentence"+newSentenceIdx, outBound, {uuid:"ob"+newSentenceIdx});
+    }
+
+    // log
+    addLogRecord("Add-new-sentence", newSentenceIdx);
 });
 
 /********* END GLOBAL PARAMETERS AND INITIALIZATION *********/
 
 
 /**
- * Check (shallowly) whether the annotators has finished the annotation
- * Definition: each sentence has outgoing connections (incoming otherwise) or dropped if no connection; OR all sentences are dropped. Only one node (non-dropped) has no outgoing connection at maximum
+ * Check (probably rather shallow) whether the annotators has finished the annotation
+ * Definition: each sentence has outgoing connections (incoming otherwise) or dropped if no connection; OR all sentences are dropped. Only one node (non-dropped) has no outgoing connection at maximum. Non-dropped sentences should have sentence categories
  */
 function isFullAnnotation() {
     var verdict = []; 
@@ -758,6 +830,7 @@ function isFullAnnotation() {
     var allNodesHaveConnection = true;
     var outgoingCount = 0;
     var dropCount = false;
+    var sentenceWithoutLabel = [];
 
     // initialization
     for (var i=0; i < Nsentences; i++) {
@@ -772,71 +845,113 @@ function isFullAnnotation() {
         var target = $("#target"+i).text();
         var relation = $("#relation"+i).text();
         var dropping = $("#dropping"+i).val();
+        var sentCategory = $("#sentenceCategory"+i).val();
         // console.log(getSentenceIdNumber(target)+","+relation+","+dropping);
         if (dropping == "non-drop") {
-            if (target != defaultTarget && relation !=defaultRelation) {
+            if (target!=defaultTarget && relation!=defaultRelation) {
                 outgoingFlag[i] = true;
                 incomingFlag[parseInt(getSentenceIdNumber(target))] = true;
                 outgoingCount += 1;
             }
+            if (!disableSentenceCategorization && (sentCategory==null || sentCategory==defaultSentenceCategory)) { //not dropped but no label
+                sentenceWithoutLabel.push(i);
+            }
         }
-        else {
+        else { 
             droppingFlag[i] = true;
             dropCount += 1;
             outgoingCount += 1;
+
         }
     }
 
     if (dropCount == Nsentences-1) { // all dropped
+        if (mode=="debug") {
+            alert("save case 1: all dropped");
+        }
         return true;
     }
     else {
-        // annotation checking
-        message = "You have not connected the following sentences: ";
-        var first = true;
-        for (var i=1; i < Nsentences; i++) {
-            verdict[i] = droppingFlag[i] || (!droppingFlag[i] && (incomingFlag[i] || outgoingFlag[i]));
-            allNodesHaveConnection = allNodesHaveConnection && verdict[i];
-
-            if (!verdict[i]) {
-                if (first) {
-                    message = message + i;
+        // check sentence without label
+        if (!disableSentenceCategorization && sentenceWithoutLabel.length > 0) { 
+            message = "You have not assigned the categories of the following sentences: ";
+            for (var i=0; i < sentenceWithoutLabel.length; i++) {
+                if (i==0) {
+                    message = message + sentenceWithoutLabel[i];
                 }
                 else {
-                    message = message + ", " + i;
+                    message = message + ", " + sentenceWithoutLabel[i];
                 }
-                first = false;
             }
+            alert(message);
+            return false;
         }
 
-        if (!allNodesHaveConnection) { // Unconnected nodes
-            message = "You cannot save/visualize the hierarchical structure because your annotation is incomplete!\n"+message;
-            alert(message);
+        // check links
+        if (disableLinking) {
+            if (mode=="debug") {
+                alert("save case 3: non-dropped are categorized");
+            }
+            return true
         }
         else {
-            // how many nodes have outgoing connection
-            if (outgoingCount == Nsentences-2) { // index starts from 1 and one unit acts as a root, so -2
-                return allNodesHaveConnection;
+            if (dropCount == Nsentences-2) { // only one sentence left, and that sentence has been labelled
+                if (mode=="debug") {
+                    alert("save case 4: only one sentence left");
+                }
+                return true;
             }
-            else {
-                message = "Only one non-dropped sentences is allowed not to have outgoing connection!\n"
-                message = message + "The following sentences have no outgoing connection: "
+            else { // check links
+                message = "You have not connected the following sentences: ";
                 var first = true;
                 for (var i=1; i < Nsentences; i++) {
-                    if (!droppingFlag[i] && !outgoingFlag[i]) {
+                    verdict[i] = droppingFlag[i] || (!droppingFlag[i] && (incomingFlag[i] || outgoingFlag[i]));
+                    allNodesHaveConnection = allNodesHaveConnection && verdict[i];
+                    if (!verdict[i]) {
                         if (first) {
-                            first = false;
-                            message = message + i; 
+                            message = message + i;
                         }
                         else {
                             message = message + ", " + i;
                         }
+                        first = false;
                     }
                 }
-                alert(message);
-                return false;
-            }
-        }
+
+                if (!allNodesHaveConnection) { // Unconnected nodes
+                    message = "You cannot save because your annotation is incomplete!\n"+message;
+                    alert(message);
+                    return false;
+                }
+                else {
+                    // how many nodes have outgoing connection
+                    if (outgoingCount == Nsentences-2) { // index starts from 1 and one unit acts as a root, so -2
+                        if (mode=="debug") {
+                            alert("save case 5: all sentences categorized or dropped, check if all nodes have outgoing connections");
+                        }
+                        return allNodesHaveConnection;
+                    }
+                    else {
+                        message = "Only one non-dropped sentences is allowed not to have outgoing connection!\n"
+                        message = message + "The following sentences have no outgoing connection: "
+                        var first = true;
+                        for (var i=1; i < Nsentences; i++) {
+                            if (!droppingFlag[i] && !outgoingFlag[i]) {
+                                if (first) {
+                                    first = false;
+                                    message = message + i; 
+                                }
+                                else {
+                                    message = message + ", " + i;
+                                }
+                            }
+                        }
+                        alert(message);
+                        return false;
+                    }
+                }
+            } // end check links
+        } 
     }
 }
 
@@ -1081,6 +1196,40 @@ function relationToTSV(numberOfSentences, essayCode, separator) {
 function annotationToTSV(essayCode) {
     var outputText = ""
     if (disableDropping)
+        outputText = "essay code\t unit ID\t text\t unit category\t target\t relation\n"; // header;
+    else
+        outputText = "essay code\t unit ID\t text\t unit category\t target\t relation\t drop flag\n"; // header;
+    
+    var items = document.getElementsByClassName("flex-item");
+    for (i = 0; i < items.length; i++) {
+        sentenceID  = parseInt(items[i].getElementsByClassName("sentence-id-number")[0].textContent);
+        text        = document.getElementById("textarea"+sentenceID).textContent.trim();
+        sentCategory= document.getElementById("sentenceCategory"+sentenceID).value;
+        target      = getSentenceIdNumber(document.getElementById("target"+sentenceID).textContent);
+        relation    = document.getElementById("relation"+sentenceID).textContent;
+        
+        if (!disableDropping) {
+            dropStr     = document.getElementById("dropping"+sentenceID).value;
+            if (dropStr == "non-drop")
+                dropFlag = false;
+            else dropFlag = true;
+        }
+
+        if (disableDropping)
+            outputText += essayCode + "\t" + sentenceID + "\t\"" + text + "\"\t\"" + sentCategory + "\"\t" + target + "\t" + relation + "\n";
+        else 
+            outputText += essayCode + "\t" + sentenceID + "\t\"" + text + "\"\t\"" + sentCategory + "\"\t" + target + "\t" + relation + "\t" + dropFlag + "\n";
+    }
+    return outputText;
+}
+
+/**
+ * Extract annotated file in TSV format (old format)
+ * @param{string} essayCode
+ */
+function annotationToTSVBackwardCompatible(essayCode) {
+    var outputText = ""
+    if (disableDropping)
         outputText = "essay code\t unit ID\t text\t target\t relation\n"; // header;
     else
         outputText = "essay code\t unit ID\t text\t target\t relation\t drop flag\n"; // header;
@@ -1307,6 +1456,20 @@ function paintExistingConnection(sourceIdx) {
 }
 
 /**
+ * Paint dropping checkbox
+ * @param{integer} sourceIdx, corresponds to original index (order) of sentence
+ */
+function paintExistingDroppingCheckbox(sourceIdx) {
+    var retval = getRelationInfoByDOM(sourceIdx);
+    if (retval[2] == "non-drop") {
+        document.getElementById("dropping"+sourceIdx).checked = false;
+    }
+    else {
+        document.getElementById("dropping"+sourceIdx).checked = true;
+    }
+}
+
+/**
  * Determining the proper visualization relation color for each dependency relation type (this function is just a mapping)
  * @param{string}   relationLabel, defined as elements of availableRels (variable)
  * @return{string}  color, defined by relColors
@@ -1410,6 +1573,184 @@ function getCurrentOrdering() {
 /**
  * Tempalate variables for text formatting (better not modify this unless you are the developer)
  */
-essayCodeHTMLTemplate = '\<!-- Essay Code --\> \n \<div class="row essay-code"\> \n \t \<div class="row"\> \n \t \t \<div class="col-md-10"\> \n \t \t \t \<h4 id="essay_code"\> [ESSAY_CODE_HERE] \</h4\> \n \t \t \</div\> \n \t \t \<div class="col-md-2 legend"\> \n \t \t \t \<p\> [Legend] \</p\> \n \t \t \</div\> \n \t \</div\> \n \t \<div class="row color-legend col-lg-12" id="color-legend"\> \n \t \</div\> \n \</div\> \<br\> \n'
-sentenceContainerHTMLTemplate = '\<span class="col-md-1 sentence-id-number"\> \n \t [PUT_SENTENCE_NUMBER_HERE] \n \</span\> \n \<span class="col-md-10"\> \n \t \<textarea id="textarea[PUT_SENTENCE_NUMBER_HERE]"\>[PUT_SENTENCE_TEXT_HERE]\</textarea\> \n \</span\> \n \n \<span class="col-md-1 sentence-side-menu" id="annotation[PUT_SENTENCE_NUMBER_HERE]"\> \n \t \<table\> \n \t \t \<tr\> \n \t \t \t \<td\> \n \t \t \t \t \<span class="input-number hide" id="target[PUT_SENTENCE_NUMBER_HERE]"\>\</span\> \n \t \t \t \t \<span class="input-relation hide" id="relation[PUT_SENTENCE_NUMBER_HERE]"\>\</span\> \n \t \t \t \t \<span\> \n \t \t \t \t \t \<Label class="drop-label"\> Drop? \</Label\> \n \t \t \t \t \t \<input type="checkbox" id="dropping[PUT_SENTENCE_NUMBER_HERE]" name="drop" value="non-drop"/\> \n \t \t \t \t \</span\> \n \t \t \t \</td\> \n \t \t \</tr\> \n \t \t \<tr\> \n \t \t \t \<td\> \n \t \t \t \t \<button class="movebutton" onclick="moveBoxLeft([PUT_SENTENCE_NUMBER_HERE])"\> \n \t \t \t \t \t \&laquo; \n \t \t \t \t \</button\> \n \n \t \t \t \t \<button class="movebutton" onclick="moveBoxRight([PUT_SENTENCE_NUMBER_HERE])"\> \n \t \t \t \t \t \&raquo; \n \t \t \t \t \</button\> \n \t \t \t \</td\> \n \t \t \</tr\> \n \t \</table\> \n \</span\> \n'
+essayCodeHTMLTemplate = '\<!-- Essay Code --\> \n \<div class="row essay-code"\> \n \t \<div class="row"\> \n \t \t \<div class="col-md-10"\> \n \t \t \t \<h4 id="essay_code"\> [ESSAY_CODE_HERE] \</h4\> \n \t \t \</div\> \n \t \t \<div class="col-md-2 legend"\> \n \t \t \t \<p\> [Legend] \</p\> \n \t \t \</div\> \n \t \</div\> \n \t \<div class="row color-legend col-lg-12" id="color-legend"\> \n \t \</div\> \n \</div\> \<br\> \n';
+// old template (TIARA without sentence categorization)
+// sentenceContainerHTMLTemplate = '\<span class="col-md-1 sentence-id-number"\> \n \t [PUT_SENTENCE_NUMBER_HERE] \n \</span\> \n \<span class="col-md-10"\> \n \t \<textarea id="textarea[PUT_SENTENCE_NUMBER_HERE]"\>[PUT_SENTENCE_TEXT_HERE]\</textarea\> \n \</span\> \n \n \<span class="col-md-1 sentence-side-menu" id="annotation[PUT_SENTENCE_NUMBER_HERE]"\> \n \t \<table\> \n \t \t \<tr\> \n \t \t \t \<td\> \n \t \t \t \t \<span class="input-number hide" id="target[PUT_SENTENCE_NUMBER_HERE]"\>\</span\> \n \t \t \t \t \<span class="input-relation hide" id="relation[PUT_SENTENCE_NUMBER_HERE]"\>\</span\> \n \t \t \t \t \<span\> \n \t \t \t \t \t \<Label class="drop-label"\> Drop? \</Label\> \n \t \t \t \t \t \<input type="checkbox" id="dropping[PUT_SENTENCE_NUMBER_HERE]" name="drop" value="non-drop"/\> \n \t \t \t \t \</span\> \n \t \t \t \</td\> \n \t \t \</tr\> \n \t \t \<tr\> \n \t \t \t \<td\> \n \t \t \t \t \<button class="movebutton" onclick="moveBoxLeft([PUT_SENTENCE_NUMBER_HERE])"\> \n \t \t \t \t \t \&laquo; \n \t \t \t \t \</button\> \n \n \t \t \t \t \<button class="movebutton" onclick="moveBoxRight([PUT_SENTENCE_NUMBER_HERE])"\> \n \t \t \t \t \t \&raquo; \n \t \t \t \t \</button\> \n \t \t \t \</td\> \n \t \t \</tr\> \n \t \</table\> \n \</span\> \n'
 
+// new template
+sentenceContainerHTMLTemplate = '\t \<div class="row"\> \n \t \t \<span class="col-md-1 sentence-box-col-padding"\> \n \t \t \</span\> \n \t \t \<span class="col-md-1 sentence-id-number"\> \n \t \t \t [PUT_SENTENCE_NUMBER_HERE] \n \t \t \</span\> \n \t \t \<span class="col-md-9"\> \n \t \t \t \<textarea id="textarea[PUT_SENTENCE_NUMBER_HERE]"\>[PUT_SENTENCE_TEXT_HERE]\</textarea\> \n \t \t \</span\> \n    \t \t \<span class="col-md-1 sentence-side-menu" id="annotation[PUT_SENTENCE_NUMBER_HERE]"\> \n \t \t \t \<table\> \<tbody\> \n \t \t \t \t \<tr\> \n \t \t \t \t \t \<td\> \n \t \t \t \t \t \t \<span class="input-number hide" id="target[PUT_SENTENCE_NUMBER_HERE]"\>\</span\> \n \t \t \t \t \t \t \<span class="input-relation hide" id="relation[PUT_SENTENCE_NUMBER_HERE]"\>\</span\> \n  \t \t \t \t \t \t \<span\> \n \t \t \t \t \t \t \t \<label class="drop-label"\> Drop? \</label\> \n \t \t \t \t \t \t \t \<input type="checkbox" id="dropping[PUT_SENTENCE_NUMBER_HERE]" name="drop" value="non-drop"\> \n \t \t \t \t \t \t \</span\> \n \t \t \t \t \t \</td\> \n \t \t \t \t \</tr\> \n \t \t \t \t \<tr\> \n \t \t \t \t \t \<td\> \n  \t \t \t \t \t \t \<button class="movebutton" onclick="moveBoxLeft([PUT_SENTENCE_NUMBER_HERE])"\> \n \t \t \t \t \t \t \t « \n \t \t \t \t \t \t \</button\> \n     \t \t \t \t \t \t \<button class="movebutton" onclick="moveBoxRight([PUT_SENTENCE_NUMBER_HERE])"\> \n \t \t \t \t \t \t \t » \n \t \t \t \t \t \t \</button\> \n  \t \t \t \t \t \</td\> \n \t \t \t \t \</tr\> \n \t \t \t \</tbody\>\</table\> \n  \t \t \</span\> \n \t \t \</div\> \n \t \t \<div class="row sentence-lower-menu"\> \n \t \t \t \<span class="col-md-1 sentence-box-col-padding"\> \n \t \t \t \</span\> \n \t \t \t \<select class="col-md-2 sentence-category" id="sentenceCategory[PUT_SENTENCE_NUMBER_HERE]" name="sentenceCategory[PUT_SENTENCE_NUMBER_HERE]"\> \n \t \t \t \t \<option value=" "\>\</option\> \n \t \t \t \</select\> \n \t \t \</div\> \n';
+
+
+
+/**** Sentence categorization related (the biggest update in TIARA 2.0) ****/
+
+/**
+ * Initialize sentence category selection dropdown
+ * @param{integer} Nsentences, number of sentences in the text (index starts from 1)
+ */
+function initializeSentenceCategorySelection(Nsentences) {
+    for (var i=1; i<=Nsentences; i++) {
+        addSentenceCategorySelection(i)
+    }
+}
+
+/**
+ * Initialize sentence category selection dropdown for a specific sentence
+ * @param{integer} sentenceNumber
+ */
+function addSentenceCategorySelection(sentenceNumber) {
+    for (var i=0; i < sentenceCategories.length; i++) {
+        option_string = "<option value=\""+sentenceCategories[i]+"\">"+sentenceCategories[i]+"</option>";
+        $('#sentenceCategory'+sentenceNumber).append(option_string);
+    }
+    sentenceCategoryChangeListener(sentenceNumber);
+}
+
+/**
+ * Change sentence category event
+ */
+function sentenceCategoryEventBinding() {
+    for (var i=1; i<=Nsentences; i++) {
+        sentenceCategoryChangeListener(i);
+    }
+}
+
+/**
+ * Event when sentence category is changed
+ * @param{integer} sentenceNumber
+ */
+function sentenceCategoryChangeListener(sentenceNumber) {
+    // normal change
+    $('#sentenceCategory'+sentenceNumber).change(function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+
+        option_selected = $(this).find("option:selected").attr('value');
+
+        idx = document.getElementById("sentenceCategory"+sentenceNumber).selectedIndex;
+        n = document.getElementById("sentenceCategory"+sentenceNumber).options.length;
+    
+        // remove old selection, and change the HTML
+        for (var i=0; i<n; i++) {
+            val = document.getElementById("sentenceCategory"+sentenceNumber).options[i].value;
+            if (i!=idx) {
+                $("#sentenceCategory"+sentenceNumber+" option[value=\""+val+"\"]").attr('selected', false);
+            }
+            else {
+                $("#sentenceCategory"+sentenceNumber+" option[value=\""+option_selected+"\"]").attr('selected', true);
+            }
+        }
+
+        if (mode=="debug") {
+            alert("sentence "+sentenceNumber + " category: " + option_selected);
+        }   
+
+        // record
+        addLogRecord("Sentence Category", "Sentence "+sentenceNumber+" is labelled `" + option_selected + "'");
+    });
+
+    // prevent changes when the sentnece is dropped
+    $('#sentenceCategory'+sentenceNumber).mousedown(function(e) {
+        if ($("#dropping"+sentenceNumber).is(":checked")) {
+            e.preventDefault(); // cannot change sentence category for dropped sentences
+            if (mode=="debug") {
+                alert("Cannot change the category for sentence "+sentenceNumber + " because it is dropped");
+            }
+        }
+    });
+}
+
+/**
+ * Changing sentence category to some default label
+ * @param{integer} sentenceNumber
+ */
+function sentenceCategoryToDefault(sentenceNumber) {
+    // drop all selection
+    n = document.getElementById("sentenceCategory"+sentenceNumber).options.length;
+    for (var i=0; i<n; i++) {
+        val = document.getElementById("sentenceCategory"+sentenceNumber).options[i].value;
+        $("#sentenceCategory"+sentenceNumber+" option[value=\""+val+"\"]").attr('selected', false);
+    }
+
+    document.getElementById("sentenceCategory"+sentenceNumber).selectedIndex = 0; // change to default category
+    addLogRecord("Sentence Category", "Sentence category for "+sentenceNumber+" is deleted due to dropping");
+}
+
+/**
+ * Hide sentence category selections from end-user
+ */
+function sentenceCategoryDisabler() {
+    $(".sentence-lower-menu").hide();
+}
+
+/**
+ * This is to support loading the annotations in the previous version of TIARA (without sentence categorization)
+ * Basically, we override the annotation global setting, and set disableSentenceCategorization=false
+ */
+function checkHTMLfileCompatibilityMode() {
+    Nsentences = document.getElementsByClassName("flex-item").length + 1; // unit index starts from 1
+    cnt = 0
+    for (var i=1; i < Nsentences; i++) {
+        if (document.getElementById("sentenceCategory"+i)==null) {
+            cnt += 1
+        }
+    }
+    if (cnt == Nsentences-1) { // no sentenceCategory DOM found
+        setBackwardCompatibilityMode();
+        return true;
+    }
+    else {
+        if (cnt!=0) { //  more than one sentenceCategory DOM found
+            alert("Corrupt file");
+            return false;
+        }
+        return true;
+    } 
+}
+
+/**
+ * This is to support loading the annotations in the previous version of TIARA (without sentence categorization)
+ * Basically, we override the annotation global setting, and set disableSentenceCategorization=false
+ */
+function checkTSVfileCompatibilityMode(header) {
+    header = header.split("\t");
+    if (header.length == 6) {
+        setBackwardCompatibilityMode();
+        return true
+    }
+    else {
+        return false
+    }
+}
+
+/**
+ * Helper function for backward compatibility routine
+ */
+function setBackwardCompatibilityMode() {
+    alert("The loaded file is apperent to be annotated using the previous version of TIARA (without sentence categorization), we now switch to compatibility mode!");
+    $("#compatibility-mode").css('visibility', 'visible');
+    compatibilityModeFlag = true;
+    if (mode=="debug") {
+        alert("set disableSentenceCategorization=false");
+    }
+    disableSentenceCategorization = true;
+}
+
+/**
+ * Get only the number portion of string
+ */
+function retnum(str) { 
+    var num = str.replace(/[^0-9]/g, ''); 
+    return parseInt(num,10); 
+}
+
+// TO DO: resolve conflict during saving 
+//     Check full annotation --> DONE (need more testing)
+//     TSV and conversions (relation and file) --> Seems OK
+//     saving in compatibility mode --> Seems OK
+// TO DO: can choose to activate or deactivate linking and sentence categorization independently --> DONE (but need more testing because it is connected to various functions)
+// TO DO: resolve conflict during loading
+//      Check TSV and HTML compatibility mode --> Seems OK
+// TO DO: when loading html or tsv, check backward compatibility (enable or disable backward compatibility mode in this script -- developer only)
+// TO DO: the selection event seems to be triggered twice: ONCE when a person selects, second when we change the html surface
+    // --> Not that of a big problem though, the log becomes very weird

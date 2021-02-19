@@ -1,0 +1,8 @@
+essay code	 unit ID	 text	 unit category	 target	 relation	 drop flag
+ESSAY_TRIAL_00	1	"I agree with the previous statement."	"proponent"			false
+ESSAY_TRIAL_00	2	"I have a two reasons."	" "			true
+ESSAY_TRIAL_00	3	"If somebody smokes in the restaurant, other people may not be able to enjoy the experience."	"proponent"	1	sup	false
+ESSAY_TRIAL_00	4	"However, if we ban smoking in restaurants, then those restaurants might lose some customers."	"opponent"	1	att	false
+ESSAY_TRIAL_00	6	"Some restaurants are indeed popular, especially among old men, because they allow people to smoke."	"opponent"	4	sup	false
+ESSAY_TRIAL_00	5	"But, I firmly support banning smoking in restaurants because we need to prioritise health."	"proponent"	4	att	false
+ESSAY_TRIAL_00	7	"In conclusion, I encourage banning smoking in all restaurants."	"proponent"	1	=	false

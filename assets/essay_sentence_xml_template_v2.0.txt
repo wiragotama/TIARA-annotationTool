@@ -1,0 +1,41 @@
+\t \<div class="row"\> \n
+\t \t \<span class="col-md-1 sentence-box-col-padding"\> \n
+\t \t \</span\> \n
+\t \t \<span class="col-md-1 sentence-id-number"\> \n
+\t \t \t [PUT_SENTENCE_NUMBER_HERE] \n
+\t \t \</span\> \n
+\t \t \<span class="col-md-9"\> \n
+\t \t \t \<textarea id="textarea[PUT_SENTENCE_NUMBER_HERE]"\>[PUT_SENTENCE_TEXT_HERE]\</textarea\> \n
+\t \t \</span\> \n   
+\t \t \<span class="col-md-1 sentence-side-menu" id="annotation[PUT_SENTENCE_NUMBER_HERE]"\> \n
+\t \t \t \<table\> \<tbody\> \n
+\t \t \t \t \<tr\> \n
+\t \t \t \t \t \<td\> \n
+\t \t \t \t \t \t \<span class="input-number hide" id="target[PUT_SENTENCE_NUMBER_HERE]"\>\</span\> \n
+\t \t \t \t \t \t \<span class="input-relation hide" id="relation[PUT_SENTENCE_NUMBER_HERE]"\>\</span\> \n 
+\t \t \t \t \t \t \<span\> \n
+\t \t \t \t \t \t \t \<label class="drop-label"\> Drop? \</label\> \n
+\t \t \t \t \t \t \t \<input type="checkbox" id="dropping[PUT_SENTENCE_NUMBER_HERE]" name="drop" value="non-drop"\> \n
+\t \t \t \t \t \t \</span\> \n
+\t \t \t \t \t \</td\> \n
+\t \t \t \t \</tr\> \n
+\t \t \t \t \<tr\> \n
+\t \t \t \t \t \<td\> \n 
+\t \t \t \t \t \t \<button class="movebutton" onclick="moveBoxLeft([PUT_SENTENCE_NUMBER_HERE])"\> \n
+\t \t \t \t \t \t \t « \n
+\t \t \t \t \t \t \</button\> \n    
+\t \t \t \t \t \t \<button class="movebutton" onclick="moveBoxRight([PUT_SENTENCE_NUMBER_HERE])"\> \n
+\t \t \t \t \t \t \t » \n
+\t \t \t \t \t \t \</button\> \n 
+\t \t \t \t \t \</td\> \n
+\t \t \t \t \</tr\> \n
+\t \t \t \</tbody\>\</table\> \n 
+\t \t \</span\> \n
+\t \t \</div\> \n
+\t \t \<div class="row sentence-lower-menu"\> \n
+\t \t \t \<span class="col-md-1 sentence-box-col-padding"\> \n
+\t \t \t \</span\> \n
+\t \t \t \<select class="col-md-2 sentence-category" id="sentenceCategory[PUT_SENTENCE_NUMBER_HERE]" name="sentenceCategory[PUT_SENTENCE_NUMBER_HERE]"\> \n
+\t \t \t \t \<option value=" "\>\</option\> \n
+\t \t \t \</select\> \n
+\t \t \</div\> \n
