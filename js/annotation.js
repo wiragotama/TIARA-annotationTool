@@ -433,7 +433,6 @@ function tsvFileFormatting(filename, content) {
 
         // dropping
         if (acFlag.trim() == "true") {
-            alert("dropping sentence "+sentence_id);
             document.getElementById("dropping"+sentence_id).value = "drop"; // trigger dropping event
             document.getElementById("annotation"+sentence_id).classList.add("hide-text-dropping");
             document.getElementById("sentence"+sentence_id).classList.add("hide-text");
