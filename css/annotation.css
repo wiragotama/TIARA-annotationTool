@@ -110,6 +110,7 @@ footer {
 .flex-item textarea {
 	border:1px solid #cccccc;
 	width:100%;
+	overflow-y: auto;
 }
 
 .relation-label {

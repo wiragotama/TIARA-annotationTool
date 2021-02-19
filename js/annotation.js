@@ -86,6 +86,17 @@ var outBound = {
     connectorStyle: {stroke: defaultConnectionColor, strokeStyle: defaultConnectionColor, strokeWidth: defaultStrokeWidth},
     connectorHoverStyle: {stroke: defaultHoverColor, strokeStyle: defaultHoverColor, strokeWidth: defaultStrokeHoverWidth}
 };
+
+/**
+ * Params to control hierarchical visualization
+ */
+var defaultSiblingSeparation = 40;
+var defaultLevelSeparation = 30;
+var defaultSmallSiblingSeparationAddition = 10;
+var defaultLargeSiblingSeparationAddition = 80;
+var defaultSmallLevelSeparationAddition = 15;
+var defaultLargeLevelSeparationAddition = 30;
+
 /**
  * configuration for hierarchical visualization
  */
@@ -93,7 +104,8 @@ var hierConfig = {
     container: "#collapsable-visualization",
     animateOnInit: false, // cannot set this true if hideRootNode=true
     hideRootNode: true,
-    siblingSeparation: 40,
+    siblingSeparation: defaultSiblingSeparation,
+    levelSeparation: defaultLevelSeparation,
     node: {
         collapsable: true,
         HTMLclass: 'visualization-text-3' // default size
@@ -256,6 +268,10 @@ $("#load-file").on('change', function(event) {
                 if (disableSentenceCategorization) { // disable sentence categorization
                     sentenceCategoryDisabler();
                 }
+
+                // adjust textarea size during loading
+                autosize(document.querySelectorAll('textarea'));
+
                 // JsPlumb, disable linking and reordering is handled inside this function
                 initializeJsPlumb(Nsentences);
 
@@ -728,10 +744,12 @@ $('#hierarchical-view-ensmall').on("click", function() {
     zoom_size = parseInt(hierConfig.node.HTMLclass.match(/\d+/g));
     if (zoom_size > 1) {
         if (zoom_size>6) {
-            hierConfig.siblingSeparation -= 80;
+            hierConfig.siblingSeparation -= defaultLargeSiblingSeparationAddition;
+            hierConfig.levelSeparation -= defaultLargeLevelSeparationAddition;
         }
         else {
-            hierConfig.siblingSeparation -= 10;
+            hierConfig.siblingSeparation -= defaultSmallSiblingSeparationAddition;
+            hierConfig.levelSeparation -= defaultSmallLevelSeparationAddition;
         }
         hierConfig.connectors.style["stroke-width"] -= 0.2;
         hierConfig.node.HTMLclass = "visualization-text-" + (zoom_size-1);
@@ -750,10 +768,12 @@ $('#hierarchical-view-enlarge').on("click", function() {
     zoom_size = parseInt(hierConfig.node.HTMLclass.match(/\d+/g));
     if (zoom_size < 11) {
         if (zoom_size<6) {
-            hierConfig.siblingSeparation += 10;
+            hierConfig.siblingSeparation += defaultSmallSiblingSeparationAddition;
+            hierConfig.levelSeparation += defaultSmallLevelSeparationAddition;
         }
         else {
-            hierConfig.siblingSeparation += 80;
+            hierConfig.siblingSeparation += defaultLargeSiblingSeparationAddition;
+            hierConfig.levelSeparation += defaultLargeLevelSeparationAddition;
         }
         hierConfig.connectors.style["stroke-width"] += 0.2;
         hierConfig.node.HTMLclass = "visualization-text-" + (zoom_size+1);

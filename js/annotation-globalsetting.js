@@ -8,13 +8,13 @@ var disableEditing = false; // {true, false}; set true to enable editing boxes' 
 var disableAddNewSentence = false; // {true, false}; set true to disable "Add New Sentence" function
 var disableLinking = false; // {true, false}; set false if you do not annotate relations between sentences
 var disableSentenceCategorization = false; // {true, false}; set true to disable sentence categorization function
-var allowIntermediarySave = false; // {true, false}; set false (suggested) if you allow the annotator to save only when the annotation is done; true if the annotator can save midway
+var allowIntermediarySave = true; // {true, false}; set false (suggested) if you allow the annotator to save only when the annotation is done; true if the annotator can save midway
 
 /** 
  * Relations and their color
  * The relations that can be used in the tool, you can add or delete the relation in this list
  */
-var availableRels = ["att", "det", "sup", "="] 
+var availableRels = ["att", "det", "sup", "="];
 
 /** 
  * The corresponding color for the relation, i.e., the first element of relColor for the first relation in availableRels list. 
@@ -22,15 +22,15 @@ var availableRels = ["att", "det", "sup", "="]
  *
  * The list of recommended color pallete is included in the manual
  */
-var relColors = ["lightpink", "lightblue", "lightgreen", "lightgray"] 
+var relColors = ["lightpink", "lightblue", "lightgreen", "lightgray"];
 
 /**
  * Corresponding relation type, true if directed (asymmetrical) and false if undirected (symmetrical)
  */
-var relDirections = [true, true, true, false]
+var relDirections = [true, true, true, false];
 
 
 /**
  * Available sentence categories
  */
-var sentenceCategories = ["proponent", "opponent"]
+var sentenceCategories = ["proponent", "opponent"];

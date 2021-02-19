@@ -61,7 +61,7 @@ In conclusion, I encourage banning smoking in all restaurants.
 ## Update!!
 Since we published the LREC paper above, we have made the following updates to the tool.
 
-- ```2020/02/19```: The tool now support the annotation of sentence categories.
+- ```2020/02/19```: The tool now support the annotation of sentence categories. The textarea of ```text view``` will adjust its size (useful for annotating long texts). 
 - ```2021/01/21```: There is a new ```Add New Sentence``` button at the bottom of the ```text view```. This button is dedicated for educational uses. For example, a teacher asks a student to add more sentences to support their argument. Another example is when the teacher asks the student to merge two or more sentences as a single opinion. In this case, the student may "drop" those two or more sentences, and then create a new merged sentence. 
 - ```2021/01/21```: You can now shrink and enlarge the hierarchical view
 - ```2020/10/03```: TIARA can now open ```.tsv``` file that results from ```Format file to TSV``` menu. Please note that the indentation and history do not present in the ```.tsv``` format.
@@ -73,6 +73,7 @@ Since we published the LREC paper above, we have made the following updates to t
 - [Treant-js](https://github.com/fperucic/treant-js)
 - [JsPlumb](https://github.com/jsplumb/jsplumb)
 - [html2canvas](https://github.com/niklasvh/html2canvas)
+- [Autosize](https://github.com/jackmoore/autosize)
 
 ## Screenshots
 ![](img/SS1.png)
