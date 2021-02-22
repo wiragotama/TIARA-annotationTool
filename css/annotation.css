@@ -167,6 +167,11 @@ footer {
 	float: left;
 }
 
+.node {
+	padding: 10px;
+	border: 2px solid;
+}
+
 .node-desc {
 	padding: none;
 	margin: 0px;

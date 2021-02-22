@@ -34,3 +34,8 @@ var relDirections = [true, true, true, false];
  * Available sentence categories
  */
 var sentenceCategories = ["proponent", "opponent"];
+
+/**
+ * The corresponding color for sentence categories
+ */
+var sentCatColors = ["lightseagreen", "lightgrey"];

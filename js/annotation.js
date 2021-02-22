@@ -94,8 +94,8 @@ var defaultSiblingSeparation = 40;
 var defaultLevelSeparation = 30;
 var defaultSmallSiblingSeparationAddition = 10;
 var defaultLargeSiblingSeparationAddition = 80;
-var defaultSmallLevelSeparationAddition = 15;
-var defaultLargeLevelSeparationAddition = 30;
+var defaultSmallLevelSeparationAddition = 10;
+var defaultLargeLevelSeparationAddition = 30
 
 /**
  * configuration for hierarchical visualization
@@ -118,7 +118,7 @@ var hierConfig = {
     },
     connectors: {
         style: { 
-            "stroke-width": 1.5, 
+            "stroke-width": 2.2, 
             'stroke': 'black',
             'arrow-start': 'classic-wide-long',
             'arrow-end': 'none',
@@ -137,7 +137,7 @@ var hierConfig = {
  */
 $(document).ready(function() {
     // initialization (whenever applicable)
-    if (availableRels.length!=relColors.length || availableRels.length!=relDirections.length || relColors.length!=relDirections.length) {
+    if (availableRels.length!=relColors.length || availableRels.length!=relDirections.length || relColors.length!=relDirections.length || sentenceCategories.length!=sentCatColors.length) {
         alert("There is an error in the application setting! Cannot initiate the application!")
         var elem = document.querySelector('#draggable-area'); // to prevent end-user from using the application, since the initialization is wrong
         elem.style.display = 'none';
@@ -445,6 +445,7 @@ function tsvFileFormatting(filename, content) {
         if (!disableSentenceCategorization) {
             addSentenceCategorySelection(sentence_id);
             $("#sentenceCategory"+sentence_id+" option[value="+sentence_category+"]").attr('selected', 'selected');
+            changeSentenceCategoryColors(sentence_id);
         }
 
         // dropping
@@ -656,7 +657,7 @@ $("#tree_view").on('click', function(event) {
             categoryName = document.getElementById("sentenceCategory"+i).value;
         }
         node.text = { 
-            desc: ((disableSentenceCategorization) ? "": "[" + categoryName + "] ")   +  ((relName!="") ? "("+ relName + ")" : ""),
+            desc: ((disableSentenceCategorization) ? "": "[" + categoryName + "] ") + ((relName!="") ? "("+ relName + ")" : ""),
             name: i +". " + document.getElementById("textarea"+i).textContent.trim(), 
         };
         node.HTMLclass = "hierSent"+i;
@@ -690,8 +691,9 @@ $("#tree_view").on('click', function(event) {
     // change the description color according to the relation it is involved in
     for (var i=1; i <Nsentences; i++) {
         relName = document.getElementById("relation"+i).textContent;
-        $(".hierSent"+i).css("border-color", chooseColor(relName));
-        $(".hierSent"+i+" > .node-desc").css("color", chooseColor(relName));
+        // $(".hierSent"+i).css("border-color", chooseRelColor(relName));
+        // $(".hierSent"+i+" > .node-desc").css("color", chooseRelColor(relName));
+        $(".hierSent"+i).css("border-color", getSentenceCategoryNodeColor(i));
     }
 });
 
@@ -749,7 +751,7 @@ $('#hierarchical-view-ensmall').on("click", function() {
         }
         else {
             hierConfig.siblingSeparation -= defaultSmallSiblingSeparationAddition;
-            hierConfig.levelSeparation -= defaultSmallLevelSeparationAddition;
+            hierConfig.levelSeparation -= defaultSmallSiblingSeparationAddition;
         }
         hierConfig.connectors.style["stroke-width"] -= 0.2;
         hierConfig.node.HTMLclass = "visualization-text-" + (zoom_size-1);
@@ -769,7 +771,7 @@ $('#hierarchical-view-enlarge').on("click", function() {
     if (zoom_size < 11) {
         if (zoom_size<6) {
             hierConfig.siblingSeparation += defaultSmallSiblingSeparationAddition;
-            hierConfig.levelSeparation += defaultSmallLevelSeparationAddition;
+            hierConfig.levelSeparation += defaultSmallSiblingSeparationAddition;
         }
         else {
             hierConfig.siblingSeparation += defaultLargeSiblingSeparationAddition;
@@ -1333,7 +1335,7 @@ function relationDialog(conn) {
         newElement = {
             text: availableRels[i],
             class: "relation-menu-button",
-            style: "background-color:"+chooseColor(availableRels[i]),
+            style: "background-color:"+chooseRelColor(availableRels[i]),
             click: function(event) {
                 relationLabel = $(event.target).text();
                 setRelationLabelColor(conn.sourceId, conn.targetId, relationLabel);
@@ -1393,7 +1395,7 @@ function setRelationLabelColor(sourceId, targetId, relationLabel) {
             ["Arrow", {width: arrowWidth, length: arrowLength, location: arrowLocation, id:"arrow"+getSentenceIdNumber(sourceId)}]
         );
     }
-    connObj.setPaintStyle({stroke: chooseColor(relationLabel), strokeWidth: defaultStrokeWidth});
+    connObj.setPaintStyle({stroke: chooseRelColor(relationLabel), strokeWidth: defaultStrokeWidth});
 }
 
 /** 
@@ -1494,7 +1496,7 @@ function paintExistingDroppingCheckbox(sourceIdx) {
  * @param{string}   relationLabel, defined as elements of availableRels (variable)
  * @return{string}  color, defined by relColors
  */
-function chooseColor(relationLabel) {
+function chooseRelColor(relationLabel) {
     return relColors[availableRels.indexOf(relationLabel)]
 }
 
@@ -1593,7 +1595,7 @@ function getCurrentOrdering() {
 /**
  * Tempalate variables for text formatting (better not modify this unless you are the developer)
  */
-essayCodeHTMLTemplate = '\<!-- Essay Code --\> \n \<div class="row essay-code"\> \n \t \<div class="row"\> \n \t \t \<div class="col-md-10"\> \n \t \t \t \<h4 id="essay_code"\> [ESSAY_CODE_HERE] \</h4\> \n \t \t \</div\> \n \t \t \<div class="col-md-2 legend"\> \n \t \t \t \<p\> [Legend] \</p\> \n \t \t \</div\> \n \t \</div\> \n \t \<div class="row color-legend col-lg-12" id="color-legend"\> \n \t \</div\> \n \</div\> \<br\> \n';
+essayCodeHTMLTemplate = '\<!-- Essay Code --\> \n \<div class="row essay-code"\> \n \t \<div class="row"\> \n \t \t \<div class="col-md-10"\> \n \t \t \t \<h4 id="essay_code"\> [ESSAY_CODE_HERE] \</h4\> \n \t \t \</div\> \n \t \t \<div class="col-md-2 legend"\> \n \t \t \t \<p\> [Relation Legend] \</p\> \n \t \t \</div\> \n \t \</div\> \n \t \<div class="row color-legend col-lg-12" id="color-legend"\> \n \t \</div\> \n \</div\> \<br\> \n';
 // old template (TIARA without sentence categorization)
 // sentenceContainerHTMLTemplate = '\<span class="col-md-1 sentence-id-number"\> \n \t [PUT_SENTENCE_NUMBER_HERE] \n \</span\> \n \<span class="col-md-10"\> \n \t \<textarea id="textarea[PUT_SENTENCE_NUMBER_HERE]"\>[PUT_SENTENCE_TEXT_HERE]\</textarea\> \n \</span\> \n \n \<span class="col-md-1 sentence-side-menu" id="annotation[PUT_SENTENCE_NUMBER_HERE]"\> \n \t \<table\> \n \t \t \<tr\> \n \t \t \t \<td\> \n \t \t \t \t \<span class="input-number hide" id="target[PUT_SENTENCE_NUMBER_HERE]"\>\</span\> \n \t \t \t \t \<span class="input-relation hide" id="relation[PUT_SENTENCE_NUMBER_HERE]"\>\</span\> \n \t \t \t \t \<span\> \n \t \t \t \t \t \<Label class="drop-label"\> Drop? \</Label\> \n \t \t \t \t \t \<input type="checkbox" id="dropping[PUT_SENTENCE_NUMBER_HERE]" name="drop" value="non-drop"/\> \n \t \t \t \t \</span\> \n \t \t \t \</td\> \n \t \t \</tr\> \n \t \t \<tr\> \n \t \t \t \<td\> \n \t \t \t \t \<button class="movebutton" onclick="moveBoxLeft([PUT_SENTENCE_NUMBER_HERE])"\> \n \t \t \t \t \t \&laquo; \n \t \t \t \t \</button\> \n \n \t \t \t \t \<button class="movebutton" onclick="moveBoxRight([PUT_SENTENCE_NUMBER_HERE])"\> \n \t \t \t \t \t \&raquo; \n \t \t \t \t \</button\> \n \t \t \t \</td\> \n \t \t \</tr\> \n \t \</table\> \n \</span\> \n'
 
@@ -1627,6 +1629,33 @@ function addSentenceCategorySelection(sentenceNumber) {
 }
 
 /**
+ * Change the color of a particular sentence category selection box
+ */
+function changeSentenceCategoryColors(sentenceNumber) {
+    document.getElementById('sentenceCategory'+sentenceNumber).style.backgroundColor = getSentenceCategoryColor(sentenceNumber);
+}
+
+
+/**
+ * Get the corresponding color for selected sentence category selection (text view)
+ */
+function getSentenceCategoryColor(sentenceNumber) {
+    idx = document.getElementById("sentenceCategory"+sentenceNumber).selectedIndex;
+    catColors = ["transparent"].concat(sentCatColors);
+    return catColors[idx];
+}
+
+/**
+ * Get the corresponding color for selected sentence category selection (tree view)
+ */
+function getSentenceCategoryNodeColor(sentenceNumber) {
+    idx = document.getElementById("sentenceCategory"+sentenceNumber).selectedIndex;
+    catColors = ["black"].concat(sentCatColors); // no transparent border
+    return catColors[idx];
+}
+
+
+/**
  * Change sentence category event
  */
 function sentenceCategoryEventBinding() {
@@ -1646,7 +1675,6 @@ function sentenceCategoryChangeListener(sentenceNumber) {
         e.stopPropagation();
 
         option_selected = $(this).find("option:selected").attr('value');
-
         idx = document.getElementById("sentenceCategory"+sentenceNumber).selectedIndex;
         n = document.getElementById("sentenceCategory"+sentenceNumber).options.length;
     
@@ -1661,6 +1689,11 @@ function sentenceCategoryChangeListener(sentenceNumber) {
             }
         }
 
+        // change color
+        catColors = ["transparent"].concat(sentCatColors);
+        document.getElementById('sentenceCategory'+sentenceNumber).style.backgroundColor = catColors[idx];
+
+        // message for debugging
         if (mode=="debug") {
             alert("sentence "+sentenceNumber + " category: " + option_selected);
         }   
@@ -1669,7 +1702,7 @@ function sentenceCategoryChangeListener(sentenceNumber) {
         addLogRecord("Sentence Category", "Sentence "+sentenceNumber+" is labelled `" + option_selected + "'");
     });
 
-    // prevent changes when the sentnece is dropped
+    // prevent changes when the sentence is dropped
     $('#sentenceCategory'+sentenceNumber).mousedown(function(e) {
         if ($("#dropping"+sentenceNumber).is(":checked")) {
             e.preventDefault(); // cannot change sentence category for dropped sentences
@@ -1693,6 +1726,7 @@ function sentenceCategoryToDefault(sentenceNumber) {
     }
 
     document.getElementById("sentenceCategory"+sentenceNumber).selectedIndex = 0; // change to default category
+    document.getElementById('sentenceCategory'+sentenceNumber).style.backgroundColor = "transparent"; // remove color
     addLogRecord("Sentence Category", "Sentence category for "+sentenceNumber+" is deleted due to dropping");
 }
 

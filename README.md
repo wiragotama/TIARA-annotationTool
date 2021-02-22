@@ -1,4 +1,4 @@
-# TIARAv2.0: An Interactive Tool for Annotating Discourse Structure and Text Improvement
+# TIARA v2.0: An Interactive Tool for Annotating Discourse Structure and Text Improvement
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
 [![version](https://img.shields.io/badge/version-2.0-red.svg)](https://semver.org) 

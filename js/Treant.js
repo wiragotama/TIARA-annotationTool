@@ -915,6 +915,15 @@
                 }
             }
             treeNode.connector = connLine;
+            // MODIFICATION: choosing the relation color
+            currNodeHTMLclass = treeNode.nodeHTMLclass.split(" ");
+            sourceNodeIdentifier = currNodeHTMLclass[currNodeHTMLclass.length-1]; // get the source sentence node id
+            source_sentence_id = retnum(sourceNodeIdentifier);
+            relName = document.getElementById("relation"+source_sentence_id).textContent;
+            if (availableRels.includes(relName)) {
+                connLine.attr("stroke", chooseRelColor(relName));
+            }
+            // end modification
             return this;
         },
 
