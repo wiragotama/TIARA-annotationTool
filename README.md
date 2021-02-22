@@ -1,7 +1,7 @@
 # TIARA v2.0: An Interactive Tool for Annotating Discourse Structure and Text Improvement
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
-[![version](https://img.shields.io/badge/version-2.0-red.svg)](https://semver.org) 
+[![version](https://img.shields.io/badge/version-2.0-red.svg)](https://semver.org)
 
 Annotation tool described in [our paper at LREC2020](http://www.lrec-conf.org/proceedings/lrec2020/pdf/2020.lrec-1.854.pdf). Please kindly cite the following paper when you use this tool. **You can use this tool freely**, but it would be appreciated if you could send me a courtesy [email](https://wiragotama.github.io) so I could survey what kind of tasks the tool is used for. 
 
@@ -61,7 +61,7 @@ In conclusion, I encourage banning smoking in all restaurants.
 ## Update!!
 Since we published the LREC paper above, we have made the following updates to the tool.
 
-- ```2020/02/19```: The tool now support the annotation of sentence categories. The textarea of ```text view``` will adjust its size (useful for annotating long texts). 
+- ```2020/02/22```: The tool now support the annotation of sentence categories. The textarea of ```text view``` will adjust its size (useful for annotating long texts). You can also customize the colors for the sentence categories. 
 - ```2021/01/21```: There is a new ```Add New Sentence``` button at the bottom of the ```text view```. This button is dedicated for educational uses. For example, a teacher asks a student to add more sentences to support their argument. Another example is when the teacher asks the student to merge two or more sentences as a single opinion. In this case, the student may "drop" those two or more sentences, and then create a new merged sentence. 
 - ```2021/01/21```: You can now shrink and enlarge the hierarchical view
 - ```2020/10/03```: TIARA can now open ```.tsv``` file that results from ```Format file to TSV``` menu. Please note that the indentation and history do not present in the ```.tsv``` format.
@@ -70,7 +70,7 @@ Since we published the LREC paper above, we have made the following updates to t
 [MIT](https://opensource.org/licenses/MIT)
 
 ## Dependencies (included)
-- [Treant-js](https://github.com/fperucic/treant-js)
+- [Treant-js](https://github.com/fperucic/treant-js) + [Raphael-js](https://dmitrybaranovskiy.github.io/raphael/)
 - [JsPlumb](https://github.com/jsplumb/jsplumb)
 - [html2canvas](https://github.com/niklasvh/html2canvas)
 - [Autosize](https://github.com/jackmoore/autosize)
