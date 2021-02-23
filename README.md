@@ -53,10 +53,13 @@ In conclusion, I encourage banning smoking in all restaurants.
 
 ``` 
 
+## Educational Use Case
+While the tool was originally developed as an annotation tool, it now offers various editing functions. We believe that these functions will enhance the learning experience, particularly in the teaching of argumentation. Please read our paper and manual on how to use TIARA for teaching.
+
 ## Important
 - Refresh the web browser before working on another file (see the manual). <span style="color:gray"> While it should be generally safe without refreshing, we found super rare cases (when used by our annotator, and that we cannot reproduce) in which error happens when loading files into pre-existing workarea. </span>
 - However, do not refresh the web browser midway (the annotation will be gone otherwise)
-- If you are looking for the older version of TIARA, visit <https://github.com/wiragotama/TIARAv1>
+- If you are looking for the older version of TIARA, visit <https://github.com/wiragotama/TIARAv1> (without sentence categorization support)
 
 ## Update!!
 Since we published the LREC paper above, we have made the following updates to the tool.

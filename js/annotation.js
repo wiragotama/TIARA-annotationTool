@@ -1797,14 +1797,3 @@ function retnum(str) {
     var num = str.replace(/[^0-9]/g, ''); 
     return parseInt(num,10); 
 }
-
-// TO DO: resolve conflict during saving 
-//     Check full annotation --> DONE (need more testing)
-//     TSV and conversions (relation and file) --> Seems OK
-//     saving in compatibility mode --> Seems OK
-// TO DO: can choose to activate or deactivate linking and sentence categorization independently --> DONE (but need more testing because it is connected to various functions)
-// TO DO: resolve conflict during loading
-//      Check TSV and HTML compatibility mode --> Seems OK
-// TO DO: when loading html or tsv, check backward compatibility (enable or disable backward compatibility mode in this script -- developer only)
-// TO DO: the selection event seems to be triggered twice: ONCE when a person selects, second when we change the html surface
-    // --> Not that of a big problem though, the log becomes very weird

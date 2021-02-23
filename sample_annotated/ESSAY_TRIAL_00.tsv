@@ -1,5 +1,5 @@
 essay code	 unit ID	 text	 unit category	 target	 relation	 drop flag
-ESSAY_TRIAL_00	1	"I agree with the previous statement."	"proponent"			false
+ESSAY_TRIAL_00	1	"I agree [ with the previous statement | that smoking should be banned at all restaurants ] ."	"proponent"			false
 ESSAY_TRIAL_00	2	"I have a two reasons."	" "			true
 ESSAY_TRIAL_00	3	"If somebody smokes in the restaurant, other people may not be able to enjoy the experience."	"proponent"	1	sup	false
 ESSAY_TRIAL_00	4	"However, if we ban smoking in restaurants, then those restaurants might lose some customers."	"opponent"	1	att	false
