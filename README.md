@@ -67,7 +67,7 @@ Since we published the LREC paper above, we have made the following updates to t
 - ```2020/02/22```: The tool now support the annotation of sentence categories. The textarea of ```text view``` will adjust its size (useful for annotating long texts). You can also customize the colors for the sentence categories. 
 - ```2021/01/21```: There is a new ```Add New Sentence``` button at the bottom of the ```text view```. This button is dedicated for educational uses. For example, a teacher asks a student to add more sentences to support their argument. Another example is when the teacher asks the student to merge two or more sentences as a single opinion. In this case, the student may "drop" those two or more sentences, and then create a new merged sentence. 
 - ```2021/01/21```: You can now shrink and enlarge the hierarchical view
-- ```2020/10/03```: TIARA can now open ```.tsv``` file that results from ```Format file to TSV``` menu. Please note that the indentation and history do not present in the ```.tsv``` format.
+- ```2020/10/03```: TIARA can now open ```.tsv``` file that results from ```Format file to TSV``` menu. Please note that the indentation and history do not present in the ```.tsv``` format. Update: issues found and fixed  at```2021/02/24```.
 
 ## License 
 [MIT](https://opensource.org/licenses/MIT)
