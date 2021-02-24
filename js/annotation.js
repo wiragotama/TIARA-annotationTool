@@ -26,7 +26,7 @@ var defaultTarget = "";
 var defaultRelation = "";
 var noRelationSymbol = "n"; // no relation between a pair of sentences
 var Nsentences = -1; // global variable, number of sentences in the window, the text body starts from unit 1
-var compatibilityModeFlag = false; // this means the loaded file was annotated using the previous version of TIARA; What's different here? (1) The way to convert file to TSV, (2) automatically set disableSentenceCategorization=false (override user's config)
+var compatibilityModeFlag = false; // this means the loaded file was annotated using the previous version of TIARA; What's different here? (1) The way to convert file to TSV, (2) automatically set enableSentenceCategorization=false (override user's config)
 var defaultSentenceCategory = " "; // this is when a category has not been assigned to a sentence
 
 /** 
@@ -37,16 +37,18 @@ var mode = "production"; // {"debug", "production"}
 /** 
  * Some parameters are defined in annotation-globalsetting.js (users can change it as they like, so we split the script in order to prevent users changing other things here) 
  * 
- * var disableDropping
- * var disableReordering
- * var disableEditing
- * var disableAddNewSentence
- * var disableLinking
- * var disableSentenceCategorization
+ * var enableDropping
+ * var enableReordering
+ * var enableEditing
+ * var enableAddNewSentence
+ * var enableLinking
+ * var enableSentenceCategorization
+ * var enableIntermediarySave
  * var availableRels
  * var relColors
  * var relDirections
  * var sentenceCategories
+ * var sentCatColors
  */
 
 /**
@@ -166,13 +168,13 @@ function droppingListener() {
             $("#sentence"+sentenceNumber).addClass('hide-text').removeClass('show-text');
             $("#textarea"+sentenceNumber).addClass('hide-text').removeClass('show-text');
             $("#annotation"+sentenceNumber).addClass('hide-text-dropping').removeClass('show-text-dropping');
-            if (!disableSentenceCategorization) {
+            if (enableSentenceCategorization) {
                 $("#sentenceCategory"+sentenceNumber).addClass('hide-text').removeClass('show-text');
                 sentenceCategoryToDefault(sentenceNumber); // remove sentence category when dropping happens
             }
             
             // drop relations when dropping sentence
-            if (!disableLinking) {
+            if (enableLinking) {
                 inboundConn = jsPlumb.getConnections({target: "sentence"+sentenceNumber});
                 outboundConn = jsPlumb.getConnections({source: "sentence"+sentenceNumber});
                 if (mode=="debug") {alert("Number of inbound connections "+inboundConn.length);}
@@ -197,7 +199,7 @@ function droppingListener() {
             $("#textarea"+sentenceNumber).addClass('show-text').removeClass('hide-text');
             $("#annotation"+sentenceNumber).addClass('show-text-dropping').removeClass('hide-text-dropping');
             $("#dropping"+sentenceNumber).val("non-drop");
-            if (!disableSentenceCategorization) {
+            if (enableSentenceCategorization) {
                 $("#sentenceCategory"+sentenceNumber).addClass('show-text').removeClass('hide-text');
             }
         }
@@ -253,19 +255,19 @@ $("#load-file").on('change', function(event) {
                 }
 
                 // disable or enable functions
-                if (disableDropping) { // hide dropping buttons from end-user
+                if (!enableDropping) { // hide dropping buttons from end-user
                     droppingDisabler();
                 }
-                if (disableAddNewSentence) { // hide add new sentence button from end-user
+                if (!enableAddNewSentence) { // hide add new sentence button from end-user
                     addNewSentenceDisabler();
                 }
-                if (disableEditing) { // disable textarea editing
+                if (!enableEditing) { // disable textarea editing
                     textAreaEditDisabler();
                 }
                 else {
                     textAreaEditEnabler(); // enable text editing
                 }
-                if (disableSentenceCategorization) { // disable sentence categorization
+                if (!enableSentenceCategorization) { // disable sentence categorization
                     sentenceCategoryDisabler();
                 }
 
@@ -442,7 +444,7 @@ function tsvFileFormatting(filename, content) {
         document.getElementById("flex-container").appendChild(newNodeSentence);
 
         // category selection
-        if (!disableSentenceCategorization) {
+        if (enableSentenceCategorization) {
             addSentenceCategorySelection(sentence_id);
             $("#sentenceCategory"+sentence_id+" option[value="+sentence_category+"]").attr('selected', 'selected');
             changeSentenceCategoryColors(sentence_id);
@@ -499,7 +501,7 @@ function addNewSentenceDisabler() {
  */
 function initializeJsPlumb(Nsentences) {
     jsPlumb.ready(function() {
-        if (!disableReordering) {
+        if (enableReordering) {
             jsPlumb.setContainer(document.getElementById("draggable-area"));
 
             // initializing sortable
@@ -527,7 +529,7 @@ function initializeJsPlumb(Nsentences) {
             });
         }
 
-        if (!disableLinking) { // linking function permitted
+        if (enableLinking) { // linking function permitted
             // create Endpoints for each sentence
             createEndpoints(Nsentences);
 
@@ -553,11 +555,11 @@ $("#save_menu").on('click', function(event) {
         alert("Save menu is clicked");
     }
 
-    if (allowIntermediarySave || (!allowIntermediarySave && isFullAnnotation() && checkRepairFormat() && !checkTemporaryPresence())) {
+    if (enableIntermediarySave || (!enableIntermediarySave && isFullAnnotation() && checkRepairFormat() && !checkTemporaryPresence())) {
         event.preventDefault(); //do not refresh the page
         addLogRecord("Save");
 
-        if (!disableLinking) {
+        if (enableLinking) {
             cut = document.getElementsByClassName('draggable-area')[0].innerHTML.indexOf("div class=\"jtk-endpoint"); // JsPlumb trailing info
             text = document.getElementsByClassName('draggable-area')[0].innerHTML.substring(0, cut-1);
         }
@@ -579,7 +581,7 @@ $("#rel_to_excel").on('click', function(event) {
         alert("Format relation to excel (menu) is clicked");
     }
 
-    if (allowIntermediarySave || (!allowIntermediarySave && isFullAnnotation() && checkRepairFormat() && !checkTemporaryPresence())) {
+    if (enableIntermediarySave || (!enableIntermediarySave && isFullAnnotation() && checkRepairFormat() && !checkTemporaryPresence())) {
         event.preventDefault(); // do not refresh the page
         addLogRecord("Expert-relation-to-TSV");
 
@@ -600,7 +602,7 @@ $("#annotation_to_excel").on('click', function(event) {
         alert("Format file to excel (menu) is clicked");
     }
 
-    if (allowIntermediarySave || (!allowIntermediarySave && isFullAnnotation() && checkRepairFormat() && !checkTemporaryPresence())) {
+    if (enableIntermediarySave || (!enableIntermediarySave && isFullAnnotation() && checkRepairFormat() && !checkTemporaryPresence())) {
         event.preventDefault(); //do not refresh the page
         addLogRecord("Export-file-to-TSV");
 
@@ -650,14 +652,14 @@ $("#tree_view").on('click', function(event) {
     for (var i=1; i < Nsentences; i++) {
         var node = new Object()
         relName = document.getElementById("relation"+i).textContent;
-        if (disableSentenceCategorization) { // to prevent DOM search error
+        if (!enableSentenceCategorization) { // to prevent DOM search error
             categoryName = "";
         }
         else {
             categoryName = document.getElementById("sentenceCategory"+i).value;
         }
         node.text = { 
-            desc: ((disableSentenceCategorization) ? "": "[" + categoryName + "] ") + ((relName!="") ? "("+ relName + ")" : ""),
+            desc: ((!enableSentenceCategorization) ? "": "[" + categoryName + "] ") + ((relName!="") ? "("+ relName + ")" : ""),
             name: i +". " + document.getElementById("textarea"+i).textContent.trim(), 
         };
         node.HTMLclass = "hierSent"+i;
@@ -812,15 +814,15 @@ $("#add_sentence_box").on("click", function() {
     textareaEventBinding();
 
     // disable dropping
-    if (disableDropping) { // hide dropping button from end-user
+    if (!enableDropping) { // hide dropping button from end-user
         droppingDisabler();
     }
     // disable editing
-    if (disableEditing) {
+    if (!enableEditing) {
         textAreaEditDisabler();
     }
     // disable or enable sentence categorization, has to be here before the endpoint is drawn
-    if (!disableSentenceCategorization) {
+    if (enableSentenceCategorization) {
         addSentenceCategorySelection(newSentenceIdx);
         sentenceCategoryChangeListener(newSentenceIdx);
     }
@@ -828,7 +830,7 @@ $("#add_sentence_box").on("click", function() {
         sentenceCategoryDisabler();
     }
     // endpoint for connections
-    if (!disableLinking) {
+    if (enableLinking) {
         jsPlumb.addEndpoint("sentence"+newSentenceIdx, inBound, {uuid:"ib"+newSentenceIdx}); 
         jsPlumb.addEndpoint("sentence"+newSentenceIdx, outBound, {uuid:"ob"+newSentenceIdx});
     }
@@ -875,7 +877,7 @@ function isFullAnnotation() {
                 incomingFlag[parseInt(getSentenceIdNumber(target))] = true;
                 outgoingCount += 1;
             }
-            if (!disableSentenceCategorization && (sentCategory==null || sentCategory==defaultSentenceCategory)) { //not dropped but no label
+            if (enableSentenceCategorization && (sentCategory==null || sentCategory==defaultSentenceCategory)) { //not dropped but no label
                 sentenceWithoutLabel.push(i);
             }
         }
@@ -895,7 +897,7 @@ function isFullAnnotation() {
     }
     else {
         // check sentence without label
-        if (!disableSentenceCategorization && sentenceWithoutLabel.length > 0) { 
+        if (enableSentenceCategorization && sentenceWithoutLabel.length > 0) { 
             message = "You have not assigned the categories of the following sentences: ";
             for (var i=0; i < sentenceWithoutLabel.length; i++) {
                 if (i==0) {
@@ -910,7 +912,7 @@ function isFullAnnotation() {
         }
 
         // check links
-        if (disableLinking) {
+        if (!enableLinking) { // linking disabled
             if (mode=="debug") {
                 alert("save case 3: non-dropped are categorized");
             }
@@ -1216,11 +1218,7 @@ function relationToTSV(numberOfSentences, essayCode, separator) {
  * @param{string} essayCode
  */
 function annotationToTSV(essayCode) {
-    var outputText = ""
-    if (disableDropping)
-        outputText = "essay code\t unit ID\t text\t unit category\t target\t relation\n"; // header;
-    else
-        outputText = "essay code\t unit ID\t text\t unit category\t target\t relation\t drop flag\n"; // header;
+    var outputText = "essay code\t unit ID\t text\t unit category\t target\t relation\t drop flag\n"; // header;
     
     var items = document.getElementsByClassName("flex-item");
     for (i = 0; i < items.length; i++) {
@@ -1230,17 +1228,17 @@ function annotationToTSV(essayCode) {
         target      = getSentenceIdNumber(document.getElementById("target"+sentenceID).textContent);
         relation    = document.getElementById("relation"+sentenceID).textContent;
         
-        if (!disableDropping) {
+        if (enableDropping) {
             dropStr     = document.getElementById("dropping"+sentenceID).value;
             if (dropStr == "non-drop")
                 dropFlag = false;
             else dropFlag = true;
         }
+        else {
+            dropFlag = false
+        }
 
-        if (disableDropping)
-            outputText += essayCode + "\t" + sentenceID + "\t\"" + text + "\"\t\"" + sentCategory + "\"\t" + target + "\t" + relation + "\n";
-        else 
-            outputText += essayCode + "\t" + sentenceID + "\t\"" + text + "\"\t\"" + sentCategory + "\"\t" + target + "\t" + relation + "\t" + dropFlag + "\n";
+        outputText += essayCode + "\t" + sentenceID + "\t\"" + text + "\"\t\"" + sentCategory + "\"\t" + target + "\t" + relation + "\t" + dropFlag + "\n";
     }
     return outputText;
 }
@@ -1250,11 +1248,7 @@ function annotationToTSV(essayCode) {
  * @param{string} essayCode
  */
 function annotationToTSVBackwardCompatible(essayCode) {
-    var outputText = ""
-    if (disableDropping)
-        outputText = "essay code\t unit ID\t text\t target\t relation\n"; // header;
-    else
-        outputText = "essay code\t unit ID\t text\t target\t relation\t drop flag\n"; // header;
+    var outputText = "essay code\t unit ID\t text\t target\t relation\t drop flag\n"; // header;
     
     var items = document.getElementsByClassName("flex-item");
     for (i = 0; i < items.length; i++) {
@@ -1263,17 +1257,17 @@ function annotationToTSVBackwardCompatible(essayCode) {
         target      = getSentenceIdNumber(document.getElementById("target"+sentenceID).textContent);
         relation    = document.getElementById("relation"+sentenceID).textContent;
         
-        if (!disableDropping) {
+        if (enableDropping) {
             dropStr     = document.getElementById("dropping"+sentenceID).value;
             if (dropStr == "non-drop")
                 dropFlag = false;
             else dropFlag = true;
         }
+        else {
+            dropFlag = false
+        }
 
-        if (disableDropping)
-            outputText += essayCode + "\t" + sentenceID + "\t\"" + text + "\"\t" + target + "\t" + relation + "\n";
-        else 
-            outputText += essayCode + "\t" + sentenceID + "\t\"" + text + "\"\t" + target + "\t" + relation + "\t" + dropFlag + "\n";
+        outputText += essayCode + "\t" + sentenceID + "\t\"" + text + "\"\t" + target + "\t" + relation + "\t" + dropFlag + "\n";
     }
     return outputText;
 }
@@ -1738,8 +1732,7 @@ function sentenceCategoryDisabler() {
 }
 
 /**
- * This is to support loading the annotations in the previous version of TIARA (without sentence categorization)
- * Basically, we override the annotation global setting, and set disableSentenceCategorization=false
+ * Backward compatibility
  */
 function checkHTMLfileCompatibilityMode() {
     Nsentences = document.getElementsByClassName("flex-item").length + 1; // unit index starts from 1
@@ -1763,8 +1756,7 @@ function checkHTMLfileCompatibilityMode() {
 }
 
 /**
- * This is to support loading the annotations in the previous version of TIARA (without sentence categorization)
- * Basically, we override the annotation global setting, and set disableSentenceCategorization=false
+ * Backward compatibility
  */
 function checkTSVfileCompatibilityMode(header) {
     header = header.split("\t");
@@ -1785,9 +1777,9 @@ function setBackwardCompatibilityMode() {
     $("#compatibility-mode").css('visibility', 'visible');
     compatibilityModeFlag = true;
     if (mode=="debug") {
-        alert("set disableSentenceCategorization=false");
+        alert("set enableSentenceCategorization=false");
     }
-    disableSentenceCategorization = true;
+    enableSentenceCategorization = false;
 }
 
 /**

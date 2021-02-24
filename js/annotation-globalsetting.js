@@ -2,13 +2,13 @@
  * Default configuration of program, can be changed based on your preference
  * It is recommended to change to configuration file before the start of your project, and keep it the same in the entire project
  */
-var disableDropping = false; // {true, false}; set true to disable dropping function
-var disableReordering = false; // {true, false}; set true to disable reordering function
-var disableEditing = false; // {true, false}; set true to enable editing boxes' content
-var disableAddNewSentence = false; // {true, false}; set true to disable "Add New Sentence" function
-var disableLinking = false; // {true, false}; set false if you do not annotate relations between sentences
-var disableSentenceCategorization = false; // {true, false}; set true to disable sentence categorization function
-var allowIntermediarySave = false; // {true, false}; set false (suggested) if you allow the annotator to save only when the annotation is done; true if the annotator can save midway
+var enableDropping = true; // {true, false}; set false to disable dropping function
+var enableReordering = true; // {true, false}; set false to disable reordering function
+var enableEditing = true; // {true, false}; set false to disable editing boxes' content
+var enableAddNewSentence = true; // {true, false}; set false to disable "Add New Sentence" function
+var enableLinking = true; // {true, false}; set false if you do not annotate relations between sentences
+var enableSentenceCategorization = true; // {true, false}; set false to disable sentence categorization function
+var enableIntermediarySave = false; // {true, false}; set false (suggested) if you allow the annotator to save only when the annotation is done; true if the annotator can save midway
 
 /** 
  * Relations and their color
