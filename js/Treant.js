@@ -925,7 +925,10 @@
             source_sentence_id = retnum(sourceNodeIdentifier);
             relName = document.getElementById("relation"+source_sentence_id).textContent; // get the relation color from the text view
             if (availableRels.includes(relName)) {
-                connLine.attr("stroke", chooseRelColor(relName));
+                treeNode.connector.attr("stroke", chooseRelColor(relName));
+                if (!isDirected(relName)) {
+                    treeNode.connector.attr("arrow-start", "none");
+                }
             }
             // end modification
             return this;
