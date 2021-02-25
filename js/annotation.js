@@ -695,7 +695,9 @@ $("#tree_view").on('click', function(event) {
         relName = document.getElementById("relation"+i).textContent;
         // $(".hierSent"+i).css("border-color", chooseRelColor(relName));
         // $(".hierSent"+i+" > .node-desc").css("color", chooseRelColor(relName));
-        $(".hierSent"+i).css("border-color", getSentenceCategoryNodeColor(i));
+        if (enableSentenceCategorization) {
+            $(".hierSent"+i).css("border-color", getSentenceCategoryNodeColor(i));
+        }
     }
 });
 
