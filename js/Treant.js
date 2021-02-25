@@ -918,13 +918,12 @@
             /**
              * MODIFICATION: changing the link color based on the information from the text view
              * Warning: this is a very dirty way to do this, i.e., temporary approach (but working)
-             * I have no leisure to read and understand the whole Treant JS data structure, so please bear with me :( 
              */ 
             currNodeHTMLclass = treeNode.nodeHTMLclass.split(" ");
             sourceNodeIdentifier = currNodeHTMLclass[currNodeHTMLclass.length-1]; // get the source sentence node id
             source_sentence_id = retnum(sourceNodeIdentifier);
-            relName = document.getElementById("relation"+source_sentence_id).textContent; // get the relation color from the text view
-            if (availableRels.includes(relName)) {
+            relName = document.getElementById("relation"+source_sentence_id).textContent; // get the relation color from the text view; for some reasons, svg color name doesn't work when the color is set when defining node, i.e., $("#tree_view").on('click')...
+            if (relLabels.includes(relName)) {
                 treeNode.connector.attr("stroke", chooseRelColor(relName));
                 if (!isDirected(relName)) {
                     treeNode.connector.attr("arrow-start", "none");

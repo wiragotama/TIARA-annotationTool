@@ -44,7 +44,7 @@ var mode = "production"; // {"debug", "production"}
  * var enableLinking
  * var enableSentenceCategorization
  * var enableIntermediarySave
- * var availableRels
+ * var relLabels
  * var relColors
  * var relDirections
  * var sentenceCategories
@@ -139,7 +139,7 @@ var hierConfig = {
  */
 $(document).ready(function() {
     // initialization (whenever applicable)
-    if (availableRels.length!=relColors.length || availableRels.length!=relDirections.length || relColors.length!=relDirections.length || sentenceCategories.length!=sentCatColors.length) {
+    if (relLabels.length!=relColors.length || relLabels.length!=relDirections.length || relColors.length!=relDirections.length || sentenceCategories.length!=sentCatColors.length) {
         alert("There is an error in the application setting! Cannot initiate the application!")
         var elem = document.querySelector('#draggable-area'); // to prevent end-user from using the application, since the initialization is wrong
         elem.style.display = 'none';
@@ -325,10 +325,10 @@ function updateColorLegend() {
     document.getElementById("color-legend").innerHTML = ""; 
     
     // update
-    for (var i=availableRels.length-1; i >= 0; i--) {
+    for (var i=relLabels.length-1; i >= 0; i--) {
         var newColorLegend = document.createElement("span");
         newColorLegend.className = "relation-color-mark";
-        newColorLegend.innerHTML = availableRels[i];
+        newColorLegend.innerHTML = relLabels[i];
         newColorLegend.style = "background-color: " + relColors[i];
         document.getElementById("color-legend").appendChild(newColorLegend);
     }
@@ -359,10 +359,10 @@ function prepXMLskeleton(filename) {
     document.getElementsByClassName('draggable-area')[0].innerHTML = xmlText;
 
     // add relation legend
-    for (var i=availableRels.length-1; i >= 0; i--) {
+    for (var i=relLabels.length-1; i >= 0; i--) {
         var newColorLegend = document.createElement("span");
         newColorLegend.className = "relation-color-mark";
-        newColorLegend.innerHTML = availableRels[i];
+        newColorLegend.innerHTML = relLabels[i];
         newColorLegend.style = "background-color: " + relColors[i];
         document.getElementById("color-legend").appendChild(newColorLegend);
     }
@@ -1325,11 +1325,11 @@ function cycleDetectionRec(numberOfSentences, matrix, visited, currentSentenceId
 function relationDialog(conn) {
     // prepare buttons for selecting available relations
     var dialogButtons = []; 
-    for (var i=0; i < availableRels.length; i++) {
+    for (var i=0; i < relLabels.length; i++) {
         newElement = {
-            text: availableRels[i],
+            text: relLabels[i],
             class: "relation-menu-button",
-            style: "background-color:"+chooseRelColor(availableRels[i]),
+            style: "background-color:"+chooseRelColor(relLabels[i]),
             click: function(event) {
                 relationLabel = $(event.target).text();
                 setRelationLabelColor(conn.sourceId, conn.targetId, relationLabel);
@@ -1375,7 +1375,7 @@ function relationDialog(conn) {
  * Set the color and relation label on the visualization
  * @param{string}   sourceId, corresponds to DOM id
  * @param{string}   targetId, corresponds to DOM id
- * @param{string}   relationLabel, defined as elements of availableRels (variable)
+ * @param{string}   relationLabel, defined as elements of relLabels (variable)
  */
 function setRelationLabelColor(sourceId, targetId, relationLabel) {
     // must select at index 0, only one object
@@ -1409,7 +1409,7 @@ function getSentenceIdNumber(sentenceId) {
  * Set the following relation from source to target sentence in the DOM
  * @param{string} sourceId, corresponds to DOM id
  * @param{string} targetId, corresponds to DOM id
- * @param{string} relationLabel, defined as elements of availableRels (variable)
+ * @param{string} relationLabel, defined as elements of relLabels (variable)
  */
 function setRelationLabelDOM(sourceId, targetId, relationLabel) {
     document.getElementById("target"+getSentenceIdNumber(sourceId)).innerHTML = targetId;
@@ -1487,20 +1487,20 @@ function paintExistingDroppingCheckbox(sourceIdx) {
 
 /**
  * Determining the proper visualization relation color for each dependency relation type (this function is just a mapping)
- * @param{string}   relationLabel, defined as elements of availableRels (variable)
+ * @param{string}   relationLabel, defined as elements of relLabels (variable)
  * @return{string}  color, defined by relColors
  */
 function chooseRelColor(relationLabel) {
-    return relColors[availableRels.indexOf(relationLabel)]
+    return relColors[relLabels.indexOf(relationLabel)]
 }
 
 /**
  * Check whether the given relationLabel is a directed relation
- * @param{string}   relationLabel, defined as elements of availableRels (variable)
+ * @param{string}   relationLabel, defined as elements of relLabels (variable)
  * @return{boolean} true or false, based on relDirections (variable)    
  */
 function isDirected(relationLabel) {
-    return relDirections[availableRels.indexOf(relationLabel)]
+    return relDirections[relLabels.indexOf(relationLabel)]
 }
 
 /**

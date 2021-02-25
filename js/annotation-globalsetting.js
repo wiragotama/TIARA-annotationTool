@@ -11,13 +11,13 @@ var enableSentenceCategorization = true; // {true, false}; set false to disable 
 var enableIntermediarySave = false; // {true, false}; set false (suggested) if you allow the annotator to save only when the annotation is done; true if the annotator can save midway
 
 /** 
- * Relations and their color
- * The relations that can be used in the tool, you can add or delete the relation in this list
+ * Relations labels
+ * The relation labels that can be used in the tool, you can add or delete the items in this list
  */
-var availableRels = ["att", "det", "sup", "="];
+var relLabels = ["att", "det", "sup", "="];
 
 /** 
- * The corresponding color for the relation, i.e., the first element of relColor for the first relation in availableRels list. 
+ * The corresponding color for the relation, i.e., the first element of relColor for the first relation in relLabels. 
  * For example, change "lightgreen" to "khaki"
  *
  * The list of recommended color pallete is included in the manual
