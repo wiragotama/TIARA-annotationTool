@@ -405,7 +405,9 @@ function tsvFileFormatting(filename, content) {
     checkTSVfileCompatibilityMode(header);
 
     infos.shift(); // remove the header
-    infos.pop(); // remove trailing underline
+    if (infos[infos.length-1] == "") { // remove trailing underline if exist
+    	infos.pop(); 
+	}
 
     // skeleton
     filename = infos[0].split("\t")[0]
