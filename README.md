@@ -32,7 +32,7 @@ Annotation tool described in [our paper at LREC2020](http://www.lrec-conf.org/pr
 - Read the manual located at ```manual/``` folder
 - Open ```index.html``` located at the root folder using a web browser.
 - We have confirmed that the tool works on Google Chrome (ver 88). You can use other web browsers at your own risk.
-- Live demo: <https://wiragotama.github.io/TIARA-annotationTool/> (since this is a **client-side** tool, your data (essay) will not be uploaded, i.e., stays in your computer locally)
+- Live demo: <https://wiragotama.github.io/TIARA-annotationTool/> (since this is a **client-side** tool, your data (essay) will not be uploaded, i.e., stays locally in your computer)
 
 ## Concept
 There are many great annotation tools available out there. However, some (if not many) require complicated steps (and dependencies) to install. People with programming background may not find it difficult to install but people from other backgrounds may. This annotation tool considers the ease of use in mind (of course, with compromises), even for people without a programming background. That is why we provide this **client-side** annotation tool. The tool is customizable, by changing the conguration to suit your annotation scheme, as explained in the manual (configuration file: ```js/annotation-globalsetting.js```). 

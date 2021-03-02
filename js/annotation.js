@@ -309,7 +309,8 @@ function textareaEventBinding() {
             if (mode=="debug") {
                 console.log("Editing", event.target.id);
             }
-            // would be nice if we put the textediting to log but I don't think it's important
+            auto_textview_resize(); // still in trial period
+            // would be nice if we put the textediting to log but I don't think it's important (and actually need to think about the time adjustment etc etc, nobody wants a log for one character)
         });
     }
 }
@@ -399,12 +400,12 @@ function plainTextFormatting(filename, content) {
  */
 function tsvFileFormatting(filename, content) {
     // preparation
-    infos = content.split("\n")
+    infos = content.split("\n");
     header = infos[0];
     checkTSVfileCompatibilityMode(header);
 
-    infos.shift() // remove the header
-    infos.pop() // remove trailing underline
+    infos.shift(); // remove the header
+    infos.pop(); // remove trailing underline
 
     // skeleton
     filename = infos[0].split("\t")[0]
@@ -1790,4 +1791,26 @@ function setBackwardCompatibilityMode() {
 function retnum(str) { 
     var num = str.replace(/[^0-9]/g, ''); 
     return parseInt(num,10); 
+}
+
+
+/**
+ * Automatic textarea resize (followed by repaintEverything), triggered by button
+ * We still need this manuall resize button, despite already adding auto resize during textarea on input/propertychange event
+ * This is because the deletition in textarea doesn't fire on input/propertychange event
+ */
+$("#auto_textview_resize").on("click", function() {
+	auto_textview_resize();
+});
+
+/**
+ * Resizing textarea in the textview
+ * This will be useful when editing text
+ */
+function auto_textview_resize() {
+    if (mode=="debug") {
+        alert("auto text view resize");
+    }
+    autosize(document.querySelectorAll('textarea'));
+    jsPlumb.repaintEverything();
 }
