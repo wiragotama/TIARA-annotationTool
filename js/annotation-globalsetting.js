@@ -15,6 +15,7 @@ var enableIntermediarySave = false; // {true, false}; set false (suggested) if y
  * The relation labels that can be used in the tool, you can add or delete the items in this list
  */
 var relLabels = ["att", "det", "sup", "="];
+// var relLabels = ["match", "not_match"];
 
 /** 
  * The corresponding color for the relation, i.e., the first element of relColor for the first relation in relLabels. 
@@ -23,11 +24,13 @@ var relLabels = ["att", "det", "sup", "="];
  * The list of recommended color pallete is included in the manual
  */
 var relColors = ["lightpink", "lightblue", "lightgreen", "lightgray"];
+// var relColors = ["red", "black"];
 
 /**
  * Corresponding relation type, true if directed (asymmetrical) and false if undirected (symmetrical)
  */
 var relDirections = [true, true, true, false];
+// var relDirections = [true, true];
 
 
 /**
@@ -38,4 +41,4 @@ var sentenceCategories = ["proponent", "opponent"];
 /**
  * The corresponding color for sentence categories
  */
-var sentCatColors = ["lightseagreen", "lightgrey"];
+var sentCatColors = ["lightseagreen", "violet"];
