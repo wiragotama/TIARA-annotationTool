@@ -3,7 +3,52 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
 [![version](https://img.shields.io/badge/version-2.0-red.svg)](https://semver.org)
 
-Annotation tool described in [our paper at LREC2020](http://www.lrec-conf.org/proceedings/lrec2020/pdf/2020.lrec-1.854.pdf). Please kindly cite the following paper when you use this tool. **You can use this tool freely**, but it would be appreciated if you could send me a courtesy [email](https://wiragotama.github.io) so I could survey what kind of tasks the tool is used for. 
+
+## About
+TIARA is a tool for annotating argumentative structure and sentence reordering. This is a client-side tool, so you do not need to install anything. You just need to download the TIARA package (click ```code``` then ```download zip``` on top of this page), and the tool is ready to use; as easy as that. Beyond as an annotation tool, we also designed the tool to be useful for educational purposes as well. It can be used both in learning-to-read and learning-to-write scenarios. 
+
+
+## Concept
+There are many great annotation tools available out there. However, some (if not many) require complicated steps (and dependencies) to install. Hence, people without a programming background may find it difficult to use them. TIARA considers the ease of use in mind (of course, with compromises), even for people without a programming background. That is why we provide this **client-side** annotation tool. The tool is customisable; you can configure it to suit your annotation project by changing the conguration file: ```js/annotation-globalsetting.js```. Please read the manual (in the ```manual/``` folder) on how to do this.  
+
+We try to design the tool to be as generic as possible, that is, supporting a wide range of tasks. It can be used to annotate (1) tree-shaped discourse structure (2) tree-shaped argumentative structure, (3) reordering sentences, and (4) content editing. Aspect (3) and (4) make this tool unique compared to existing tools. If you are a teacher, you can use this tool to analyse students' writing. You may then provide feedback, telling them where to improve their texts. Students can directly revise their texts in TIARA. One of our team members came from an educational background and has used **TIARA to analyse argumentative texts and encourage revisions**. Please read our paper below and the manual for a more detailed explanation. 
+
+Please do not hestitate to contact us if you have any questions
+
+
+## How to Use
+- Fork, clone or download (```code``` then ```download zip``` on the top of this page) this repository.
+- Read the manual in ```manual/``` folder
+- Open ```index.html``` located in the root folder using a web browser.
+- We have confirmed that the tool works on Google Chrome (ver 88). You can use other web browsers at your own risk.
+- Live demo: <https://wiragotama.github.io/TIARA-annotationTool/> (since this is a **client-side** tool, your data (essay) will not be uploaded, i.e., stays locally in your computer)
+
+## Formatting Text for Annotation
+Format the text you want to annotate in ```.txt```, in which each discourse unit (sentence/clause) is separated by a newline. See the following example (```sample_original/ESSAY_TRIAL_00.txt```).
+
+```
+I agree with the previous statement.
+I have a two reasons.
+If somebody smokes in the restaurant, other people may not be able to enjoy the experience.
+However, if we ban smoking in restaurants, then those restaurants might lose some customers.
+But, I firmly support banning smoking in restaurants because we need to prioritise health.
+Some restaurants are indeed popular, especially among old men, because they allow people to smoke.
+In conclusion, I encourage banning smoking in all restaurants.
+
+``` 
+
+
+## Important Notes
+We assume you have read the manual at this point.
+
+- Refresh the web browser before working on another file (see the manual). <span style="color:gray"> While it should be generally safe without refreshing, we found super rare cases (when used by our annotator, and that we cannot reproduce) in which error happens when loading files into pre-existing workarea. </span>
+- However, do not refresh the web browser midway (the annotation will be gone otherwise)
+- If you are looking for the older version of TIARA, visit <https://github.com/wiragotama/TIARAv1> (without sentence categorization support)
+
+
+## Paper
+
+The [paper](http://www.lrec-conf.org/proceedings/lrec2020/pdf/2020.lrec-1.854.pdf) describing the tool has been published at LREC2020. Please kindly cite the following paper when you use TIARA. **You can use this tool for free**, but it would be appreciated if you could send us a courtesy email so we could survey what kind of tasks the tool is used for. Please visit [this link](https://wiragotama.github.io) to contact us. 
 
 
 ```
@@ -27,39 +72,12 @@ Annotation tool described in [our paper at LREC2020](http://www.lrec-conf.org/pr
 
 >Jan Wira Gotama Putra, Simone Teufel, Kana Matsumura, and Takenobu Tokunaga. TIARA: A Tool for Annotating Discourse Relations and Sentence Reordering. Proceedings of the 12th International Conference on Language Resources and Evaluation (LREC), pp. 6914--6922, Marseille, France, May 2020.
 
-## How to Use
-- Fork, clone or download (+unpack) this repository
-- Read the manual located at ```manual/``` folder
-- Open ```index.html``` located at the root folder using a web browser.
-- We have confirmed that the tool works on Google Chrome (ver 88). You can use other web browsers at your own risk.
-- Live demo: <https://wiragotama.github.io/TIARA-annotationTool/> (since this is a **client-side** tool, your data (essay) will not be uploaded, i.e., stays locally in your computer)
+#### What can you get from the paper
+- How to design an annotation tool, especially for discourse structures. What are the requirements? Why the consideration of the visual elegance of the tool is important in discourse annotation? How TIARA compares to other tools?
+- Some possible best practices when designing an annotation tool
+- How TIARA can be used in the teaching environment, particularly for analysing argumentative essays? 
+- How the visualisation and functionalities in TIARA may encourage revisions. 
 
-## Concept
-There are many great annotation tools available out there. However, some (if not many) require complicated steps (and dependencies) to install. People with programming background may not find it difficult to install but people from other backgrounds may. This annotation tool considers the ease of use in mind (of course, with compromises), even for people without a programming background. That is why we provide this **client-side** annotation tool. The tool is customizable, by changing the conguration to suit your annotation scheme, as explained in the manual (configuration file: ```js/annotation-globalsetting.js```). 
-
-We designed the tool to be general enough for discourse structure and argumentative structure annotation (but the structure must be tree-shaped). Specifically, it can be used to annotate sentence (discourse unit) categories and relations between sentences. This tool can also be useful for educational purpose as well. Please read our paper for a more complete explanation. 
-
-## Formatting Text for Annotation
-Format the text you want to annotate in ```.txt```, in which each discourse unit (sentence/clause) is separated by a newline. See at the following example (```sample_original/ESSAY_TRIAL_00.txt```).
-
-```
-I agree with the previous statement.
-I have a two reasons.
-If somebody smokes in the restaurant, other people may not be able to enjoy the experience.
-However, if we ban smoking in restaurants, then those restaurants might lose some customers.
-But, I firmly support banning smoking in restaurants because we need to prioritise health.
-Some restaurants are indeed popular, especially among old men, because they allow people to smoke.
-In conclusion, I encourage banning smoking in all restaurants.
-
-``` 
-
-## Educational Use Case
-While the tool was originally developed as an annotation tool, it now offers various editing functions. We believe that these functions will enhance the learning experience, particularly in the teaching of argumentation. Please read our paper and manual on how to use TIARA for teaching.
-
-## Important
-- Refresh the web browser before working on another file (see the manual). <span style="color:gray"> While it should be generally safe without refreshing, we found super rare cases (when used by our annotator, and that we cannot reproduce) in which error happens when loading files into pre-existing workarea. </span>
-- However, do not refresh the web browser midway (the annotation will be gone otherwise)
-- If you are looking for the older version of TIARA, visit <https://github.com/wiragotama/TIARAv1> (without sentence categorization support)
 
 ## Update!!
 Since we published the LREC paper above, we have made the following updates to the tool.
@@ -69,14 +87,17 @@ Since we published the LREC paper above, we have made the following updates to t
 - ```2021/01/21```: You can now shrink and enlarge the hierarchical view
 - ```2020/10/03```: TIARA can now open (visualise) ```.tsv``` file that results from ```Export annotation to TSV``` menu. Please note that the indentation and history do not present in the ```.tsv``` format. Update: issues found and fixed  in```2021/02/24```.
 
+
 ## License 
 [MIT](https://opensource.org/licenses/MIT)
+
 
 ## Dependencies (included)
 - [Treant-js](https://github.com/fperucic/treant-js) + [Raphael-js](https://dmitrybaranovskiy.github.io/raphael/)
 - [JsPlumb](https://github.com/jsplumb/jsplumb)
 - [html2canvas](https://github.com/niklasvh/html2canvas)
 - [Autosize](https://github.com/jackmoore/autosize)
+
 
 ## Screenshots
 ![](img/SS1.png)
