@@ -1,7 +1,10 @@
 # TIARA v2.0: An Interactive Tool for Annotating Discourse Structure and Text Improvement
 
+### [Homepage](https://sites.google.com/view/tokyotechcl-tiara/)・[Live Demo](https://wiragotama.github.io/TIARA-annotationTool/)・[Paper](http://www.lrec-conf.org/proceedings/lrec2020/pdf/2020.lrec-1.854.pdf)
+
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
 [![version](https://img.shields.io/badge/version-2.0-red.svg)](https://semver.org)
+
 
 
 ## About
