@@ -5,7 +5,8 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
 [![version](https://img.shields.io/badge/version-2.0-red.svg)](https://semver.org)
 
-
+## Notice
+For people without programming background, it is recommended to visit the [homepage](https://sites.google.com/view/tokyotechcl-tiara/) instead of this page. 
 
 ## About
 TIARA is a tool for annotating argumentative structure and sentence reordering. This is a client-side tool, so you do not need to install anything. You just need to download the TIARA package (click ```code``` then ```download zip``` on top of this page), and the tool is ready to use; as easy as that. Beyond as an annotation tool, we also designed the tool to be useful for educational purposes as well. It can be used both in learning-to-read and learning-to-write scenarios. 
